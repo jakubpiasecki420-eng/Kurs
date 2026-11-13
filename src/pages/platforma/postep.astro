@@ -1,0 +1,140 @@
+---
+import Aplikacja from '@/layouts/Aplikacja.astro';
+import NaglowekWidoku from '@/components/platforma/NaglowekWidoku.astro';
+import PasekPostepu from '@/components/platforma/PasekPostepu.astro';
+import ZnacznikStatusu from '@/components/platforma/ZnacznikStatusu.astro';
+import { ID_KURSU_AKTYWNEGO, kurs as pobierzKurs } from '@/lib/platforma/dane';
+import { lekcjeKursu } from '@/lib/platforma/kurs';
+
+const kurs = await pobierzKurs(ID_KURSU_AKTYWNEGO);
+const lekcje = lekcjeKursu(kurs);
+---
+
+<Aplikacja tytul="Postęp" opis="Panel postępu: ukończone moduły i lekcje, wyniki quizów i historia aktywności." sekcja="postep" kursy={[kurs]}>
+  <NaglowekWidoku
+    etykieta="Panel postępu"
+    tytul="Twój postęp"
+    opis="Ukończone moduły i lekcje, wyniki quizów oraz historia aktywności. Dane pochodzą wyłącznie z tej przeglądarki."
+    okruszki={[{ adres: '/platforma/', etykieta: 'Pulpit' }]}
+  />
+
+  <div class="uklad-pulpitu">
+    <div class="kolumna">
+      <section class="panel" aria-labelledby="kurs-tytul">
+        <h2 class="panel__tytul" id="kurs-tytul"><span>{kurs.tytul}</span><a href={kurs.adres}>Program</a></h2>
+        <PasekPostepu etykieta="Ukończone lekcje" kurs={kurs.id} />
+        <dl class="statystyki">
+          <div class="statystyka">
+            <dt>Lekcje</dt>
+            <dd><span data-liczba="lekcje-ukonczone" data-kurs={kurs.id}>0</span> <span class="statystyka__z">z {lekcje.length}</span></dd>
+          </div>
+          <div class="statystyka">
+            <dt>Moduły</dt>
+            <dd><span data-liczba="moduly-ukonczone" data-kurs={kurs.id}>0</span> <span class="statystyka__z">z {kurs.moduly.length}</span></dd>
+          </div>
+          <div class="statystyka">
+            <dt>Quizy</dt>
+            <dd><span data-liczba="quizy-rozwiazane" data-kurs={kurs.id}>0</span></dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="panel" aria-labelledby="moduly-tytul">
+        <h2 class="panel__tytul" id="moduly-tytul">Moduły</h2>
+        <ul class="lista-modulow">
+          {
+            kurs.moduly.map((m) => (
+              <li class="postep-modulu">
+                <div class="postep-modulu__glowa">
+                  <a href={m.adres}>{m.numer}. {m.tytul}</a>
+                  <ZnacznikStatusu kurs={kurs.id} modul={m.id} poczatkowy={m.wymaga.length ? 'niedostepny' : 'dostepny'} />
+                </div>
+                <PasekPostepu etykieta={`Moduł ${m.numer}`} kurs={kurs.id} modul={m.id} maly />
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section class="panel" aria-labelledby="quizy-tytul">
+        <h2 class="panel__tytul" id="quizy-tytul">Wyniki quizów</h2>
+        <p class="pusto" data-quizy-pusto>Nie rozwiązałeś jeszcze żadnego quizu.</p>
+        <div class="tabela-przewijana" tabindex="0" role="region" aria-label="Wyniki quizów" data-quizy-tabela hidden>
+          <table>
+            <thead>
+              <tr><th scope="col">Lekcja</th><th scope="col" class="liczba">Wynik</th><th scope="col">Data</th></tr>
+            </thead>
+            <tbody data-quizy></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <div class="kolumna">
+      <section class="panel" aria-labelledby="historia-tytul">
+        <h2 class="panel__tytul" id="historia-tytul">Historia aktywności</h2>
+        <p class="pusto" data-aktywnosci-pusto>Brak aktywności. Otwórz pierwszą lekcję, a pojawi się tutaj.</p>
+        <ol class="aktywnosci" data-aktywnosci data-limit="30" hidden></ol>
+      </section>
+    </div>
+  </div>
+</Aplikacja>
+
+<style>
+  .postep-modulu {
+    display: grid;
+    gap: var(--o-2);
+    padding-bottom: var(--o-3);
+    border-bottom: 1px solid var(--linia);
+  }
+  .postep-modulu:last-child {
+    border-bottom: 0;
+  }
+  .postep-modulu__glowa {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--o-2);
+    font-weight: 600;
+  }
+</style>
+
+<script>
+  import { data, kursyNaStronie, uruchomStrefe, ZDARZENIE_ZMIANY } from '@/lib/platforma/klient';
+  import { postepKursu } from '@/lib/platforma/postep';
+
+  const sesja = await uruchomStrefe();
+  const [kurs] = kursyNaStronie();
+  const lekcje = kurs.moduly.flatMap((m) => m.lekcje);
+  const tbody = document.querySelector<HTMLElement>('[data-quizy]')!;
+
+  const pokaz = () => {
+    const wyniki = Object.entries(postepKursu(sesja.stan(), kurs.id).wynikiQuizow);
+    document.querySelector<HTMLElement>('[data-quizy-pusto]')!.hidden = wyniki.length > 0;
+    document.querySelector<HTMLElement>('[data-quizy-tabela]')!.hidden = wyniki.length === 0;
+    tbody.replaceChildren(
+      ...wyniki.map(([id, w]) => {
+        const l = lekcje.find((x) => x.id === id);
+        const tr = document.createElement('tr');
+        const th = document.createElement('th');
+        th.scope = 'row';
+        if (l) {
+          const a = document.createElement('a');
+          a.href = l.adres;
+          a.textContent = `${l.numer} ${l.tytul}`;
+          th.append(a);
+        } else th.textContent = id;
+        const wynik = document.createElement('td');
+        wynik.className = 'liczba';
+        wynik.textContent = `${w.poprawne}/${w.wszystkie}`;
+        const kiedy = document.createElement('td');
+        kiedy.textContent = data(w.data);
+        tr.append(th, wynik, kiedy);
+        return tr;
+      }),
+    );
+  };
+  pokaz();
+  document.addEventListener(ZDARZENIE_ZMIANY, pokaz);
+</script>

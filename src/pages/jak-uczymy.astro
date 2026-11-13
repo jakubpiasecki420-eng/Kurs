@@ -1,0 +1,133 @@
+---
+import Bazowy from '@/layouts/Bazowy.astro';
+import NaglowekStrony from '@/components/NaglowekStrony.astro';
+import Ikona from '@/components/Ikona.astro';
+---
+
+<Bazowy
+  tytul="Jak uczymy"
+  opis="Jak działa platforma Finansowa Przyszłość: kursy podzielone na moduły i krótkie lekcje, ćwiczenia, quizy, kalkulatory i zapisywany postęp."
+>
+  <NaglowekStrony
+    etykieta="Platforma edukacyjna"
+    tytul="Uczysz się w swoim tempie, na własnych liczbach"
+    lid="Finansowa Przyszłość to platforma z kursami podzielonymi na krótkie lekcje. Każda kończy się zadaniem, które wykonujesz na własnych dokumentach albo w kalkulatorze."
+  >
+    <div class="grupa-przyciskow" style="margin-top: var(--o-5)">
+      <a class="przycisk" href="/platforma/">Zobacz strefę kursanta</a>
+      <a class="przycisk przycisk--kontur" href="/program/">Program kursu</a>
+    </div>
+  </NaglowekStrony>
+
+  <section class="sekcja" aria-labelledby="struktura-tytul">
+    <div class="kontener">
+      <div class="naglowek-sekcji">
+        <p class="etykieta">Struktura</p>
+        <h2 id="struktura-tytul">Od kursu do pojedynczego ćwiczenia</h2>
+      </div>
+      <ol class="struktura">
+        <li><strong>Kurs</strong><span>Jeden temat, np. oszczędzanie na emeryturę przy działalności gospodarczej.</span></li>
+        <li><strong>Moduł</strong><span>Zamknięta część kursu, np. jeden rodzaj konta. Kolejne moduły mogą wymagać ukończenia wcześniejszych.</span></li>
+        <li><strong>Lekcja</strong><span>Kilka minut nauki. Dzieli się na krótkie sekcje ze spisem treści.</span></li>
+        <li><strong>Ćwiczenia</strong><span>Quiz utrwalający, kalkulator osadzony w lekcji albo zadanie do wykonania na własnych dokumentach.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sekcja sekcja--biala" aria-labelledby="lekcja-tytul">
+    <div class="kontener">
+      <div class="naglowek-sekcji">
+        <p class="etykieta">Lekcja</p>
+        <h2 id="lekcja-tytul">Co znajdziesz w każdej lekcji</h2>
+      </div>
+      <div class="siatka siatka--3">
+        <div class="karta">
+          <Ikona nazwa="jezyk" klasa="karta__ikona" />
+          <h3>Prosty język</h3>
+          <p>Każde pojęcie objaśnione przy pierwszym użyciu, krótkie sekcje i przykłady.</p>
+        </div>
+        <div class="karta">
+          <Ikona nazwa="zrodla" klasa="karta__ikona" />
+          <h3>Przypisy do przepisów</h3>
+          <p>Każda liczba i każdy przepis mają źródło z datą sprawdzenia.</p>
+        </div>
+        <div class="karta">
+          <Ikona nazwa="kalkulator" klasa="karta__ikona" />
+          <h3>Narzędzia w treści</h3>
+          <p>Kalkulator osadzony w lekcji pozwala od razu sprawdzić skutki własnych założeń.</p>
+        </div>
+        <div class="karta">
+          <Ikona nazwa="pytanie" klasa="karta__ikona" />
+          <h3>Quizy</h3>
+          <p>Kilka pytań z wyjaśnieniami. Wynik zapisuje się w Twoim postępie.</p>
+        </div>
+        <div class="karta">
+          <Ikona nazwa="lista" klasa="karta__ikona" />
+          <h3>Zadania na własnych danych</h3>
+          <p>Lista rzeczy do sprawdzenia w informacji z ZUS, zeznaniu podatkowym i umowach.</p>
+        </div>
+        <div class="karta">
+          <Ikona nazwa="postep" klasa="karta__ikona" />
+          <h3>Postęp</h3>
+          <p>Platforma pamięta ukończone lekcje i podpowiada, od czego kontynuować.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sekcja" aria-labelledby="status-tytul">
+    <div class="kontener proza">
+      <h2 id="status-tytul">Na jakim etapie jest platforma</h2>
+      <p>
+        Strefa kursanta działa w wersji demonstracyjnej. Możesz przejść kurs demonstracyjny, który pokazuje lekcje, quizy,
+        narzędzia i zapisywanie postępu. Nie zawiera on treści finansowych.
+      </p>
+      <p>
+        Konta użytkowników jeszcze nie działają: postęp zapisuje się tylko w Twojej przeglądarce. Kurs „Emerytura pod
+        kontrolą” jest w przygotowaniu.
+      </p>
+      <p><a class="link-strzalka" href="/platforma/">Wejdź do strefy kursanta</a></p>
+    </div>
+  </section>
+</Bazowy>
+
+<style>
+  .struktura {
+    list-style: none;
+    counter-reset: poziom;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+    gap: var(--o-4);
+  }
+  .struktura li {
+    counter-increment: poziom;
+    position: relative;
+    display: grid;
+    gap: var(--o-2);
+    margin: 0;
+    padding: var(--o-5);
+    background: var(--biel);
+    border: 1px solid var(--linia);
+    border-radius: var(--promien-m);
+  }
+  .struktura li::before {
+    content: counter(poziom);
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--granat);
+    color: var(--zloto);
+    font: 700 var(--tekst-s) var(--font-naglowki);
+  }
+  .struktura strong {
+    font: 700 var(--tekst-l) var(--font-naglowki);
+  }
+  .struktura span {
+    font-size: var(--tekst-s);
+    color: var(--tekst-pomocniczy);
+  }
+</style>

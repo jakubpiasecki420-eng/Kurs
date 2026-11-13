@@ -1,0 +1,43 @@
+---
+import { OPIS_STANU, zrodlaNarzedzia, type Narzedzie } from '@/lib/platforma/narzedzia';
+import { zrodlo } from '@/lib/rejestr';
+import { data } from '@/lib/format';
+
+/** Obowiązkowy opis narzędzia: metoda, założenia, źródła, data aktualizacji i zastrzeżenie. */
+interface Props {
+  narzedzie: Narzedzie;
+  tytulPoziom?: 'h2' | 'h3';
+}
+const { narzedzie: n, tytulPoziom = 'h2' } = Astro.props;
+const Tytul = tytulPoziom;
+const zrodla = zrodlaNarzedzia(n).map((t) => ({ t, z: zrodlo(t.zrodlo) }));
+---
+
+<section class="o-narzedziu" aria-label={`O narzędziu: ${n.nazwa}`}>
+  <Tytul class="o-narzedziu__tytul">O narzędziu</Tytul>
+  <dl class="o-narzedziu__meta">
+    <div><dt>Stan</dt><dd>{OPIS_STANU[n.stan]}</dd></div>
+    <div><dt>Aktualizacja metody</dt><dd>{data(n.zaktualizowano)}</dd></div>
+  </dl>
+  <p>{n.opis}</p>
+  <h3 class="o-narzedziu__podtytul">Założenia</h3>
+  <ul>{n.zalozenia.map((z) => <li>{z}</li>)}</ul>
+  {
+    zrodla.length > 0 && (
+      <>
+        <h3 class="o-narzedziu__podtytul">Źródła danych</h3>
+        <ul>
+          {zrodla.map(({ t, z }) => (
+            <li>
+              {t.tresc}{' '}
+              <span class="cichy">
+                ({t.przepis}, {z.url ? <a href={z.url}>{z.publikator}</a> : z.publikator}; sprawdzono {data(t.sprawdzono)})
+              </span>
+            </li>
+          ))}
+        </ul>
+      </>
+    )
+  }
+  <p class="o-narzedziu__zastrzezenie">{n.zastrzezenie}</p>
+</section>

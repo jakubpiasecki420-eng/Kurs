@@ -42,17 +42,28 @@ export const ZAPIS_DOSTEPNY =
   SERWIS.zapis.aktywny && Boolean(SERWIS.zapis.adresFormularza) && SERWIS.publikacja.politykaPrywatnosci;
 
 export const NAWIGACJA = [
+  { adres: '/program/', etykieta: 'Program' },
+  { adres: '/jak-uczymy/', etykieta: 'Jak uczymy' },
+  { adres: '/biblioteka/', etykieta: 'Biblioteka' },
+  { adres: '/kalkulator/', etykieta: 'Kalkulator' },
+  { adres: '/zrodla/', etykieta: 'Źródła' },
+] as const;
+
+/** Darmowe materiały — stopka i biblioteka. */
+export const NAWIGACJA_WIEDZY = [
   { adres: '/ike/', etykieta: 'IKE' },
   { adres: '/ikze/', etykieta: 'IKZE' },
   { adres: '/oki/', etykieta: 'OKI' },
   { adres: '/jdg-b2b/', etykieta: 'JDG i B2B' },
-  { adres: '/kalkulator/', etykieta: 'Kalkulator' },
   { adres: '/artykuly/', etykieta: 'Artykuły' },
+  { adres: '/kalkulator/', etykieta: 'Kalkulator' },
 ] as const;
 
 export const NAWIGACJA_STOPKI = [
+  { adres: '/program/', etykieta: 'Program' },
+  { adres: '/jak-uczymy/', etykieta: 'Jak uczymy' },
+  { adres: '/platforma/', etykieta: 'Strefa kursanta' },
   { adres: '/o-projekcie/', etykieta: 'O projekcie' },
   { adres: '/zrodla/', etykieta: 'Źródła i metodologia' },
-  { adres: '/produkt/', etykieta: 'Przewodnik' },
   { adres: '/kontakt/', etykieta: 'Kontakt' },
 ] as const;

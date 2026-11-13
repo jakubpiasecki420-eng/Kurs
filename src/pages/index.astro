@@ -37,11 +37,12 @@ const dzien = (d: Date) => data(d.toISOString().slice(0, 10));
         <h1>Świadomie buduj swoją przyszłość.</h1>
         <p class="hero__lid">
           Zrozum, jak działa system emerytalny, poznaj IKE i IKZE oraz naucz się planować długoterminowe
-          oszczędzanie. Zaczynamy od osób prowadzących działalność i pracujących na B2B.
+          oszczędzanie. Platforma z kursami, ćwiczeniami i kalkulatorami — zaczynamy od osób prowadzących działalność
+          i pracujących na B2B.
         </p>
         <div class="grupa-przyciskow">
-          <a class="przycisk przycisk--zloty" href="#obszary">Poznaj podstawy</a>
-          <a class="przycisk przycisk--kontur" href="/kalkulator/">Sprawdź kalkulator</a>
+          <a class="przycisk przycisk--zloty" href="/program/">Zobacz program</a>
+          <a class="przycisk przycisk--kontur" href="/platforma/">Wejdź do strefy kursanta</a>
         </div>
       </div>
       <div class="hero__grafika">
@@ -117,11 +118,35 @@ const dzien = (d: Date) => data(d.toISOString().slice(0, 10));
         </article>
         <article class="karta karta--link">
           <Ikona nazwa="droga" klasa="karta__ikona" />
-          <h3><a href="/produkt/">Plan finansowy</a></h3>
+          <h3><a href="/program/">Plan finansowy</a></h3>
           <p>Jak z tych elementów ułożyć własny plan krok po kroku.</p>
-          <p class="karta__stopka">Przewodnik w przygotowaniu →</p>
+          <p class="karta__stopka">Kurs w przygotowaniu →</p>
         </article>
       </div>
+    </div>
+  </section>
+
+  <!-- Platforma -->
+  <section class="sekcja sekcja--biala" aria-labelledby="platforma-tytul">
+    <div class="kontener platforma-intro">
+      <div>
+        <p class="etykieta">Platforma edukacyjna</p>
+        <h2 id="platforma-tytul">Kurs, który zapamiętuje, gdzie skończyłeś</h2>
+        <p class="lid">
+          Krótkie lekcje podzielone na moduły, quizy z wyjaśnieniami, kalkulatory osadzone w treści i panel postępu.
+          Strefa kursanta działa już w wersji demonstracyjnej.
+        </p>
+        <div class="grupa-przyciskow">
+          <a class="przycisk" href="/jak-uczymy/">Jak uczymy</a>
+          <a class="przycisk przycisk--kontur" href="/platforma/">Zobacz wersję demonstracyjną</a>
+        </div>
+      </div>
+      <ol class="platforma-kroki">
+        <li><span><strong>Moduły i lekcje</strong> po kilka minut, z jasnym celem</span></li>
+        <li><span><strong>Ćwiczenia</strong>: quizy i zadania na własnych dokumentach</span></li>
+        <li><span><strong>Narzędzia</strong> z jawnymi założeniami i źródłami</span></li>
+        <li><span><strong>Postęp</strong> i podpowiedź, od czego kontynuować</span></li>
+      </ol>
     </div>
   </section>
 
@@ -213,8 +238,8 @@ const dzien = (d: Date) => data(d.toISOString().slice(0, 10));
           <Ikona nazwa="lista" klasa="karta__ikona" />
           <h3>Checklisty i przewodniki</h3>
           <p>
-            Lista rzeczy do sprawdzenia we własnych dokumentach oraz przewodnik „{SERWIS.produkt.nazwa}” dla
-            osób na JDG i B2B.
+            Lista rzeczy do sprawdzenia we własnych dokumentach oraz kurs „{SERWIS.produkt.nazwa}” dla osób na
+            JDG i B2B.
           </p>
           <p class="karta__stopka"><span class="znacznik">W przygotowaniu</span></p>
         </article>
@@ -258,12 +283,12 @@ const dzien = (d: Date) => data(d.toISOString().slice(0, 10));
     <div class="kontener zapis-sekcja">
       <div>
         <p class="etykieta">Lista zainteresowanych</p>
-        <h2 id="zapis-tytul">Chcesz wiedzieć, kiedy pojawi się przewodnik?</h2>
+        <h2 id="zapis-tytul">Chcesz wiedzieć, kiedy ruszy kurs?</h2>
         <p class="cichy">
-          „{SERWIS.produkt.nazwa}” to przewodnik z kalkulatorem dla osób na JDG i B2B. Pokaże, jak
-          uporządkować IKE, IKZE i OKI przy Twojej formie opodatkowania.
+          „{SERWIS.produkt.nazwa}” to kurs na platformie dla osób na JDG i B2B. Pokaże, jak uporządkować
+          IKE, IKZE i OKI przy Twojej formie opodatkowania.
         </p>
-        <p><a class="link-strzalka" href="/produkt/">Zobacz, co będzie w środku</a></p>
+        <p><a class="link-strzalka" href="/program/">Zobacz program kursu</a></p>
       </div>
       <Zapis />
     </div>
@@ -361,6 +386,43 @@ const dzien = (d: Date) => data(d.toISOString().slice(0, 10));
     white-space: nowrap;
   }
 
+  .platforma-intro {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+    gap: var(--o-6);
+    align-items: center;
+  }
+  .platforma-kroki {
+    list-style: none;
+    counter-reset: krok;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--o-3);
+  }
+  .platforma-kroki li {
+    counter-increment: krok;
+    display: grid;
+    grid-template-columns: 2.25rem minmax(0, 1fr);
+    gap: var(--o-3);
+    align-items: center;
+    margin: 0;
+    padding: var(--o-4);
+    border: 1px solid var(--linia);
+    border-radius: var(--promien-m);
+    background: var(--tlo);
+  }
+  .platforma-kroki li::before {
+    content: counter(krok);
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    background: var(--granat);
+    color: var(--zloto);
+    font: 700 var(--tekst-s) var(--font-naglowki);
+  }
   .zasady__wiecej {
     margin: var(--o-6) 0 0;
   }

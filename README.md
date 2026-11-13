@@ -1,6 +1,8 @@
 # Finansowa Przyszłość
 
-Niezależny serwis edukacji finansowej dla osób prowadzących działalność i pracujących na B2B. Strona statyczna zbudowana w Astro.
+Niezależna platforma edukacji finansowej dla osób prowadzących działalność i pracujących na B2B: strona publiczna oraz strefa kursanta z kursami, lekcjami, quizami, kalkulatorami i postępem. Zbudowana w Astro jako strona statyczna.
+
+Strefa kursanta (`/platforma/`) działa w wersji demonstracyjnej: konta jeszcze nie istnieją, a postęp zapisuje się tylko w przeglądarce.
 
 **Status: wersja robocza.** Materiały nie przeszły recenzji doradcy podatkowego. Serwis jest zamknięty dla wyszukiwarek, nie zbiera danych i niczego nie sprzedaje.
 
@@ -20,7 +22,7 @@ npm test           # testy jednostkowe
 npm run test:e2e   # buduje stronę i testuje ją w przeglądarce (przy pierwszym uruchomieniu: npx playwright install chromium)
 ```
 
-## Przewodnik PDF
+## Przewodnik PDF (materiał uzupełniający)
 
 ```bash
 npm run przewodnik # składa PDF do katalogu wydruki/
@@ -39,6 +41,7 @@ Polecenie wypisuje blokady: brakujące dane podmiotu, recenzję, dokumenty prawn
 ## Dokumentacja
 
 - `CLAUDE.md` — główny brief, zasady i struktura projektu
+- `docs/architektura-platformy.md` — struktura platformy, kursy i lekcje, postęp, narzędzia, plan backendu
 - `docs/strategia-biznesowa.md` — model, oferta, walidacja, kanały
 - `docs/grupa-docelowa-i-pozycjonowanie.md`
 - `docs/marka.md` — architektura marki, logo, kolory, komponenty

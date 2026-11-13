@@ -4,7 +4,7 @@ Stan na dzień: **13 listopada 2026 r.**
 
 ## 1. Kalkulator scenariuszy oszczędzania — zbudowany
 
-Adres: `/kalkulator/`. Kod: `src/lib/kalkulator/oszczednosci.ts`, `src/lib/kalkulator/wykres.ts`, `src/components/Kalkulator.astro`.
+Adresy: `/kalkulator/` (strona publiczna), `/platforma/narzedzia/oszczedzanie/` (centrum narzędzi), lekcja 1.1 kursu demonstracyjnego (osadzenie w lekcji). Opis w rejestrze narzędzi: `src/lib/platforma/narzedzia.ts`. Ograniczenie: jeden kalkulator na stronę (stałe identyfikatory pól). Kod: `src/lib/kalkulator/oszczednosci.ts`, `src/lib/kalkulator/wykres.ts`, `src/components/Kalkulator.astro`.
 
 ### Dane wejściowe
 

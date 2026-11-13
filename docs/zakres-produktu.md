@@ -1,25 +1,27 @@
-# Zakres pierwszego produktu i granice edukacji
+# Zakres pierwszego kursu i granice edukacji
 
 Stan na dzień: **13 listopada 2026 r.**
 
 ## 1. Produkt
 
-**„Emerytura pod kontrolą”** — przewodnik z kalkulatorem dla osób na JDG i B2B.
+**„Emerytura pod kontrolą”** — kurs na platformie Finansowa Przyszłość dla osób na JDG i B2B.
 
 | Składnik | Forma | Stan |
 | --- | --- | --- |
-| Przewodnik | PDF, 60–80 stron | Szkice rozdziałów 0, 2, 4 i 9; skład PDF poleceniem `npm run przewodnik`. Struktura: `produkt/przewodnik/struktura.md` |
-| Arkusz obliczeniowy | Arkusz kalkulacyjny | Biblioteka obliczeń z testami: `src/lib/kalkulator/` |
-| Zeszyt ćwiczeń i checklisty | PDF do wypełniania | Struktura gotowa: `produkt/workbook/struktura.md` |
+| Kurs | 12 modułów z lekcjami, quizami i zadaniami na platformie (`/platforma/`) | Program modułów: `src/content/kursy/emerytura-pod-kontrola.json`. Lekcje jeszcze nie powstały. Szablon lekcji i strefa kursanta działają na kursie demonstracyjnym |
+| Narzędzia | Kalkulatory w centrum narzędzi i osadzone w lekcjach | Kalkulator oszczędzania dostępny; pozostałe zaplanowane w `src/lib/platforma/narzedzia.ts` |
+| Materiały uzupełniające | PDF z rozdziałami i zeszyt ćwiczeń do wydruku | Szkice rozdziałów 0, 2, 4 i 9 (`npm run przewodnik`); struktura zeszytu: `produkt/workbook/struktura.md` |
 | Aktualizacje | 12 miesięcy | Proces: `system-aktualizacji.md` |
 
-Czego produkt nie zawiera w pierwszej wersji: kursu wideo, konsultacji indywidualnych, społeczności, portfeli modelowych, rankingów instytucji.
+Szkice rozdziałów przewodnika są źródłem treści przyszłych lekcji: jeden rozdział odpowiada jednemu modułowi.
+
+Czego kurs nie zawiera w pierwszej wersji: wideo, konsultacji indywidualnych, społeczności, portfeli modelowych, rankingów instytucji.
 
 ## 2. Układ treści
 
-Układ 12 rozdziałów z `CLAUDE.md` został zachowany. Zmiany: dodany rozdział o OKI, rozdział o formach zatrudnienia zawężony do perspektywy przedsiębiorcy, rozdział o inwestowaniu ograniczony do pojęć.
+Moduły kursu odpowiadają rozdziałom przewodnika. Zmiany względem pierwotnego planu: dodany moduł o OKI, moduł o formach zatrudnienia zawężony do perspektywy przedsiębiorcy, moduł o inwestowaniu ograniczony do pojęć.
 
-| Nr | Rozdział | Zakres | Granica |
+| Nr | Moduł | Zakres | Granica |
 | --- | --- | --- | --- |
 | 1 | Jak działa system emerytalny | Filary, skąd bierze się świadczenie | Bez prognoz wysokości świadczeń |
 | 2 | ZUS: co możesz sprawdzić | Informacja o stanie konta, hipotetyczna emerytura | Prognoza to nie gwarancja |

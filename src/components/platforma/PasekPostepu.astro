@@ -1,0 +1,21 @@
+---
+/** Pasek postępu kursu albo modułu. Wartość uzupełnia skrypt strefy kursanta. */
+interface Props {
+  etykieta: string;
+  kurs: string;
+  modul?: string;
+  maly?: boolean;
+}
+const { etykieta, kurs, modul, maly = false } = Astro.props;
+const atrybuty = modul ? { 'data-postep-modulu': modul, 'data-kurs': kurs } : { 'data-postep-kursu': kurs };
+---
+
+<div class:list={['pasek', { 'pasek--maly': maly }]} {...atrybuty}>
+  <div class="pasek__glowa">
+    <span class="pasek__etykieta">{etykieta}</span>
+    <span class="pasek__wartosc" data-postep-tekst>0%</span>
+  </div>
+  <div class="pasek__tor" role="progressbar" aria-label={etykieta} aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+    <div class="pasek__wypelnienie" style="width: 0%"></div>
+  </div>
+</div>

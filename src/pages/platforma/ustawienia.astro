@@ -1,0 +1,103 @@
+---
+import Aplikacja from '@/layouts/Aplikacja.astro';
+import NaglowekWidoku from '@/components/platforma/NaglowekWidoku.astro';
+---
+
+<Aplikacja tytul="Profil i ustawienia" opis="Nazwa wyświetlana, miejsce zapisu postępu, eksport i usuwanie danych." sekcja="ustawienia">
+  <NaglowekWidoku
+    etykieta="Ustawienia"
+    tytul="Profil i ustawienia"
+    opis="Konta użytkowników jeszcze nie działają. Poniższe ustawienia dotyczą wyłącznie tej przeglądarki."
+    okruszki={[{ adres: '/platforma/', etykieta: 'Pulpit' }]}
+  />
+
+  <div class="lista-ustawien">
+    <section class="panel" aria-labelledby="profil-tytul">
+      <h2 class="panel__tytul" id="profil-tytul">Profil</h2>
+      <form class="formularz-pole" data-formularz-nazwy novalidate>
+        <label for="nazwa">Nazwa wyświetlana na pulpicie</label>
+        <input id="nazwa" name="nazwa" type="text" maxlength="60" autocomplete="nickname" aria-describedby="nazwa-opis" />
+        <p class="formularz-pole__opis" id="nazwa-opis">Opcjonalnie, np. imię. Zostaje tylko w tej przeglądarce.</p>
+        <div class="grupa-przyciskow">
+          <button class="przycisk" type="submit">Zapisz</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel" aria-labelledby="dane-tytul">
+      <h2 class="panel__tytul" id="dane-tytul">Twoje dane</h2>
+      <p data-magazyn-opis>Postęp zapisuje się tylko w tej przeglądarce na tym urządzeniu.</p>
+      <p class="maly cichy">
+        Zapisujemy: ukończone lekcje i moduły, ostatnio otwartą lekcję, wyniki quizów, historię aktywności i nazwę
+        wyświetlaną, jeśli ją podasz. Nic z tego nie trafia na serwer.
+      </p>
+      <div class="grupa-przyciskow">
+        <button class="przycisk przycisk--kontur" type="button" data-eksport>Pobierz dane (JSON)</button>
+        <button class="przycisk przycisk--kontur" type="button" data-usun>Usuń zapisany postęp</button>
+      </div>
+      <div class="blokada" data-potwierdzenie hidden style="margin-top: var(--o-4)">
+        <h3>Usunąć cały zapisany postęp?</h3>
+        <p class="maly">Tej operacji nie da się cofnąć. Jeśli chcesz zachować kopię, najpierw pobierz dane.</p>
+        <div class="grupa-przyciskow">
+          <button class="przycisk przycisk--niebezpieczny" type="button" data-usun-potwierdz>Tak, usuń</button>
+          <button class="przycisk przycisk--kontur" type="button" data-usun-anuluj>Anuluj</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="konto-tytul">
+      <h2 class="panel__tytul" id="konto-tytul">Konto</h2>
+      <p class="maly">
+        Logowanie i synchronizacja postępu między urządzeniami są planowane. Do tego czasu strefa kursanta działa w trybie
+        demonstracyjnym.
+      </p>
+    </section>
+  </div>
+</Aplikacja>
+
+<script>
+  import { pokazKomunikat, uruchomStrefe } from '@/lib/platforma/klient';
+  import { pustyStan, ustawNazwe } from '@/lib/platforma/postep';
+
+  const sesja = await uruchomStrefe();
+  const formularz = document.querySelector<HTMLFormElement>('[data-formularz-nazwy]')!;
+  const pole = formularz.querySelector<HTMLInputElement>('input')!;
+  const potwierdzenie = document.querySelector<HTMLElement>('[data-potwierdzenie]')!;
+  const usun = document.querySelector<HTMLButtonElement>('[data-usun]')!;
+
+  pole.value = sesja.stan().profil.nazwa ?? '';
+
+  formularz.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (await sesja.zmien((s) => ustawNazwe(s, pole.value))) {
+      pole.value = sesja.stan().profil.nazwa ?? '';
+      pokazKomunikat('Zapisano nazwę.');
+    }
+  });
+
+  document.querySelector('[data-eksport]')!.addEventListener('click', () => {
+    const plik = new Blob([JSON.stringify(sesja.stan(), null, 2)], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(plik);
+    a.download = `finansowa-przyszlosc-postep-${new Date().toISOString().slice(0, 10)}.json`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+
+  usun.addEventListener('click', () => {
+    potwierdzenie.hidden = false;
+    potwierdzenie.querySelector<HTMLButtonElement>('[data-usun-anuluj]')!.focus();
+  });
+  document.querySelector('[data-usun-anuluj]')!.addEventListener('click', () => {
+    potwierdzenie.hidden = true;
+    usun.focus();
+  });
+  document.querySelector('[data-usun-potwierdz]')!.addEventListener('click', async () => {
+    await sesja.magazyn.wyczysc();
+    await sesja.zmien(() => pustyStan());
+    potwierdzenie.hidden = true;
+    pole.value = '';
+    pokazKomunikat('Usunięto zapisany postęp.');
+    usun.focus();
+  });
+</script>

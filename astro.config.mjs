@@ -10,5 +10,7 @@ export default defineConfig({
   build: { format: 'directory' },
   // Bez kompresji HTML: kompresor usuwał spacje przed pogrubieniami i linkami w tekście ciągłym.
   compressHTML: false,
+  // Dawna strona przewodnika PDF; produktem jest teraz kurs na platformie.
+  redirects: { '/produkt': '/program/' },
   server: { host: true },
 });

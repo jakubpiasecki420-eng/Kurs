@@ -1,6 +1,6 @@
 ---
 import Logo from './Logo.astro';
-import { NAWIGACJA, NAWIGACJA_STOPKI, SERWIS } from '@/lib/serwis';
+import { NAWIGACJA_STOPKI, NAWIGACJA_WIEDZY, SERWIS } from '@/lib/serwis';
 import { STAN_NA_DZIEN } from '@/lib/rejestr';
 import { data } from '@/lib/format';
 
@@ -19,7 +19,7 @@ const operator = SERWIS.operator.nazwa;
       <nav aria-label="Wiedza">
         <h2 class="stopka__tytul">Wiedza</h2>
         <ul>
-          {NAWIGACJA.map((p) => <li><a href={p.adres}>{p.etykieta}</a></li>)}
+          {NAWIGACJA_WIEDZY.map((p) => <li><a href={p.adres}>{p.etykieta}</a></li>)}
         </ul>
       </nav>
 

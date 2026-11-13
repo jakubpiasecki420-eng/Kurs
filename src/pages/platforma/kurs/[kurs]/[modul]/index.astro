@@ -1,0 +1,78 @@
+---
+import Aplikacja from '@/layouts/Aplikacja.astro';
+import NaglowekWidoku from '@/components/platforma/NaglowekWidoku.astro';
+import ListaLekcji from '@/components/platforma/ListaLekcji.astro';
+import PasekPostepu from '@/components/platforma/PasekPostepu.astro';
+import ZnacznikStatusu from '@/components/platforma/ZnacznikStatusu.astro';
+import { wszystkieKursy } from '@/lib/platforma/dane';
+import type { Kurs, Modul } from '@/lib/platforma/model';
+
+export async function getStaticPaths() {
+  return (await wszystkieKursy()).flatMap((kurs) =>
+    kurs.moduly.filter((m) => m.lekcje.length > 0).map((modul) => ({ params: { kurs: kurs.id, modul: modul.id }, props: { kurs, modul } })),
+  );
+}
+
+const { kurs, modul } = Astro.props as { kurs: Kurs; modul: Modul };
+const i = kurs.moduly.indexOf(modul);
+const poprzedni = kurs.moduly.slice(0, i).reverse().find((m) => m.lekcje.length > 0);
+const nastepny = kurs.moduly.slice(i + 1).find((m) => m.lekcje.length > 0);
+const wymagane = modul.wymaga.map((w) => kurs.moduly.find((m) => m.id === w)!);
+const czas = modul.lekcje.reduce((s, l) => s + l.czasMin, 0);
+---
+
+<Aplikacja tytul={modul.tytul} opis={modul.opis} sekcja="kurs" kursy={[kurs]}>
+  <NaglowekWidoku
+    etykieta={`Moduł ${modul.numer}`}
+    tytul={modul.tytul}
+    opis={modul.opis}
+    okruszki={[{ adres: '/platforma/', etykieta: 'Pulpit' }, { adres: kurs.adres, etykieta: kurs.tytul }]}
+  >
+    <div class="lekcja-meta">
+      <ZnacznikStatusu kurs={kurs.id} modul={modul.id} poczatkowy={wymagane.length ? 'niedostepny' : 'dostepny'} />
+      <span>{modul.lekcje.length} lekcji · {czas} min</span>
+    </div>
+  </NaglowekWidoku>
+
+  {
+    wymagane.length > 0 && (
+      <p class="blokada maly">
+        Moduł odblokuje się po ukończeniu:{' '}
+        {wymagane.map((m, j) => (
+          <>
+            {j > 0 && ', '}
+            <a href={m.adres}>{m.tytul}</a>
+          </>
+        ))}
+        .
+      </p>
+    )
+  }
+
+  <section class="panel" aria-labelledby="lekcje-tytul">
+    <h2 class="panel__tytul" id="lekcje-tytul">Lekcje</h2>
+    <PasekPostepu etykieta="Postęp modułu" kurs={kurs.id} modul={modul.id} maly />
+    <div style="margin-top: var(--o-4)">
+      <ListaLekcji kurs={kurs.id} modul={modul} />
+    </div>
+  </section>
+
+  <nav class="nawigacja-lekcji" aria-label="Sąsiednie moduły">
+    {
+      poprzedni && (
+        <a href={poprzedni.adres}>
+          <span class="nawigacja-lekcji__kierunek">← Poprzedni moduł</span>
+          <span class="nawigacja-lekcji__tytul">{poprzedni.tytul}</span>
+        </a>
+      )
+    }
+    {
+      nastepny && (
+        <a class="nawigacja-lekcji__nastepna" href={nastepny.adres}>
+          <span class="nawigacja-lekcji__kierunek">Następny moduł →</span>
+          <span class="nawigacja-lekcji__tytul">{nastepny.tytul}</span>
+        </a>
+      )
+    }
+  </nav>
+</Aplikacja>

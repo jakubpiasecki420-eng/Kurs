@@ -9,11 +9,21 @@ test('link „Przejdź do treści” jest pierwszym elementem fokusu', async ({ 
   await expect(page.locator('main#tresc')).toBeFocused();
 });
 
-test('przyciski w sekcji głównej prowadzą do treści i kalkulatora', async ({ page }) => {
+test('przyciski w sekcji głównej prowadzą do programu i strefy kursanta', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('link', { name: 'Sprawdź kalkulator' }).click();
-  await expect(page).toHaveURL(/\/kalkulator\/$/);
-  await expect(page.locator('h1')).toContainText('Kalkulator');
+  await page.locator('.hero').getByRole('link', { name: 'Wejdź do strefy kursanta' }).click();
+  await expect(page).toHaveURL(/\/platforma\/$/);
+  await expect(page.locator('h1')).toContainText('Witaj');
+  await page.goto('/');
+  await page.locator('.hero').getByRole('link', { name: 'Zobacz program' }).click();
+  await expect(page).toHaveURL(/\/program\/$/);
+});
+
+test('nagłówek prowadzi do strefy kursanta', async ({ page, isMobile }) => {
+  await page.goto('/');
+  if (isMobile) await page.getByRole('button', { name: 'Menu' }).click();
+  await page.getByRole('navigation', { name: 'Główna' }).getByRole('link', { name: 'Strefa kursanta' }).click();
+  await expect(page).toHaveURL(/\/platforma\/$/);
 });
 
 test('nawigacja główna prowadzi do podstron i oznacza bieżącą', async ({ page, isMobile }) => {
@@ -34,11 +44,11 @@ test('nawigacja główna prowadzi do podstron i oznacza bieżącą', async ({ pa
     await expect(page.getByRole('button', { name: 'Menu' })).toBeHidden();
   }
 
-  await nawigacja.getByRole('link', { name: 'IKZE', exact: true }).click();
-  await expect(page).toHaveURL(/\/ikze\/$/);
+  await nawigacja.getByRole('link', { name: 'Biblioteka', exact: true }).click();
+  await expect(page).toHaveURL(/\/biblioteka\/$/);
   if (isMobile) await page.getByRole('button', { name: 'Menu' }).click();
   await expect(
-    page.getByRole('navigation', { name: 'Główna' }).getByRole('link', { name: 'IKZE', exact: true }),
+    page.getByRole('navigation', { name: 'Główna' }).getByRole('link', { name: 'Biblioteka', exact: true }),
   ).toHaveAttribute('aria-current', 'page');
 });
 
@@ -48,8 +58,13 @@ test('formularz zapisu nie jest pokazywany bez polityki prywatności', async ({ 
   await expect(page.getByText('Lista zainteresowanych jeszcze nie działa.')).toBeVisible();
 });
 
-test('strona produktu nie przyjmuje zamówień', async ({ page }) => {
+test('dawny adres przewodnika przekierowuje na program kursu', async ({ page }) => {
   await page.goto('/produkt/');
+  await expect(page).toHaveURL(/\/program\/$/);
+});
+
+test('strona programu nie przyjmuje zamówień', async ({ page }) => {
+  await page.goto('/program/');
   await expect(page.getByText('sprzedaż jeszcze nie ruszyła')).toBeVisible();
   await expect(page.getByRole('button', { name: /kup|zamów|zapłać/i })).toHaveCount(0);
   await expect(page.locator('main')).not.toContainText(/\d+\s?zł/);

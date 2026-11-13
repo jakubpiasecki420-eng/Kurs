@@ -1,0 +1,41 @@
+---
+/** Wspólne metadane <head> dla strony publicznej i strefy kursanta. */
+import { INDEKSOWANIE, SERWIS } from '@/lib/serwis';
+
+interface Props {
+  tytul: string;
+  opis: string;
+  typ?: 'website' | 'article';
+  pelnyTytul?: boolean;
+  /** Strefa kursanta nigdy nie jest indeksowana. */
+  bezIndeksowania?: boolean;
+}
+
+const { tytul, opis, typ = 'website', pelnyTytul = false, bezIndeksowania = false } = Astro.props;
+const tytulStrony = pelnyTytul ? tytul : `${tytul} · ${SERWIS.marka}`;
+const indeksowanie = INDEKSOWANIE && !bezIndeksowania;
+const adres = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : null;
+const obrazek = Astro.site ? new URL('/og.png', Astro.site).href : null;
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{tytulStrony}</title>
+<meta name="description" content={opis} />
+<meta name="robots" content={indeksowanie ? 'index, follow' : 'noindex, nofollow'} />
+{adres && <link rel="canonical" href={adres} />}
+
+<meta property="og:type" content={typ} />
+<meta property="og:locale" content="pl_PL" />
+<meta property="og:site_name" content={SERWIS.marka} />
+<meta property="og:title" content={tytulStrony} />
+<meta property="og:description" content={opis} />
+{adres && <meta property="og:url" content={adres} />}
+{obrazek && <meta property="og:image" content={obrazek} />}
+{obrazek && <meta property="og:image:width" content="1200" />}
+{obrazek && <meta property="og:image:height" content="630" />}
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<meta name="theme-color" content="#101D35" />

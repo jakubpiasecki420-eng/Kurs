@@ -72,6 +72,8 @@ Fonty są serwowane z własnego serwera (pakiety `@fontsource-variable`), z `fon
 
 ## 5. Komponenty
 
+Strefa kursanta ma własny układ (`src/layouts/Aplikacja.astro`), style (`src/styles/platforma.css`) i komponenty (`src/components/platforma/`): karta modułu, lista lekcji, pasek postępu, znacznik statusu, quiz, ilustracja, materiały dodatkowe, opis narzędzia, karta narzędzia, nagłówek widoku, baner trybu demonstracyjnego. Używa tych samych tokenów kolorów i fontów co strona publiczna. Opis: `architektura-platformy.md`.
+
 | Komponent | Plik | Opis |
 | --- | --- | --- |
 | Układ strony | `src/layouts/Bazowy.astro` | Metadane, nagłówek, stopka, baner statusu, link „Przejdź do treści” |

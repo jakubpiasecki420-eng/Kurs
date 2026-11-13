@@ -1,0 +1,17 @@
+---
+import type { StatusModulu } from '@/lib/platforma/model';
+import { ETYKIETY_STATUSU } from '@/lib/platforma/etykiety';
+
+interface Props {
+  kurs: string;
+  modul: string;
+  /** Status bez postępu kursanta — widoczny, dopóki skrypt nie wczyta zapisanych danych. */
+  poczatkowy: StatusModulu;
+}
+const { kurs, modul, poczatkowy } = Astro.props;
+---
+
+<span class="status" data-status-modulu={modul} data-kurs={kurs} data-stan={poczatkowy}>
+  <span class="status__kropka" aria-hidden="true"></span>
+  <span class="status__tekst">{ETYKIETY_STATUSU[poczatkowy]}</span>
+</span>

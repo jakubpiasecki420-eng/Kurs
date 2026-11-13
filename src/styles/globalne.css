@@ -6,6 +6,11 @@
   box-sizing: border-box;
 }
 
+/* Atrybut hidden ma pierwszeństwo przed display z klas komponentów. */
+[hidden] {
+  display: none !important;
+}
+
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
@@ -538,4 +543,25 @@ th.liczba {
   body {
     background: #fff;
   }
+}
+
+/* ---------- Link „Przejdź do treści” ---------- */
+
+.pomin {
+  position: absolute;
+  left: var(--o-4);
+  top: -4rem;
+  z-index: 50;
+  padding: 0.6rem 1rem;
+  background: var(--zloto);
+  color: var(--granat);
+  font-weight: 700;
+  border-radius: var(--promien-s);
+  text-decoration: none;
+}
+.pomin:focus {
+  top: var(--o-3);
+}
+main:focus {
+  outline: none;
 }

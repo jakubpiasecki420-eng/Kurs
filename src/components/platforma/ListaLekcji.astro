@@ -1,0 +1,32 @@
+---
+import Ikona from '@/components/Ikona.astro';
+import type { Modul } from '@/lib/platforma/model';
+
+interface Props {
+  kurs: string;
+  modul: Modul;
+  /** Lekcja otwarta na bieżącej stronie. */
+  aktualna?: string;
+}
+const { kurs, modul, aktualna } = Astro.props;
+---
+
+<ol class="lista-lekcji">
+  {
+    modul.lekcje.map((l) => (
+      <li data-lekcja={l.id} data-kurs={kurs} data-ukonczona="false">
+        <a href={l.adres} aria-current={l.id === aktualna ? 'page' : undefined}>
+          <span class="lista-lekcji__stan" aria-hidden="true">
+            <Ikona nazwa="ukonczone" klasa="lista-lekcji__ok" />
+            <span class="lista-lekcji__numer">{l.numer}</span>
+          </span>
+          <span class="lista-lekcji__tytul">
+            {l.tytul}
+            <span class="wizualnie-ukryte" data-tekst-ukonczenia />
+          </span>
+          <span class="lista-lekcji__czas">{l.czasMin} min</span>
+        </a>
+      </li>
+    ))
+  }
+</ol>

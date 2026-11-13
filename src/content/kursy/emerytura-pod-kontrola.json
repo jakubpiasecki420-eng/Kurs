@@ -1,0 +1,20 @@
+{
+  "tytul": "Emerytura pod kontrolą",
+  "opis": "Kurs dla osób prowadzących działalność i pracujących na B2B: system emerytalny, IKE, IKZE i OKI przy Twojej formie opodatkowania, inflacja, koszty i własny plan.",
+  "stan": "w-przygotowaniu",
+  "demonstracyjny": false,
+  "moduly": [
+    { "id": "system-emerytalny", "tytul": "Jak działa system emerytalny", "opis": "Skąd bierze się świadczenie i dlaczego dodatkowe oszczędzanie jest Twoją decyzją." },
+    { "id": "zus", "tytul": "ZUS: co możesz sprawdzić", "opis": "Informacja o stanie konta i hipotetyczna emerytura — jak je czytać." },
+    { "id": "forma-pracy", "tytul": "Twoja forma pracy", "opis": "Co z prowadzenia działalności wynika dla limitów i odliczeń." },
+    { "id": "ike", "tytul": "IKE", "opis": "Limity, warunki wypłaty bez podatku i koszt wcześniejszego zwrotu." },
+    { "id": "ikze", "tytul": "IKZE", "opis": "Odliczenie przy skali, podatku liniowym i ryczałcie oraz podatek przy wypłacie." },
+    { "id": "oki", "tytul": "OKI", "opis": "Podatek od wartości aktywów i zwolnienia w nowym rodzaju konta." },
+    { "id": "trzy-konta", "tytul": "Trzy konta obok siebie", "opis": "Jak ułożyć kolejność kont przy swojej formie opodatkowania." },
+    { "id": "ppk-ppe", "tytul": "PPK i PPE", "opis": "Kiedy programy pracownicze mają znaczenie dla przedsiębiorcy." },
+    { "id": "inflacja", "tytul": "Inflacja i procent składany", "opis": "Wartość nominalna i realna, czas i koszty." },
+    { "id": "inwestowanie", "tytul": "Podstawy inwestowania", "opis": "Ryzyko, dywersyfikacja, koszty i horyzont — pojęcia bez wskazywania produktów." },
+    { "id": "porownywanie-ofert", "tytul": "Jak porównywać instytucje i produkty", "opis": "Pytania do instytucji i tabela opłat do samodzielnego wypełnienia." },
+    { "id": "twoj-plan", "tytul": "Twój plan", "opis": "Rezerwa, kolejność, kwota, terminy i przegląd roczny." }
+  ]
+}

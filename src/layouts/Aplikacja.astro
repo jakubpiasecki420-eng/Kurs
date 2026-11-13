@@ -1,0 +1,105 @@
+---
+/**
+ * Układ strefy kursanta: nagłówek aplikacji, menu boczne (na telefonie — dolny pasek),
+ * informacja o trybie demonstracyjnym i osadzone struktury kursów dla skryptów.
+ */
+import '@fontsource-variable/manrope';
+import '@fontsource-variable/inter';
+import '@/styles/globalne.css';
+import '@/styles/platforma.css';
+
+import MetaGlowy from '@/components/MetaGlowy.astro';
+import BanerRoboczy from '@/components/BanerRoboczy.astro';
+import Logo from '@/components/Logo.astro';
+import Ikona from '@/components/Ikona.astro';
+import BanerDemo from '@/components/platforma/BanerDemo.astro';
+import { kursDlaKlienta } from '@/lib/platforma/kurs';
+import type { Kurs } from '@/lib/platforma/model';
+import { ID_KURSU_AKTYWNEGO } from '@/lib/platforma/dane';
+
+export type SekcjaAplikacji = 'pulpit' | 'kurs' | 'postep' | 'narzedzia' | 'ustawienia';
+
+interface Props {
+  tytul: string;
+  opis: string;
+  sekcja: SekcjaAplikacji;
+  /** Kursy, których postęp pokazuje strona. */
+  kursy?: Kurs[];
+}
+
+const { tytul, opis, sekcja, kursy = [] } = Astro.props;
+
+const MENU: Array<{ id: SekcjaAplikacji; adres: string; etykieta: string; ikona: 'pulpit' | 'kurs' | 'postep' | 'kalkulator' | 'ustawienia' }> = [
+  { id: 'pulpit', adres: '/platforma/', etykieta: 'Pulpit', ikona: 'pulpit' },
+  { id: 'kurs', adres: `/platforma/kurs/${ID_KURSU_AKTYWNEGO}/`, etykieta: 'Mój kurs', ikona: 'kurs' },
+  { id: 'postep', adres: '/platforma/postep/', etykieta: 'Postęp', ikona: 'postep' },
+  { id: 'narzedzia', adres: '/platforma/narzedzia/', etykieta: 'Narzędzia', ikona: 'kalkulator' },
+  { id: 'ustawienia', adres: '/platforma/ustawienia/', etykieta: 'Ustawienia', ikona: 'ustawienia' },
+];
+
+// JSON osadzany w <script type="application/json">; znak „<” jest kodowany, żeby nie zamknąć znacznika.
+const json = (k: Kurs) => JSON.stringify(kursDlaKlienta(k)).replace(/</g, '\\u003c');
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <MetaGlowy tytul={`${tytul} · Strefa kursanta`} opis={opis} bezIndeksowania />
+  </head>
+  <body class="aplikacja">
+    <a class="pomin" href="#tresc">Przejdź do treści</a>
+    <BanerRoboczy />
+    <header class="app-glowa">
+      <a class="app-glowa__logo" href="/platforma/">
+        <Logo rozmiar={30} />
+        <span class="app-glowa__strefa">Strefa kursanta</span>
+      </a>
+      <div class="app-glowa__akcje">
+        <a class="app-glowa__link" href="/" aria-label="Strona główna">
+          <Ikona nazwa="wyjscie" klasa="app-glowa__ikona" />
+          <span>Strona główna</span>
+        </a>
+        <a class="app-glowa__profil" href="/platforma/ustawienia/" aria-label="Profil i ustawienia">
+          <span class="app-glowa__inicjal" data-inicjal data-domyslnie="K" aria-hidden="true">K</span>
+        </a>
+      </div>
+    </header>
+
+    <div class="app-ramka">
+      <nav class="app-menu" aria-label="Strefa kursanta">
+        <ul>
+          {
+            MENU.map((m) => (
+              <li>
+                <a href={m.adres} aria-current={m.id === sekcja ? 'page' : undefined}>
+                  <Ikona nazwa={m.ikona} klasa="app-menu__ikona" />
+                  <span>{m.etykieta}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <main id="tresc" class="app-tresc" tabindex="-1">
+        <BanerDemo />
+        <slot />
+        <footer class="app-stopka">
+          <p>
+            Finansowa Przyszłość jest niezależnym projektem edukacyjnym. Materiały i narzędzia nie są rekomendacją
+            inwestycyjną ani poradą podatkową. <a href="/zrodla/">Źródła i metodologia</a>
+          </p>
+        </footer>
+      </main>
+    </div>
+
+    <p class="komunikat" role="status" aria-live="polite" data-komunikat hidden></p>
+
+    {kursy.map((k) => <script type="application/json" data-kurs-klienta set:html={json(k)} />)}
+
+    <script>
+      import { uruchomStrefe } from '@/lib/platforma/klient';
+      uruchomStrefe();
+    </script>
+  </body>
+</html>

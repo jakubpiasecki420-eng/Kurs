@@ -1,0 +1,85 @@
+---
+import Bazowy from '@/layouts/Bazowy.astro';
+import NaglowekStrony from '@/components/NaglowekStrony.astro';
+import Ikona from '@/components/Ikona.astro';
+import { getCollection } from 'astro:content';
+import { data } from '@/lib/format';
+
+const PRZEWODNIKI = [
+  { adres: '/ike/', tytul: 'IKE: zasady, limity i wypłaty', opis: 'Kto może wpłacać, ile wynosi limit i kiedy wypłata jest wolna od podatku.' },
+  { adres: '/ikze/', tytul: 'IKZE: odliczenie, limity i wypłaty', opis: 'Odliczenie przy skali, podatku liniowym i ryczałcie oraz podatek przy wypłacie.' },
+  { adres: '/oki/', tytul: 'OKI od 2027 roku', opis: 'Podatek od wartości aktywów i zwolnienia w nowym rodzaju konta.' },
+  { adres: '/jdg-b2b/', tytul: 'Emerytura na JDG i B2B', opis: 'Co sprawdzić w ZUS, jaki limit IKZE Cię dotyczy i jak odliczasz wpłaty.' },
+];
+
+const artykuly = (await getCollection('artykuly')).sort(
+  (a, b) => b.data.zaktualizowano.getTime() - a.data.zaktualizowano.getTime(),
+);
+const dzien = (d: Date) => data(d.toISOString().slice(0, 10));
+---
+
+<Bazowy
+  tytul="Biblioteka darmowych materiałów"
+  opis="Bezpłatne przewodniki po IKE, IKZE i OKI, materiały dla JDG i B2B, artykuły i kalkulator — z przypisami do przepisów."
+>
+  <NaglowekStrony
+    etykieta="Biblioteka"
+    tytul="Darmowe materiały"
+    lid="Przewodniki, artykuły i kalkulator dostępne bez rejestracji. Każda liczba ma przypis do przepisu i datę sprawdzenia."
+  />
+
+  <section class="sekcja" aria-labelledby="przewodniki-tytul">
+    <div class="kontener">
+      <h2 id="przewodniki-tytul">Przewodniki</h2>
+      <div class="siatka siatka--2">
+        {
+          PRZEWODNIKI.map((p) => (
+            <article class="karta karta--link">
+              <Ikona nazwa="konta" klasa="karta__ikona" />
+              <h3>
+                <a href={p.adres}>{p.tytul}</a>
+              </h3>
+              <p>{p.opis}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="sekcja sekcja--biala" aria-labelledby="artykuly-tytul">
+    <div class="kontener">
+      <h2 id="artykuly-tytul">Artykuły</h2>
+      {
+        artykuly.length > 0 ? (
+          <div class="siatka siatka--3">
+            {artykuly.map((a) => (
+              <article class="karta karta--link">
+                <p class="maly cichy">{a.data.seria}</p>
+                <h3>
+                  <a href={`/artykuly/${a.id}/`}>{a.data.tytul}</a>
+                </h3>
+                <p>{a.data.opis}</p>
+                <p class="karta__stopka cichy">Aktualizacja: {dzien(a.data.zaktualizowano)}</p>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <p class="lid">Pierwsze artykuły są w przygotowaniu.</p>
+        )
+      }
+      <p style="margin-top: var(--o-5)"><a class="link-strzalka" href="/artykuly/">Wszystkie artykuły</a></p>
+    </div>
+  </section>
+
+  <section class="sekcja" aria-labelledby="narzedzia-tytul">
+    <div class="kontener">
+      <h2 id="narzedzia-tytul">Narzędzia</h2>
+      <article class="karta karta--link" style="max-width: 36rem">
+        <Ikona nazwa="kalkulator" klasa="karta__ikona" />
+        <h3><a href="/kalkulator/">Kalkulator scenariuszy oszczędzania</a></h3>
+        <p>Suma wpłat, wartość nominalna i wartość w dzisiejszych pieniądzach przy Twoich założeniach.</p>
+      </article>
+    </div>
+  </section>
+</Bazowy>

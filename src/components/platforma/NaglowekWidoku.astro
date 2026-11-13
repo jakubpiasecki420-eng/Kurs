@@ -1,0 +1,31 @@
+---
+/** Nagłówek widoku w strefie kursanta: okruszki, etykieta, tytuł, opis i miejsce na akcje. */
+interface Props {
+  tytul: string;
+  etykieta?: string;
+  opis?: string;
+  okruszki?: Array<{ adres: string; etykieta: string }>;
+}
+const { tytul, etykieta, opis, okruszki = [] } = Astro.props;
+---
+
+<header class="widok-glowa">
+  {
+    okruszki.length > 0 && (
+      <nav class="okruszki" aria-label="Ścieżka">
+        <ol>
+          {okruszki.map((o) => (
+            <li>
+              <a href={o.adres}>{o.etykieta}</a>
+            </li>
+          ))}
+          <li aria-current="page">{tytul}</li>
+        </ol>
+      </nav>
+    )
+  }
+  {etykieta && <p class="etykieta">{etykieta}</p>}
+  <h1>{tytul}</h1>
+  {opis && <p class="widok-glowa__opis">{opis}</p>}
+  <slot />
+</header>

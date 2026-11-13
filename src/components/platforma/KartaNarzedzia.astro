@@ -1,0 +1,23 @@
+---
+import Ikona from '@/components/Ikona.astro';
+import { OPIS_STANU, type Narzedzie } from '@/lib/platforma/narzedzia';
+
+interface Props {
+  narzedzie: Narzedzie;
+}
+const { narzedzie: n } = Astro.props;
+---
+
+<article class:list={['karta', 'narzedzie-karta', { 'karta--link': Boolean(n.adres) }]} data-stan={n.stan}>
+  <div class="narzedzie-karta__glowa">
+    <Ikona nazwa={n.stan === 'dostepne' ? 'kalkulator' : 'zamek'} klasa="karta__ikona" />
+    <span class="status" data-stan={n.stan === 'dostepne' ? 'dostepny' : 'przygotowanie'}>
+      <span class="status__kropka" aria-hidden="true"></span>
+      <span class="status__tekst">{OPIS_STANU[n.stan]}</span>
+    </span>
+  </div>
+  <h3>{n.adres ? <a href={n.adres}>{n.nazwa}</a> : n.nazwa}</h3>
+  <p>{n.opis}</p>
+  {n.uwaga && <p class="narzedzie-karta__uwaga">{n.uwaga}</p>}
+  {n.adres && <p class="karta__stopka">Otwórz narzędzie →</p>}
+</article>

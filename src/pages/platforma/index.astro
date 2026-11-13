@@ -1,0 +1,113 @@
+---
+import Aplikacja from '@/layouts/Aplikacja.astro';
+import KartaModulu from '@/components/platforma/KartaModulu.astro';
+import KartaNarzedzia from '@/components/platforma/KartaNarzedzia.astro';
+import PasekPostepu from '@/components/platforma/PasekPostepu.astro';
+import { ID_KURSU_AKTYWNEGO, wszystkieKursy } from '@/lib/platforma/dane';
+import { lekcjeKursu } from '@/lib/platforma/kurs';
+import { NARZEDZIA } from '@/lib/platforma/narzedzia';
+
+const kursy = await wszystkieKursy();
+const kurs = kursy.find((k) => k.id === ID_KURSU_AKTYWNEGO)!;
+const wPrzygotowaniu = kursy.filter((k) => k.stan === 'w-przygotowaniu');
+const pierwsza = lekcjeKursu(kurs)[0];
+---
+
+<Aplikacja tytul="Pulpit" opis="Pulpit strefy kursanta: postęp, kontynuacja nauki, moduły i narzędzia." sekcja="pulpit" kursy={[kurs]}>
+  <header class="widok-glowa">
+    <p class="etykieta">Pulpit</p>
+    <h1 data-powitanie>Witaj w strefie kursanta</h1>
+    <p class="widok-glowa__opis">
+      Tu wracasz do nauki, sprawdzasz postęp i korzystasz z narzędzi. Ostatnia aktywność:
+      <span data-ostatnia-aktywnosc data-domyslnie="jeszcze żadnej">jeszcze żadnej</span>.
+    </p>
+  </header>
+
+  <div class="uklad-pulpitu">
+    <div class="kolumna">
+      <section class="panel panel--ciemny na-ciemnym kontynuuj" data-kontynuuj={kurs.id} aria-labelledby="kontynuuj-tytul">
+        <p class="kontynuuj__etykieta" data-kontynuuj-etykieta>Zacznij naukę</p>
+        <h2 class="kontynuuj__tytul" id="kontynuuj-tytul" data-kontynuuj-tytul>{pierwsza.numer} {pierwsza.tytul}</h2>
+        <p class="kontynuuj__modul" data-kontynuuj-modul>Moduł: {pierwsza.modul.tytul}</p>
+        <PasekPostepu etykieta={`Postęp kursu: ${kurs.tytul}`} kurs={kurs.id} />
+        <div class="kontynuuj__akcje">
+          <a class="przycisk przycisk--zloty" href={pierwsza.adres} data-kontynuuj-link data-adres-kursu={kurs.adres}>Zacznij</a>
+          <a class="przycisk przycisk--kontur" href={kurs.adres}>Program kursu</a>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="moduly-tytul">
+        <h2 class="panel__tytul" id="moduly-tytul">
+          <span>{kurs.tytul}</span>
+          <a href={kurs.adres}>Cały program</a>
+        </h2>
+        {kurs.demonstracyjny && <p class="cichy maly">Kurs demonstracyjny z przykładowymi lekcjami. Pokazuje działanie platformy, nie zawiera treści finansowych.</p>}
+        <ul class="lista-modulow">
+          {kurs.moduly.map((m) => <li><KartaModulu kurs={kurs} modul={m} /></li>)}
+        </ul>
+      </section>
+    </div>
+
+    <div class="kolumna">
+      <section class="panel" aria-labelledby="postep-tytul">
+        <h2 class="panel__tytul" id="postep-tytul"><span>Twój postęp</span><a href="/platforma/postep/">Szczegóły</a></h2>
+        <dl class="statystyki">
+          <div class="statystyka">
+            <dt>Ukończone lekcje</dt>
+            <dd><span data-liczba="lekcje-ukonczone" data-kurs={kurs.id}>0</span> <span class="statystyka__z">z <span data-liczba="lekcje-wszystkie" data-kurs={kurs.id}>{lekcjeKursu(kurs).length}</span></span></dd>
+          </div>
+          <div class="statystyka">
+            <dt>Ukończone moduły</dt>
+            <dd><span data-liczba="moduly-ukonczone" data-kurs={kurs.id}>0</span> <span class="statystyka__z">z <span data-liczba="moduly-wszystkie" data-kurs={kurs.id}>{kurs.moduly.length}</span></span></dd>
+          </div>
+          <div class="statystyka">
+            <dt>Rozwiązane quizy</dt>
+            <dd><span data-liczba="quizy-rozwiazane" data-kurs={kurs.id}>0</span></dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="panel" aria-labelledby="aktywnosc-tytul">
+        <h2 class="panel__tytul" id="aktywnosc-tytul">Ostatnia aktywność</h2>
+        <p class="pusto" data-aktywnosci-pusto>Nie masz jeszcze żadnej aktywności. Zacznij od pierwszej lekcji.</p>
+        <ol class="aktywnosci" data-aktywnosci data-limit="5" hidden></ol>
+      </section>
+
+      {
+        wPrzygotowaniu.map((k) => (
+          <section class="panel" aria-labelledby={`kurs-${k.id}`}>
+            <h2 class="panel__tytul" id={`kurs-${k.id}`}>{k.tytul}</h2>
+            <p class="maly">{k.opis}</p>
+            <p class="maly cichy">{k.moduly.length} modułów · kurs w przygotowaniu</p>
+            <a class="link-strzalka" href={k.adres}>Zobacz program</a>
+          </section>
+        ))
+      }
+
+      <section class="panel" aria-labelledby="ustawienia-tytul">
+        <h2 class="panel__tytul" id="ustawienia-tytul">Profil i dane</h2>
+        <p class="maly cichy" data-magazyn-opis>Postęp zapisuje się tylko w tej przeglądarce na tym urządzeniu.</p>
+        <a class="link-strzalka" href="/platforma/ustawienia/">Ustawienia</a>
+      </section>
+    </div>
+
+    <section class="panel pelna" aria-labelledby="narzedzia-tytul">
+      <h2 class="panel__tytul" id="narzedzia-tytul"><span>Centrum narzędzi</span><a href="/platforma/narzedzia/">Wszystkie narzędzia</a></h2>
+      <div class="siatka siatka--3">
+        {NARZEDZIA.slice(0, 3).map((n) => <KartaNarzedzia narzedzie={n} />)}
+      </div>
+    </section>
+  </div>
+</Aplikacja>
+
+<script>
+  import { pobierzSesje, ZDARZENIE_ZMIANY } from '@/lib/platforma/klient';
+
+  const powitanie = document.querySelector<HTMLElement>('[data-powitanie]');
+  const ustaw = async () => {
+    const nazwa = (await pobierzSesje()).stan().profil.nazwa;
+    if (powitanie) powitanie.textContent = nazwa ? `Witaj, ${nazwa}` : 'Witaj w strefie kursanta';
+  };
+  ustaw();
+  document.addEventListener(ZDARZENIE_ZMIANY, ustaw);
+</script>

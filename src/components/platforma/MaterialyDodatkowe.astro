@@ -1,0 +1,20 @@
+---
+interface Props {
+  materialy: Array<{ tytul: string; opis: string; adres?: string }>;
+}
+const { materialy } = Astro.props;
+---
+
+<section class="lekcja-blok" aria-labelledby="materialy-tytul">
+  <h2 id="materialy-tytul" class="lekcja-blok__tytul">Materiały dodatkowe</h2>
+  <ul class="materialy">
+    {
+      materialy.map((m) => (
+        <li class="material">
+          {m.adres ? <a href={m.adres}>{m.tytul}</a> : <span class="material__tytul">{m.tytul}</span>}
+          <p>{m.opis}</p>
+        </li>
+      ))
+    }
+  </ul>
+</section>

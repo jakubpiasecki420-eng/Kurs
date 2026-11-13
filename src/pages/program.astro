@@ -1,0 +1,137 @@
+---
+import Bazowy from '@/layouts/Bazowy.astro';
+import NaglowekStrony from '@/components/NaglowekStrony.astro';
+import Zapis from '@/components/Zapis.astro';
+import { wszystkieKursy } from '@/lib/platforma/dane';
+import { SERWIS } from '@/lib/serwis';
+
+const kurs = (await wszystkieKursy()).find((k) => k.id === 'emerytura-pod-kontrola')!;
+---
+
+<Bazowy
+  tytul={`Program kursu „${kurs.tytul}”`}
+  opis="Program kursu dla osób na JDG i B2B: system emerytalny, IKE, IKZE i OKI przy Twojej formie opodatkowania, inflacja, koszty i własny plan."
+>
+  <NaglowekStrony etykieta="Program edukacyjny" tytul={kurs.tytul} lid={kurs.opis}>
+    <p class="status-programu"><span class="znacznik znacznik--zloty">Kurs w przygotowaniu — sprzedaż jeszcze nie ruszyła</span></p>
+  </NaglowekStrony>
+
+  <section class="sekcja" aria-labelledby="moduly-tytul">
+    <div class="kontener">
+      <div class="naglowek-sekcji">
+        <h2 id="moduly-tytul">{kurs.moduly.length} modułów, od podstaw do własnego planu</h2>
+        <p>
+          Kurs działa na platformie: każdy moduł składa się z krótkich lekcji z ćwiczeniami, quizami i kalkulatorami. Postęp
+          zapisuje się, więc możesz wracać do nauki w dowolnym momencie.
+        </p>
+      </div>
+      <ol class="program">
+        {
+          kurs.moduly.map((m) => (
+            <li>
+              <span class="program__nr" aria-hidden="true">{String(m.numer).padStart(2, '0')}</span>
+              <div>
+                <h3>{m.tytul}</h3>
+                <p>{m.opis}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+      <p class="maly cichy">
+        Moduły 3, 5, 6 i 7 opisują zasady podatkowe. Udostępnimy je po recenzji doradcy podatkowego.
+      </p>
+    </div>
+  </section>
+
+  <section class="sekcja sekcja--biala">
+    <div class="kontener">
+      <div class="siatka siatka--2">
+        <div>
+          <h2>Dla kogo</h2>
+          <ul>
+            <li>Prowadzisz jednoosobową działalność lub pracujesz na B2B.</li>
+            <li>Masz co miesiąc nadwyżkę, którą chcesz odkładać na długi termin.</li>
+            <li>Chcesz zrozumieć zasady i policzyć skutki, zanim podpiszesz umowę.</li>
+            <li>Wolisz jeden uporządkowany kurs niż wiele rozproszonych artykułów.</li>
+          </ul>
+        </div>
+        <div>
+          <h2>Dla kogo nie</h2>
+          <ul>
+            <li>Szukasz wskazówek, w które fundusze lub akcje inwestować.</li>
+            <li>Nie masz jeszcze rezerwy na nieprzewidziane wydatki albo spłacasz drogie długi.</li>
+            <li>Pracujesz wyłącznie na etacie — wersja dla pracowników powstanie później.</li>
+            <li>Jesteś tuż przed emeryturą i potrzebujesz planu wypłat, a nie gromadzenia.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="proza zasady">
+        <h2>Czego kurs nie zrobi</h2>
+        <p>
+          Nie wskaże konkretnej instytucji ani produktu, nie powie, w co inwestować, i nie obieca wysokości emerytury ani
+          zysku. Nie zastąpi indywidualnej porady doradcy podatkowego lub inwestycyjnego.
+        </p>
+        <h2>Materiały uzupełniające</h2>
+        <p>
+          Do kursu dołączymy wersję PDF najważniejszych rozdziałów i zeszyt ćwiczeń do wydruku. Głównym miejscem nauki jest
+          platforma.
+        </p>
+        <h2>Zanim zaczniemy sprzedaż</h2>
+        <ol>
+          <li>Treści podatkowe przejdą recenzję doradcy podatkowego.</li>
+          <li>Opublikujemy regulamin, politykę prywatności i dane podmiotu prowadzącego serwis.</li>
+          <li>Podamy cenę i zasady zwrotu.</li>
+        </ol>
+        <p>Do tego czasu nie przyjmujemy płatności ani zamówień.</p>
+        <p><a class="link-strzalka" href="/jak-uczymy/">Zobacz, jak wygląda nauka na platformie</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sekcja sekcja--ciemna" aria-labelledby="zapis-tytul">
+    <div class="kontener">
+      <h2 id="zapis-tytul">Daj znać, że czekasz na „{SERWIS.produkt.nazwa}”</h2>
+      <Zapis />
+    </div>
+  </section>
+</Bazowy>
+
+<style>
+  .status-programu {
+    margin: var(--o-4) 0 0;
+  }
+  .program {
+    list-style: none;
+    margin: 0 0 var(--o-5);
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    gap: var(--o-3) var(--o-6);
+  }
+  .program li {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    gap: var(--o-3);
+    margin: 0;
+    padding: var(--o-4) 0;
+    border-top: 1px solid var(--linia);
+  }
+  .program__nr {
+    font: 700 var(--tekst-l) var(--font-naglowki);
+    color: var(--zloto-ciemne);
+  }
+  .program h3 {
+    font-size: var(--tekst-m);
+    margin-bottom: var(--o-1);
+  }
+  .program p {
+    margin: 0;
+    font-size: var(--tekst-s);
+    color: var(--tekst-pomocniczy);
+  }
+  .zasady {
+    margin-top: var(--o-7);
+  }
+</style>

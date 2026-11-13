@@ -1,0 +1,52 @@
+---
+import ZnacznikStatusu from './ZnacznikStatusu.astro';
+import PasekPostepu from './PasekPostepu.astro';
+import ListaLekcji from './ListaLekcji.astro';
+import type { Kurs, Modul, StatusModulu } from '@/lib/platforma/model';
+
+interface Props {
+  kurs: Kurs;
+  modul: Modul;
+  /** Pokaż listę lekcji w karcie. */
+  zLekcjami?: boolean;
+}
+const { kurs, modul, zLekcjami = false } = Astro.props;
+const czas = modul.lekcje.reduce((s, l) => s + l.czasMin, 0);
+const poczatkowy: StatusModulu = modul.lekcje.length === 0 || modul.wymaga.length > 0 ? 'niedostepny' : 'dostepny';
+const wymagane = modul.wymaga.map((w) => kurs.moduly.find((m) => m.id === w)?.tytul).filter(Boolean);
+const wPrzygotowaniu = modul.lekcje.length === 0;
+---
+
+<article class="modul" data-modul={modul.id}>
+  <header class="modul__glowa">
+    <span class="modul__numer" aria-hidden="true">{String(modul.numer).padStart(2, '0')}</span>
+    <div class="modul__tytuly">
+      <h3 class="modul__tytul">
+        {wPrzygotowaniu ? modul.tytul : <a href={modul.adres}>{modul.tytul}</a>}
+      </h3>
+      <p class="modul__opis">{modul.opis}</p>
+    </div>
+    {
+      wPrzygotowaniu ? (
+        <span class="status" data-stan="przygotowanie">
+          <span class="status__kropka" aria-hidden="true" />
+          <span class="status__tekst">W przygotowaniu</span>
+        </span>
+      ) : (
+        <ZnacznikStatusu kurs={kurs.id} modul={modul.id} poczatkowy={poczatkowy} />
+      )
+    }
+  </header>
+  {
+    !wPrzygotowaniu && (
+      <div class="modul__meta">
+        <span>
+          {modul.lekcje.length} {modul.lekcje.length === 1 ? 'lekcja' : modul.lekcje.length < 5 ? 'lekcje' : 'lekcji'} · {czas} min
+        </span>
+        {wymagane.length > 0 && <span class="modul__warunek">Wymaga ukończenia: {wymagane.join(', ')}</span>}
+      </div>
+    )
+  }
+  {!wPrzygotowaniu && <PasekPostepu etykieta={`Postęp modułu ${modul.numer}`} kurs={kurs.id} modul={modul.id} maly />}
+  {zLekcjami && !wPrzygotowaniu && <ListaLekcji kurs={kurs.id} modul={modul} />}
+</article>

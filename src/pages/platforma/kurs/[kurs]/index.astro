@@ -1,0 +1,49 @@
+---
+import Aplikacja from '@/layouts/Aplikacja.astro';
+import NaglowekWidoku from '@/components/platforma/NaglowekWidoku.astro';
+import KartaModulu from '@/components/platforma/KartaModulu.astro';
+import PasekPostepu from '@/components/platforma/PasekPostepu.astro';
+import { wszystkieKursy } from '@/lib/platforma/dane';
+import { lacznyCzas, lekcjeKursu } from '@/lib/platforma/kurs';
+import type { Kurs } from '@/lib/platforma/model';
+
+export async function getStaticPaths() {
+  return (await wszystkieKursy()).map((kurs) => ({ params: { kurs: kurs.id }, props: { kurs } }));
+}
+
+const { kurs } = Astro.props as { kurs: Kurs };
+const lekcje = lekcjeKursu(kurs).length;
+const aktywny = kurs.stan === 'aktywny';
+---
+
+<Aplikacja tytul={kurs.tytul} opis={kurs.opis} sekcja="kurs" kursy={aktywny ? [kurs] : []}>
+  <NaglowekWidoku
+    etykieta={kurs.demonstracyjny ? 'Kurs demonstracyjny' : aktywny ? 'Kurs' : 'Kurs w przygotowaniu'}
+    tytul={kurs.tytul}
+    opis={kurs.opis}
+    okruszki={[{ adres: '/platforma/', etykieta: 'Pulpit' }]}
+  />
+
+  {
+    aktywny ? (
+      <section class="panel" aria-label="Postęp kursu" style="margin-bottom: var(--o-5)">
+        <PasekPostepu etykieta="Postęp kursu" kurs={kurs.id} />
+        <p class="maly cichy" style="margin: var(--o-3) 0 0">
+          {kurs.moduly.length} moduły · {lekcje} lekcji · około {lacznyCzas(kurs)} minut nauki
+        </p>
+      </section>
+    ) : (
+      <div class="blokada">
+        <h2>Ten kurs jest w przygotowaniu</h2>
+        <p class="maly" style="margin: 0">
+          Program pokazuje planowane moduły. Lekcje udostępnimy po przygotowaniu treści i recenzji doradcy podatkowego.
+        </p>
+      </div>
+    )
+  }
+
+  <h2 class="wizualnie-ukryte">Moduły</h2>
+  <ol class="lista-modulow">
+    {kurs.moduly.map((m) => <li><KartaModulu kurs={kurs} modul={m} zLekcjami /></li>)}
+  </ol>
+</Aplikacja>

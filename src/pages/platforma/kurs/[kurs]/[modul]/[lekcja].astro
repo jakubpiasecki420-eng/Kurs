@@ -1,0 +1,220 @@
+---
+import Aplikacja from '@/layouts/Aplikacja.astro';
+import Ikona from '@/components/Ikona.astro';
+import Kalkulator from '@/components/Kalkulator.astro';
+import ListaLekcji from '@/components/platforma/ListaLekcji.astro';
+import PasekPostepu from '@/components/platforma/PasekPostepu.astro';
+import Ilustracja from '@/components/platforma/Ilustracja.astro';
+import MaterialyDodatkowe from '@/components/platforma/MaterialyDodatkowe.astro';
+import Quiz from '@/components/platforma/Quiz.astro';
+import InformacjeNarzedzia from '@/components/platforma/InformacjeNarzedzia.astro';
+import Zrodla from '@/components/Zrodla.astro';
+import { render } from 'astro:content';
+import { wszystkieKursy, wszystkieLekcje, type WpisLekcji } from '@/lib/platforma/dane';
+import { sasiedzi } from '@/lib/platforma/kurs';
+import { narzedzie } from '@/lib/platforma/narzedzia';
+import { przypisy } from '@/lib/rejestr';
+import type { Kurs, Lekcja, Modul } from '@/lib/platforma/model';
+
+export async function getStaticPaths() {
+  const [kursy, lekcje] = await Promise.all([wszystkieKursy(), wszystkieLekcje()]);
+  return kursy.flatMap((kurs) =>
+    kurs.moduly.flatMap((modul) =>
+      modul.lekcje.map((lekcja) => {
+        const wpis = lekcje.find((l) => l.dane.kurs === kurs.id && l.dane.id === lekcja.id)!.wpis;
+        return { params: { kurs: kurs.id, modul: modul.id, lekcja: lekcja.id }, props: { kurs, modul, lekcja, wpis } };
+      }),
+    ),
+  );
+}
+
+const { kurs, modul, lekcja, wpis } = Astro.props as { kurs: Kurs; modul: Modul; lekcja: Lekcja; wpis: WpisLekcji };
+const { Content, headings } = await render(wpis);
+const d = wpis.data;
+const sekcje = headings.filter((h) => h.depth === 2);
+const { poprzednia, nastepna, pozycja, wszystkie } = sasiedzi(kurs, lekcja.id);
+const zrodla = przypisy(d.twierdzenia);
+const n = d.narzedzie ? narzedzie(d.narzedzie) : null;
+const wymagane = modul.wymaga.map((w) => kurs.moduly.find((m) => m.id === w)!);
+---
+
+<Aplikacja tytul={lekcja.tytul} opis={lekcja.opis} sekcja="kurs" kursy={[kurs]}>
+  <div class="uklad-lekcji" data-lekcja-strona data-kurs={kurs.id} data-modul={modul.id} data-lekcja-id={lekcja.id}>
+    <article class="lekcja" aria-labelledby="lekcja-tytul">
+      <header class="widok-glowa">
+        <nav class="okruszki" aria-label="Ścieżka">
+          <ol>
+            <li><a href="/platforma/">Pulpit</a></li>
+            <li><a href={kurs.adres}>{kurs.tytul}</a></li>
+            <li><a href={modul.adres}>{modul.tytul}</a></li>
+            <li aria-current="page">Lekcja {lekcja.numer}</li>
+          </ol>
+        </nav>
+        <p class="etykieta">Lekcja {lekcja.numer} · {pozycja} z {wszystkie} w kursie</p>
+        <h1 id="lekcja-tytul">{lekcja.tytul}</h1>
+        <p class="widok-glowa__opis">{lekcja.opis}</p>
+        <div class="lekcja-meta">
+          <span class="lekcja-meta__czas"><Ikona nazwa="zegar" /> {lekcja.czasMin} min</span>
+          {lekcja.demonstracyjna && <span class="znacznik znacznik--zloty">Treść przykładowa</span>}
+          <span class="znacznik" data-lekcja={lekcja.id} data-kurs={kurs.id} data-ukonczona="false" data-znacznik-ukonczenia>
+            <span data-tekst-znacznika>Nieukończona</span>
+          </span>
+        </div>
+      </header>
+
+      {
+        wymagane.length > 0 && (
+          <div class="blokada" data-blokada hidden>
+            <h2>Ta lekcja jest jeszcze niedostępna</h2>
+            <p class="maly">
+              Najpierw ukończ moduł:{' '}
+              {wymagane.map((m, j) => (
+                <>
+                  {j > 0 && ', '}
+                  <a href={m.adres}>{m.tytul}</a>
+                </>
+              ))}
+              . W wersji demonstracyjnej możesz mimo to przejrzeć lekcję.
+            </p>
+          </div>
+        )
+      }
+
+      <div class="tresc-lekcji">
+        {
+          sekcje.length > 1 && (
+            <nav class="spis-sekcji" aria-labelledby="spis-tytul">
+              <h2 id="spis-tytul">W tej lekcji</h2>
+              <ol>
+                {sekcje.map((s) => (
+                  <li>
+                    <a href={`#${s.slug}`}>{s.text}</a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          )
+        }
+
+        <div class="proza">
+          <Content />
+        </div>
+
+        {d.ilustracja && <Ilustracja opis={d.ilustracja.opis} podpis={d.ilustracja.podpis} />}
+
+        {
+          n && (
+            <section class="lekcja-blok lekcja-narzedzie" aria-labelledby="narzedzie-tytul">
+              <h2 id="narzedzie-tytul" class="lekcja-blok__tytul">
+                Ćwiczenie: {n.nazwa.toLowerCase()}
+              </h2>
+              <p class="maly cichy">Wpisz własne założenia. Wynik nie zapisuje się w postępie.</p>
+              <Kalkulator />
+              <details class="tabela-wynikow" style="margin-top: var(--o-4)">
+                <summary>O narzędziu: założenia, źródła i zastrzeżenia</summary>
+                <InformacjeNarzedzia narzedzie={n} tytulPoziom="h3" />
+              </details>
+            </section>
+          )
+        }
+
+        {d.quiz && <Quiz kurs={kurs.id} modul={modul.id} lekcja={lekcja.id} pytania={d.quiz.pytania} />}
+
+        {d.materialy.length > 0 && <MaterialyDodatkowe materialy={d.materialy} />}
+
+        {zrodla.lista.length > 0 && <Zrodla lista={zrodla.lista} />}
+      </div>
+
+      <section class="ukonczenie" aria-label="Ukończenie lekcji">
+        <p class="ukonczenie__stan" data-stan-ukonczenia role="status">Gdy skończysz, oznacz lekcję jako ukończoną.</p>
+        <div class="grupa-przyciskow">
+          <button class="przycisk przycisk--zloty" type="button" data-ukoncz>Oznacz jako ukończoną</button>
+          <button class="przycisk przycisk--kontur" type="button" data-cofnij hidden>Cofnij ukończenie</button>
+        </div>
+      </section>
+
+      <nav class="nawigacja-lekcji" aria-label="Sąsiednie lekcje">
+        {
+          poprzednia && (
+            <a href={poprzednia.adres} rel="prev">
+              <span class="nawigacja-lekcji__kierunek">← Poprzednia lekcja</span>
+              <span class="nawigacja-lekcji__tytul">
+                {poprzednia.numer} {poprzednia.tytul}
+              </span>
+            </a>
+          )
+        }
+        {
+          nastepna ? (
+            <a class="nawigacja-lekcji__nastepna" href={nastepna.adres} rel="next">
+              <span class="nawigacja-lekcji__kierunek">Następna lekcja →</span>
+              <span class="nawigacja-lekcji__tytul">
+                {nastepna.numer} {nastepna.tytul}
+              </span>
+            </a>
+          ) : (
+            <a class="nawigacja-lekcji__nastepna" href={kurs.adres}>
+              <span class="nawigacja-lekcji__kierunek">Koniec kursu →</span>
+              <span class="nawigacja-lekcji__tytul">Wróć do programu</span>
+            </a>
+          )
+        }
+      </nav>
+    </article>
+
+    <aside class="uklad-lekcji__boczny" aria-label="Moduł i postęp">
+      <section class="panel">
+        <PasekPostepu etykieta="Postęp kursu" kurs={kurs.id} maly />
+      </section>
+      <section class="panel">
+        <h2 class="panel__tytul" style="font-size: var(--tekst-m)">Moduł {modul.numer}: {modul.tytul}</h2>
+        <ListaLekcji kurs={kurs.id} modul={modul} aktualna={lekcja.id} />
+      </section>
+    </aside>
+  </div>
+</Aplikacja>
+
+<script>
+  import { kursNaStronie, pokazKomunikat, uruchomStrefe, ZDARZENIE_ZMIANY } from '@/lib/platforma/klient';
+  import { cofnijUkonczenie, lekcjaUkonczona, otworzLekcje, statusModulu, ukonczLekcje } from '@/lib/platforma/postep';
+
+  const korzen = document.querySelector<HTMLElement>('[data-lekcja-strona]')!;
+  const { kurs: idKursu, modul, lekcjaId } = korzen.dataset as Record<string, string>;
+  const kurs = kursNaStronie(idKursu);
+  const ukoncz = document.querySelector<HTMLButtonElement>('[data-ukoncz]')!;
+  const cofnij = document.querySelector<HTMLButtonElement>('[data-cofnij]')!;
+  const stanTekst = document.querySelector<HTMLElement>('[data-stan-ukonczenia]')!;
+  const znacznik = document.querySelector<HTMLElement>('[data-tekst-znacznika]')!;
+  const blokada = document.querySelector<HTMLElement>('[data-blokada]');
+
+  const sesja = await uruchomStrefe();
+
+  const pokaz = () => {
+    const s = sesja.stan();
+    const gotowa = lekcjaUkonczona(s, idKursu, lekcjaId);
+    ukoncz.hidden = gotowa;
+    cofnij.hidden = !gotowa;
+    znacznik.textContent = gotowa ? 'Ukończona' : 'Nieukończona';
+    stanTekst.textContent = gotowa
+      ? 'Lekcja ukończona. Możesz przejść dalej albo wrócić do niej w dowolnym momencie.'
+      : 'Gdy skończysz, oznacz lekcję jako ukończoną.';
+    if (blokada) blokada.hidden = statusModulu(s, kurs, modul) !== 'niedostepny';
+  };
+
+  await sesja.zmien((s) => otworzLekcje(s, kurs, modul, lekcjaId, new Date()));
+  pokaz();
+  document.addEventListener(ZDARZENIE_ZMIANY, pokaz);
+
+  ukoncz.addEventListener('click', async () => {
+    if (await sesja.zmien((s) => ukonczLekcje(s, kurs, modul, lekcjaId, new Date()))) {
+      pokazKomunikat('Lekcja oznaczona jako ukończona.');
+      cofnij.focus();
+    }
+  });
+  cofnij.addEventListener('click', async () => {
+    if (await sesja.zmien((s) => cofnijUkonczenie(s, kurs, modul, lekcjaId))) {
+      pokazKomunikat('Cofnięto ukończenie lekcji.');
+      ukoncz.focus();
+    }
+  });
+</script>

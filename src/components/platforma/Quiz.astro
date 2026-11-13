@@ -1,0 +1,130 @@
+---
+/**
+ * Quiz lekcji. Sprawdza odpowiedzi w przeglądarce i zapisuje wynik w postępie.
+ * Odpowiedzi poprawne są w kodzie strony — quiz służy do utrwalania wiedzy, nie do egzaminowania.
+ */
+interface Pytanie {
+  pytanie: string;
+  odpowiedzi: string[];
+  poprawna: number;
+  wyjasnienie: string;
+}
+interface Props {
+  kurs: string;
+  modul: string;
+  lekcja: string;
+  pytania: Pytanie[];
+}
+const { kurs, modul, lekcja, pytania } = Astro.props;
+const klucz = pytania.map((p) => p.poprawna).join(',');
+---
+
+<section class="lekcja-blok quiz" aria-labelledby="quiz-tytul" data-quiz data-kurs={kurs} data-modul={modul} data-lekcja-quizu={lekcja} data-klucz={klucz}>
+  <h2 id="quiz-tytul" class="lekcja-blok__tytul">Sprawdź się</h2>
+  <p class="quiz__wstep">
+    {pytania.length} {pytania.length === 1 ? 'pytanie' : pytania.length < 5 ? 'pytania' : 'pytań'}. Wynik zapisze się
+    w Twoim postępie. <span data-quiz-poprzedni hidden></span>
+  </p>
+  <form class="quiz__formularz" novalidate>
+    {
+      pytania.map((p, i) => (
+        <fieldset class="quiz__pytanie" data-pytanie={i}>
+          <legend>
+            <span class="quiz__nr">{i + 1}.</span> {p.pytanie}
+          </legend>
+          {p.odpowiedzi.map((o, j) => (
+            <label class="quiz__odpowiedz">
+              <input type="radio" name={`pytanie-${i}`} value={j} />
+              <span>{o}</span>
+            </label>
+          ))}
+          <p class="quiz__informacja" data-informacja hidden>
+            <strong data-werdykt />
+            <span>{p.wyjasnienie}</span>
+          </p>
+        </fieldset>
+      ))
+    }
+    <p class="quiz__blad" data-quiz-blad role="alert" hidden>Odpowiedz na wszystkie pytania.</p>
+    <div class="quiz__akcje">
+      <button class="przycisk" type="submit" data-sprawdz>Sprawdź odpowiedzi</button>
+      <button class="przycisk przycisk--kontur" type="button" data-ponownie hidden>Rozwiąż ponownie</button>
+    </div>
+    <p class="quiz__wynik" data-quiz-wynik role="status" hidden></p>
+  </form>
+</section>
+
+<script>
+  import { kursNaStronie, pobierzSesje, pokazKomunikat } from '@/lib/platforma/klient';
+  import { postepKursu, zapiszWynikQuizu } from '@/lib/platforma/postep';
+
+  document.querySelectorAll<HTMLElement>('[data-quiz]').forEach(async (sekcja) => {
+    const formularz = sekcja.querySelector('form')!;
+    const klucz = sekcja.dataset.klucz!.split(',').map(Number);
+    const { kurs: idKursu, modul, lekcjaQuizu: lekcja } = sekcja.dataset as Record<string, string>;
+    const wynikEl = sekcja.querySelector<HTMLElement>('[data-quiz-wynik]')!;
+    const blad = sekcja.querySelector<HTMLElement>('[data-quiz-blad]')!;
+    const ponownie = sekcja.querySelector<HTMLButtonElement>('[data-ponownie]')!;
+    const sprawdz = sekcja.querySelector<HTMLButtonElement>('[data-sprawdz]')!;
+    const poprzedni = sekcja.querySelector<HTMLElement>('[data-quiz-poprzedni]')!;
+    const sesja = await pobierzSesje();
+    const kurs = kursNaStronie(idKursu);
+
+    const pokazPoprzedni = () => {
+      const w = postepKursu(sesja.stan(), idKursu).wynikiQuizow[lekcja];
+      poprzedni.hidden = !w;
+      if (w) poprzedni.textContent = `Ostatni wynik: ${w.poprawne}/${w.wszystkie}.`;
+    };
+    pokazPoprzedni();
+
+    formularz.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const odpowiedzi = klucz.map((_, i) => {
+        const z = formularz.querySelector<HTMLInputElement>(`input[name="pytanie-${i}"]:checked`);
+        return z ? Number(z.value) : null;
+      });
+      if (odpowiedzi.some((o) => o === null)) {
+        blad.hidden = false;
+        formularz.querySelector<HTMLInputElement>(`fieldset:nth-of-type(${odpowiedzi.indexOf(null) + 1}) input`)?.focus();
+        return;
+      }
+      blad.hidden = true;
+      let poprawne = 0;
+      klucz.forEach((dobra, i) => {
+        const pole = formularz.querySelector<HTMLElement>(`[data-pytanie="${i}"]`)!;
+        const ok = odpowiedzi[i] === dobra;
+        if (ok) poprawne += 1;
+        pole.dataset.wynik = ok ? 'dobrze' : 'zle';
+        pole.querySelector<HTMLElement>('[data-werdykt]')!.textContent = ok ? 'Dobrze. ' : 'Nie tym razem. ';
+        pole.querySelector<HTMLElement>('[data-informacja]')!.hidden = false;
+        pole.querySelectorAll<HTMLInputElement>('input').forEach((i) => (i.disabled = true));
+        pole.querySelectorAll<HTMLElement>('.quiz__odpowiedz').forEach((l, j) => {
+          if (j === dobra) l.dataset.poprawna = 'true';
+        });
+      });
+      wynikEl.textContent = `Wynik: ${poprawne} z ${klucz.length}.`;
+      wynikEl.hidden = false;
+      sprawdz.hidden = true;
+      ponownie.hidden = false;
+      const zapisano = await sesja.zmien((s) => zapiszWynikQuizu(s, kurs, modul, lekcja, poprawne, klucz.length, new Date()));
+      if (zapisano) {
+        pokazPoprzedni();
+        pokazKomunikat('Zapisano wynik quizu.');
+      }
+    });
+
+    ponownie.addEventListener('click', () => {
+      formularz.reset();
+      formularz.querySelectorAll<HTMLElement>('[data-pytanie]').forEach((pole) => {
+        delete pole.dataset.wynik;
+        pole.querySelector<HTMLElement>('[data-informacja]')!.hidden = true;
+        pole.querySelectorAll<HTMLInputElement>('input').forEach((i) => (i.disabled = false));
+        pole.querySelectorAll<HTMLElement>('.quiz__odpowiedz').forEach((l) => delete l.dataset.poprawna);
+      });
+      wynikEl.hidden = true;
+      sprawdz.hidden = false;
+      ponownie.hidden = true;
+      formularz.querySelector<HTMLInputElement>('input')?.focus();
+    });
+  });
+</script>

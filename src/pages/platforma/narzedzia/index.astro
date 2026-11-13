@@ -1,0 +1,32 @@
+---
+import Aplikacja from '@/layouts/Aplikacja.astro';
+import NaglowekWidoku from '@/components/platforma/NaglowekWidoku.astro';
+import KartaNarzedzia from '@/components/platforma/KartaNarzedzia.astro';
+import { NARZEDZIA } from '@/lib/platforma/narzedzia';
+
+const dostepne = NARZEDZIA.filter((n) => n.stan === 'dostepne');
+const pozostale = NARZEDZIA.filter((n) => n.stan !== 'dostepne');
+---
+
+<Aplikacja tytul="Centrum narzędzi" opis="Kalkulatory finansowe platformy: dostępne i planowane." sekcja="narzedzia">
+  <NaglowekWidoku
+    etykieta="Centrum narzędzi"
+    tytul="Narzędzia finansowe"
+    opis="Każde narzędzie pokazuje metodę, założenia, źródła i datę aktualizacji. Wyniki są symulacjami, nie prognozami."
+    okruszki={[{ adres: '/platforma/', etykieta: 'Pulpit' }]}
+  />
+
+  <section aria-labelledby="dostepne-tytul">
+    <h2 id="dostepne-tytul" class="panel__tytul">Dostępne</h2>
+    <div class="siatka siatka--3">{dostepne.map((n) => <KartaNarzedzia narzedzie={n} />)}</div>
+  </section>
+
+  <section aria-labelledby="planowane-tytul" style="margin-top: var(--o-7)">
+    <h2 id="planowane-tytul" class="panel__tytul">W przygotowaniu</h2>
+    <p class="maly cichy">
+      Narzędzia oznaczone „po recenzji podatkowej” mają gotowe obliczenia, ale udostępnimy je dopiero po sprawdzeniu przez
+      doradcę podatkowego.
+    </p>
+    <div class="siatka siatka--3">{pozostale.map((n) => <KartaNarzedzia narzedzie={n} />)}</div>
+  </section>
+</Aplikacja>

@@ -6,14 +6,18 @@ Oznaczenia: **[P]** potwierdzone w źródle pierwotnym, **[W]** źródło wtórn
 
 ## 1. Cel i model
 
-Finansowa Przyszłość jest niezależną marką edukacji finansowej. Zarabia na sprzedaży własnych materiałów. Nie pośredniczy w sprzedaży produktów finansowych i nie pobiera prowizji.
+Finansowa Przyszłość jest niezależną marką edukacji finansowej działającą jako **platforma edukacyjna w przeglądarce**: kursy podzielone na moduły i lekcje, quizy, kalkulatory i zapisywany postęp. Zarabia na dostępie do własnych kursów. Nie pośredniczy w sprzedaży produktów finansowych i nie pobiera prowizji.
+
+> **Zmiana z 13 listopada 2026 r.** Wcześniej głównym produktem był przewodnik PDF. Decyzją właściciela produktem jest kurs na platformie; PDF i zeszyt ćwiczeń pozostają materiałami uzupełniającymi. Architektura: `architektura-platformy.md`.
 
 Kolejność budowy:
 
-1. Bezpłatny serwis z wiedzą i kalkulatorem — źródło zaufania i ruchu z wyszukiwarek.
-2. Lista zainteresowanych — dopiero po publikacji polityki prywatności.
-3. Pierwszy produkt płatny: przewodnik „Emerytura pod kontrolą” dla osób na JDG i B2B.
-4. Po walidacji: wersja dla pracowników etatowych, coroczna aktualizacja, warsztaty.
+1. Bezpłatna część publiczna z wiedzą i kalkulatorem — źródło zaufania i ruchu z wyszukiwarek.
+2. Fundamenty platformy: strefa kursanta, model kursu i postępu, centrum narzędzi (etap 1 — zrobione, wersja demonstracyjna).
+3. Lista zainteresowanych — dopiero po publikacji polityki prywatności.
+4. Treść pierwszego kursu „Emerytura pod kontrolą” dla osób na JDG i B2B, po recenzji podatkowej.
+5. Konta, ochrona treści płatnej i sprzedaż dostępu (`architektura-platformy.md`, sekcja 7).
+6. Po walidacji: kurs dla pracowników etatowych, coroczna aktualizacja, warsztaty.
 
 ## 2. Dlaczego ten segment
 
@@ -32,15 +36,16 @@ Wszystkie ceny są hipotezami do sprawdzenia w przedsprzedaży.
 
 | Etap | Oferta | Cena testowa | Warunek uruchomienia |
 | --- | --- | --- | --- |
-| 1 | Pakiet „Emerytura pod kontrolą”: przewodnik PDF, arkusz obliczeniowy, zeszyt ćwiczeń, 12 miesięcy aktualizacji | 129 zł w przedsprzedaży, 179 zł regularnie | Recenzja doradcy podatkowego, regulamin, polityka prywatności |
+| 1 | Kurs „Emerytura pod kontrolą” na platformie: lekcje, quizy, kalkulatory, postęp; materiały uzupełniające w PDF; 12 miesięcy aktualizacji | 129 zł w przedsprzedaży, 179 zł regularnie (hipoteza z okresu PDF — do ponownej oceny dla kursu) | Recenzja doradcy podatkowego, regulamin, polityka prywatności, konta i ochrona treści płatnej |
 | 2 | Coroczna aktualizacja dla dotychczasowych klientów | do ustalenia | Co najmniej 100 klientów |
 | 3 | Wersja dla pracowników etatowych | do ustalenia | Osiągnięty próg walidacji etapu 1 |
 | 4 | Warsztat na żywo lub kurs wideo | 399–499 zł **[Z]** | Popyt potwierdzony pytaniami klientów |
 
 Czego nie robimy na starcie i dlaczego:
 
-- **Samego PDF za 49–99 zł.** Niska cena przy tych samych kosztach obsługi i recenzji; arkusz jest głównym wyróżnikiem. Wracamy do tej opcji, jeśli przedsprzedaż pokaże opór cenowy.
-- **Kursu wideo.** Drogi w produkcji i w corocznej aktualizacji.
+- **Samego PDF jako produktu głównego.** PDF pozostaje materiałem uzupełniającym do kursu.
+- **Kursu wideo.** Drogi w produkcji i w corocznej aktualizacji. Platforma opiera się na tekście, ćwiczeniach i narzędziach.
+- **Płatności i abonamentów przed walidacją.** Platforma ma punkty integracji, ale sprzedaż ruszy dopiero po progach z sekcji 4.
 - **Subskrypcji.** Bez bazy klientów nie ma komu jej sprzedać.
 - **Afiliacji.** Ryzyko prawne (pozyskiwanie klientów dla firm inwestycyjnych, art. 79 ustawy o obrocie instrumentami finansowymi **[P]**) i utrata głównego argumentu wiarygodności.
 - **Płatnych reklam.** Do czasu poznania konwersji z własnej listy.

@@ -1,0 +1,18 @@
+---
+import Ikona from '@/components/Ikona.astro';
+
+/** Miejsce na ilustrację lekcji. Dopóki nie ma grafiki, pokazuje wyraźnie opisany placeholder. */
+interface Props {
+  opis: string;
+  podpis: string;
+}
+const { opis, podpis } = Astro.props;
+---
+
+<figure class="ilustracja">
+  <div class="ilustracja__miejsce" role="img" aria-label={`${opis} (grafika w przygotowaniu)`}>
+    <Ikona nazwa="obraz" klasa="ilustracja__ikona" />
+    <span>{opis}</span>
+  </div>
+  <figcaption>{podpis}</figcaption>
+</figure>

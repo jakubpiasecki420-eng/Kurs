@@ -33,7 +33,8 @@ Działaj jako zespół produktowo-technologiczny: projektant UX/UI, programista,
 | Marka nadrzędna | **Finansowa Przyszłość** |
 | Hasło | „Świadomie buduj swoją przyszłość.” |
 | Kategoria | Niezależna edukacja finansowa |
-| Pierwszy produkt | **„Emerytura pod kontrolą”** — przewodnik z kalkulatorem dla osób na JDG i B2B |
+| Forma | **Platforma edukacyjna w przeglądarce**: kursy, moduły, lekcje, quizy, kalkulatory i postęp kursanta. PDF jest materiałem uzupełniającym |
+| Pierwszy kurs | **„Emerytura pod kontrolą”** — dla osób na JDG i B2B (w przygotowaniu) |
 | Rynek | Polska |
 | Pierwsza grupa | Osoby prowadzące JDG i pracujące na B2B, zwłaszcza na ryczałcie i podatku liniowym |
 | Kolejne grupy | Pracownicy etatowi, zleceniobiorcy, freelancerzy |
@@ -56,7 +57,7 @@ Szczegóły: `docs/strategia-biznesowa.md`, `docs/grupa-docelowa-i-pozycjonowani
 
 Obszary: system emerytalny i ZUS, IKE, IKZE, **OKI (od 1 stycznia 2027 r.)**, PPK, PPE, inflacja, procent składany, koszty, ryzyko, planowanie.
 
-Pierwszy produkt ma 12 rozdziałów i trzy dodatki: `produkt/przewodnik/struktura.md`. Zakres i granice: `docs/zakres-produktu.md`.
+Pierwszy kurs ma 12 modułów (`src/content/kursy/emerytura-pod-kontrola.json`, rozwinięcie: `produkt/przewodnik/struktura.md`). Zakres i granice: `docs/zakres-produktu.md`. Architektura platformy: `docs/architektura-platformy.md`.
 
 ### Granice edukacji
 
@@ -128,14 +129,19 @@ Pełny opis, pliki logo i komponenty: `docs/marka.md`.
 | `/ike/`, `/ikze/`, `/oki/` | Przewodniki po kontach |
 | `/jdg-b2b/` | Materiał dla prowadzących działalność |
 | `/kalkulator/` | Kalkulator scenariuszy oszczędzania |
-| `/artykuly/` | Biblioteka wiedzy |
-| `/produkt/` | „Emerytura pod kontrolą” — w przygotowaniu |
+| `/program/` | Program kursu „Emerytura pod kontrolą” (`/produkt/` przekierowuje tutaj) |
+| `/jak-uczymy/` | Prezentacja platformy i sposobu nauki |
+| `/biblioteka/` | Darmowe materiały: przewodniki, artykuły, kalkulator |
+| `/artykuly/` | Artykuły |
+| `/platforma/…` | **Strefa kursanta** (wersja demonstracyjna): pulpit, program kursu, moduły, lekcje, postęp, narzędzia, ustawienia. Zawsze `noindex` |
 | `/o-projekcie/` | Zasady, metoda, status serwisu |
 | `/zrodla/` | Rejestr źródeł i metodologia |
 | `/kontakt/` | Kontakt |
 | `/polityka-prywatnosci/`, `/regulamin/` | **Nie istnieją.** Powstaną po przygotowaniu i weryfikacji prawnej |
 
 Wymagania: mobile-first, WCAG 2.1 AA, brak agresywnych okien, czytelne formularze, dobre stany pustych danych i błędów, poprawne metadane.
+
+Strefa kursanta działa bez kont: postęp zapisuje się w pamięci przeglądarki i każda strona strefy to komunikuje. Nie przedstawiaj tego jako konta ani synchronizacji. Nie dodawaj danych udających wyniki kursanta.
 
 Kalkulator: `docs/kalkulator-wymagania.md`. Nie łącz zasad podatkowych z kalkulatorem oszczędzania. Biblioteki `src/lib/kalkulator/ikze.ts` nie podłączaj do interfejsu przed recenzją podatkową.
 
@@ -179,10 +185,12 @@ Zmienna `SITE_URL` ustawia docelowy adres serwisu. Bez niej nie powstają adresy
 | `src/config/serwis.json` | Marka, dane podmiotu, flagi publikacji, ustawienia zapisu |
 | `src/data/rejestr.json` | Rejestr źródeł i twierdzeń |
 | `src/lib/` | Rejestr, formatowanie, kolory, kalkulatory — z testami obok |
-| `src/components/`, `src/layouts/` | Komponenty i układ |
+| `src/lib/platforma/` | Model kursu, budowanie programu, postęp, magazyn, rejestr narzędzi, skrypt strefy kursanta — z testami |
+| `src/content/kursy/`, `src/content/lekcje/` | Programy kursów (JSON) i lekcje (Markdown) |
+| `src/components/`, `src/layouts/` | Komponenty i układy: `Bazowy.astro` (strona publiczna), `Aplikacja.astro` (strefa kursanta); komponenty platformy w `src/components/platforma/` |
 | `src/pages/` | Strony |
 | `src/content/artykuly/` | Artykuły w Markdown ze schematem (`src/content.config.ts`) |
-| `src/styles/` | Tokeny i style wspólne |
+| `src/styles/` | Tokeny, style wspólne, `platforma.css` dla strefy kursanta |
 | `public/` | Logo, favicon, grafika OG (generowane) |
 | `tests/e2e/` | Testy w przeglądarce |
 | `scripts/` | Generatory i kontrola gotowości |
@@ -195,6 +203,8 @@ Zmienna `SITE_URL` ustawia docelowy adres serwisu. Bez niej nie powstają adresy
 - Przewijane tabele mają `tabindex="0"`, `role="region"` i etykietę.
 - Nowy kolor tekstu dopisz do `src/lib/kolory.ts`, `src/styles/tokeny.css` i testu kontrastu.
 - Każda nowa strona trafia na listę w `tests/e2e/strony.spec.ts`.
+- Strefa kursanta: stan postępu zmieniają wyłącznie funkcje z `src/lib/platforma/postep.ts`, zapisuje go magazyn (`magazyn.ts`). Widoki oznaczają elementy zależne od postępu atrybutami `data-*`, które uzupełnia `klient.ts`. Teksty do DOM tylko przez `textContent`.
+- Nowa lekcja: plik w `src/content/lekcje/<kurs>/` i wpis w programie kursu. Treści merytoryczne tylko na twierdzeniach ze statusem P.
 
 ---
 
@@ -215,8 +225,8 @@ Zmiana jest gotowa, gdy:
 
 Stan faz i ścieżka do publikacji: `docs/harmonogram.md`.
 
-Przewodnik: szkice rozdziałów 0, 2, 4 i 9 są gotowe i składają się do PDF. Rozdział złożony przez `npm run przewodnik` może używać wyłącznie twierdzeń ze statusem P zadeklarowanych w nagłówku — inaczej skład się zatrzyma.
+Etap 1 platformy (fundamenty) jest zakończony: strefa kursanta w wersji demonstracyjnej, model kursu i postępu, centrum narzędzi. Szczegóły i ograniczenia: `docs/architektura-platformy.md`.
 
-Prace możliwe bez opinii zewnętrznych: rozdział 12 i dodatki A–B przewodnika, zeszyt ćwiczeń w PDF, kolejne artykuły na twierdzeniach ze statusem P, arkusz kalkulatora oszczędzania, konfiguracja wdrożenia.
+Materiał uzupełniający: szkice rozdziałów 0, 2, 4 i 9 przewodnika składają się do PDF (`npm run przewodnik`). Te same treści staną się źródłem lekcji kursu.
 
-Wstrzymane do czasu opinii: kalkulator IKZE w interfejsie, rozdziały 3 i 5–7, porównanie kont według formy opodatkowania, formularz zapisu, sprzedaż, włączenie indeksowania.
+Nie rozpoczynaj kolejnego etapu bez polecenia właściciela. Wstrzymane do czasu opinii zewnętrznych: kalkulator IKZE w interfejsie, moduły 3 i 5–7, porównanie kont według formy opodatkowania, formularz zapisu, sprzedaż, włączenie indeksowania.

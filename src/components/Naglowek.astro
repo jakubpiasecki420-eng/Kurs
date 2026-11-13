@@ -34,6 +34,7 @@ const sciezka = Astro.url.pathname.replace(/\/?$/, '/');
           ))
         }
       </ul>
+      <a class="przycisk naglowek__cta" href="/platforma/">Strefa kursanta</a>
     </nav>
   </div>
 </header>
@@ -79,6 +80,16 @@ const sciezka = Astro.url.pathname.replace(/\/?$/, '/');
     text-decoration: none;
     padding-block: var(--o-1);
   }
+  .naglowek__nawigacja {
+    display: flex;
+    align-items: center;
+    gap: var(--o-4);
+  }
+  .naglowek__cta {
+    min-height: 2.5rem;
+    padding: 0.45rem 1rem;
+    font-size: var(--tekst-s);
+  }
   .naglowek__nawigacja ul {
     display: flex;
     flex-wrap: wrap;
@@ -90,7 +101,7 @@ const sciezka = Astro.url.pathname.replace(/\/?$/, '/');
   .naglowek__nawigacja li {
     margin: 0;
   }
-  .naglowek__nawigacja a {
+  .naglowek__nawigacja li a {
     display: block;
     padding: 0.55rem 0.8rem;
     border-radius: var(--promien-s);
@@ -100,11 +111,11 @@ const sciezka = Astro.url.pathname.replace(/\/?$/, '/');
     color: var(--tekst-pomocniczy);
     text-decoration: none;
   }
-  .naglowek__nawigacja a:hover {
+  .naglowek__nawigacja li a:hover {
     background: var(--tlo);
     color: var(--granat);
   }
-  .naglowek__nawigacja a[aria-current='page'] {
+  .naglowek__nawigacja li a[aria-current='page'] {
     color: var(--granat);
     box-shadow: inset 0 -2px 0 var(--zloto);
     border-radius: var(--promien-s) var(--promien-s) 0 0;
@@ -154,6 +165,10 @@ const sciezka = Astro.url.pathname.replace(/\/?$/, '/');
     }
     .naglowek__nawigacja {
       flex-basis: 100%;
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--o-3);
+      padding-bottom: var(--o-4);
     }
     :global(.js) .naglowek__nawigacja[data-otwarte='false'] {
       display: none;
@@ -161,15 +176,14 @@ const sciezka = Astro.url.pathname.replace(/\/?$/, '/');
     .naglowek__nawigacja ul {
       flex-direction: column;
       gap: 0;
-      padding-bottom: var(--o-3);
     }
-    .naglowek__nawigacja a {
+    .naglowek__nawigacja li a {
       padding: 0.8rem 0.5rem;
       font-size: var(--tekst-m);
       border-bottom: 1px solid var(--linia);
       border-radius: 0;
     }
-    .naglowek__nawigacja a[aria-current='page'] {
+    .naglowek__nawigacja li a[aria-current='page'] {
       box-shadow: inset 3px 0 0 var(--zloto);
       padding-left: 0.9rem;
       border-radius: 0;

@@ -1,0 +1,29 @@
+{
+  "tytul": "Kurs demonstracyjny",
+  "opis": "Przykładowy kurs, który pokazuje, jak działa platforma: lekcje, postęp, ćwiczenia i narzędzia. Nie zawiera treści finansowych.",
+  "stan": "aktywny",
+  "demonstracyjny": true,
+  "moduly": [
+    {
+      "id": "poznaj-platforme",
+      "tytul": "Poznaj platformę",
+      "opis": "Jak zbudowana jest lekcja, jak zapisuje się postęp i jak korzystać z narzędzi.",
+      "wymaga": [],
+      "lekcje": ["jak-zbudowana-jest-lekcja", "jak-dziala-postep", "narzedzia-w-lekcjach"]
+    },
+    {
+      "id": "modul-przykladowy",
+      "tytul": "Moduł przykładowy",
+      "opis": "Dwie lekcje z tekstem zastępczym. Pokazują nawigację między lekcjami i ukończenie modułu.",
+      "wymaga": [],
+      "lekcje": ["lekcja-przykladowa-a", "lekcja-przykladowa-b"]
+    },
+    {
+      "id": "modul-z-warunkiem",
+      "tytul": "Moduł z warunkiem dostępu",
+      "opis": "Odblokowuje się po ukończeniu modułu przykładowego. Pokazuje status „niedostępny”.",
+      "wymaga": ["modul-przykladowy"],
+      "lekcje": ["lekcja-przykladowa-c"]
+    }
+  ]
+}
