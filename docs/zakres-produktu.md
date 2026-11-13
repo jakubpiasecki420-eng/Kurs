@@ -8,7 +8,7 @@ Stan na dzień: **13 listopada 2026 r.**
 
 | Składnik | Forma | Stan |
 | --- | --- | --- |
-| Przewodnik | PDF, 60–80 stron | Struktura gotowa: `produkt/przewodnik/struktura.md` |
+| Przewodnik | PDF, 60–80 stron | Szkice rozdziałów 0, 2, 4 i 9; skład PDF poleceniem `npm run przewodnik`. Struktura: `produkt/przewodnik/struktura.md` |
 | Arkusz obliczeniowy | Arkusz kalkulacyjny | Biblioteka obliczeń z testami: `src/lib/kalkulator/` |
 | Zeszyt ćwiczeń i checklisty | PDF do wypełniania | Struktura gotowa: `produkt/workbook/struktura.md` |
 | Aktualizacje | 12 miesięcy | Proces: `system-aktualizacji.md` |

@@ -2,18 +2,19 @@
 
 > Plik generowany poleceniem `npm run rejestr` z `src/data/rejestr.json`. Nie edytuj go ręcznie.
 
-Stan prawny na dzień: **2026-11-13**. Liczba twierdzeń: **58**.
+Stan prawny na dzień: **2026-11-13**. Liczba twierdzeń: **64**.
 
 ## Potwierdzone w źródle pierwotnym [P]
 
 Przeczytane w akcie prawnym lub na stronie urzędu. Tylko te twierdzenia wolno pokazać na stronie.
 
-Liczba: 48.
+Liczba: 54.
 
 | Identyfikator | Obszar | Twierdzenie | Podstawa | Sprawdzono | Przegląd |
 | --- | --- | --- | --- | --- | --- |
 | `ike-wiek-wplat` | ike | Prawo do wpłat na IKE lub IKZE przysługuje osobie fizycznej, która ukończyła 16 lat. | art. 3 ust. 1; [t.j. Dz.U. 2026 poz. 91](https://api.sejm.gov.pl/eli/acts/DU/2026/91/text.pdf) | 2026-11-13 | 2027-05-15 |
 | `ike-jedno-konto` | ike | Zwolnienie podatkowe przysługuje, jeżeli oszczędzający gromadzi środki tylko na jednym IKE. | art. 4 ust. 1; [t.j. Dz.U. 2026 poz. 91](https://api.sejm.gov.pl/eli/acts/DU/2026/91/text.pdf) | 2026-11-13 | 2027-05-15 |
+| `ike-ubezpieczenie` | ike | IKE może być prowadzone m.in. w ramach umowy ubezpieczenia na życie z ubezpieczeniowym funduszem kapitałowym. | art. 13 ust. 2; [t.j. Dz.U. 2026 poz. 91](https://api.sejm.gov.pl/eli/acts/DU/2026/91/text.pdf) | 2026-11-13 | 2027-05-15 |
 | `ike-limit-wzor` | ike | Roczny limit wpłat na IKE odpowiada trzykrotności prognozowanego przeciętnego wynagrodzenia miesięcznego w gospodarce narodowej na dany rok. | art. 13 ust. 1; [t.j. Dz.U. 2026 poz. 91](https://api.sejm.gov.pl/eli/acts/DU/2026/91/text.pdf) | 2026-11-13 | 2027-05-15 |
 | `ike-limit-2026` | ike | Limit wpłat na IKE w 2026 r. wynosi 28 260 zł. | obwieszczenie; [M.P. 2025 poz. 1202](https://www.gov.pl/web/rodzina/ike-limit-wplat) | 2026-11-13 | 2027-01-15 |
 | `ike-limit-2027` | ike | Limit wpłat na IKE w 2027 r. wynosi 30 099 zł. | obwieszczenie; [M.P. 2026 poz. 1081](https://api.sejm.gov.pl/eli/acts/MP/2026/1081/text.pdf) | 2026-11-13 | 2027-11-15 |
@@ -41,6 +42,11 @@ Liczba: 48.
 | `zdrowotna-podstawa` | jdg-b2b | Roczną podstawą składki zdrowotnej przedsiębiorcy na skali lub podatku liniowym jest dochód z działalności, czyli przychody pomniejszone o koszty i o opłacone składki społeczne. Przepis nie przewiduje pomniejszenia tej podstawy o wpłaty na IKZE. | art. 81 ust. 2; [t.j. Dz.U. 2025 poz. 1461](https://api.sejm.gov.pl/eli/acts/DU/2025/1461/text.pdf) | 2026-11-13 | 2027-05-15 |
 | `zus-informacja-o-stanie-konta` | zus | Do 31 sierpnia każdego roku ZUS udostępnia ubezpieczonemu informację o stanie konta, czyli o składkach zewidencjonowanych na jego koncie według stanu na 31 grudnia poprzedniego roku. | art. 50 ust. 1; [t.j. Dz.U. 2026 poz. 1474](https://api.sejm.gov.pl/eli/acts/DU/2026/1474/text.pdf) | 2026-11-13 | 2027-05-15 |
 | `zus-hipotetyczna-emerytura` | zus | Informacja o stanie konta zawiera wysokość hipotetycznej emerytury, jeżeli ubezpieczony na 31 grudnia poprzedniego roku miał ukończone 35 lat. ZUS podaje ją dla wieku 60 lat w przypadku kobiety i 65 lat w przypadku mężczyzny. | art. 50 ust. 1a pkt 2, ust. 1ba i 1c; [t.j. Dz.U. 2026 poz. 1474](https://api.sejm.gov.pl/eli/acts/DU/2026/1474/text.pdf) | 2026-11-13 | 2027-05-15 |
+| `zus-informacja-zawartosc` | zus | Informacja o stanie konta zawiera m.in. zwaloryzowany kapitał początkowy (jeżeli został obliczony), hipotetyczną emeryturę oraz składki na ubezpieczenie emerytalne z ostatnich 12 miesięcy w podziale na miesiące. | art. 50 ust. 1a pkt 1–3; [t.j. Dz.U. 2026 poz. 1474](https://api.sejm.gov.pl/eli/acts/DU/2026/1474/text.pdf) | 2026-11-13 | 2027-05-15 |
+| `zus-hipotetyczna-warianty` | zus | ZUS podaje dwie wysokości hipotetycznej emerytury: według obecnego stanu konta oraz przy założeniu, że do osiągnięcia wieku emerytalnego za każdy miesiąc wpływa składka równa średniej miesięcznej składce z dotychczasowego okresu ubezpieczenia. | art. 50 ust. 1c; [t.j. Dz.U. 2026 poz. 1474](https://api.sejm.gov.pl/eli/acts/DU/2026/1474/text.pdf) | 2026-11-13 | 2027-05-15 |
+| `zus-hipotetyczna-wzor` | zus | Hipotetyczną emeryturę oblicza się, dzieląc sumę składek i kapitału początkowego (w drugim wariancie powiększoną o hipotetyczne składki) przez średnie dalsze trwanie życia w wieku przejścia na emeryturę. | art. 50 ust. 2; [t.j. Dz.U. 2026 poz. 1474](https://api.sejm.gov.pl/eli/acts/DU/2026/1474/text.pdf) | 2026-11-13 | 2027-05-15 |
+| `zus-kapital-poczatkowy` | zus | Kapitał początkowy ustala się dla ubezpieczonych urodzonych po 31 grudnia 1948 r., którzy przed 1 stycznia 1999 r. opłacali składki na ubezpieczenie społeczne albo za których opłacał je płatnik. | art. 173 ust. 1; art. 196; [t.j. Dz.U. 2025 poz. 1749](https://api.sejm.gov.pl/eli/acts/DU/2025/1749/text.pdf) | 2026-11-13 | 2027-05-15 |
+| `zus-profil-informacyjny` | zus | ZUS udostępnia informację o stanie konta osobom, które utworzyły profil informacyjny w systemie teleinformatycznym ZUS. Elementy informacji mogą być udostępniane także w aplikacji mObywatel, a na żądanie — w formie pisemnej. | art. 50 ust. 1h, 1ha i 1i; [t.j. Dz.U. 2026 poz. 1474](https://api.sejm.gov.pl/eli/acts/DU/2026/1474/text.pdf) | 2026-11-13 | 2027-05-15 |
 | `oki-start` | oki | Ustawa o osobistych kontach inwestycyjnych wchodzi w życie 1 stycznia 2027 r. | art. 46; [Dz.U. 2026 poz. 1098](https://eli.gov.pl/api/acts/DU/2026/1098/text/T/D20261098L.pdf) | 2026-11-13 | 2027-01-15 |
 | `oki-kto` | oki | Umowę o prowadzenie OKI może zawrzeć wyłącznie osoba fizyczna, która ukończyła 18 lat. Można zawrzeć więcej niż jedną umowę. | art. 3 ust. 2 i 3; [Dz.U. 2026 poz. 1098](https://eli.gov.pl/api/acts/DU/2026/1098/text/T/D20261098L.pdf) | 2026-11-13 | 2027-05-15 |
 | `oki-podatek` | oki | Aktywa zgromadzone na OKI podlegają podatkowi od wartości aktywów. Przychody z tych aktywów są wyłączone z ustawy o podatku dochodowym od osób fizycznych. | art. 22 ust. 1; art. 32 pkt 1; [Dz.U. 2026 poz. 1098](https://eli.gov.pl/api/acts/DU/2026/1098/text/T/D20261098L.pdf) | 2026-11-13 | 2027-05-15 |
@@ -102,6 +108,7 @@ Liczba: 4.
 | `ustawa-ryczalt` | [Ustawa z 20 listopada 1998 r. o zryczałtowanym podatku dochodowym od niektórych przychodów osiąganych przez osoby fizyczne](https://api.sejm.gov.pl/eli/acts/DU/2025/843/text.pdf) | t.j. Dz.U. 2025 poz. 843 | akt prawny |
 | `ustawa-oki` | [Ustawa z 3 lipca 2026 r. o osobistych kontach inwestycyjnych](https://eli.gov.pl/api/acts/DU/2026/1098/text/T/D20261098L.pdf) | Dz.U. 2026 poz. 1098 | akt prawny |
 | `ustawa-sus` | [Ustawa z 13 października 1998 r. o systemie ubezpieczeń społecznych](https://api.sejm.gov.pl/eli/acts/DU/2026/1474/text.pdf) | t.j. Dz.U. 2026 poz. 1474 | akt prawny |
+| `ustawa-fus` | [Ustawa z 17 grudnia 1998 r. o emeryturach i rentach z Funduszu Ubezpieczeń Społecznych](https://api.sejm.gov.pl/eli/acts/DU/2025/1749/text.pdf) | t.j. Dz.U. 2025 poz. 1749 | akt prawny |
 | `ustawa-zdrowotna` | [Ustawa z 27 sierpnia 2004 r. o świadczeniach opieki zdrowotnej finansowanych ze środków publicznych](https://api.sejm.gov.pl/eli/acts/DU/2025/1461/text.pdf) | t.j. Dz.U. 2025 poz. 1461 | akt prawny |
 | `ustawa-obrot` | [Ustawa z 29 lipca 2005 r. o obrocie instrumentami finansowymi](https://api.sejm.gov.pl/eli/acts/DU/2024/722/text.pdf) | t.j. Dz.U. 2024 poz. 722 | akt prawny |
 | `ustawa-konsument` | [Ustawa z 30 maja 2014 r. o prawach konsumenta](https://api.sejm.gov.pl/eli/acts/DU/2026/1244/text.pdf) | t.j. Dz.U. 2026 poz. 1244 | akt prawny |

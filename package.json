@@ -16,7 +16,8 @@
     "test:e2e": "astro build && playwright test",
     "rejestr": "node scripts/generuj-rejestr.mjs",
     "logo": "node scripts/generuj-logo.mjs",
-    "gotowosc": "node scripts/sprawdz-gotowosc.mjs"
+    "gotowosc": "node scripts/sprawdz-gotowosc.mjs",
+    "przewodnik": "tsx scripts/generuj-przewodnik.ts"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
@@ -29,7 +30,10 @@
     "@axe-core/playwright": "^4.14.0",
     "@expo-google-fonts/manrope": "^0.4.3",
     "@playwright/test": "^1.63.0",
+    "marked": "^18.2.0",
     "opentype.js": "^2.0.0",
+    "pdf-lib": "^1.17.1",
+    "tsx": "^4.23.15",
     "typescript": "^6.0.3",
     "vitest": "^5.1.0"
   },

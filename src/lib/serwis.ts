@@ -11,7 +11,7 @@ export interface Serwis {
   marka: string;
   haslo: string;
   opis: string;
-  produkt: { nazwa: string; podtytul: string; status: string };
+  produkt: { nazwa: string; podtytul: string; status: string; wersja: string };
   operator: {
     nazwa: string | null;
     formaPrawna: string | null;

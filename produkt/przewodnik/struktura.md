@@ -25,9 +25,21 @@ Kolumna „Twierdzenia” podaje identyfikatory z `src/data/rejestr.json`. Rozdz
 | B | Słownik pojęć | — | — | — | 3 |
 | C | Źródła i dziennik zmian | Widzi wszystkie przepisy i historię aktualizacji | cały rejestr, status P | — | 4 |
 
+## Stan rozdziałów
+
+| Rozdział | Plik | Stan |
+| --- | --- | --- |
+| 0 | `rozdzialy/00-jak-korzystac.md` | Szkic przed recenzją |
+| 2 | `rozdzialy/02-zus.md` | Szkic przed recenzją |
+| 4 | `rozdzialy/04-ike.md` | Szkic przed recenzją |
+| 9 | `rozdzialy/09-inflacja-i-procent-skladany.md` | Szkic przed recenzją |
+| C | generowany ze źródeł użytych w rozdziałach | Automatycznie |
+
+Skład: `npm run przewodnik` tworzy `wydruki/emerytura-pod-kontrola-<wersja>.pdf`. Tabele i wykres w rozdziałach 4 i 9 powstają z bibliotek kalkulatora (dyrektywy `<!-- tabela:… -->` w treści), więc zmiana stawki w rejestrze aktualizuje przykłady.
+
 ## Kolejność pisania
 
-1. Bez blokad: 0, 2, 4, 9, 12, A, B, C.
+1. Bez blokad: 0, 2, 4, 9 (gotowe), 12, A, B, C.
 2. Po uzupełnieniu rejestru o nowe twierdzenia P: 1, 8.
 3. Po recenzji doradcy podatkowego: 3, 5, 6, 7.
 4. Po opinii prawnika: 10, 11.

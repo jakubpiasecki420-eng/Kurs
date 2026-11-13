@@ -167,6 +167,7 @@ Strona statyczna: **Astro 7**, TypeScript, zwykły CSS z tokenami, bez framework
 | `npm run check` | Kontrola typów |
 | `npm run rejestr` | Generuje `docs/rejestr-zrodel-i-twierdzen.md` |
 | `npm run logo` | Generuje pliki logo, favicon, avatar i grafikę OG |
+| `npm run przewodnik` | Składa przewodnik do PDF w katalogu `wydruki/` (poza repozytorium) |
 | `npm run gotowosc` | Lista blokad publikacji |
 
 Zmienna `SITE_URL` ustawia docelowy adres serwisu. Bez niej nie powstają adresy kanoniczne ani mapa strony.
@@ -185,7 +186,7 @@ Zmienna `SITE_URL` ustawia docelowy adres serwisu. Bez niej nie powstają adresy
 | `public/` | Logo, favicon, grafika OG (generowane) |
 | `tests/e2e/` | Testy w przeglądarce |
 | `scripts/` | Generatory i kontrola gotowości |
-| `produkt/` | Struktura przewodnika i zeszytu ćwiczeń |
+| `produkt/` | Przewodnik (struktura, szablon, rozdziały w `produkt/przewodnik/rozdzialy/`) i zeszyt ćwiczeń |
 | `docs/` | Dokumentacja; `docs/archiwum/` — wcześniejsze analizy |
 
 ### Konwencje
@@ -214,6 +215,8 @@ Zmiana jest gotowa, gdy:
 
 Stan faz i ścieżka do publikacji: `docs/harmonogram.md`.
 
-Prace możliwe bez opinii zewnętrznych: kolejne artykuły na twierdzeniach ze statusem P, rozdziały przewodnika bez blokad (0, 2, 4, 9, 12), szablon PDF, arkusz kalkulatora oszczędzania, konfiguracja wdrożenia.
+Przewodnik: szkice rozdziałów 0, 2, 4 i 9 są gotowe i składają się do PDF. Rozdział złożony przez `npm run przewodnik` może używać wyłącznie twierdzeń ze statusem P zadeklarowanych w nagłówku — inaczej skład się zatrzyma.
+
+Prace możliwe bez opinii zewnętrznych: rozdział 12 i dodatki A–B przewodnika, zeszyt ćwiczeń w PDF, kolejne artykuły na twierdzeniach ze statusem P, arkusz kalkulatora oszczędzania, konfiguracja wdrożenia.
 
 Wstrzymane do czasu opinii: kalkulator IKZE w interfejsie, rozdziały 3 i 5–7, porównanie kont według formy opodatkowania, formularz zapisu, sprzedaż, włączenie indeksowania.

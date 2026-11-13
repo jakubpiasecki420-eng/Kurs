@@ -1,6 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
-const PORT = 4321;
+// Osobny port i własny serwer: testy nie kolidują z działającym `astro preview`.
+const PORT = 4322;
 
 export default defineConfig({
   testDir: './tests/e2e',
@@ -17,9 +18,9 @@ export default defineConfig({
     { name: 'telefon', use: { ...devices['Pixel 7'] } },
   ],
   webServer: {
-    command: `npx astro preview --port ${PORT}`,
+    command: `node scripts/serwer-testowy.mjs ${PORT}`,
     url: `http://localhost:${PORT}`,
-    reuseExistingServer: true,
+    reuseExistingServer: false,
     timeout: 60_000,
   },
 });

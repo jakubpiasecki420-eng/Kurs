@@ -122,3 +122,11 @@ export function symuluj(z: Zalozenia): Wynik {
     przebieg,
   };
 }
+
+/** Wartość jednorazowej kwoty po pełnych latach przy stałej rocznej stopie. */
+export function kapitalPoLatach(kwota: number, stopa: number, lata: number): number {
+  if (![kwota, stopa, lata].every(Number.isFinite) || lata < 0 || stopa <= -1) {
+    throw new RangeError('Podaj kwotę, stopę większą niż −100% i nieujemną liczbę lat.');
+  }
+  return kwota * Math.pow(1 + stopa, lata);
+}

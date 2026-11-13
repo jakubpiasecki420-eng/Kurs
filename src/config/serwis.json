@@ -5,7 +5,8 @@
   "produkt": {
     "nazwa": "Emerytura pod kontrolą",
     "podtytul": "Przewodnik z kalkulatorem dla osób na JDG i B2B",
-    "status": "w-przygotowaniu"
+    "status": "w-przygotowaniu",
+    "wersja": "2027.0"
   },
   "operator": {
     "nazwa": null,

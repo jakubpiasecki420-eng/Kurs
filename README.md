@@ -20,6 +20,14 @@ npm test           # testy jednostkowe
 npm run test:e2e   # buduje stronę i testuje ją w przeglądarce (przy pierwszym uruchomieniu: npx playwright install chromium)
 ```
 
+## Przewodnik PDF
+
+```bash
+npm run przewodnik # składa PDF do katalogu wydruki/
+```
+
+Rozdziały są w `produkt/przewodnik/rozdzialy/`. Dopóki materiały nie przejdą recenzji, okładka i stopka oznaczają PDF jako wersję roboczą.
+
 ## Przed publikacją
 
 ```bash

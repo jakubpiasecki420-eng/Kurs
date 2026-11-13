@@ -11,7 +11,7 @@ Stan na dzień: **13 listopada 2026 r.**
 | 2 | Strona główna | Zrobione |
 | 3 | Podstrony edukacyjne | Zrobione jako wersja robocza: IKE, IKZE, OKI, JDG/B2B, źródła, o projekcie, produkt, kontakt, artykuły |
 | 4 | Kalkulator | Zrobione: kalkulator oszczędzania z testami. Mechanika IKZE jako biblioteka, bez interfejsu |
-| 5 | Treści i publikacje | Częściowo: szablon artykułu ze schematem, jeden artykuł, struktura przewodnika i zeszytu ćwiczeń |
+| 5 | Treści i publikacje | Częściowo: szablon artykułu ze schematem, jeden artykuł, struktura przewodnika i zeszytu ćwiczeń, szkice rozdziałów 0, 2, 4 i 9 przewodnika ze składem PDF (`npm run przewodnik`) |
 | 6 | Walidacja | Częściowo: testy jednostkowe, testy w przeglądarce, automatyczne testy dostępności. Brak recenzji eksperckiej i prawnej |
 
 ## 2. Ścieżka krytyczna do publikacji
@@ -40,8 +40,8 @@ Zmiana wobec wcześniejszego planu: premiera przesuwa się z lutego na marzec 20
 Możliwe bez czekania na opinie zewnętrzne:
 
 1. Kolejne artykuły oparte wyłącznie na twierdzeniach ze statusem P.
-2. Treść rozdziałów 1, 2, 4, 9 i 12 przewodnika (nie zależą od DP-1 do DP-5).
-3. Szablon PDF przewodnika i zeszytu ćwiczeń w identyfikacji marki.
+2. Rozdział 12 i dodatki A–B przewodnika; rozdziały 1 i 8 po uzupełnieniu rejestru o przepisy ustaw o FUS i o PPK.
+3. Zeszyt ćwiczeń w PDF, w tym samym układzie co przewodnik.
 4. Arkusz kalkulatora oszczędzania (część bez podatków).
 5. Konfiguracja wdrożenia na wybrany hosting statyczny.
 
