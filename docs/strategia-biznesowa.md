@@ -96,7 +96,7 @@ Budżet początkowy: 1 500–3 000 zł. Kwoty poniżej to założenia do potwier
 | Narzędzie do listy mailingowej | 0 zł na starcie | Plan bezpłatny; wybór przy uruchomieniu zapisu |
 | Reklamy | 0 zł | — |
 
-Przy budżecie 1 500 zł pierwszeństwo ma recenzja podatkowa.
+Przy budżecie 1 500 zł pierwszeństwo ma recenzja podatkowa. Zlecamy ją dopiero wtedy, gdy rozmowy potwierdzą problem — zanim wydamy największą część budżetu.
 
 ## 8. Ryzyka
 

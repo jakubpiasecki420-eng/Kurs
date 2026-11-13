@@ -20,12 +20,12 @@ Kolejność wynika z zależności, nie z dat. Terminy są orientacyjne i zakład
 
 | Krok | Kto | Zależy od | Orientacyjnie |
 | --- | --- | --- | --- |
-| 1. Dziesięć rozmów z osobami na JDG/B2B | Właściciel | — | listopad 2026 |
+| 1. Dziesięć rozmów z osobami na JDG/B2B (`docs/walidacja/scenariusz-rozmow.md`) | Właściciel | — | listopad 2026 |
 | 2. Dane podmiotu i adres kontaktowy w konfiguracji | Właściciel | — | listopad 2026 |
-| 3. Zapytania ofertowe do doradców podatkowych (zakres DP-1 do DP-7) | Właściciel | — | listopad 2026 |
+| 3. Zapytania ofertowe do doradców podatkowych (`docs/walidacja/zapytanie-do-doradcy.md`) | Właściciel | — | listopad 2026 |
 | 4. Badanie nazw i wybór domeny (PR-5, WL-2) | Właściciel, prawnik | — | listopad–grudzień 2026 |
 | 5. Polityka prywatności i regulamin (PR-3) | Prawnik lub wzór kancelarii | krok 2 | grudzień 2026 |
-| 6. Recenzja podatkowa stron i rejestru | Doradca podatkowy | krok 3 | grudzień 2026 |
+| 6. Recenzja podatkowa stron i rejestru | Doradca podatkowy | krok 3; zlecenie dopiero po spełnieniu progu z kroku 1 | grudzień 2026 |
 | 7. Poprawki po recenzji, wpis recenzji do konfiguracji | Claude Code | krok 6 | grudzień 2026 |
 | 8. Wdrożenie na hosting, włączenie indeksowania | Właściciel, Claude Code | kroki 2, 4, 5, 7; `npm run gotowosc` bez blokad | styczeń 2027 |
 | 9. Uruchomienie listy zainteresowanych | Właściciel | kroki 5 i 8 | styczeń 2027 |
