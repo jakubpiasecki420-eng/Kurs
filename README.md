@@ -49,4 +49,5 @@ Polecenie wypisuje blokady: brakujące dane podmiotu, recenzję, dokumenty prawn
 - `docs/kwestie-do-weryfikacji.md` — pytania do doradcy podatkowego, prawnika i księgowego
 - `docs/harmonogram.md`
 - `docs/walidacja/` — scenariusz rozmów walidacyjnych i zapytanie ofertowe do doradcy podatkowego
+- `docs/raport-do-recenzji.md` — raport stanu projektu dla recenzenta zewnętrznego
 - `docs/konfrontacja-analiz.md` — co zmieniło się względem wcześniejszych analiz
