@@ -1,0 +1,170 @@
+---
+import Bazowy from '@/layouts/Bazowy.astro';
+import NaglowekStrony from '@/components/NaglowekStrony.astro';
+import { STAN_NA_DZIEN, TWIERDZENIA, zrodlo } from '@/lib/rejestr';
+import { PRZED_RECENZJA } from '@/lib/serwis';
+import { data } from '@/lib/format';
+
+const OBSZARY: Array<[string, string]> = [
+  ['ike', 'IKE'],
+  ['ikze', 'IKZE'],
+  ['oki', 'OKI'],
+  ['jdg-b2b', 'Działalność gospodarcza'],
+  ['zus', 'ZUS'],
+  ['kalkulator', 'Kalkulator'],
+];
+
+// Publicznie pokazujemy wyłącznie twierdzenia potwierdzone w źródle pierwotnym.
+const grupy = OBSZARY.map(([klucz, nazwa]) => ({
+  klucz,
+  nazwa,
+  wiersze: TWIERDZENIA.filter((t) => t.obszar === klucz && t.status === 'P'),
+})).filter((g) => g.wiersze.length > 0);
+
+const liczba = grupy.reduce((s, g) => s + g.wiersze.length, 0);
+---
+
+<Bazowy
+  tytul="Źródła i metodologia"
+  opis="Rejestr twierdzeń Finansowej Przyszłości: każda liczba i każdy przepis z podstawą prawną, linkiem do źródła i datą sprawdzenia."
+>
+  <NaglowekStrony
+    etykieta="Źródła i metodologia"
+    tytul="Skąd bierzemy liczby i przepisy"
+    lid={`Rejestr zawiera ${liczba} twierdzeń wykorzystanych w serwisie. Każde ma podstawę prawną, link do źródła i datę sprawdzenia.`}
+  />
+
+  <div class="sekcja">
+    <div class="kontener">
+      <div class="proza">
+        <h2>Zasady</h2>
+        <ol>
+          <li>
+            <strong>Tylko źródła pierwotne.</strong> Na stronach serwisu pojawiają się wyłącznie informacje
+            przeczytane w akcie prawnym albo na stronie urzędu. Doniesień prasowych nie traktujemy jak źródła.
+          </li>
+          <li>
+            <strong>Jedno miejsce na liczby.</strong> Limity i stawki zapisujemy w jednym rejestrze. Strony
+            pobierają je stamtąd, więc ta sama wartość nie może różnić się między artykułami.
+          </li>
+          <li>
+            <strong>Data przy każdym twierdzeniu.</strong> Podajemy, kiedy sprawdziliśmy informację i kiedy
+            sprawdzimy ją ponownie.
+          </li>
+          <li>
+            <strong>Recenzja przed publikacją.</strong> Materiały o podatkach kierujemy do doradcy
+            podatkowego. {
+              PRZED_RECENZJA
+                ? 'Recenzja nie została jeszcze przeprowadzona, dlatego serwis ma status wersji roboczej.'
+                : 'Status recenzji podajemy na stronie „O projekcie”.'
+            }
+          </li>
+        </ol>
+
+        <h2>Kalendarz aktualizacji</h2>
+      </div>
+
+      <div class="tabela-przewijana" tabindex="0" role="region" aria-label="Tabela. Jeśli nie mieści się na ekranie, przewiń ją w poziomie." style="max-width: 52rem">
+        <table>
+          <caption class="wizualnie-ukryte">Kiedy sprawdzamy poszczególne informacje</caption>
+          <thead>
+            <tr>
+              <th scope="col">Kiedy</th>
+              <th scope="col">Co sprawdzamy</th>
+              <th scope="col">Gdzie</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Październik–grudzień</th>
+              <td>Limity wpłat na IKE i IKZE na kolejny rok</td>
+              <td>Monitor Polski, obwieszczenia ministra właściwego do spraw zabezpieczenia społecznego</td>
+            </tr>
+            <tr>
+              <th scope="row">Do 30 listopada</th>
+              <td>Stawka podatku od wartości aktywów OKI na kolejny rok</td>
+              <td>Monitor Polski, obwieszczenie ministra finansów</td>
+            </tr>
+            <tr>
+              <th scope="row">Wrzesień–październik</th>
+              <td>Założenia polityki pieniężnej NBP</td>
+              <td>Monitor Polski, uchwała Rady Polityki Pieniężnej</td>
+            </tr>
+            <tr>
+              <th scope="row">Maj i listopad</th>
+              <td>Przegląd wszystkich przepisów w rejestrze</td>
+              <td>Teksty jednolite ustaw w Dzienniku Ustaw</td>
+            </tr>
+            <tr>
+              <th scope="row">Na bieżąco</th>
+              <td>Zmiany ustaw ogłoszone w trakcie roku</td>
+              <td>Dziennik Ustaw</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="rejestr-tytul">Rejestr twierdzeń</h2>
+      <p class="cichy">Stan prawny na {data(STAN_NA_DZIEN)}</p>
+
+      {
+        grupy.map((g) => (
+          <section aria-labelledby={`grupa-${g.klucz}`} class="grupa">
+            <h3 id={`grupa-${g.klucz}`}>{g.nazwa}</h3>
+            <div class="tabela-przewijana" tabindex="0" role="region" aria-label="Tabela. Jeśli nie mieści się na ekranie, przewiń ją w poziomie.">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Twierdzenie</th>
+                    <th scope="col">Podstawa</th>
+                    <th scope="col">Sprawdzono</th>
+                    <th scope="col">Następny przegląd</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {g.wiersze.map((t) => {
+                    const z = zrodlo(t.zrodlo);
+                    return (
+                      <tr id={t.id}>
+                        <td class="tresc">{t.tresc}</td>
+                        <td>
+                          {t.przepis !== 'obwieszczenie' && <>{t.przepis}<br /></>}
+                          {z.url ? <a href={z.url}>{z.publikator}</a> : z.publikator}
+                        </td>
+                        <td class="data">{data(t.sprawdzono)}</td>
+                        <td class="data">{data(t.przeglad)}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        ))
+      }
+    </div>
+  </div>
+</Bazowy>
+
+<style>
+  .rejestr-tytul {
+    margin-top: var(--o-8);
+    font-size: var(--tekst-2xl);
+  }
+  .grupa {
+    margin-top: var(--o-6);
+  }
+  .grupa h3 {
+    font-size: var(--tekst-l);
+  }
+  .tresc {
+    min-width: 18rem;
+    max-width: 34rem;
+  }
+  .data {
+    white-space: nowrap;
+  }
+  tr:target td {
+    background: #fbf6e8;
+  }
+</style>

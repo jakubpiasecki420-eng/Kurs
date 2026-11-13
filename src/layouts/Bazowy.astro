@@ -1,0 +1,80 @@
+---
+import '@fontsource-variable/manrope';
+import '@fontsource-variable/inter';
+import '@/styles/globalne.css';
+
+import Naglowek from '@/components/Naglowek.astro';
+import Stopka from '@/components/Stopka.astro';
+import BanerRoboczy from '@/components/BanerRoboczy.astro';
+import { INDEKSOWANIE, SERWIS } from '@/lib/serwis';
+
+interface Props {
+  tytul: string;
+  opis: string;
+  typ?: 'website' | 'article';
+  /** Strona główna ma własny, pełny tytuł. */
+  pelnyTytul?: boolean;
+}
+
+const { tytul, opis, typ = 'website', pelnyTytul = false } = Astro.props;
+const tytulStrony = pelnyTytul ? tytul : `${tytul} · ${SERWIS.marka}`;
+const adres = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : null;
+const obrazek = Astro.site ? new URL('/og.png', Astro.site).href : null;
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{tytulStrony}</title>
+    <meta name="description" content={opis} />
+    <meta name="robots" content={INDEKSOWANIE ? 'index, follow' : 'noindex, nofollow'} />
+    {adres && <link rel="canonical" href={adres} />}
+
+    <meta property="og:type" content={typ} />
+    <meta property="og:locale" content="pl_PL" />
+    <meta property="og:site_name" content={SERWIS.marka} />
+    <meta property="og:title" content={tytulStrony} />
+    <meta property="og:description" content={opis} />
+    {adres && <meta property="og:url" content={adres} />}
+    {obrazek && <meta property="og:image" content={obrazek} />}
+    {obrazek && <meta property="og:image:width" content="1200" />}
+    {obrazek && <meta property="og:image:height" content="630" />}
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#101D35" />
+  </head>
+  <body>
+    <a class="pomin" href="#tresc">Przejdź do treści</a>
+    <BanerRoboczy />
+    <Naglowek />
+    <main id="tresc" tabindex="-1">
+      <slot />
+    </main>
+    <Stopka />
+  </body>
+</html>
+
+<style is:global>
+  .pomin {
+    position: absolute;
+    left: var(--o-4);
+    top: -4rem;
+    z-index: 10;
+    padding: 0.6rem 1rem;
+    background: var(--zloto);
+    color: var(--granat);
+    font-weight: 700;
+    border-radius: var(--promien-s);
+    text-decoration: none;
+  }
+  .pomin:focus {
+    top: var(--o-3);
+  }
+  main:focus {
+    outline: none;
+  }
+</style>

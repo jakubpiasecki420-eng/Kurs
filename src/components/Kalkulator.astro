@@ -1,0 +1,753 @@
+---
+/**
+ * Kalkulator scenariuszy oszczędzania.
+ * Pierwszy wynik powstaje przy budowaniu strony, więc jest widoczny bez JavaScriptu.
+ * Zasad podatkowych tu nie ma — zob. docs/kalkulator-wymagania.md.
+ */
+import { symuluj, ZAKRESY, type Zalozenia } from '@/lib/kalkulator/oszczednosci';
+import { rysujWykres, SERIE } from '@/lib/kalkulator/wykres';
+import { zlPelne } from '@/lib/format';
+import { wartosc } from '@/lib/rejestr';
+
+const inflacjaDomyslna = wartosc('nbp-cel-inflacyjny');
+
+// Domyślnie stopa zwrotu jest równa inflacji: scenariusz „oszczędności utrzymują siłę nabywczą”.
+const domyslne: Zalozenia = {
+  wplataMiesieczna: 500,
+  lata: 20,
+  stopaZwrotu: inflacjaDomyslna,
+  inflacja: inflacjaDomyslna,
+  koszty: 0,
+};
+const wynik = symuluj(domyslne);
+const proc = (u: number) => (u * 100).toLocaleString('pl-PL', { maximumFractionDigits: 2 });
+const warianty = [-0.02, 0, 0.025, 0.05, 0.07];
+---
+
+<div class="kalkulator" data-kalkulator data-domyslne={JSON.stringify(domyslne)}>
+  <form class="kalkulator__formularz" novalidate data-formularz>
+    <h2 class="kalkulator__tytul">Założenia</h2>
+
+    <div class="pole">
+      <label for="k-wplata">Wpłata miesięczna</label>
+      <div class="pole__wejscie">
+        <input
+          id="k-wplata"
+          name="wplataMiesieczna"
+          type="text"
+          inputmode="decimal"
+          autocomplete="off"
+          value={domyslne.wplataMiesieczna}
+          aria-describedby="k-wplata-blad"
+        />
+        <span class="pole__jednostka" aria-hidden="true">zł</span>
+      </div>
+      <p class="pole__blad" id="k-wplata-blad" data-blad="wplataMiesieczna" aria-live="polite"></p>
+    </div>
+
+    <div class="pole">
+      <label for="k-lata">Okres oszczędzania</label>
+      <div class="pole__wejscie">
+        <input
+          id="k-lata"
+          name="lata"
+          type="text"
+          inputmode="numeric"
+          autocomplete="off"
+          value={domyslne.lata}
+          aria-describedby="k-lata-blad"
+        />
+        <span class="pole__jednostka" aria-hidden="true">lat</span>
+      </div>
+      <p class="pole__blad" id="k-lata-blad" data-blad="lata" aria-live="polite"></p>
+    </div>
+
+    <div class="pole">
+      <label for="k-zwrot">Roczna stopa zwrotu</label>
+      <div class="pole__wejscie">
+        <input
+          id="k-zwrot"
+          name="stopaZwrotu"
+          type="text"
+          inputmode="decimal"
+          autocomplete="off"
+          value={proc(domyslne.stopaZwrotu)}
+          aria-describedby="k-zwrot-opis k-zwrot-blad"
+        />
+        <span class="pole__jednostka" aria-hidden="true">%</span>
+      </div>
+      <div class="warianty" role="group" aria-label="Przykładowe warianty stopy zwrotu">
+        {
+          warianty.map((w) => (
+            <button
+              type="button"
+              class="wariant"
+              data-wariant={w}
+              aria-pressed={w === domyslne.stopaZwrotu ? 'true' : 'false'}
+            >
+              {`${w < 0 ? '−' : ''}${proc(Math.abs(w))}%`}
+            </button>
+          ))
+        }
+      </div>
+      <p class="pole__opis" id="k-zwrot-opis">
+        To Twoje założenie, nie prognoza. Sprawdź też warianty niekorzystne: zerowy i ujemny.
+      </p>
+      <p class="pole__blad" id="k-zwrot-blad" data-blad="stopaZwrotu" aria-live="polite"></p>
+    </div>
+
+    <div class="pole">
+      <label for="k-inflacja">Roczna inflacja</label>
+      <div class="pole__wejscie">
+        <input
+          id="k-inflacja"
+          name="inflacja"
+          type="text"
+          inputmode="decimal"
+          autocomplete="off"
+          value={proc(domyslne.inflacja)}
+          aria-describedby="k-inflacja-opis k-inflacja-blad"
+        />
+        <span class="pole__jednostka" aria-hidden="true">%</span>
+      </div>
+      <p class="pole__opis" id="k-inflacja-opis">
+        Domyślnie {proc(inflacjaDomyslna)}% — tyle wynosi cel inflacyjny NBP. Rzeczywista inflacja bywa
+        wyższa lub niższa.
+      </p>
+      <p class="pole__blad" id="k-inflacja-blad" data-blad="inflacja" aria-live="polite"></p>
+    </div>
+
+    <div class="pole">
+      <label for="k-koszty">Roczne koszty <span class="pole__opcja">(opcjonalnie)</span></label>
+      <div class="pole__wejscie">
+        <input
+          id="k-koszty"
+          name="koszty"
+          type="text"
+          inputmode="decimal"
+          autocomplete="off"
+          value={proc(domyslne.koszty)}
+          aria-describedby="k-koszty-opis k-koszty-blad"
+        />
+        <span class="pole__jednostka" aria-hidden="true">%</span>
+      </div>
+      <p class="pole__opis" id="k-koszty-opis">
+        Opłaty liczone od zgromadzonych środków, np. opłata za zarządzanie. Maksymalnie {
+          proc(ZAKRESY.koszty.max)
+        }%.
+      </p>
+      <p class="pole__blad" id="k-koszty-blad" data-blad="koszty" aria-live="polite"></p>
+    </div>
+
+    <button type="button" class="kalkulator__reset" data-reset>Przywróć wartości początkowe</button>
+    <noscript>
+      <p class="pole__opis">
+        Przeliczanie wymaga włączonego JavaScriptu. Poniżej widzisz wynik dla wartości początkowych.
+      </p>
+    </noscript>
+  </form>
+
+  <div class="kalkulator__wyniki" data-wyniki>
+    <p class="kalkulator__symulacja">
+      <span class="znacznik znacznik--zloty">Symulacja</span>
+      To przykład obliczeniowy dla podanych założeń. Nie jest prognozą ani obietnicą wyniku.
+    </p>
+
+    <dl class="kafle" aria-live="polite">
+      <div class="kafel">
+        <dt><span class="klucz" style="--k: var(--seria-wplaty)"></span>Suma wpłat</dt>
+        <dd data-wynik="sumaWplat">{zlPelne(wynik.sumaWplat)}</dd>
+      </div>
+      <div class="kafel">
+        <dt><span class="klucz" style="--k: var(--seria-nominalna)"></span>Wartość nominalna</dt>
+        <dd data-wynik="wartoscNominalna">{zlPelne(wynik.wartoscNominalna)}</dd>
+      </div>
+      <div class="kafel">
+        <dt><span class="klucz" style="--k: var(--seria-realna)"></span>W dzisiejszych pieniądzach</dt>
+        <dd data-wynik="wartoscRealna">{zlPelne(wynik.wartoscRealna)}</dd>
+      </div>
+      <div class="kafel">
+        <dt>Wartość nominalna minus wpłaty</dt>
+        <dd data-wynik="roznica">{zlPelne(wynik.roznica)}</dd>
+      </div>
+    </dl>
+
+    <figure class="wykres">
+      <figcaption class="wykres__naglowek">
+        <span class="wykres__tytul">Jak zmienia się wartość w kolejnych latach</span>
+        <ul class="legenda" aria-label="Legenda">
+          {
+            SERIE.map((s) => (
+              <li>
+                <span class="klucz" style={`--k: ${s.kolor}`} />
+                {s.nazwa}
+              </li>
+            ))
+          }
+        </ul>
+      </figcaption>
+      <div
+        class="wykres__pole"
+        data-wykres
+        tabindex="0"
+        role="group"
+        aria-label="Wykres przebiegu symulacji. Strzałki w lewo i w prawo pokazują wartości z kolejnych lat."
+      >
+        <Fragment set:html={rysujWykres(wynik, 720)} />
+        <div class="dymek" data-dymek hidden></div>
+      </div>
+      <p class="wizualnie-ukryte" aria-live="polite" data-odczyt></p>
+    </figure>
+
+    <details class="tabela-wynikow">
+      <summary>Pokaż wyniki rok po roku w tabeli</summary>
+      <div class="tabela-przewijana" tabindex="0" role="region" aria-label="Tabela. Jeśli nie mieści się na ekranie, przewiń ją w poziomie.">
+        <table>
+          <caption class="wizualnie-ukryte">Przebieg symulacji na koniec każdego roku</caption>
+          <thead>
+            <tr>
+              <th scope="col" class="liczba">Rok</th>
+              <th scope="col" class="liczba">Suma wpłat</th>
+              <th scope="col" class="liczba">Wartość nominalna</th>
+              <th scope="col" class="liczba">W dzisiejszych pieniądzach</th>
+            </tr>
+          </thead>
+          <tbody data-tabela>
+            {
+              wynik.przebieg.slice(1).map((p) => (
+                <tr>
+                  <th scope="row" class="liczba">
+                    {p.rok}
+                  </th>
+                  <td class="liczba">{zlPelne(p.sumaWplat)}</td>
+                  <td class="liczba">{zlPelne(p.wartoscNominalna)}</td>
+                  <td class="liczba">{zlPelne(p.wartoscRealna)}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+</div>
+
+<script>
+  import { symuluj, waliduj, type Pole, type Wynik, type Zalozenia } from '@/lib/kalkulator/oszczednosci';
+  import { geometria, rysujWykres, SERIE } from '@/lib/kalkulator/wykres';
+  import { zlPelne } from '@/lib/format';
+
+  const korzen = document.querySelector<HTMLElement>('[data-kalkulator]');
+  if (korzen) uruchom(korzen);
+
+  function uruchom(korzen: HTMLElement) {
+    const formularz = korzen.querySelector<HTMLFormElement>('[data-formularz]')!;
+    const wyniki = korzen.querySelector<HTMLElement>('[data-wyniki]')!;
+    const poleWykresu = korzen.querySelector<HTMLElement>('[data-wykres]')!;
+    const dymek = korzen.querySelector<HTMLElement>('[data-dymek]')!;
+    const odczyt = korzen.querySelector<HTMLElement>('[data-odczyt]')!;
+    const tabela = korzen.querySelector<HTMLTableSectionElement>('[data-tabela]')!;
+    const domyslne = JSON.parse(korzen.dataset.domyslne!) as Zalozenia;
+    const procentowe: Pole[] = ['stopaZwrotu', 'inflacja', 'koszty'];
+
+    let wynik: Wynik = symuluj(domyslne);
+    let wybranyRok: number | null = null;
+
+    const pole = (nazwa: Pole) => formularz.elements.namedItem(nazwa) as HTMLInputElement;
+
+    /** Akceptuje zapis z przecinkiem, spacjami i znakiem procentu. */
+    function liczba(tekst: string): number {
+      const czysty = tekst.replace(/[\s %]/g, '').replace('−', '-').replace(',', '.');
+      if (czysty === '' || !/^-?\d*\.?\d+$/.test(czysty)) return Number.NaN;
+      return Number(czysty);
+    }
+
+    function odczytaj(): Zalozenia {
+      const z = {} as Zalozenia;
+      (Object.keys(domyslne) as Pole[]).forEach((nazwa) => {
+        const v = liczba(pole(nazwa).value);
+        z[nazwa] = procentowe.includes(nazwa) ? v / 100 : v;
+      });
+      return z;
+    }
+
+    function pokazBledy(bledy: Partial<Record<Pole, string>>) {
+      (Object.keys(domyslne) as Pole[]).forEach((nazwa) => {
+        const komunikat = bledy[nazwa] ?? '';
+        const el = korzen.querySelector<HTMLElement>(`[data-blad="${nazwa}"]`)!;
+        el.textContent = komunikat;
+        pole(nazwa).setAttribute('aria-invalid', komunikat ? 'true' : 'false');
+      });
+    }
+
+    function rysuj() {
+      const szerokosc = Math.max(280, Math.round(poleWykresu.clientWidth));
+      const stary = poleWykresu.querySelector('svg');
+      const szablon = document.createElement('template');
+      // Znaczniki pochodzą wyłącznie z naszych stałych i liczb — nie ma tu danych od użytkownika.
+      szablon.innerHTML = rysujWykres(wynik, szerokosc);
+      const nowy = szablon.content.firstElementChild!;
+      if (stary) stary.replaceWith(nowy);
+      else poleWykresu.prepend(nowy);
+      if (wybranyRok !== null) wskaz(Math.min(wybranyRok, wynik.przebieg.length - 1), false);
+    }
+
+    function wypelnij() {
+      (['sumaWplat', 'wartoscNominalna', 'wartoscRealna', 'roznica'] as const).forEach((klucz) => {
+        korzen.querySelector<HTMLElement>(`[data-wynik="${klucz}"]`)!.textContent = zlPelne(wynik[klucz]);
+      });
+      const wiersze = wynik.przebieg.slice(1).map((p) => {
+        const tr = document.createElement('tr');
+        const th = document.createElement('th');
+        th.scope = 'row';
+        th.className = 'liczba';
+        th.textContent = String(p.rok);
+        tr.append(th);
+        [p.sumaWplat, p.wartoscNominalna, p.wartoscRealna].forEach((v) => {
+          const td = document.createElement('td');
+          td.className = 'liczba';
+          td.textContent = zlPelne(v);
+          tr.append(td);
+        });
+        return tr;
+      });
+      tabela.replaceChildren(...wiersze);
+    }
+
+    function przelicz() {
+      const zalozenia = odczytaj();
+      const bledy = waliduj(zalozenia);
+      pokazBledy(bledy);
+      const poprawne = Object.keys(bledy).length === 0;
+      // Przy błędnych danych zostawiamy poprzedni wynik, wyraźnie przygaszony.
+      wyniki.toggleAttribute('data-nieaktualne', !poprawne);
+      formularz.querySelectorAll<HTMLButtonElement>('[data-wariant]').forEach((b) => {
+        b.setAttribute('aria-pressed', String(Number(b.dataset.wariant) === zalozenia.stopaZwrotu));
+      });
+      if (!poprawne) return;
+      wynik = symuluj(zalozenia);
+      wypelnij();
+      rysuj();
+    }
+
+    function ukryjKursor() {
+      wybranyRok = null;
+      poleWykresu.querySelector('[data-kursor]')?.setAttribute('hidden', '');
+      dymek.hidden = true;
+    }
+
+    function wskaz(rok: number, oglos: boolean) {
+      const svg = poleWykresu.querySelector('svg');
+      if (!svg) return;
+      wybranyRok = rok;
+      const g = geometria(wynik, Number(svg.getAttribute('width')));
+      const p = wynik.przebieg[rok];
+      const x = g.x(rok);
+      const kursor = svg.querySelector<SVGGElement>('[data-kursor]')!;
+      kursor.removeAttribute('hidden');
+      const linia = kursor.querySelector('line')!;
+      linia.setAttribute('x1', String(x));
+      linia.setAttribute('x2', String(x));
+      SERIE.forEach((s) => {
+        const c = kursor.querySelector(`[data-kursor-punkt="${s.klucz}"]`)!;
+        c.setAttribute('cx', String(x));
+        c.setAttribute('cy', String(g.y(p[s.klucz])));
+      });
+
+      const naglowek = document.createElement('p');
+      naglowek.className = 'dymek__rok';
+      naglowek.textContent = rok === 0 ? 'Start' : `Po ${rok} ${rok === 1 ? 'roku' : 'latach'}`;
+      const lista = document.createElement('dl');
+      SERIE.forEach((s) => {
+        const wiersz = document.createElement('div');
+        const dt = document.createElement('dt');
+        const klucz = document.createElement('span');
+        klucz.className = 'klucz';
+        klucz.style.setProperty('--k', s.kolor);
+        dt.append(klucz, s.nazwa);
+        const dd = document.createElement('dd');
+        dd.textContent = zlPelne(p[s.klucz]);
+        wiersz.append(dd, dt);
+        lista.append(wiersz);
+      });
+      dymek.replaceChildren(naglowek, lista);
+      dymek.hidden = false;
+      const szer = poleWykresu.clientWidth;
+      const poLewej = x > szer / 2;
+      dymek.style.left = poLewej ? '' : `${x + 14}px`;
+      dymek.style.right = poLewej ? `${szer - x + 14}px` : '';
+
+      if (oglos) {
+        odczyt.textContent =
+          `${naglowek.textContent}: ` +
+          SERIE.map((s) => `${s.nazwa.toLowerCase()} ${zlPelne(p[s.klucz])}`).join(', ') +
+          '.';
+      }
+    }
+
+    function rokZPozycji(clientX: number): number {
+      const svg = poleWykresu.querySelector('svg')!;
+      const ramka = svg.getBoundingClientRect();
+      const g = geometria(wynik, Number(svg.getAttribute('width')));
+      const lata = wynik.przebieg.length - 1;
+      const udzial = (clientX - ramka.left - g.lewy) / (g.szerokosc - g.lewy - g.prawy);
+      return Math.max(0, Math.min(lata, Math.round(udzial * lata)));
+    }
+
+    formularz.addEventListener('input', przelicz);
+    formularz.addEventListener('submit', (e) => e.preventDefault());
+
+    formularz.querySelectorAll<HTMLButtonElement>('[data-wariant]').forEach((b) => {
+      b.addEventListener('click', () => {
+        const v = Number(b.dataset.wariant) * 100;
+        pole('stopaZwrotu').value = v.toLocaleString('pl-PL', { maximumFractionDigits: 2 });
+        przelicz();
+      });
+    });
+
+    korzen.querySelector('[data-reset]')!.addEventListener('click', () => {
+      (Object.keys(domyslne) as Pole[]).forEach((nazwa) => {
+        const v = procentowe.includes(nazwa) ? domyslne[nazwa] * 100 : domyslne[nazwa];
+        pole(nazwa).value = v.toLocaleString('pl-PL', { maximumFractionDigits: 2, useGrouping: false });
+      });
+      przelicz();
+      pole('wplataMiesieczna').focus();
+    });
+
+    poleWykresu.addEventListener('pointermove', (e) => wskaz(rokZPozycji(e.clientX), false));
+    poleWykresu.addEventListener('pointerdown', (e) => wskaz(rokZPozycji(e.clientX), false));
+    poleWykresu.addEventListener('pointerleave', () => {
+      if (document.activeElement !== poleWykresu) ukryjKursor();
+    });
+    poleWykresu.addEventListener('focus', () => {
+      if (wybranyRok === null) wskaz(wynik.przebieg.length - 1, true);
+    });
+    poleWykresu.addEventListener('blur', ukryjKursor);
+    poleWykresu.addEventListener('keydown', (e) => {
+      const lata = wynik.przebieg.length - 1;
+      const obecny = wybranyRok ?? lata;
+      const ruchy: Record<string, number> = {
+        ArrowLeft: obecny - 1,
+        ArrowRight: obecny + 1,
+        Home: 0,
+        End: lata,
+      };
+      if (!(e.key in ruchy)) return;
+      e.preventDefault();
+      wskaz(Math.max(0, Math.min(lata, ruchy[e.key])), true);
+    });
+
+    new ResizeObserver(() => rysuj()).observe(poleWykresu);
+    korzen.dataset.gotowy = 'true';
+  }
+</script>
+
+<style is:global>
+  .kalkulator {
+    display: grid;
+    grid-template-columns: minmax(0, 20rem) minmax(0, 1fr);
+    gap: var(--o-6);
+    align-items: start;
+  }
+  @media (max-width: 60rem) {
+    .kalkulator {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  .kalkulator__formularz {
+    background: var(--biel);
+    border: 1px solid var(--linia);
+    border-radius: var(--promien-m);
+    padding: var(--o-5);
+    box-shadow: var(--cien-1);
+  }
+  .kalkulator__tytul {
+    font-size: var(--tekst-l);
+    margin-bottom: var(--o-4);
+  }
+
+  .pole {
+    margin-bottom: var(--o-5);
+  }
+  .pole label {
+    display: block;
+    font-weight: 600;
+    font-size: var(--tekst-s);
+    margin-bottom: var(--o-2);
+  }
+  .pole__opcja {
+    font-weight: 400;
+    color: var(--tekst-cichy);
+  }
+  .pole__wejscie {
+    position: relative;
+  }
+  .pole input {
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.6rem 3rem 0.6rem 0.9rem;
+    border: 1.5px solid #8794ab;
+    border-radius: var(--promien-s);
+    background: var(--biel);
+    color: var(--granat);
+    font: 550 var(--tekst-m) / 1.2 var(--font-tekst);
+    font-variant-numeric: tabular-nums;
+  }
+  .pole input:hover {
+    border-color: var(--granat);
+  }
+  .pole input[aria-invalid='true'] {
+    border-color: var(--blad);
+    box-shadow: 0 0 0 1px var(--blad);
+  }
+  .pole__jednostka {
+    position: absolute;
+    right: 0.9rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--tekst-cichy);
+    font-size: var(--tekst-s);
+    pointer-events: none;
+  }
+  .pole__opis {
+    margin: var(--o-2) 0 0;
+    font-size: var(--tekst-xs);
+    color: var(--tekst-cichy);
+    line-height: 1.5;
+  }
+  .pole__blad {
+    margin: var(--o-2) 0 0;
+    font-size: var(--tekst-xs);
+    font-weight: 600;
+    color: var(--blad);
+  }
+  .pole__blad:empty {
+    display: none;
+  }
+
+  .warianty {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    margin-top: var(--o-2);
+  }
+  .wariant {
+    min-height: 2.25rem;
+    padding: 0.25rem 0.6rem;
+    border: 1.5px solid var(--linia);
+    border-radius: 999px;
+    background: var(--biel);
+    color: var(--tekst-pomocniczy);
+    font: 600 var(--tekst-xs) var(--font-tekst);
+    font-variant-numeric: tabular-nums;
+    cursor: pointer;
+  }
+  .wariant:hover {
+    border-color: var(--granat);
+    color: var(--granat);
+  }
+  .wariant[aria-pressed='true'] {
+    background: var(--granat);
+    border-color: var(--granat);
+    color: var(--biel);
+  }
+
+  .kalkulator__reset {
+    padding: 0.4rem 0;
+    border: 0;
+    background: none;
+    color: var(--granat);
+    font: 600 var(--tekst-s) var(--font-tekst);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    cursor: pointer;
+  }
+
+  .kalkulator__wyniki {
+    min-width: 0;
+    transition: opacity 0.15s ease;
+  }
+  .kalkulator__wyniki[data-nieaktualne] {
+    opacity: 0.45;
+  }
+  .kalkulator__symulacja {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--o-2) var(--o-3);
+    font-size: var(--tekst-s);
+    color: var(--tekst-pomocniczy);
+  }
+
+  .kafle {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 10.75rem), 1fr));
+    gap: var(--o-3);
+    margin: 0 0 var(--o-5);
+  }
+  .kafel {
+    background: var(--biel);
+    border: 1px solid var(--linia);
+    border-radius: var(--promien-m);
+    padding: var(--o-4);
+  }
+  .kafel dt {
+    display: flex;
+    align-items: center;
+    gap: var(--o-2);
+    font-size: var(--tekst-xs);
+    color: var(--tekst-cichy);
+    margin-bottom: var(--o-1);
+  }
+  .kafel dd {
+    margin: 0;
+    font-family: var(--font-naglowki);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    white-space: nowrap;
+  }
+
+  .klucz {
+    display: inline-block;
+    flex: none;
+    width: 1rem;
+    height: 0;
+    border-top: 3px solid var(--k);
+    border-radius: 2px;
+  }
+
+  .wykres {
+    margin: 0 0 var(--o-4);
+    background: var(--biel);
+    border: 1px solid var(--linia);
+    border-radius: var(--promien-m);
+    padding: var(--o-4) var(--o-4) var(--o-3);
+  }
+  .wykres__naglowek {
+    margin-bottom: var(--o-3);
+  }
+  .wykres__tytul {
+    display: block;
+    font-family: var(--font-naglowki);
+    font-weight: 700;
+    margin-bottom: var(--o-2);
+  }
+  .legenda {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--o-1) var(--o-5);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: var(--tekst-xs);
+    color: var(--tekst-pomocniczy);
+  }
+  .legenda li {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--o-2);
+    margin: 0;
+  }
+  .wykres__pole {
+    position: relative;
+    touch-action: pan-y;
+    cursor: crosshair;
+    border-radius: var(--promien-s);
+  }
+  .wykres__svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  /* Atrybut hidden nie ukrywa elementów SVG bez tej reguły */
+  .wykres__svg [hidden] {
+    display: none;
+  }
+  .wykres__siatka {
+    stroke: #e6eaf0;
+    stroke-width: 1;
+  }
+  .wykres__siatka--os {
+    stroke: #b9c2d0;
+  }
+  .wykres__os {
+    font: 500 12px var(--font-tekst);
+    fill: var(--tekst-cichy);
+    font-variant-numeric: tabular-nums;
+  }
+  .wykres__os--tytul {
+    font-weight: 400;
+  }
+  .wykres__etykieta {
+    font: 600 12px var(--font-tekst);
+    fill: var(--tekst-pomocniczy);
+  }
+  .wykres__lacznik {
+    stroke: #b9c2d0;
+    stroke-width: 1;
+  }
+  .wykres__kursor {
+    stroke: #8794ab;
+    stroke-width: 1;
+  }
+
+  .dymek {
+    position: absolute;
+    top: 0.5rem;
+    z-index: 2;
+    min-width: 13.5rem;
+    padding: var(--o-3);
+    background: var(--biel);
+    border: 1px solid var(--linia);
+    border-radius: var(--promien-s);
+    box-shadow: var(--cien-2);
+    font-size: var(--tekst-xs);
+    pointer-events: none;
+  }
+  .dymek__rok {
+    margin: 0 0 var(--o-2);
+    font-weight: 700;
+    color: var(--tekst-pomocniczy);
+  }
+  .dymek dl {
+    margin: 0;
+    display: grid;
+    gap: var(--o-2);
+  }
+  .dymek dd {
+    margin: 0;
+    font-size: var(--tekst-s);
+    font-weight: 700;
+    color: var(--granat);
+    font-variant-numeric: tabular-nums;
+  }
+  .dymek dt {
+    display: flex;
+    align-items: center;
+    gap: var(--o-2);
+    color: var(--tekst-cichy);
+  }
+
+  .tabela-wynikow summary {
+    display: inline-block;
+    padding: 0.5rem 0;
+    font-weight: 600;
+    font-size: var(--tekst-s);
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+  .tabela-wynikow summary::marker {
+    content: '';
+  }
+  .tabela-wynikow summary::before {
+    content: '+ ';
+  }
+  .tabela-wynikow[open] summary::before {
+    content: '− ';
+  }
+</style>

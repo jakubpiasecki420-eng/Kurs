@@ -1,0 +1,49 @@
+---
+import Bazowy from '@/layouts/Bazowy.astro';
+import NaglowekStrony from '@/components/NaglowekStrony.astro';
+import { SERWIS } from '@/lib/serwis';
+
+const email = SERWIS.kontakt.email;
+---
+
+<Bazowy tytul="Kontakt" opis="Jak skontaktować się z zespołem Finansowej Przyszłości i zgłosić błąd w materiałach.">
+  <NaglowekStrony
+    etykieta="Kontakt"
+    tytul="Napisz do nas"
+    lid="Szczególnie zależy nam na zgłoszeniach błędów i nieaktualnych informacji."
+  />
+
+  <div class="sekcja">
+    <div class="kontener">
+      <div class="proza">
+        {
+          email ? (
+            <p class="lid">
+              Adres e-mail: <a href={`mailto:${email}`}>{email}</a>
+            </p>
+          ) : (
+            <div class="ramka">
+              <p class="ramka__tytul">Adres kontaktowy jest w przygotowaniu</p>
+              <p>Opublikujemy go razem z danymi podmiotu prowadzącego serwis.</p>
+            </div>
+          )
+        }
+
+        <h2>Zgłoszenie błędu</h2>
+        <p>Żeby szybko sprawdzić zgłoszenie, podaj:</p>
+        <ul>
+          <li>adres strony i fragment, którego dotyczy uwaga,</li>
+          <li>co Twoim zdaniem jest nieprawidłowe,</li>
+          <li>źródło, na którym się opierasz — najlepiej przepis lub stronę urzędu.</li>
+        </ul>
+
+        <h2>Na co nie odpowiemy</h2>
+        <p>
+          Nie oceniamy indywidualnych sytuacji i nie doradzamy, które konto, instytucję lub inwestycję
+          wybrać. Z takim pytaniem zwróć się do doradcy podatkowego albo licencjonowanego doradcy
+          inwestycyjnego.
+        </p>
+      </div>
+    </div>
+  </div>
+</Bazowy>

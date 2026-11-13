@@ -1,0 +1,87 @@
+---
+import { SERWIS, ZAPIS_DOSTEPNY } from '@/lib/serwis';
+---
+
+{
+  ZAPIS_DOSTEPNY ? (
+    <form class="zapis" action={SERWIS.zapis.adresFormularza} method="post">
+      <div class="zapis__pole">
+        <label for="zapis-email">Adres e-mail</label>
+        <input
+          id="zapis-email"
+          type="email"
+          name={SERWIS.zapis.nazwaPolaEmail}
+          autocomplete="email"
+          required
+          placeholder="np. anna@example.com"
+        />
+      </div>
+      <div class="zapis__zgoda">
+        <input id="zapis-zgoda" type="checkbox" name="zgoda" value="tak" required />
+        <label for="zapis-zgoda">
+          Chcę otrzymywać e-mailem informacje o materiałach Finansowej Przyszłości. Zgodę mogę wycofać w
+          każdej chwili. Zasady opisuje <a href="/polityka-prywatnosci/">polityka prywatności</a>.
+        </label>
+      </div>
+      <button class="przycisk przycisk--zloty" type="submit">
+        Zapisz mnie
+      </button>
+    </form>
+  ) : (
+    <div class="zapis-wstrzymany">
+      <p>
+        <strong>Lista zainteresowanych jeszcze nie działa.</strong> Uruchomimy ją razem z polityką
+        prywatności. Do tego czasu nie zbieramy żadnych danych.
+      </p>
+    </div>
+  )
+}
+
+<style>
+  .zapis {
+    display: grid;
+    gap: var(--o-4);
+    max-width: 32rem;
+  }
+  .zapis label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: var(--o-2);
+  }
+  .zapis input[type='email'] {
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.7rem 0.9rem;
+    border: 1.5px solid #8794ab;
+    border-radius: var(--promien-s);
+    font: inherit;
+    color: var(--granat);
+    background: var(--biel);
+  }
+  .zapis__zgoda {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--o-3);
+    align-items: start;
+  }
+  .zapis__zgoda input {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-top: 0.2rem;
+  }
+  .zapis__zgoda label {
+    font-weight: 400;
+    font-size: var(--tekst-s);
+    margin: 0;
+  }
+  .zapis-wstrzymany {
+    max-width: 36rem;
+    padding: var(--o-4) var(--o-5);
+    border: 1px solid var(--linia-ciemna);
+    border-left: 4px solid var(--zloto);
+    border-radius: var(--promien-s);
+  }
+  .zapis-wstrzymany p {
+    margin: 0;
+  }
+</style>

@@ -1,0 +1,132 @@
+---
+import Logo from './Logo.astro';
+import { NAWIGACJA, NAWIGACJA_STOPKI, SERWIS } from '@/lib/serwis';
+import { STAN_NA_DZIEN } from '@/lib/rejestr';
+import { data } from '@/lib/format';
+
+const rok = new Date().getFullYear();
+const operator = SERWIS.operator.nazwa;
+---
+
+<footer class="stopka na-ciemnym">
+  <div class="kontener">
+    <div class="stopka__gora">
+      <div class="stopka__marka">
+        <Logo motyw="ciemny" />
+        <p class="stopka__haslo">{SERWIS.haslo}</p>
+      </div>
+
+      <nav aria-label="Wiedza">
+        <h2 class="stopka__tytul">Wiedza</h2>
+        <ul>
+          {NAWIGACJA.map((p) => <li><a href={p.adres}>{p.etykieta}</a></li>)}
+        </ul>
+      </nav>
+
+      <nav aria-label="Serwis">
+        <h2 class="stopka__tytul">Serwis</h2>
+        <ul>
+          {NAWIGACJA_STOPKI.map((p) => <li><a href={p.adres}>{p.etykieta}</a></li>)}
+        </ul>
+      </nav>
+    </div>
+
+    <div class="stopka__zastrzezenie">
+      <p>
+        <strong>Finansowa Przyszłość jest niezależnym projektem edukacyjnym.</strong> Nie jesteśmy bankiem,
+        funduszem, domem maklerskim, doradcą inwestycyjnym ani instytucją publiczną. Materiały mają charakter
+        ogólny, nie uwzględniają Twojej indywidualnej sytuacji i nie są rekomendacją inwestycyjną ani poradą
+        podatkową. Inwestowanie wiąże się z ryzykiem utraty części lub całości kapitału.
+      </p>
+      <p>
+        Stan prawny materiałów: {data(STAN_NA_DZIEN)} Każdą liczbę i każdy przepis znajdziesz w
+        <a href="/zrodla/">rejestrze źródeł</a>.
+      </p>
+    </div>
+
+    <div class="stopka__dol">
+      <p>{`© ${rok} ${operator ?? 'Finansowa Przyszłość'}`}</p>
+      {
+        !operator && (
+          <p>Dane podmiotu prowadzącego serwis zostaną opublikowane przed jego udostępnieniem.</p>
+        )
+      }
+    </div>
+  </div>
+</footer>
+
+<style>
+  .stopka {
+    background: var(--granat-gleboki);
+    color: #c5cedc;
+    padding-block: var(--o-8) var(--o-6);
+    font-size: var(--tekst-s);
+    --fokus: var(--zloto);
+  }
+  .stopka__gora {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+    gap: var(--o-6);
+    padding-bottom: var(--o-7);
+  }
+  .stopka__marka {
+    grid-column: span 2;
+    min-width: 0;
+  }
+  @media (max-width: 40rem) {
+    .stopka__marka {
+      grid-column: auto;
+    }
+  }
+  .stopka__haslo {
+    margin-top: var(--o-4);
+    max-width: 22rem;
+    color: #c5cedc;
+  }
+  .stopka__tytul {
+    font-size: var(--tekst-xs);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--zloto);
+    margin-bottom: var(--o-3);
+  }
+  .stopka ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .stopka li {
+    margin-bottom: var(--o-1);
+  }
+  .stopka nav a {
+    display: inline-block;
+    padding-block: 0.3rem;
+    color: var(--biel);
+    text-decoration: none;
+  }
+  .stopka nav a:hover {
+    text-decoration: underline;
+  }
+  .stopka__zastrzezenie {
+    border-top: 1px solid var(--linia-ciemna);
+    padding-top: var(--o-5);
+    max-width: 60rem;
+  }
+  .stopka__zastrzezenie strong {
+    color: var(--biel);
+  }
+  .stopka__zastrzezenie a {
+    color: var(--biel);
+  }
+  .stopka__dol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--o-2) var(--o-5);
+    justify-content: space-between;
+    margin-top: var(--o-5);
+    color: #a9b4c6;
+  }
+  .stopka__dol p {
+    margin: 0;
+  }
+</style>

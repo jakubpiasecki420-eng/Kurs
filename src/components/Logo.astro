@@ -1,0 +1,70 @@
+---
+/**
+ * Logo — koncept B „Droga do przyszłości”.
+ * Symbol: droga z dwoma zakrętami prowadząca do złotego punktu.
+ * Pliki do pobrania (z napisem zamienionym na krzywe) generuje `npm run logo`.
+ */
+interface Props {
+  wariant?: 'poziomy' | 'symbol';
+  motyw?: 'jasny' | 'ciemny';
+  rozmiar?: number;
+}
+const { wariant = 'poziomy', motyw = 'jasny', rozmiar = 36 } = Astro.props;
+const kolor = motyw === 'ciemny' ? '#FFFFFF' : '#101D35';
+---
+
+<span class:list={['logo', `logo--${motyw}`]}>
+  <svg
+    class="logo__symbol"
+    width={rozmiar}
+    height={rozmiar}
+    viewBox="0 0 48 48"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path
+      d="M6 38h8a10 10 0 0 0 10-10v-4a10 10 0 0 1 10-10h1"
+      fill="none"
+      stroke={kolor}
+      stroke-width="5.2"
+      stroke-linecap="round"></path>
+    <circle cx="42" cy="14" r="3.6" fill="#D5B875"></circle>
+  </svg>
+  {wariant === 'poziomy' && <span class="logo__napis">Finansowa Przyszłość</span>}
+  {wariant === 'symbol' && <span class="wizualnie-ukryte">Finansowa Przyszłość</span>}
+</span>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--granat);
+  }
+  .logo--ciemny {
+    color: var(--biel);
+  }
+  .logo__symbol {
+    flex: none;
+  }
+  .logo__napis {
+    font-family: var(--font-naglowki);
+    font-weight: 700;
+    font-size: 1.1875rem;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  @media (max-width: 26rem) {
+    .logo {
+      gap: 0.5rem;
+    }
+    .logo__symbol {
+      width: 1.875rem;
+      height: 1.875rem;
+    }
+    .logo__napis {
+      font-size: 1.0625rem;
+    }
+  }
+</style>

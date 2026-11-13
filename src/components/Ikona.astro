@@ -1,0 +1,39 @@
+---
+/** Proste ikony liniowe w jednym stylu: siatka 24 px, kreska 1,75 px. */
+const IKONY = {
+  warstwy: 'M12 4 4 8.5l8 4.5 8-4.5L12 4ZM4 13l8 4.5 8-4.5M4 17l8 4.5 8-4.5',
+  konta: 'M4 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7ZM4 10h16M8 15h3',
+  oszczednosci:
+    'M6 6c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5S15.3 3.5 12 3.5 6 4.6 6 6ZM6 6v5c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5V6M6 11v5c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5v-5',
+  droga: 'M3 19h5a4 4 0 0 0 4-4v-4a4 4 0 0 1 4-4h1M20.5 7h.01',
+  jezyk: 'M5 5h14a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-7l-4 3.5V16H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1ZM8 9h8M8 12h5',
+  zrodla: 'M7 3h7l5 5v12a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1ZM14 3v5h5M9 13h6M9 17h6',
+  zalozenia: 'M4 7h9M17 7h3M4 17h3M11 17h9M15 5v4M9 15v4',
+  aktualizacje: 'M20 11a8 8 0 0 0-14.3-4.6L4 8M4 4v4h4M4 13a8 8 0 0 0 14.3 4.6L20 16M20 20v-4h-4',
+  kalkulator:
+    'M7 3h10a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1ZM9 7h6M9 12h.01M12 12h.01M15 12h.01M9 16h.01M12 16h.01M15 16h.01',
+  lista: 'M10 6h10M10 12h10M10 18h10M4 6l1.2 1.2L7.5 5M4 12l1.2 1.2L7.5 11M4 18l1.2 1.2L7.5 17',
+} as const;
+
+interface Props {
+  nazwa: keyof typeof IKONY;
+  klasa?: string;
+}
+const { nazwa, klasa } = Astro.props;
+---
+
+<svg
+  class={klasa}
+  viewBox="0 0 24 24"
+  width="24"
+  height="24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+>
+  <path d={IKONY[nazwa]}></path>
+</svg>

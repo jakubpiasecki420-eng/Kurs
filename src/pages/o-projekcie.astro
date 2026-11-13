@@ -1,0 +1,117 @@
+---
+import Bazowy from '@/layouts/Bazowy.astro';
+import NaglowekStrony from '@/components/NaglowekStrony.astro';
+import { PRZED_RECENZJA, SERWIS } from '@/lib/serwis';
+import { STAN_NA_DZIEN } from '@/lib/rejestr';
+import { data } from '@/lib/format';
+
+const o = SERWIS.operator;
+const r = SERWIS.publikacja.recenzjaEksperta;
+const pub = SERWIS.publikacja;
+---
+
+<Bazowy
+  tytul="O projekcie"
+  opis="Czym jest Finansowa Przyszłość, kto prowadzi serwis, jak powstają materiały i na jakim etapie jest ich weryfikacja."
+>
+  <NaglowekStrony
+    etykieta="O projekcie"
+    tytul="Niezależna edukacja finansowa z jawnymi źródłami"
+    lid="Finansowa Przyszłość tłumaczy system emerytalny i długoterminowe oszczędzanie prostym językiem. Pokazujemy źródła i założenia, żebyś mógł sprawdzić każdą liczbę."
+  />
+
+  <div class="sekcja">
+    <div class="kontener">
+      <div class="proza">
+        <h2>Czym jesteśmy, a czym nie</h2>
+        <p>
+          Jesteśmy projektem edukacyjnym. Nie jesteśmy bankiem, funduszem, domem maklerskim, doradcą
+          inwestycyjnym, doradcą podatkowym ani instytucją publiczną. Nie prowadzimy kont IKE, IKZE ani OKI
+          i nie pośredniczymy w ich zakładaniu.
+        </p>
+
+        <h2>Jak pracujemy</h2>
+        <ul>
+          <li>
+            <strong>Prosty język.</strong> Zakładamy, że nie musisz znać pojęć finansowych. Objaśniamy je,
+            nie upraszczając faktów.
+          </li>
+          <li>
+            <strong>Oficjalne źródła.</strong> Limity, stawki i warunki bierzemy z aktów prawnych i stron
+            urzędów. Każde twierdzenie ma przepis, link i datę sprawdzenia w
+            <a href="/zrodla/">rejestrze źródeł</a>.
+          </li>
+          <li>
+            <strong>Jawne założenia.</strong> Symulacje pokazują, co przyjęliśmy do obliczeń, i są wyraźnie
+            oznaczone jako przykłady.
+          </li>
+          <li>
+            <strong>Bez rekomendacji.</strong> Nie wskazujemy instytucji ani produktów i nie mówimy, w co
+            inwestować. Podajemy kryteria, według których możesz porównać oferty samodzielnie.
+          </li>
+        </ul>
+
+        <h2>Jak powstają materiały</h2>
+        <p>
+          Szkice przygotowujemy z pomocą narzędzi sztucznej inteligencji. Każdą liczbę i każdy przepis
+          sprawdzamy następnie w tekście źródłowym, a materiały o podatkach przed publikacją kierujemy do
+          recenzji doradcy podatkowego.
+        </p>
+
+        <h2>Jak zarabiamy</h2>
+        <p>
+          Planujemy sprzedaż własnego przewodnika <a href="/produkt/">„{SERWIS.produkt.nazwa}”</a>. Nie mamy
+          umów partnerskich z instytucjami finansowymi i nie otrzymujemy wynagrodzenia za to, co wybierzesz.
+        </p>
+
+        <h2 id="status">Status serwisu</h2>
+      </div>
+
+      <div class="tabela-przewijana" tabindex="0" role="region" aria-label="Tabela. Jeśli nie mieści się na ekranie, przewiń ją w poziomie." style="max-width: 46rem">
+        <table>
+          <caption class="wizualnie-ukryte">Stan przygotowania serwisu do publikacji</caption>
+          <tbody>
+            <tr>
+              <th scope="row">Stan prawny materiałów</th>
+              <td>{data(STAN_NA_DZIEN)}</td>
+            </tr>
+            <tr>
+              <th scope="row">Recenzja doradcy podatkowego</th>
+              <td>
+                {
+                  PRZED_RECENZJA
+                    ? 'Jeszcze nie przeprowadzona. Do tego czasu serwis jest wersją roboczą.'
+                    : `${r?.kto}, nr wpisu ${r?.numerWpisu}, ${data(r?.data ?? STAN_NA_DZIEN)}. Zakres: ${r?.zakres}`
+                }
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Opinia prawna</th>
+              <td>{pub.opiniaPrawna ? 'Uzyskana.' : 'Jeszcze nie uzyskana.'}</td>
+            </tr>
+            <tr>
+              <th scope="row">Polityka prywatności i regulamin</th>
+              <td>
+                {
+                  pub.politykaPrywatnosci && pub.regulamin
+                    ? 'Opublikowane.'
+                    : 'W przygotowaniu. Do czasu publikacji nie zbieramy danych i niczego nie sprzedajemy.'
+                }
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Podmiot prowadzący serwis</th>
+              <td>
+                {
+                  o.nazwa
+                    ? [o.nazwa, o.formaPrawna, o.nip && `NIP ${o.nip}`, o.adres].filter(Boolean).join(', ')
+                    : 'Dane zostaną opublikowane przed udostępnieniem serwisu.'
+                }
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</Bazowy>

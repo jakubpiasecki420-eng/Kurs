@@ -1,0 +1,150 @@
+---
+import Bazowy from '@/layouts/Bazowy.astro';
+import NaglowekStrony from '@/components/NaglowekStrony.astro';
+import Odn from '@/components/Odn.astro';
+import Zrodla from '@/components/Zrodla.astro';
+import { przypisy } from '@/lib/rejestr';
+import { procent, zl } from '@/lib/format';
+
+const p = przypisy([
+  'oki-start',
+  'oki-kto',
+  'oki-podatek',
+  'oki-stawka',
+  'oki-stawka-2027',
+  'oki-zwolnienie-lacznie',
+  'oki-zwolnienie-oszczednosciowe',
+  'oki-kwalifikowane',
+  'oki-strata',
+  'oki-waloryzacja',
+  'ike-zwolnienie',
+  'ikze-wyplata-podatek',
+]);
+---
+
+<Bazowy
+  tytul="OKI — osobiste konto inwestycyjne od 2027 r."
+  opis="Co wynika z ustawy o osobistych kontach inwestycyjnych: kto może założyć konto, jak działa podatek od wartości aktywów i jakie są zwolnienia."
+>
+  <NaglowekStrony
+    etykieta="Nowe przepisy"
+    tytul="OKI: osobiste konto inwestycyjne od 2027 roku"
+    lid="Ustawa wprowadza trzeci rodzaj konta. Działa ono inaczej niż IKE i IKZE: nie ma podatku od zysków, jest coroczny podatek od wartości zgromadzonych aktywów."
+  />
+
+  <div class="sekcja">
+    <div class="kontener">
+      <div class="proza">
+        <h2>W skrócie</h2>
+        <ul>
+          <li>Przepisy wchodzą w życie 1 stycznia 2027 r.<Odn nr={p.nr('oki-start')} /></li>
+          <li>
+            Konto może założyć osoba fizyczna, która ukończyła 18 lat. Można mieć więcej niż jedno<Odn
+              nr={p.nr('oki-kto')}
+            />.
+          </li>
+          <li>
+            Aktywa na koncie podlegają podatkowi od wartości aktywów, a przychody z nich są wyłączone z
+            podatku dochodowego<Odn nr={p.nr('oki-podatek')} />.
+          </li>
+          <li>
+            W 2027 r. stawka wynosi <strong>{procent(p.wartosc('oki-stawka-2027'))}</strong><Odn
+              nr={p.nr('oki-stawka-2027')}
+            />.
+          </li>
+        </ul>
+
+        <h2>Jak liczony jest podatek</h2>
+        <p>
+          Stawka na dany rok to 19% stopy referencyjnej NBP z 31 października roku poprzedniego, nie mniej
+          niż 0,1%<Odn nr={p.nr('oki-stawka')} />. Na pierwszy rok ustawa wskazuje stawkę wprost<Odn
+            nr={p.nr('oki-stawka-2027')}
+          />.
+        </p>
+        <div class="ramka">
+          <p class="ramka__tytul">Podatek także w roku ze stratą</p>
+          <p>
+            Podatek liczy się od wartości aktywów, a nie od zysku. Jest więc należny również wtedy, gdy w
+            danym roku wartość inwestycji spadła<Odn nr={p.nr('oki-strata')} />.
+          </p>
+        </div>
+
+        <h2>Zwolnienia</h2>
+        <ul>
+          <li>
+            Łącznie zwolnione mogą być aktywa o średniej wartości do
+            <strong>{zl(p.wartosc('oki-zwolnienie-lacznie'))}</strong> w roku<Odn
+              nr={p.nr('oki-zwolnienie-lacznie')}
+            />.
+          </li>
+          <li>
+            W ramach tej kwoty do {zl(p.wartosc('oki-zwolnienie-oszczednosciowe'))} zwolnienie obejmuje m.in.
+            środki na rachunku bankowym w złotych, obligacje oszczędnościowe Skarbu Państwa i bony skarbowe<Odn
+              nr={p.nr('oki-zwolnienie-oszczednosciowe')}
+            />.
+          </li>
+          <li>
+            Fundusze korzystają ze zwolnienia, jeżeli co najmniej 70% ich aktywów to tzw. kwalifikowane
+            aktywa, czyli m.in. akcje i obligacje denominowane w złotych<Odn nr={p.nr('oki-kwalifikowane')} />.
+          </li>
+          <li>Kwoty zwolnienia będą waloryzowane dopiero od 2030 r.<Odn nr={p.nr('oki-waloryzacja')} /></li>
+        </ul>
+        <p>
+          Lista aktywów objętych zwolnieniem jest w ustawie szczegółowa. Przed decyzją sprawdź w dokumentach
+          konkretnego produktu, do której grupy należy.
+        </p>
+
+        <h2>Czym OKI różni się od IKE i IKZE</h2>
+      </div>
+
+      <div class="tabela-przewijana" tabindex="0" role="region" aria-label="Tabela. Jeśli nie mieści się na ekranie, przewiń ją w poziomie." style="max-width: 46rem">
+        <table>
+          <caption class="wizualnie-ukryte">Sposób działania preferencji podatkowej w trzech rodzajach kont</caption>
+          <thead>
+            <tr>
+              <th scope="col">Konto</th>
+              <th scope="col">Jak działa preferencja podatkowa</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row"><a href="/ike/">IKE</a></th>
+              <td>
+                Dochód jest wolny od podatku przy wypłacie po spełnieniu warunków<Odn
+                  nr={p.nr('ike-zwolnienie')}
+                />.
+              </td>
+            </tr>
+            <tr>
+              <th scope="row"><a href="/ikze/">IKZE</a></th>
+              <td>
+                Wpłaty odliczasz od dochodu lub przychodu, a przy wypłacie płacisz {
+                  procent(p.wartosc('ikze-wyplata-podatek'))
+                } od całej kwoty<Odn nr={p.nr('ikze-wyplata-podatek')} />.
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">OKI</th>
+              <td>
+                Nie ma podatku od zysków. Co roku płacisz podatek od wartości aktywów ponad kwotę zwolnienia<Odn
+                  nr={p.nr('oki-podatek')}
+                />.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="proza">
+        <h2>Czego ta strona nie rozstrzyga</h2>
+        <p>
+          Nie odpowiadamy tu na pytanie, które konto wybrać. Nie oceniamy też, które konkretne fundusze
+          spełniają warunek 70% — to wymaga analizy dokumentów każdego produktu. Finansowa Przyszłość nie
+          prowadzi OKI ani żadnych innych kont; opisujemy wyłącznie przepisy.
+        </p>
+      </div>
+
+      <Zrodla lista={p.lista} />
+    </div>
+  </div>
+</Bazowy>

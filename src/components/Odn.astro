@@ -1,0 +1,9 @@
+---
+/** Odnośnik do przypisu źródłowego na dole strony. */
+interface Props {
+  nr: number;
+}
+const { nr } = Astro.props;
+---
+
+<sup><a class="odn" href={`#zrodlo-${nr}`} aria-label={`Źródło ${nr}`}>[{nr}]</a></sup>

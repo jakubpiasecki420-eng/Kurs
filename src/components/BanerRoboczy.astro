@@ -1,0 +1,47 @@
+---
+import { PRZED_RECENZJA } from '@/lib/serwis';
+---
+
+{
+  PRZED_RECENZJA && (
+    <aside class="baner" aria-label="Status serwisu">
+      <div class="kontener baner__w">
+        <span class="baner__znak">Wersja robocza</span>
+        <p>
+          Materiały nie przeszły jeszcze recenzji doradcy podatkowego i nie są przeznaczone do publikacji.{' '}
+          <a href="/o-projekcie/#status">Sprawdź status</a>
+        </p>
+      </div>
+    </aside>
+  )
+}
+
+<style>
+  .baner {
+    background: var(--granat);
+    color: var(--biel);
+    font-size: var(--tekst-xs);
+    --fokus: var(--zloto);
+  }
+  .baner__w {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--o-2) var(--o-3);
+    padding-block: var(--o-2);
+  }
+  .baner__znak {
+    flex: none;
+    padding: 0.1rem 0.5rem;
+    border-radius: 999px;
+    background: var(--zloto);
+    color: var(--granat);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 0.6875rem;
+  }
+  .baner p {
+    margin: 0;
+  }
+</style>

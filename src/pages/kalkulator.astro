@@ -1,0 +1,86 @@
+---
+import Bazowy from '@/layouts/Bazowy.astro';
+import NaglowekStrony from '@/components/NaglowekStrony.astro';
+import Kalkulator from '@/components/Kalkulator.astro';
+import Odn from '@/components/Odn.astro';
+import Zrodla from '@/components/Zrodla.astro';
+import { przypisy } from '@/lib/rejestr';
+
+const p = przypisy(['nbp-cel-inflacyjny']);
+---
+
+<Bazowy
+  tytul="Kalkulator scenariuszy oszczędzania"
+  opis="Edukacyjny kalkulator regularnego oszczędzania: suma wpłat, wartość nominalna i wartość w dzisiejszych pieniądzach przy Twoich założeniach."
+>
+  <NaglowekStrony
+    etykieta="Narzędzie edukacyjne"
+    tytul="Kalkulator scenariuszy oszczędzania"
+    lid="Sprawdź, jak wpłata, czas, stopa zwrotu, inflacja i koszty wpływają na wynik regularnego oszczędzania. Wszystkie założenia ustawiasz samodzielnie."
+  />
+
+  <div class="sekcja">
+    <div class="kontener">
+      <Kalkulator />
+    </div>
+  </div>
+
+  <div class="sekcja sekcja--biala">
+    <div class="kontener">
+      <div class="proza">
+        <h2>Jak liczymy</h2>
+        <ol>
+          <li>
+            Roczny mnożnik netto to <em>(1 + stopa zwrotu) × (1 − koszty roczne)</em>.
+          </li>
+          <li>Mnożnik miesięczny to pierwiastek dwunastego stopnia z mnożnika rocznego.</li>
+          <li>Wpłata trafia na konto na koniec każdego miesiąca i przez cały okres ma tę samą wysokość.</li>
+          <li>
+            Wartość w dzisiejszych pieniądzach to wartość nominalna podzielona przez skumulowaną inflację z
+            całego okresu.
+          </li>
+        </ol>
+
+        <h2>Czego kalkulator nie uwzględnia</h2>
+        <ul>
+          <li>
+            <strong>Podatków.</strong> Zasady opodatkowania zależą od rodzaju konta. Opisujemy je osobno na
+            stronach o <a href="/ike/">IKE</a>, <a href="/ikze/">IKZE</a> i <a href="/oki/">OKI</a>.
+          </li>
+          <li>
+            <strong>Zmienności.</strong> W symulacji wartość rośnie lub spada w stałym tempie. W
+            rzeczywistości wyniki inwestycji wahają się z roku na rok, a kolejność dobrych i złych lat ma
+            znaczenie.
+          </li>
+          <li>
+            <strong>Zmian wpłaty.</strong> Wpłata jest stała nominalnie, więc jej realna wartość z czasem
+            maleje.
+          </li>
+          <li><strong>Opłat jednorazowych</strong>, np. za otwarcie konta lub od każdej wpłaty.</li>
+        </ul>
+
+        <div class="ramka">
+          <p class="ramka__tytul">To symulacja, nie prognoza</p>
+          <p>
+            Wynik pokazuje wyłącznie skutki założeń, które wpisujesz. Nikt nie zna przyszłych stóp zwrotu ani
+            inflacji. Inwestowanie wiąże się z ryzykiem utraty części lub całości kapitału. Kalkulator nie
+            jest rekomendacją inwestycyjną i nie wskazuje żadnego produktu.
+          </p>
+        </div>
+
+        <h2>Skąd domyślna inflacja</h2>
+        <p>
+          Jako wartość początkową przyjmujemy 2,5%, czyli średniookresowy cel inflacyjny NBP<Odn
+            nr={p.nr('nbp-cel-inflacyjny')}
+          />. To punkt odniesienia, a nie przewidywanie. Domyślna stopa zwrotu jest równa inflacji: w tym
+          scenariuszu oszczędności jedynie utrzymują siłę nabywczą.
+        </p>
+        <p>
+          Więcej o różnicy między obiema kwotami przeczytasz w artykule
+          <a href="/artykuly/wartosc-nominalna-i-realna/">Wartość nominalna i realna</a>.
+        </p>
+      </div>
+      <Zrodla lista={p.lista} />
+    </div>
+  </div>
+</Bazowy>

@@ -1,0 +1,31 @@
+{
+  "marka": "Finansowa Przyszłość",
+  "haslo": "Świadomie buduj swoją przyszłość.",
+  "opis": "Niezależny serwis edukacyjny o systemie emerytalnym, IKE, IKZE, OKI i planowaniu długoterminowego oszczędzania. Dla osób prowadzących działalność i pracujących na B2B.",
+  "produkt": {
+    "nazwa": "Emerytura pod kontrolą",
+    "podtytul": "Przewodnik z kalkulatorem dla osób na JDG i B2B",
+    "status": "w-przygotowaniu"
+  },
+  "operator": {
+    "nazwa": null,
+    "formaPrawna": null,
+    "nip": null,
+    "adres": null
+  },
+  "kontakt": {
+    "email": null
+  },
+  "publikacja": {
+    "indeksowanie": false,
+    "recenzjaEksperta": null,
+    "politykaPrywatnosci": false,
+    "regulamin": false,
+    "opiniaPrawna": false
+  },
+  "zapis": {
+    "aktywny": false,
+    "adresFormularza": null,
+    "nazwaPolaEmail": "email"
+  }
+}

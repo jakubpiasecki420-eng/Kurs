@@ -1,0 +1,746 @@
+{
+  "stanNaDzien": "2026-11-13",
+  "zrodla": {
+    "ustawa-ike-ikze": {
+      "tytul": "Ustawa z 20 kwietnia 2004 r. o indywidualnych kontach emerytalnych oraz indywidualnych kontach zabezpieczenia emerytalnego",
+      "publikator": "t.j. Dz.U. 2026 poz. 91",
+      "url": "https://api.sejm.gov.pl/eli/acts/DU/2026/91/text.pdf",
+      "rodzaj": "akt prawny"
+    },
+    "mp-2025-1202": {
+      "tytul": "Obwieszczenie Ministra Rodziny, Pracy i Polityki Społecznej z 17 listopada 2025 r. w sprawie wysokości kwoty wpłat na IKE w roku 2026",
+      "publikator": "M.P. 2025 poz. 1202",
+      "url": "https://www.gov.pl/web/rodzina/ike-limit-wplat",
+      "rodzaj": "akt prawny"
+    },
+    "mp-2026-1081": {
+      "tytul": "Obwieszczenie Ministra Rodziny, Pracy i Polityki Społecznej z 30 października 2026 r. w sprawie wysokości kwoty wpłat dokonywanych na IKE w roku 2027",
+      "publikator": "M.P. 2026 poz. 1081",
+      "url": "https://api.sejm.gov.pl/eli/acts/MP/2026/1081/text.pdf",
+      "rodzaj": "akt prawny"
+    },
+    "mp-2025-1156": {
+      "tytul": "Obwieszczenie Ministra Rodziny, Pracy i Polityki Społecznej z 10 listopada 2025 r. w sprawie wysokości kwoty wpłat na IKZE w roku 2026",
+      "publikator": "M.P. 2025 poz. 1156",
+      "url": "https://www.gov.pl/web/rodzina/ikze-limit-wplat",
+      "rodzaj": "akt prawny"
+    },
+    "mp-2026-1062": {
+      "tytul": "Obwieszczenie Ministra Rodziny, Pracy i Polityki Społecznej z 27 października 2026 r. w sprawie wysokości kwoty wpłat na IKZE w roku 2027",
+      "publikator": "M.P. 2026 poz. 1062",
+      "url": "https://api.sejm.gov.pl/eli/acts/MP/2026/1062/text.pdf",
+      "rodzaj": "akt prawny"
+    },
+    "ustawa-pit": {
+      "tytul": "Ustawa z 26 lipca 1991 r. o podatku dochodowym od osób fizycznych",
+      "publikator": "t.j. Dz.U. 2026 poz. 592",
+      "url": "https://api.sejm.gov.pl/eli/acts/DU/2026/592/text.pdf",
+      "rodzaj": "akt prawny"
+    },
+    "ustawa-ryczalt": {
+      "tytul": "Ustawa z 20 listopada 1998 r. o zryczałtowanym podatku dochodowym od niektórych przychodów osiąganych przez osoby fizyczne",
+      "publikator": "t.j. Dz.U. 2025 poz. 843",
+      "url": "https://api.sejm.gov.pl/eli/acts/DU/2025/843/text.pdf",
+      "rodzaj": "akt prawny"
+    },
+    "ustawa-oki": {
+      "tytul": "Ustawa z 3 lipca 2026 r. o osobistych kontach inwestycyjnych",
+      "publikator": "Dz.U. 2026 poz. 1098",
+      "url": "https://eli.gov.pl/api/acts/DU/2026/1098/text/T/D20261098L.pdf",
+      "rodzaj": "akt prawny"
+    },
+    "ustawa-sus": {
+      "tytul": "Ustawa z 13 października 1998 r. o systemie ubezpieczeń społecznych",
+      "publikator": "t.j. Dz.U. 2026 poz. 1474",
+      "url": "https://api.sejm.gov.pl/eli/acts/DU/2026/1474/text.pdf",
+      "rodzaj": "akt prawny"
+    },
+    "ustawa-zdrowotna": {
+      "tytul": "Ustawa z 27 sierpnia 2004 r. o świadczeniach opieki zdrowotnej finansowanych ze środków publicznych",
+      "publikator": "t.j. Dz.U. 2025 poz. 1461",
+      "url": "https://api.sejm.gov.pl/eli/acts/DU/2025/1461/text.pdf",
+      "rodzaj": "akt prawny"
+    },
+    "ustawa-obrot": {
+      "tytul": "Ustawa z 29 lipca 2005 r. o obrocie instrumentami finansowymi",
+      "publikator": "t.j. Dz.U. 2024 poz. 722",
+      "url": "https://api.sejm.gov.pl/eli/acts/DU/2024/722/text.pdf",
+      "rodzaj": "akt prawny"
+    },
+    "ustawa-konsument": {
+      "tytul": "Ustawa z 30 maja 2014 r. o prawach konsumenta",
+      "publikator": "t.j. Dz.U. 2026 poz. 1244",
+      "url": "https://api.sejm.gov.pl/eli/acts/DU/2026/1244/text.pdf",
+      "rodzaj": "akt prawny"
+    },
+    "mp-2026-943": {
+      "tytul": "Uchwała nr 6/2026 Rady Polityki Pieniężnej z 8 września 2026 r. w sprawie ustalenia założeń polityki pieniężnej na rok 2027",
+      "publikator": "M.P. 2026 poz. 943",
+      "url": "https://api.sejm.gov.pl/eli/acts/MP/2026/943/text.pdf",
+      "rodzaj": "akt prawny"
+    },
+    "knf-finfluencerzy": {
+      "tytul": "KNF — Dobre praktyki dla finfluencerów (aktualizacja 28 sierpnia 2025 r.)",
+      "publikator": "knf.gov.pl",
+      "url": "https://www.knf.gov.pl/dla_konsumenta/kampanie_informacyjne/Finfluencer_dobre_praktyki_i_ryzyka/dobre_praktyki_fininfluencerzy",
+      "rodzaj": "urząd"
+    },
+    "analizy-knf-ike-ikze": {
+      "tytul": "Analizy.pl — KNF skorygowała dane o IKZE (dane na 30 czerwca 2026 r.)",
+      "publikator": "analizy.pl",
+      "url": "https://www.analizy.pl/puls-rynku/40656/knf-skorygowala-dane-o-ikze-liczba-rachunkow-wzrosla-o-10-proc-nie-o-49-proc",
+      "rodzaj": "media"
+    },
+    "analizy-ppk": {
+      "tytul": "Analizy.pl — W PPK oszczędza już 4,52 mln osób (dane na 30 września 2026 r.)",
+      "publikator": "analizy.pl",
+      "url": "https://www.analizy.pl/puls-rynku/40833/w-ppk-oszczedza-juz-4-52-mln-osob-partycypacja-przekroczyla-63",
+      "rodzaj": "media"
+    },
+    "bankier-zus-2027": {
+      "tytul": "Bankier.pl — Składki ZUS w 2027 r.",
+      "publikator": "bankier.pl",
+      "url": "https://www.bankier.pl/wiadomosc/Skladki-ZUS-w-2027-r-Przedsiebiorcy-zaplaca-rekordowe-sumy-9127120.html",
+      "rodzaj": "media"
+    },
+    "gp-emerytura-minimalna": {
+      "tytul": "Gazeta Prawna — Najniższa emerytura w 2026 r.",
+      "publikator": "gazetaprawna.pl",
+      "url": "https://www.gazetaprawna.pl/praca/emerytury-i-renty/artykuly/10650086,najnizsza-emerytura-w-2026-roku-ile-wynosi-netto-po-waloryzacji.html",
+      "rodzaj": "media"
+    },
+    "pit-pl-ryczalt": {
+      "tytul": "Pit.pl — liczba ryczałtowców w zeznaniach za 2025 r.",
+      "publikator": "pit.pl",
+      "url": "https://www.pit.pl/aktualnosci/podatkowy-trend-ucieczka-przedsiebiorcow-ze-skali-co-najczesciej-wybieraja-zamiast-niej",
+      "rodzaj": "media"
+    },
+    "ey-pip": {
+      "tytul": "EY — Nowelizacja ustawy o PIP wejdzie w życie 8 lipca 2026 r.",
+      "publikator": "ey.com",
+      "url": "https://www.ey.com/pl_pl/insights/workforce/b2b-umowy-cywilnoprawne-reforma-pip-7-lipca-2026",
+      "rodzaj": "media"
+    },
+    "analiza-wlasna": {
+      "tytul": "Wniosek lub założenie własne projektu",
+      "publikator": "dokumentacja projektu",
+      "url": null,
+      "rodzaj": "własne"
+    }
+  },
+  "twierdzenia": [
+    {
+      "id": "ike-wiek-wplat",
+      "obszar": "ike",
+      "tresc": "Prawo do wpłat na IKE lub IKZE przysługuje osobie fizycznej, która ukończyła 16 lat.",
+      "zrodlo": "ustawa-ike-ikze",
+      "przepis": "art. 3 ust. 1",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "ike-jedno-konto",
+      "obszar": "ike",
+      "tresc": "Zwolnienie podatkowe przysługuje, jeżeli oszczędzający gromadzi środki tylko na jednym IKE.",
+      "zrodlo": "ustawa-ike-ikze",
+      "przepis": "art. 4 ust. 1",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "ike-limit-wzor",
+      "obszar": "ike",
+      "tresc": "Roczny limit wpłat na IKE odpowiada trzykrotności prognozowanego przeciętnego wynagrodzenia miesięcznego w gospodarce narodowej na dany rok.",
+      "zrodlo": "ustawa-ike-ikze",
+      "przepis": "art. 13 ust. 1",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "ike-limit-2026",
+      "obszar": "ike",
+      "tresc": "Limit wpłat na IKE w 2026 r. wynosi 28 260 zł.",
+      "wartosc": 28260,
+      "jednostka": "zł",
+      "rok": 2026,
+      "zrodlo": "mp-2025-1202",
+      "przepis": "obwieszczenie",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-01-15"
+    },
+    {
+      "id": "ike-limit-2027",
+      "obszar": "ike",
+      "tresc": "Limit wpłat na IKE w 2027 r. wynosi 30 099 zł.",
+      "wartosc": 30099,
+      "jednostka": "zł",
+      "rok": 2027,
+      "zrodlo": "mp-2026-1081",
+      "przepis": "obwieszczenie",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-11-15"
+    },
+    {
+      "id": "ike-wyplata-warunki",
+      "obszar": "ike",
+      "tresc": "Wypłata z IKE następuje na wniosek oszczędzającego po ukończeniu 60 lat albo po nabyciu uprawnień emerytalnych i ukończeniu 55 lat. Dodatkowo trzeba spełnić jeden z warunków: wpłaty w co najmniej 5 dowolnych latach kalendarzowych albo ponad połowa wartości wpłat dokonana nie później niż 5 lat przed wnioskiem.",
+      "zrodlo": "ustawa-ike-ikze",
+      "przepis": "art. 34 ust. 1",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "ike-zwolnienie",
+      "obszar": "ike",
+      "tresc": "Dochody z oszczędzania na IKE uzyskane w związku z gromadzeniem i wypłatą środków są wolne od podatku dochodowego, o ile oszczędzający nie gromadził środków na więcej niż jednym IKE.",
+      "zrodlo": "ustawa-pit",
+      "przepis": "art. 21 ust. 1 pkt 58a",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "ike-zwrot-podatek",
+      "obszar": "ike",
+      "tresc": "Od dochodu z tytułu zwrotu albo częściowego zwrotu środków z IKE pobiera się 19% zryczałtowanego podatku dochodowego.",
+      "wartosc": 0.19,
+      "jednostka": "stawka",
+      "zrodlo": "ustawa-pit",
+      "przepis": "art. 30a ust. 1 pkt 10",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "ike-wiele-kont",
+      "obszar": "ike",
+      "tresc": "Gromadzenie oszczędności na więcej niż jednym IKE oznacza zryczałtowany podatek w wysokości 75% dochodu uzyskanego na każdym koncie.",
+      "wartosc": 0.75,
+      "jednostka": "stawka",
+      "zrodlo": "ustawa-pit",
+      "przepis": "art. 30 ust. 1 pkt 7a",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "ike-zwrot-dochod",
+      "obszar": "ike",
+      "tresc": "Przy zwrocie z IKE dochodem jest różnica między wartością środków zgromadzonych na koncie a sumą wpłat.",
+      "zrodlo": "ustawa-pit",
+      "przepis": "art. 30a ust. 8",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "ike-wyplata-transferowa",
+      "obszar": "ike",
+      "tresc": "Środki można przenieść do innej instytucji finansowej, z którą oszczędzający zawarł umowę o prowadzenie IKE lub IKZE, w drodze wypłaty transferowej.",
+      "zrodlo": "ustawa-ike-ikze",
+      "przepis": "art. 35 ust. 1 pkt 1",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "ikze-limit-wzor",
+      "obszar": "ikze",
+      "tresc": "Roczny limit wpłat na IKZE odpowiada 1,2-krotności prognozowanego przeciętnego wynagrodzenia miesięcznego, a dla osób prowadzących pozarolniczą działalność — 1,8-krotności.",
+      "zrodlo": "ustawa-ike-ikze",
+      "przepis": "art. 13a ust. 1 i 1a",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "ikze-limit-2026",
+      "obszar": "ikze",
+      "tresc": "Limit wpłat na IKZE w 2026 r. wynosi 11 304 zł.",
+      "wartosc": 11304,
+      "jednostka": "zł",
+      "rok": 2026,
+      "zrodlo": "mp-2025-1156",
+      "przepis": "obwieszczenie",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-01-15"
+    },
+    {
+      "id": "ikze-limit-2026-dzialalnosc",
+      "obszar": "ikze",
+      "tresc": "Limit wpłat na IKZE w 2026 r. dla osób prowadzących pozarolniczą działalność wynosi 16 956 zł.",
+      "wartosc": 16956,
+      "jednostka": "zł",
+      "rok": 2026,
+      "zrodlo": "mp-2025-1156",
+      "przepis": "obwieszczenie",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-01-15"
+    },
+    {
+      "id": "ikze-limit-2027",
+      "obszar": "ikze",
+      "tresc": "Limit wpłat na IKZE w 2027 r. wynosi 12 039,60 zł.",
+      "wartosc": 12039.6,
+      "jednostka": "zł",
+      "rok": 2027,
+      "zrodlo": "mp-2026-1062",
+      "przepis": "pkt 1 obwieszczenia",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-11-15"
+    },
+    {
+      "id": "ikze-limit-2027-dzialalnosc",
+      "obszar": "ikze",
+      "tresc": "Limit wpłat na IKZE w 2027 r. dla osób prowadzących pozarolniczą działalność wynosi 18 059,40 zł.",
+      "wartosc": 18059.4,
+      "jednostka": "zł",
+      "rok": 2027,
+      "zrodlo": "mp-2026-1062",
+      "przepis": "pkt 2 obwieszczenia",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-11-15"
+    },
+    {
+      "id": "ikze-dzialalnosc-definicja",
+      "obszar": "jdg-b2b",
+      "tresc": "Wyższy limit IKZE dotyczy osoby prowadzącej pozarolniczą działalność w rozumieniu art. 8 ust. 6 ustawy o systemie ubezpieczeń społecznych. Przepis ten obejmuje m.in. osoby prowadzące działalność gospodarczą na podstawie Prawa przedsiębiorców, twórców i artystów, osoby wykonujące wolny zawód oraz wspólników jednoosobowej spółki z o.o., spółki jawnej, komandytowej i partnerskiej.",
+      "zrodlo": "ustawa-sus",
+      "przepis": "art. 8 ust. 6; odesłanie w art. 13a ust. 1a ustawy o IKE/IKZE",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "ikze-ulga-na-start-wylaczenie",
+      "obszar": "jdg-b2b",
+      "tresc": "Za osobę prowadzącą pozarolniczą działalność w rozumieniu ustawy o systemie ubezpieczeń społecznych nie uważa się osoby korzystającej z tzw. ulgi na start (art. 18 ust. 1 Prawa przedsiębiorców).",
+      "zrodlo": "ustawa-sus",
+      "przepis": "art. 8 ust. 6a",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "ikze-odliczenie-skala",
+      "obszar": "ikze",
+      "tresc": "Wpłaty na IKZE dokonane w roku podatkowym odlicza się od dochodu, do wysokości limitu wpłat.",
+      "zrodlo": "ustawa-pit",
+      "przepis": "art. 26 ust. 1 pkt 2b",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "ikze-odliczenie-liniowy",
+      "obszar": "ikze",
+      "tresc": "Podatnik rozliczający się podatkiem liniowym może pomniejszyć dochód o wpłaty na IKZE; odliczenia dokonuje w zeznaniu podatkowym.",
+      "zrodlo": "ustawa-pit",
+      "przepis": "art. 30c ust. 2 pkt 3 i ust. 3b",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "ikze-odliczenie-ryczalt",
+      "obszar": "ikze",
+      "tresc": "Podatnik opłacający ryczałt od przychodów ewidencjonowanych może odliczyć wpłaty na IKZE od przychodów.",
+      "zrodlo": "ustawa-ryczalt",
+      "przepis": "art. 11 ust. 1",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "ikze-ryczalt-proporcja",
+      "obszar": "ikze",
+      "tresc": "Jeżeli ryczałtowiec uzyskuje przychody opodatkowane różnymi stawkami, odliczeń dokonuje proporcjonalnie do udziału poszczególnych przychodów w ogólnej kwocie przychodów.",
+      "zrodlo": "ustawa-ryczalt",
+      "przepis": "art. 11 ust. 3",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "ikze-wyplata-warunki",
+      "obszar": "ikze",
+      "tresc": "Wypłata z IKZE następuje na wniosek oszczędzającego po ukończeniu 65 lat, pod warunkiem dokonywania wpłat w co najmniej 5 latach kalendarzowych. Może być jednorazowa albo w ratach.",
+      "zrodlo": "ustawa-ike-ikze",
+      "przepis": "art. 34a ust. 1 i 2",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "ikze-wyplata-raty",
+      "obszar": "ikze",
+      "tresc": "Wypłata z IKZE w ratach trwa co najmniej 10 lat. Jeżeli wpłaty były dokonywane krócej niż 10 lat, wypłata może być rozłożona na okres równy okresowi wpłat.",
+      "zrodlo": "ustawa-ike-ikze",
+      "przepis": "art. 34a ust. 4",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "ikze-wyplata-podatek",
+      "obszar": "ikze",
+      "tresc": "Od kwoty wypłat z IKZE pobiera się zryczałtowany podatek dochodowy w wysokości 10% przychodu, czyli od całej wypłaty.",
+      "wartosc": 0.1,
+      "jednostka": "stawka",
+      "zrodlo": "ustawa-pit",
+      "przepis": "art. 30 ust. 1 pkt 14",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "ikze-zwrot-podatek",
+      "obszar": "ikze",
+      "tresc": "Kwoty uzyskane z tytułu zwrotu z IKZE są przychodem z innych źródeł.",
+      "zrodlo": "ustawa-pit",
+      "przepis": "art. 20 ust. 1",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "zdrowotna-podstawa",
+      "obszar": "jdg-b2b",
+      "tresc": "Roczną podstawą składki zdrowotnej przedsiębiorcy na skali lub podatku liniowym jest dochód z działalności, czyli przychody pomniejszone o koszty i o opłacone składki społeczne. Przepis nie przewiduje pomniejszenia tej podstawy o wpłaty na IKZE.",
+      "zrodlo": "ustawa-zdrowotna",
+      "przepis": "art. 81 ust. 2",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "zus-informacja-o-stanie-konta",
+      "obszar": "zus",
+      "tresc": "Do 31 sierpnia każdego roku ZUS udostępnia ubezpieczonemu informację o stanie konta, czyli o składkach zewidencjonowanych na jego koncie według stanu na 31 grudnia poprzedniego roku.",
+      "zrodlo": "ustawa-sus",
+      "przepis": "art. 50 ust. 1",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "zus-hipotetyczna-emerytura",
+      "obszar": "zus",
+      "tresc": "Informacja o stanie konta zawiera wysokość hipotetycznej emerytury, jeżeli ubezpieczony na 31 grudnia poprzedniego roku miał ukończone 35 lat. ZUS podaje ją dla wieku 60 lat w przypadku kobiety i 65 lat w przypadku mężczyzny.",
+      "zrodlo": "ustawa-sus",
+      "przepis": "art. 50 ust. 1a pkt 2, ust. 1ba i 1c",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "oki-start",
+      "obszar": "oki",
+      "tresc": "Ustawa o osobistych kontach inwestycyjnych wchodzi w życie 1 stycznia 2027 r.",
+      "zrodlo": "ustawa-oki",
+      "przepis": "art. 46",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-01-15"
+    },
+    {
+      "id": "oki-kto",
+      "obszar": "oki",
+      "tresc": "Umowę o prowadzenie OKI może zawrzeć wyłącznie osoba fizyczna, która ukończyła 18 lat. Można zawrzeć więcej niż jedną umowę.",
+      "zrodlo": "ustawa-oki",
+      "przepis": "art. 3 ust. 2 i 3",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "oki-podatek",
+      "obszar": "oki",
+      "tresc": "Aktywa zgromadzone na OKI podlegają podatkowi od wartości aktywów. Przychody z tych aktywów są wyłączone z ustawy o podatku dochodowym od osób fizycznych.",
+      "zrodlo": "ustawa-oki",
+      "przepis": "art. 22 ust. 1; art. 32 pkt 1",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "oki-stawka",
+      "obszar": "oki",
+      "tresc": "Stawka podatku od wartości aktywów wynosi 19% stopy referencyjnej NBP obowiązującej 31 października roku poprzedniego, nie mniej niż 0,1%.",
+      "zrodlo": "ustawa-oki",
+      "przepis": "art. 25 ust. 1",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-11-30"
+    },
+    {
+      "id": "oki-stawka-2027",
+      "obszar": "oki",
+      "tresc": "W 2027 r. stawka podatku od wartości aktywów wynosi 0,85%.",
+      "wartosc": 0.0085,
+      "jednostka": "stawka",
+      "rok": 2027,
+      "zrodlo": "ustawa-oki",
+      "przepis": "art. 43",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-11-30"
+    },
+    {
+      "id": "oki-zwolnienie-lacznie",
+      "obszar": "oki",
+      "tresc": "Suma średnich wartości aktywów zwolnionych z podatku nie może w roku podatkowym przekroczyć 100 000 zł.",
+      "wartosc": 100000,
+      "jednostka": "zł",
+      "zrodlo": "ustawa-oki",
+      "przepis": "art. 26 ust. 2",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "oki-zwolnienie-oszczednosciowe",
+      "obszar": "oki",
+      "tresc": "W ramach tego limitu do 25 000 zł zwolnienie obejmuje m.in. środki na rachunku bankowym w złotych, obligacje oszczędnościowe Skarbu Państwa i bony skarbowe.",
+      "wartosc": 25000,
+      "jednostka": "zł",
+      "zrodlo": "ustawa-oki",
+      "przepis": "art. 26 ust. 1 pkt 1",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "oki-kwalifikowane",
+      "obszar": "oki",
+      "tresc": "Fundusze inwestycyjne, fundusze zagraniczne i ubezpieczeniowe fundusze kapitałowe korzystają ze zwolnienia, jeżeli co najmniej 70% ich aktywów stanowią kwalifikowane aktywa, czyli m.in. obligacje i akcje denominowane w złotych oraz bony skarbowe.",
+      "zrodlo": "ustawa-oki",
+      "przepis": "art. 26 ust. 1 pkt 2 i ust. 4",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "oki-strata",
+      "obszar": "oki",
+      "tresc": "Podatek od wartości aktywów jest należny również w roku, w którym inwestujący poniósł stratę; strata ta nie jest stratą podatkową w podatku dochodowym.",
+      "zrodlo": "ustawa-oki",
+      "przepis": "art. 5 ust. 1 pkt 3 lit. c",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "oki-waloryzacja",
+      "obszar": "oki",
+      "tresc": "Kwoty zwolnienia będą podwyższane o wskaźnik inflacji dopiero od roku podatkowego 2030.",
+      "zrodlo": "ustawa-oki",
+      "przepis": "art. 26 ust. 5; art. 44 ust. 1",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "nbp-cel-inflacyjny",
+      "obszar": "kalkulator",
+      "tresc": "Średniookresowy cel inflacyjny NBP wynosi 2,5%.",
+      "wartosc": 0.025,
+      "jednostka": "stawka",
+      "zrodlo": "mp-2026-943",
+      "przepis": "załącznik do uchwały",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-10-01"
+    },
+    {
+      "id": "nazwy-ike-ikze",
+      "obszar": "prawo",
+      "tresc": "Określenia „indywidualne konto emerytalne”, „indywidualne konto zabezpieczenia emerytalnego” oraz skróty „IKE” i „IKZE” w działalności i reklamie są zastrzeżone dla instytucji finansowych prowadzących te konta. Sankcja: grzywna do 1 mln zł lub kara pozbawienia wolności do 3 lat.",
+      "zrodlo": "ustawa-ike-ikze",
+      "przepis": "art. 18 i art. 40",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "nazwa-oki",
+      "obszar": "prawo",
+      "tresc": "Określenie „osobiste konto inwestycyjne” i skrót „OKI” mogą być używane wyłącznie przez instytucje finansowe OKI w zakresie działalności i reklamy. Sankcja: grzywna do 1 mln zł albo kara pozbawienia wolności do 3 lat.",
+      "zrodlo": "ustawa-oki",
+      "przepis": "art. 20 i art. 31",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "doradztwo-definicja",
+      "obszar": "prawo",
+      "tresc": "Doradztwo inwestycyjne polega na przygotowywaniu i przekazywaniu klientowi rekomendacji opartej na jego potrzebach i sytuacji, dotyczącej nabycia lub zbycia instrumentów finansowych. Jest działalnością maklerską wymagającą zezwolenia KNF.",
+      "zrodlo": "ustawa-obrot",
+      "przepis": "art. 69 ust. 1 i ust. 2 pkt 5; art. 76 ust. 1",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "doradztwo-sankcja",
+      "obszar": "prawo",
+      "tresc": "Prowadzenie działalności w zakresie obrotu instrumentami finansowymi bez zezwolenia podlega grzywnie do 5 mln zł albo karze pozbawienia wolności do 5 lat.",
+      "zrodlo": "ustawa-obrot",
+      "przepis": "art. 178",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "agent-firmy-inwestycyjnej",
+      "obszar": "prawo",
+      "tresc": "Pozyskiwanie klientów usług maklerskich w imieniu firmy inwestycyjnej jest czynnością agenta firmy inwestycyjnej.",
+      "zrodlo": "ustawa-obrot",
+      "przepis": "art. 79 ust. 1 i 2",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "knf-dobre-praktyki",
+      "obszar": "prawo",
+      "tresc": "KNF zaleca twórcom treści finansowych m.in. oznaczanie reklam, ujawnianie konfliktów interesów, przedstawianie kwalifikacji i unikanie rozbudzania emocji.",
+      "zrodlo": "knf-finfluencerzy",
+      "przepis": "zalecenia",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "konsument-tresci-cyfrowe",
+      "obszar": "prawo",
+      "tresc": "Konsument traci prawo odstąpienia od umowy o dostarczanie treści cyfrowych tylko wtedy, gdy wyraźnie zgodził się na rozpoczęcie świadczenia, przyjął do wiadomości utratę tego prawa i otrzymał potwierdzenie.",
+      "zrodlo": "ustawa-konsument",
+      "przepis": "art. 38 ust. 1 pkt 13",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "konsument-jdg",
+      "obszar": "prawo",
+      "tresc": "Przepisy chroniące konsumenta przy umowach zawieranych na odległość stosuje się także do osoby fizycznej prowadzącej działalność, jeżeli umowa nie ma dla niej charakteru zawodowego.",
+      "zrodlo": "ustawa-konsument",
+      "przepis": "art. 7aa",
+      "status": "P",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "rynek-ike-ikze",
+      "obszar": "rynek",
+      "tresc": "Na 30 czerwca 2026 r. było 1 318 729 rachunków IKE z aktywami 38,2 mld zł oraz 847 130 rachunków IKZE z aktywami 21,85 mld zł.",
+      "zrodlo": "analizy-knf-ike-ikze",
+      "przepis": "dane KNF po korekcie z września 2026 r.",
+      "status": "W",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-03-01"
+    },
+    {
+      "id": "rynek-ppk",
+      "obszar": "rynek",
+      "tresc": "Na 30 września 2026 r. w PPK uczestniczyło 4,52 mln osób, a partycypacja wynosiła 63,14%.",
+      "zrodlo": "analizy-ppk",
+      "przepis": "dane PFR Portal PPK",
+      "status": "W",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-03-01"
+    },
+    {
+      "id": "zus-skladki-jdg",
+      "obszar": "jdg-b2b",
+      "tresc": "Składki społeczne przedsiębiorcy z chorobowym i Funduszem Pracy: 1 926,76 zł miesięcznie w 2026 r. oraz 2 052,15 zł w 2027 r. (kwota na 2027 r. wynika z projektu ustawy budżetowej).",
+      "zrodlo": "bankier-zus-2027",
+      "przepis": "przeliczenie od podstawy 5 652 zł i 6 019,80 zł",
+      "status": "W",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-01-15"
+    },
+    {
+      "id": "emerytura-minimalna-2026",
+      "obszar": "zus",
+      "tresc": "Najniższa emerytura od 1 marca 2026 r. wynosi 1 978,49 zł brutto.",
+      "zrodlo": "gp-emerytura-minimalna",
+      "przepis": "waloryzacja 2026",
+      "status": "W",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-03-01"
+    },
+    {
+      "id": "rynek-ryczaltowcy",
+      "obszar": "rynek",
+      "tresc": "W zeznaniach za 2025 r. było ponad 945 tys. osób prowadzących działalność na ryczałcie.",
+      "zrodlo": "pit-pl-ryczalt",
+      "przepis": "dane MF za „Pulsem Biznesu”",
+      "status": "W",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-06-01"
+    },
+    {
+      "id": "pip-reforma",
+      "obszar": "rynek",
+      "tresc": "Od 8 lipca 2026 r. obowiązuje nowelizacja ustawy o Państwowej Inspekcji Pracy, która pozwala kwestionować pozorne umowy B2B.",
+      "zrodlo": "ey-pip",
+      "przepis": "opracowanie",
+      "status": "W",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-03-01"
+    },
+    {
+      "id": "z-ikze-wzgledem-ike",
+      "obszar": "ikze",
+      "tresc": "Przy tym samym koszcie netto wartość końcowa IKZE względem IKE wynosi 0,9 / (1 − stawka podatku), więc próg opłacalności wypada przy stawce 10%.",
+      "zrodlo": "analiza-wlasna",
+      "przepis": "wniosek z art. 30 ust. 1 pkt 14 ustawy o PIT i przepisów o odliczeniu",
+      "status": "Z",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-01-15"
+    },
+    {
+      "id": "z-oki-fundusze-globalne",
+      "obszar": "oki",
+      "tresc": "Fundusze zagraniczne inwestujące globalnie nie spełniają progu 70% kwalifikowanych aktywów, więc nie korzystają ze zwolnienia w OKI.",
+      "zrodlo": "analiza-wlasna",
+      "przepis": "wniosek z art. 26 ustawy o OKI",
+      "status": "Z",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-01-15"
+    },
+    {
+      "id": "z-ulga-na-start-limit",
+      "obszar": "jdg-b2b",
+      "tresc": "Osoba korzystająca z ulgi na start może nie mieć prawa do wyższego limitu IKZE, bo nie jest osobą prowadzącą pozarolniczą działalność w rozumieniu ustawy o systemie ubezpieczeń społecznych.",
+      "zrodlo": "analiza-wlasna",
+      "przepis": "wniosek z art. 8 ust. 6a ustawy o sus i art. 13a ust. 1a ustawy o IKE/IKZE",
+      "status": "Z",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-01-15"
+    },
+    {
+      "id": "z-ryczalt-zdrowotna-ikze",
+      "obszar": "jdg-b2b",
+      "tresc": "Odliczenie wpłat na IKZE nie zmienia progów przychodu, od których zależy składka zdrowotna ryczałtowca.",
+      "zrodlo": "analiza-wlasna",
+      "przepis": "do potwierdzenia: art. 81 ust. 2e ustawy zdrowotnej",
+      "status": "Z",
+      "sprawdzono": "2026-11-13",
+      "przeglad": "2027-01-15"
+    }
+  ]
+}

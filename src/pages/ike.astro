@@ -1,0 +1,138 @@
+---
+import Bazowy from '@/layouts/Bazowy.astro';
+import NaglowekStrony from '@/components/NaglowekStrony.astro';
+import Odn from '@/components/Odn.astro';
+import Zrodla from '@/components/Zrodla.astro';
+import { przypisy } from '@/lib/rejestr';
+import { procent, zl } from '@/lib/format';
+
+const p = przypisy([
+  'ike-wiek-wplat',
+  'ike-limit-wzor',
+  'ike-limit-2026',
+  'ike-limit-2027',
+  'ike-wyplata-warunki',
+  'ike-zwolnienie',
+  'ike-zwrot-podatek',
+  'ike-zwrot-dochod',
+  'ike-jedno-konto',
+  'ike-wiele-kont',
+  'ike-wyplata-transferowa',
+]);
+---
+
+<Bazowy
+  tytul="IKE — zasady, limity i wypłaty"
+  opis="Jak działa indywidualne konto emerytalne: kto może wpłacać, ile wynosi limit, kiedy wypłata jest wolna od podatku i co oznacza wcześniejszy zwrot."
+>
+  <NaglowekStrony
+    etykieta="Przewodnik"
+    tytul="IKE: zasady, limity i wypłaty"
+    lid="Indywidualne konto emerytalne to sposób dobrowolnego oszczędzania, w którym zysk może być wolny od podatku. Warunkiem jest dotrzymanie zasad opisanych w ustawie."
+  />
+
+  <div class="sekcja">
+    <div class="kontener">
+      <div class="proza">
+        <h2>W skrócie</h2>
+        <ul>
+          <li>Wpłacać może osoba, która ukończyła 16 lat<Odn nr={p.nr('ike-wiek-wplat')} />.</li>
+          <li>
+            Limit wpłat w 2027 r. wynosi <strong>{zl(p.wartosc('ike-limit-2027'))}</strong><Odn
+              nr={p.nr('ike-limit-2027')}
+            />.
+          </li>
+          <li>
+            Wypłata po spełnieniu warunków jest wolna od podatku dochodowego<Odn nr={p.nr('ike-zwolnienie')} />.
+          </li>
+          <li>Preferencja dotyczy jednego konta<Odn nr={p.nr('ike-jedno-konto')} />.</li>
+        </ul>
+
+        <h2>Ile można wpłacić</h2>
+        <p>
+          Limit jest roczny i równy trzykrotności prognozowanego przeciętnego wynagrodzenia miesięcznego<Odn
+            nr={p.nr('ike-limit-wzor')}
+          />. Minister ogłasza go co roku w Monitorze Polskim.
+        </p>
+      </div>
+
+      <div class="tabela-przewijana" tabindex="0" role="region" aria-label="Tabela. Jeśli nie mieści się na ekranie, przewiń ją w poziomie." style="max-width: 30rem">
+        <table>
+          <caption>Limit wpłat na IKE</caption>
+          <thead>
+            <tr>
+              <th scope="col">Rok</th>
+              <th scope="col" class="liczba">Limit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">2026</th>
+              <td class="liczba">{zl(p.wartosc('ike-limit-2026'))}<Odn nr={p.nr('ike-limit-2026')} /></td>
+            </tr>
+            <tr>
+              <th scope="row">2027</th>
+              <td class="liczba">{zl(p.wartosc('ike-limit-2027'))}<Odn nr={p.nr('ike-limit-2027')} /></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="proza">
+        <h2>Kiedy wypłata jest wolna od podatku</h2>
+        <p>Ustawa wymaga spełnienia dwóch warunków jednocześnie<Odn nr={p.nr('ike-wyplata-warunki')} />:</p>
+        <ol>
+          <li>
+            <strong>Wiek.</strong> Ukończone 60 lat albo ukończone 55 lat i nabyte uprawnienia emerytalne.
+          </li>
+          <li>
+            <strong>Historia wpłat.</strong> Wpłaty w co najmniej 5 dowolnych latach kalendarzowych albo ponad
+            połowa wartości wpłat dokonana nie później niż 5 lat przed złożeniem wniosku o wypłatę.
+          </li>
+        </ol>
+
+        <h2>Co oznacza wcześniejszy zwrot</h2>
+        <p>
+          Środki można wycofać przed spełnieniem warunków, ale wtedy od dochodu pobierany jest
+          zryczałtowany podatek {procent(p.wartosc('ike-zwrot-podatek'))}<Odn nr={p.nr('ike-zwrot-podatek')} />.
+          Dochodem jest różnica między wartością środków na koncie a sumą wpłat<Odn
+            nr={p.nr('ike-zwrot-dochod')}
+          />.
+        </p>
+
+        <div class="ramka">
+          <p class="ramka__tytul">Jedno konto</p>
+          <p>
+            Gromadzenie oszczędności na więcej niż jednym IKE oznacza podatek w wysokości {
+              procent(p.wartosc('ike-wiele-kont'))
+            } dochodu uzyskanego na każdym z kont<Odn nr={p.nr('ike-wiele-kont')} />. Instytucję można zmienić
+            w drodze wypłaty transferowej<Odn nr={p.nr('ike-wyplata-transferowa')} />, a nie przez otwarcie
+            drugiego konta.
+          </p>
+        </div>
+
+        <h2>O co zapytać instytucję przed podpisaniem umowy</h2>
+        <p>
+          IKE prowadzą różne rodzaje instytucji finansowych, a koszty i zasady ustala każda z nich. Nie
+          wskazujemy konkretnych ofert. Te pytania pomogą Ci je porównać samodzielnie:
+        </p>
+        <ul class="lista-kontrolna">
+          <li>Ile kosztuje otwarcie i prowadzenie konta w kolejnych latach?</li>
+          <li>Jakie opłaty i prowizje obciążają wpłaty oraz zgromadzone środki?</li>
+          <li>W co można lokować środki w ramach tego konta?</li>
+          <li>Ile kosztuje przeniesienie konta do innej instytucji i wcześniejszy zwrot?</li>
+          <li>Jak wygląda wypłata jednorazowa i wypłata w ratach?</li>
+        </ul>
+
+        <h2>Czego ta strona nie rozstrzyga</h2>
+        <p>
+          Nie odpowiadamy tu na pytanie, czy IKE jest dla Ciebie lepsze niż <a href="/ikze/">IKZE</a> albo
+          <a href="/oki/">OKI</a>. To zależy od Twojej formy opodatkowania, wieku i planów. Nie mówimy też, w
+          co inwestować w ramach konta.
+        </p>
+      </div>
+
+      <Zrodla lista={p.lista} />
+    </div>
+  </div>
+</Bazowy>

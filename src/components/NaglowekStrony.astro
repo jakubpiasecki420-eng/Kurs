@@ -1,0 +1,60 @@
+---
+/** Nagłówek podstrony: etykieta, tytuł i krótkie wprowadzenie. */
+interface Props {
+  etykieta?: string;
+  tytul: string;
+  lid?: string;
+}
+const { etykieta, tytul, lid } = Astro.props;
+---
+
+<header class="naglowek-strony">
+  <div class="kontener">
+    {etykieta && <p class="etykieta">{etykieta}</p>}
+    <h1>{tytul}</h1>
+    {lid && <p class="lid">{lid}</p>}
+    <slot />
+  </div>
+  <svg class="naglowek-strony__motyw" viewBox="0 0 400 160" aria-hidden="true" focusable="false">
+    <path
+      d="M0 132h120a36 36 0 0 0 36-36V84a36 36 0 0 1 36-36h150"
+      fill="none"
+      stroke="#D6DBE4"
+      stroke-width="2"></path>
+    <circle cx="352" cy="48" r="5" fill="#D5B875"></circle>
+  </svg>
+</header>
+
+<style>
+  .naglowek-strony {
+    position: relative;
+    overflow: hidden;
+    background: var(--biel);
+    border-bottom: 1px solid var(--linia);
+    padding-block: clamp(2.5rem, 6vw, 4.5rem);
+  }
+  .naglowek-strony h1 {
+    font-size: var(--tekst-2xl);
+    max-width: 22ch;
+  }
+  .naglowek-strony .kontener {
+    position: relative;
+    z-index: 1;
+  }
+  .naglowek-strony .lid {
+    margin-bottom: 0;
+  }
+  .naglowek-strony__motyw {
+    position: absolute;
+    right: -2rem;
+    bottom: 0;
+    width: min(28rem, 45%);
+    height: auto;
+    pointer-events: none;
+  }
+  @media (max-width: 48rem) {
+    .naglowek-strony__motyw {
+      display: none;
+    }
+  }
+</style>

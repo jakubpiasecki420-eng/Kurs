@@ -1,0 +1,181 @@
+---
+import Bazowy from '@/layouts/Bazowy.astro';
+import NaglowekStrony from '@/components/NaglowekStrony.astro';
+import Odn from '@/components/Odn.astro';
+import Zrodla from '@/components/Zrodla.astro';
+import { przypisy } from '@/lib/rejestr';
+import { procent, zl } from '@/lib/format';
+
+const p = przypisy([
+  'ikze-limit-wzor',
+  'ikze-limit-2026',
+  'ikze-limit-2026-dzialalnosc',
+  'ikze-limit-2027',
+  'ikze-limit-2027-dzialalnosc',
+  'ikze-odliczenie-skala',
+  'ikze-odliczenie-liniowy',
+  'ikze-odliczenie-ryczalt',
+  'ikze-wyplata-podatek',
+  'ikze-wyplata-warunki',
+  'ikze-wyplata-raty',
+  'ikze-zwrot-podatek',
+]);
+---
+
+<Bazowy
+  tytul="IKZE — odliczenie, limity i wypłaty"
+  opis="Jak działa indywidualne konto zabezpieczenia emerytalnego: limity wpłat, odliczenie przy skali, podatku liniowym i ryczałcie oraz podatek przy wypłacie."
+>
+  <NaglowekStrony
+    etykieta="Przewodnik"
+    tytul="IKZE: odliczenie, limity i wypłaty"
+    lid="Indywidualne konto zabezpieczenia emerytalnego pozwala odliczyć wpłaty od dochodu lub przychodu. Podatek nie znika — jest pobierany przy wypłacie, według innej stawki."
+  />
+
+  <div class="sekcja">
+    <div class="kontener">
+      <div class="proza">
+        <h2>W skrócie</h2>
+        <ul>
+          <li>
+            Limit wpłat w 2027 r.: <strong>{zl(p.wartosc('ikze-limit-2027'))}</strong><Odn
+              nr={p.nr('ikze-limit-2027')}
+            />, a dla osób prowadzących pozarolniczą działalność
+            <strong>{zl(p.wartosc('ikze-limit-2027-dzialalnosc'))}</strong><Odn
+              nr={p.nr('ikze-limit-2027-dzialalnosc')}
+            />.
+          </li>
+          <li>Wpłaty odliczasz od dochodu albo od przychodu, zależnie od formy opodatkowania.</li>
+          <li>
+            Przy wypłacie pobierany jest podatek {procent(p.wartosc('ikze-wyplata-podatek'))} od całej
+            wypłacanej kwoty<Odn nr={p.nr('ikze-wyplata-podatek')} />.
+          </li>
+          <li>
+            Wypłata jest możliwa po ukończeniu 65 lat i wpłatach w co najmniej 5 latach kalendarzowych<Odn
+              nr={p.nr('ikze-wyplata-warunki')}
+            />.
+          </li>
+        </ul>
+
+        <h2>Ile można wpłacić</h2>
+        <p>
+          Limit podstawowy to 1,2-krotność prognozowanego przeciętnego wynagrodzenia miesięcznego, a limit
+          dla osób prowadzących pozarolniczą działalność — 1,8-krotność<Odn nr={p.nr('ikze-limit-wzor')} />.
+          Kto dokładnie mieści się w tej drugiej grupie, wyjaśniamy na stronie
+          <a href="/jdg-b2b/">dla JDG i B2B</a>.
+        </p>
+      </div>
+
+      <div class="tabela-przewijana" tabindex="0" role="region" aria-label="Tabela. Jeśli nie mieści się na ekranie, przewiń ją w poziomie." style="max-width: 40rem">
+        <table>
+          <caption>Limity wpłat na IKZE</caption>
+          <thead>
+            <tr>
+              <th scope="col">Rok</th>
+              <th scope="col" class="liczba">Limit podstawowy</th>
+              <th scope="col" class="liczba">Prowadzący działalność</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">2026</th>
+              <td class="liczba">{zl(p.wartosc('ikze-limit-2026'))}<Odn nr={p.nr('ikze-limit-2026')} /></td>
+              <td class="liczba"
+                >{zl(p.wartosc('ikze-limit-2026-dzialalnosc'))}<Odn
+                  nr={p.nr('ikze-limit-2026-dzialalnosc')}
+                /></td
+              >
+            </tr>
+            <tr>
+              <th scope="row">2027</th>
+              <td class="liczba">{zl(p.wartosc('ikze-limit-2027'))}<Odn nr={p.nr('ikze-limit-2027')} /></td>
+              <td class="liczba"
+                >{zl(p.wartosc('ikze-limit-2027-dzialalnosc'))}<Odn
+                  nr={p.nr('ikze-limit-2027-dzialalnosc')}
+                /></td
+              >
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="proza">
+        <h2>Jak działa odliczenie</h2>
+        <p>Mechanizm zależy od tego, jak rozliczasz podatek dochodowy:</p>
+      </div>
+
+      <div class="tabela-przewijana" tabindex="0" role="region" aria-label="Tabela. Jeśli nie mieści się na ekranie, przewiń ją w poziomie." style="max-width: 46rem">
+        <table>
+          <caption class="wizualnie-ukryte">Odliczenie wpłat na IKZE według formy opodatkowania</caption>
+          <thead>
+            <tr>
+              <th scope="col">Forma opodatkowania</th>
+              <th scope="col">Od czego odliczasz wpłatę</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Skala podatkowa</th>
+              <td>Od dochodu<Odn nr={p.nr('ikze-odliczenie-skala')} /></td>
+            </tr>
+            <tr>
+              <th scope="row">Podatek liniowy</th>
+              <td>Od dochodu, w zeznaniu rocznym<Odn nr={p.nr('ikze-odliczenie-liniowy')} /></td>
+            </tr>
+            <tr>
+              <th scope="row">Ryczałt od przychodów ewidencjonowanych</th>
+              <td>Od przychodu<Odn nr={p.nr('ikze-odliczenie-ryczalt')} /></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="proza">
+        <div class="ramka">
+          <p class="ramka__tytul">Odliczenie to odroczenie podatku, nie zwolnienie</p>
+          <p>
+            Wpłata zmniejsza podatek za rok, w którym jej dokonujesz. Przy wypłacie zapłacisz jednak {
+              procent(p.wartosc('ikze-wyplata-podatek'))
+            } od całej wypłacanej kwoty, czyli od wpłat i od zysku<Odn nr={p.nr('ikze-wyplata-podatek')} />.
+            Ostateczny bilans zależy od stawki, według której dziś płacisz podatek.
+          </p>
+        </div>
+
+        <h2>Wypłata</h2>
+        <p>
+          Wypłata następuje na wniosek po ukończeniu 65 lat, pod warunkiem dokonywania wpłat w co najmniej 5
+          latach kalendarzowych<Odn nr={p.nr('ikze-wyplata-warunki')} />. Może być jednorazowa albo w ratach.
+          Raty trwają co najmniej 10 lat, chyba że wpłaty były dokonywane krócej<Odn
+            nr={p.nr('ikze-wyplata-raty')}
+          />.
+        </p>
+
+        <h2>Co oznacza wcześniejszy zwrot</h2>
+        <p>
+          Kwota zwrócona przed spełnieniem warunków jest przychodem z innych źródeł<Odn
+            nr={p.nr('ikze-zwrot-podatek')}
+          />. Nie obejmuje jej więc zryczałtowana stawka {procent(p.wartosc('ikze-wyplata-podatek'))}
+          przewidziana dla wypłaty.
+        </p>
+
+        <h2>O co zapytać instytucję przed podpisaniem umowy</h2>
+        <ul class="lista-kontrolna">
+          <li>Ile kosztuje otwarcie i prowadzenie konta w kolejnych latach?</li>
+          <li>Jakie opłaty i prowizje obciążają wpłaty oraz zgromadzone środki?</li>
+          <li>W co można lokować środki w ramach tego konta?</li>
+          <li>Ile kosztuje przeniesienie konta do innej instytucji i wcześniejszy zwrot?</li>
+          <li>Jak instytucja potwierdza wysokość wpłat do rozliczenia rocznego?</li>
+        </ul>
+
+        <h2>Czego ta strona nie rozstrzyga</h2>
+        <p>
+          Nie odpowiadamy tu na pytanie, czy IKZE opłaca się przy Twojej stawce podatku. Rachunek dla
+          poszczególnych form opodatkowania przygotowujemy i opublikujemy po recenzji doradcy podatkowego.
+          Nie mówimy też, w co inwestować w ramach konta.
+        </p>
+      </div>
+
+      <Zrodla lista={p.lista} />
+    </div>
+  </div>
+</Bazowy>

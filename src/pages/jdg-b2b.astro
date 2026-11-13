@@ -1,0 +1,129 @@
+---
+import Bazowy from '@/layouts/Bazowy.astro';
+import NaglowekStrony from '@/components/NaglowekStrony.astro';
+import Odn from '@/components/Odn.astro';
+import Zrodla from '@/components/Zrodla.astro';
+import { przypisy } from '@/lib/rejestr';
+import { zl } from '@/lib/format';
+
+const p = przypisy([
+  'zus-informacja-o-stanie-konta',
+  'zus-hipotetyczna-emerytura',
+  'ikze-limit-2027-dzialalnosc',
+  'ikze-limit-2027',
+  'ikze-dzialalnosc-definicja',
+  'ikze-ulga-na-start-wylaczenie',
+  'ikze-odliczenie-skala',
+  'ikze-odliczenie-liniowy',
+  'ikze-odliczenie-ryczalt',
+  'ikze-ryczalt-proporcja',
+  'zdrowotna-podstawa',
+]);
+---
+
+<Bazowy
+  tytul="Emerytura na JDG i B2B — od czego zacząć"
+  opis="Co wynika z prowadzenia działalności dla oszczędzania na emeryturę: informacja z ZUS, wyższy limit IKZE i odliczenie przy skali, podatku liniowym i ryczałcie."
+>
+  <NaglowekStrony
+    etykieta="Dla prowadzących działalność"
+    tytul="Emerytura na JDG i B2B: od czego zacząć"
+    lid="Prowadząc działalność, sam decydujesz o dodatkowym oszczędzaniu. Poniżej zebraliśmy to, co wynika wprost z przepisów i co możesz sprawdzić we własnych dokumentach."
+  />
+
+  <div class="sekcja">
+    <div class="kontener">
+      <div class="proza">
+        <h2>Krok 1. Sprawdź własne dane w ZUS</h2>
+        <p>
+          Do 31 sierpnia każdego roku ZUS udostępnia informację o stanie konta: ile składek zapisano na
+          Twoim koncie według stanu na koniec poprzedniego roku<Odn
+            nr={p.nr('zus-informacja-o-stanie-konta')}
+          />.
+        </p>
+        <p>
+          Jeżeli masz ukończone 35 lat, w informacji znajdziesz też wysokość hipotetycznej emerytury<Odn
+            nr={p.nr('zus-hipotetyczna-emerytura')}
+          />. To wyliczenie oparte na założeniach, a nie gwarancja przyszłego świadczenia.
+        </p>
+
+        <h2>Krok 2. Ustal, jaki limit IKZE Cię dotyczy</h2>
+        <p>
+          W 2027 r. limit podstawowy wynosi {zl(p.wartosc('ikze-limit-2027'))}<Odn
+            nr={p.nr('ikze-limit-2027')}
+          />, a limit dla osób prowadzących pozarolniczą działalność
+          <strong>{zl(p.wartosc('ikze-limit-2027-dzialalnosc'))}</strong><Odn
+            nr={p.nr('ikze-limit-2027-dzialalnosc')}
+          />.
+        </p>
+        <p>
+          Wyższy limit przysługuje osobom wymienionym w ustawie o systemie ubezpieczeń społecznych. To m.in.
+          prowadzący działalność gospodarczą, twórcy i artyści, osoby wykonujące wolny zawód oraz wspólnicy
+          jednoosobowej spółki z o.o., spółki jawnej, komandytowej i partnerskiej<Odn
+            nr={p.nr('ikze-dzialalnosc-definicja')}
+          />.
+        </p>
+        <div class="ramka">
+          <p class="ramka__tytul">Uwaga na ulgę na start</p>
+          <p>
+            Ta sama ustawa stanowi, że osoba korzystająca z ulgi na start nie jest uznawana za prowadzącą
+            pozarolniczą działalność<Odn nr={p.nr('ikze-ulga-na-start-wylaczenie')} />. Jeżeli z niej
+            korzystasz, zapytaj doradcę podatkowego, który limit Cię obowiązuje.
+          </p>
+        </div>
+
+        <h2>Krok 3. Sprawdź, jak odliczasz wpłaty</h2>
+        <ul>
+          <li>
+            <strong>Skala podatkowa:</strong> wpłaty odliczasz od dochodu<Odn
+              nr={p.nr('ikze-odliczenie-skala')}
+            />.
+          </li>
+          <li>
+            <strong>Podatek liniowy:</strong> wpłaty odliczasz od dochodu, w zeznaniu rocznym<Odn
+              nr={p.nr('ikze-odliczenie-liniowy')}
+            />.
+          </li>
+          <li>
+            <strong>Ryczałt:</strong> wpłaty odliczasz od przychodu<Odn nr={p.nr('ikze-odliczenie-ryczalt')} />.
+            Jeżeli masz przychody opodatkowane różnymi stawkami, odliczenie rozkłada się proporcjonalnie<Odn
+              nr={p.nr('ikze-ryczalt-proporcja')}
+            />.
+          </li>
+        </ul>
+        <p>
+          Im niższa stawka, według której płacisz podatek, tym mniejsza korzyść z odliczenia. Dlatego ten sam
+          produkt daje różny wynik osobie na ryczałcie i osobie na podatku liniowym. Szczegóły opisujemy na
+          stronie o <a href="/ikze/">IKZE</a>.
+        </p>
+
+        <h2>Krok 4. Sprawdź wpływ na składkę zdrowotną</h2>
+        <p>
+          Podstawą składki zdrowotnej przedsiębiorcy na skali lub podatku liniowym jest dochód z
+          działalności pomniejszony o składki społeczne. Przepis nie przewiduje pomniejszenia tej podstawy o
+          wpłaty na IKZE<Odn nr={p.nr('zdrowotna-podstawa')} />. Jak wygląda to na ryczałcie, wyjaśniamy z
+          doradcą podatkowym.
+        </p>
+
+        <h2>Lista do sprawdzenia we własnych dokumentach</h2>
+        <ul class="lista-kontrolna">
+          <li>Stan konta i hipotetyczna emerytura w informacji z ZUS.</li>
+          <li>Forma opodatkowania i stawka, według której płacisz podatek.</li>
+          <li>Podstawa, od której opłacasz składki społeczne.</li>
+          <li>Czy masz już IKE lub IKZE, w jakiej instytucji i z jakimi opłatami.</li>
+          <li>Ile wpłaciłeś w tym roku i ile zostało do limitu.</li>
+          <li>Czy masz rezerwę na nieprzewidziane wydatki, zanim zamrozisz pieniądze na lata.</li>
+        </ul>
+
+        <h2>Co przygotowujemy</h2>
+        <p>
+          Porównanie IKE, IKZE i <a href="/oki/">OKI</a> dla poszczególnych form opodatkowania będzie częścią
+          przewodnika <a href="/produkt/">„Emerytura pod kontrolą”</a>. Opublikujemy je po recenzji doradcy
+          podatkowego.
+        </p>
+      </div>
+
+      <Zrodla lista={p.lista} />
+    </div>
+  </div>
+</Bazowy>

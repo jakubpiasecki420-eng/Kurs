@@ -1,0 +1,91 @@
+---
+import type { Przypis } from '@/lib/rejestr';
+import { STAN_NA_DZIEN } from '@/lib/rejestr';
+import { PRZED_RECENZJA, SERWIS } from '@/lib/serwis';
+import { data } from '@/lib/format';
+
+interface Props {
+  lista: Przypis[];
+}
+const { lista } = Astro.props;
+const recenzja = SERWIS.publikacja.recenzjaEksperta;
+---
+
+<section class="zrodla" aria-labelledby="zrodla-tytul">
+  <h2 id="zrodla-tytul">Źródła</h2>
+  <dl class="zrodla__status">
+    <div>
+      <dt>Stan prawny na</dt>
+      <dd>{data(STAN_NA_DZIEN)}</dd>
+    </div>
+    <div>
+      <dt>Recenzja doradcy podatkowego</dt>
+      <dd>
+        {
+          PRZED_RECENZJA
+            ? 'jeszcze nie przeprowadzona'
+            : `${recenzja?.kto} (nr wpisu ${recenzja?.numerWpisu}), ${data(recenzja?.data ?? STAN_NA_DZIEN)}`
+        }
+      </dd>
+    </div>
+  </dl>
+  <ol>
+    {
+      lista.map((p) => (
+        <li id={`zrodlo-${p.nr}`}>
+          <span class="zrodla__przepis">
+            {p.twierdzenie.przepis !== 'obwieszczenie' && `${p.twierdzenie.przepis} — `}
+          </span>
+          {p.zrodlo.url ? <a href={p.zrodlo.url}>{p.zrodlo.tytul}</a> : p.zrodlo.tytul}
+          <span class="cichy">({p.zrodlo.publikator})</span>
+        </li>
+      ))
+    }
+  </ol>
+  <p class="maly cichy">
+    Pełny rejestr twierdzeń z datami weryfikacji znajdziesz na stronie <a href="/zrodla/">Źródła i metodologia</a>.
+  </p>
+</section>
+
+<style>
+  .zrodla {
+    margin-top: var(--o-8);
+    padding-top: var(--o-6);
+    border-top: 1px solid var(--linia);
+    max-width: var(--szerokosc-tekstu);
+    font-size: var(--tekst-s);
+  }
+  .zrodla h2 {
+    font-size: var(--tekst-l);
+  }
+  .zrodla__status {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--o-3) var(--o-6);
+    margin: 0 0 var(--o-5);
+  }
+  .zrodla__status dt {
+    font-size: var(--tekst-xs);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--tekst-cichy);
+  }
+  .zrodla__status dd {
+    margin: 0;
+    font-weight: 600;
+  }
+  .zrodla ol {
+    padding-left: 1.5rem;
+  }
+  .zrodla li {
+    scroll-margin-top: var(--o-5);
+  }
+  .zrodla li:target {
+    background: #fbf6e8;
+    outline: 6px solid #fbf6e8;
+    border-radius: 2px;
+  }
+  .zrodla__przepis {
+    font-weight: 600;
+  }
+</style>

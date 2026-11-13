@@ -1,0 +1,65 @@
+---
+import Bazowy from '@/layouts/Bazowy.astro';
+import NaglowekStrony from '@/components/NaglowekStrony.astro';
+import Zrodla from '@/components/Zrodla.astro';
+import { getCollection, render } from 'astro:content';
+import { przypisy } from '@/lib/rejestr';
+import { data } from '@/lib/format';
+
+export async function getStaticPaths() {
+  const artykuly = await getCollection('artykuly');
+  return artykuly.map((artykul) => ({ params: { id: artykul.id }, props: { artykul } }));
+}
+
+const { artykul } = Astro.props;
+const { Content } = await render(artykul);
+const p = przypisy(artykul.data.twierdzenia);
+const dzien = (d: Date) => data(d.toISOString().slice(0, 10));
+---
+
+<Bazowy tytul={artykul.data.tytul} opis={artykul.data.opis} typ="article">
+  <NaglowekStrony etykieta={artykul.data.seria} tytul={artykul.data.tytul} lid={artykul.data.opis}>
+    <p class="meta">
+      <span>Opublikowano: <time datetime={artykul.data.opublikowano.toISOString().slice(0, 10)}>{dzien(artykul.data.opublikowano)}</time></span>
+      <span>Aktualizacja: <time datetime={artykul.data.zaktualizowano.toISOString().slice(0, 10)}>{dzien(artykul.data.zaktualizowano)}</time></span>
+      {artykul.data.szkic && <span class="znacznik znacznik--zloty">Szkic przed recenzją</span>}
+    </p>
+  </NaglowekStrony>
+
+  <div class="sekcja">
+    <div class="kontener">
+      <article class="proza">
+        <Content />
+      </article>
+      {
+        artykul.data.zrodlaDodatkowe.length > 0 && (
+          <div class="proza">
+            <h2>Materiały dodatkowe</h2>
+            <ul>
+              {artykul.data.zrodlaDodatkowe.map((z) => (
+                <li>{z.url ? <a href={z.url}>{z.tytul}</a> : z.tytul}</li>
+              ))}
+            </ul>
+          </div>
+        )
+      }
+      {p.lista.length > 0 && <Zrodla lista={p.lista} />}
+      <p class="powrot"><a class="link-strzalka" href="/artykuly/">Wszystkie artykuły</a></p>
+    </div>
+  </div>
+</Bazowy>
+
+<style>
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--o-2) var(--o-5);
+    margin: var(--o-4) 0 0;
+    font-size: var(--tekst-s);
+    color: var(--tekst-cichy);
+  }
+  .powrot {
+    margin-top: var(--o-7);
+  }
+</style>

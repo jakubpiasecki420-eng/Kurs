@@ -1,0 +1,32 @@
+---
+import Bazowy from '@/layouts/Bazowy.astro';
+import NaglowekStrony from '@/components/NaglowekStrony.astro';
+import { NAWIGACJA } from '@/lib/serwis';
+---
+
+<Bazowy tytul="Nie znaleziono strony" opis="Strona o podanym adresie nie istnieje.">
+  <NaglowekStrony
+    etykieta="Błąd 404"
+    tytul="Tej strony nie ma"
+    lid="Adres mógł się zmienić albo zawiera literówkę. Wybierz jeden z działów albo wróć na stronę główną."
+  >
+    <ul class="skroty">
+      <li><a class="przycisk" href="/">Strona główna</a></li>
+      {NAWIGACJA.map((n) => <li><a class="przycisk przycisk--kontur" href={n.adres}>{n.etykieta}</a></li>)}
+    </ul>
+  </NaglowekStrony>
+</Bazowy>
+
+<style>
+  .skroty {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--o-3);
+    list-style: none;
+    padding: 0;
+    margin: var(--o-6) 0 0;
+  }
+  .skroty li {
+    margin: 0;
+  }
+</style>

@@ -1,0 +1,376 @@
+---
+import Bazowy from '@/layouts/Bazowy.astro';
+import GrafikaDrogi from '@/components/GrafikaDrogi.astro';
+import Ikona from '@/components/Ikona.astro';
+import Odn from '@/components/Odn.astro';
+import Zrodla from '@/components/Zrodla.astro';
+import Zapis from '@/components/Zapis.astro';
+import { getCollection } from 'astro:content';
+import { przypisy, STAN_NA_DZIEN } from '@/lib/rejestr';
+import { data, zl } from '@/lib/format';
+import { SERWIS } from '@/lib/serwis';
+
+const p = przypisy([
+  'ike-limit-2027',
+  'ikze-limit-2027',
+  'ikze-limit-2027-dzialalnosc',
+  'oki-start',
+  'zus-informacja-o-stanie-konta',
+]);
+
+const artykuly = (await getCollection('artykuly'))
+  .sort((a, b) => b.data.zaktualizowano.getTime() - a.data.zaktualizowano.getTime())
+  .slice(0, 3);
+const dzien = (d: Date) => data(d.toISOString().slice(0, 10));
+---
+
+<Bazowy
+  pelnyTytul
+  tytul="Finansowa Przyszłość — niezależna edukacja o emeryturze, IKE, IKZE i OKI"
+  opis={SERWIS.opis}
+>
+  <!-- 1. Hero -->
+  <section class="hero sekcja--ciemna">
+    <div class="kontener hero__w">
+      <div class="hero__tekst">
+        <p class="etykieta">Niezależna edukacja finansowa</p>
+        <h1>Świadomie buduj swoją przyszłość.</h1>
+        <p class="hero__lid">
+          Zrozum, jak działa system emerytalny, poznaj IKE i IKZE oraz naucz się planować długoterminowe
+          oszczędzanie. Zaczynamy od osób prowadzących działalność i pracujących na B2B.
+        </p>
+        <div class="grupa-przyciskow">
+          <a class="przycisk przycisk--zloty" href="#obszary">Poznaj podstawy</a>
+          <a class="przycisk przycisk--kontur" href="/kalkulator/">Sprawdź kalkulator</a>
+        </div>
+      </div>
+      <div class="hero__grafika">
+        <GrafikaDrogi />
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Problem -->
+  <section class="sekcja sekcja--biala" aria-labelledby="pytania-tytul">
+    <div class="kontener">
+      <div class="naglowek-sekcji">
+        <p class="etykieta">Punkt wyjścia</p>
+        <h2 id="pytania-tytul">Czy wiesz, jak będzie wyglądać Twoje zabezpieczenie finansowe?</h2>
+        <p>
+          Kiedy pracujesz na własny rachunek, planu nie przygotuje za Ciebie pracodawca. Zacznij od trzech
+          pytań. Odpowiedzi znajdziesz we własnych dokumentach, a nie w cudzych prognozach.
+        </p>
+      </div>
+      <ol class="pytania">
+        <li>
+          <h3>Co masz zapisane w ZUS?</h3>
+          <p>
+            Co roku do 31 sierpnia ZUS udostępnia informację o stanie Twojego konta<Odn
+              nr={p.nr('zus-informacja-o-stanie-konta')}
+            />. To najprostszy sposób, żeby zobaczyć własne liczby.
+          </p>
+        </li>
+        <li>
+          <h3>Jak rozliczasz podatek?</h3>
+          <p>
+            Skala, podatek liniowy i ryczałt inaczej traktują wpłaty na IKZE. Forma opodatkowania zmienia
+            rachunek, dlatego warto ją znać, zanim zaczniesz porównywać konta.
+          </p>
+        </li>
+        <li>
+          <h3>Z których kont już korzystasz?</h3>
+          <p>
+            IKE i IKZE rządzą się różnymi zasadami, a od {data('2027-01-01')} dochodzi trzecie rozwiązanie:
+            OKI<Odn nr={p.nr('oki-start')} />.
+          </p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 3. Obszary edukacji -->
+  <section class="sekcja" id="obszary" aria-labelledby="obszary-tytul">
+    <div class="kontener">
+      <div class="naglowek-sekcji">
+        <p class="etykieta">Obszary edukacji</p>
+        <h2 id="obszary-tytul">Cztery tematy, od podstaw do własnego planu</h2>
+        <p>Każdy materiał tłumaczy pojęcia prostym językiem i podaje źródło każdej liczby.</p>
+      </div>
+      <div class="siatka siatka--4">
+        <article class="karta karta--link">
+          <Ikona nazwa="warstwy" klasa="karta__ikona" />
+          <h3><a href="/jdg-b2b/">System emerytalny i ZUS</a></h3>
+          <p>Co wynika z prowadzenia działalności i gdzie sprawdzić własne dane.</p>
+          <p class="karta__stopka">Dla JDG i B2B →</p>
+        </article>
+        <article class="karta karta--link">
+          <Ikona nazwa="konta" klasa="karta__ikona" />
+          <h3><a href="/ike/">IKE, IKZE i OKI</a></h3>
+          <p>Limity, warunki wypłaty i zasady podatkowe trzech rodzajów kont.</p>
+          <p class="karta__stopka">Zacznij od IKE →</p>
+        </article>
+        <article class="karta karta--link">
+          <Ikona nazwa="oszczednosci" klasa="karta__ikona" />
+          <h3><a href="/kalkulator/">Oszczędzanie i inwestowanie</a></h3>
+          <p>Inflacja, procent składany, koszty i ryzyko — na jawnych przykładach.</p>
+          <p class="karta__stopka">Otwórz kalkulator →</p>
+        </article>
+        <article class="karta karta--link">
+          <Ikona nazwa="droga" klasa="karta__ikona" />
+          <h3><a href="/produkt/">Plan finansowy</a></h3>
+          <p>Jak z tych elementów ułożyć własny plan krok po kroku.</p>
+          <p class="karta__stopka">Przewodnik w przygotowaniu →</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Liczby na 2027 r. -->
+  <section class="sekcja sekcja--biala" aria-labelledby="rok-tytul">
+    <div class="kontener">
+      <div class="naglowek-sekcji">
+        <p class="etykieta">Stan prawny na {data(STAN_NA_DZIEN)}</p>
+        <h2 id="rok-tytul">Co obowiązuje w 2027 roku</h2>
+        <p>Limity wpłat zmieniają się co roku. Te wartości pochodzą z obwieszczeń w Monitorze Polskim.</p>
+      </div>
+      <dl class="fakty">
+        <div>
+          <dt>Limit wpłat na IKE</dt>
+          <dd>{zl(p.wartosc('ike-limit-2027'))}<Odn nr={p.nr('ike-limit-2027')} /></dd>
+        </div>
+        <div>
+          <dt>Limit wpłat na IKZE</dt>
+          <dd>{zl(p.wartosc('ikze-limit-2027'))}<Odn nr={p.nr('ikze-limit-2027')} /></dd>
+        </div>
+        <div>
+          <dt>Limit IKZE dla prowadzących działalność</dt>
+          <dd>
+            {zl(p.wartosc('ikze-limit-2027-dzialalnosc'))}<Odn nr={p.nr('ikze-limit-2027-dzialalnosc')} />
+          </dd>
+        </div>
+        <div>
+          <dt>Start osobistych kont inwestycyjnych</dt>
+          <dd>1 stycznia<Odn nr={p.nr('oki-start')} /></dd>
+        </div>
+      </dl>
+      <Zrodla lista={p.lista} />
+    </div>
+  </section>
+
+  <!-- 4. Jak pracujemy -->
+  <section class="sekcja sekcja--ciemna" aria-labelledby="zasady-tytul">
+    <div class="kontener">
+      <div class="naglowek-sekcji">
+        <p class="etykieta">Jak pracujemy</p>
+        <h2 id="zasady-tytul">Cztery zasady, których się trzymamy</h2>
+      </div>
+      <div class="siatka siatka--4">
+        <div class="karta">
+          <Ikona nazwa="jezyk" klasa="karta__ikona" />
+          <h3>Prosty język</h3>
+          <p>Każdy trudniejszy termin objaśniamy, najlepiej na krótkim przykładzie.</p>
+        </div>
+        <div class="karta">
+          <Ikona nazwa="zrodla" klasa="karta__ikona" />
+          <h3>Oficjalne źródła</h3>
+          <p>Limity, stawki i warunki bierzemy z aktów prawnych i stron urzędów. Podajemy przepis i link.</p>
+        </div>
+        <div class="karta">
+          <Ikona nazwa="zalozenia" klasa="karta__ikona" />
+          <h3>Jawne założenia</h3>
+          <p>Każda symulacja pokazuje, co przyjęliśmy: wpłatę, okres, stopę zwrotu, inflację i koszty.</p>
+        </div>
+        <div class="karta">
+          <Ikona nazwa="aktualizacje" klasa="karta__ikona" />
+          <h3>Aktualizacje</h3>
+          <p>Przy materiale widzisz datę stanu prawnego. Liczby trzymamy w jednym rejestrze.</p>
+        </div>
+      </div>
+      <p class="zasady__wiecej">
+        <a class="link-strzalka" href="/o-projekcie/">Kto prowadzi projekt i jak powstają materiały</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- 5. Narzędzia -->
+  <section class="sekcja" aria-labelledby="narzedzia-tytul">
+    <div class="kontener">
+      <div class="naglowek-sekcji">
+        <p class="etykieta">Narzędzia</p>
+        <h2 id="narzedzia-tytul">Policz na własnych liczbach</h2>
+      </div>
+      <div class="siatka siatka--2">
+        <article class="karta karta--link narzedzie">
+          <Ikona nazwa="kalkulator" klasa="karta__ikona" />
+          <h3><a href="/kalkulator/">Kalkulator scenariuszy oszczędzania</a></h3>
+          <p>
+            Wpisz wpłatę, okres, stopę zwrotu, inflację i koszty. Zobaczysz sumę wpłat, wartość nominalną i
+            wartość w dzisiejszych pieniądzach — na wykresie i w tabeli.
+          </p>
+          <p class="karta__stopka">Otwórz kalkulator →</p>
+        </article>
+        <article class="karta narzedzie">
+          <Ikona nazwa="lista" klasa="karta__ikona" />
+          <h3>Checklisty i przewodniki</h3>
+          <p>
+            Lista rzeczy do sprawdzenia we własnych dokumentach oraz przewodnik „{SERWIS.produkt.nazwa}” dla
+            osób na JDG i B2B.
+          </p>
+          <p class="karta__stopka"><span class="znacznik">W przygotowaniu</span></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Biblioteka wiedzy -->
+  <section class="sekcja sekcja--biala" aria-labelledby="biblioteka-tytul">
+    <div class="kontener">
+      <div class="naglowek-sekcji">
+        <p class="etykieta">Biblioteka wiedzy</p>
+        <h2 id="biblioteka-tytul">Najnowsze artykuły</h2>
+      </div>
+      {
+        artykuly.length > 0 ? (
+          <div class="siatka siatka--3">
+            {artykuly.map((a) => (
+              <article class="karta karta--link">
+                <p class="maly cichy">{a.data.seria}</p>
+                <h3>
+                  <a href={`/artykuly/${a.id}/`}>{a.data.tytul}</a>
+                </h3>
+                <p>{a.data.opis}</p>
+                <p class="karta__stopka cichy">Aktualizacja: {dzien(a.data.zaktualizowano)}</p>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <p class="lid">Pierwsze artykuły są w przygotowaniu.</p>
+        )
+      }
+      <p class="zasady__wiecej">
+        <a class="link-strzalka" href="/artykuly/">Wszystkie artykuły</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- 7. Zapis -->
+  <section class="sekcja sekcja--ciemna" aria-labelledby="zapis-tytul">
+    <div class="kontener zapis-sekcja">
+      <div>
+        <p class="etykieta">Lista zainteresowanych</p>
+        <h2 id="zapis-tytul">Chcesz wiedzieć, kiedy pojawi się przewodnik?</h2>
+        <p class="cichy">
+          „{SERWIS.produkt.nazwa}” to przewodnik z kalkulatorem dla osób na JDG i B2B. Pokaże, jak
+          uporządkować IKE, IKZE i OKI przy Twojej formie opodatkowania.
+        </p>
+        <p><a class="link-strzalka" href="/produkt/">Zobacz, co będzie w środku</a></p>
+      </div>
+      <Zapis />
+    </div>
+  </section>
+</Bazowy>
+
+<style>
+  .hero {
+    overflow: hidden;
+  }
+  .hero__w {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: var(--o-6);
+    align-items: center;
+    padding-block: clamp(3.5rem, 9vw, 7rem);
+  }
+  .hero h1 {
+    max-width: 12ch;
+  }
+  .hero__lid {
+    font-size: var(--tekst-l);
+    color: #c5cedc;
+    max-width: 34rem;
+    margin-bottom: var(--o-6);
+  }
+  .hero__grafika {
+    margin-right: calc(-1 * var(--margines));
+  }
+  @media (max-width: 56rem) {
+    .hero__w {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .hero__grafika {
+      margin: 0 calc(-1 * var(--margines)) calc(-1 * clamp(3.5rem, 9vw, 7rem));
+      max-height: 14rem;
+      overflow: hidden;
+    }
+  }
+
+  .pytania {
+    list-style: none;
+    counter-reset: pytanie;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+    gap: var(--o-6);
+    margin: 0;
+    padding: 0;
+  }
+  .pytania li {
+    counter-increment: pytanie;
+    margin: 0;
+    padding-top: var(--o-4);
+    border-top: 2px solid var(--granat);
+  }
+  .pytania li::before {
+    content: '0' counter(pytanie);
+    display: block;
+    font-family: var(--font-naglowki);
+    font-weight: 700;
+    font-size: var(--tekst-s);
+    letter-spacing: 0.08em;
+    color: var(--zloto-ciemne);
+    margin-bottom: var(--o-2);
+  }
+  .pytania h3 {
+    font-size: var(--tekst-l);
+  }
+  .pytania p {
+    color: var(--tekst-pomocniczy);
+    margin: 0;
+  }
+
+  .fakty {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+    gap: var(--o-5);
+    margin: 0;
+  }
+  .fakty > div {
+    padding-left: var(--o-4);
+    border-left: 3px solid var(--zloto);
+  }
+  .fakty dt {
+    font-size: var(--tekst-s);
+    color: var(--tekst-pomocniczy);
+    margin-bottom: var(--o-1);
+  }
+  .fakty dd {
+    margin: 0;
+    font-family: var(--font-naglowki);
+    font-size: var(--tekst-xl);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+
+  .zasady__wiecej {
+    margin: var(--o-6) 0 0;
+  }
+  .narzedzie {
+    padding: var(--o-6);
+  }
+  .zapis-sekcja {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    gap: var(--o-6);
+    align-items: center;
+  }
+</style>

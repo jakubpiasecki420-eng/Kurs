@@ -1,0 +1,96 @@
+---
+import Bazowy from '@/layouts/Bazowy.astro';
+import NaglowekStrony from '@/components/NaglowekStrony.astro';
+import { getCollection } from 'astro:content';
+import { data } from '@/lib/format';
+
+const artykuly = (await getCollection('artykuly')).sort(
+  (a, b) => b.data.zaktualizowano.getTime() - a.data.zaktualizowano.getTime(),
+);
+const dzien = (d: Date) => data(d.toISOString().slice(0, 10));
+---
+
+<Bazowy
+  tytul="Artykuły"
+  opis="Biblioteka wiedzy Finansowej Przyszłości: artykuły o systemie emerytalnym, kontach z preferencjami podatkowymi i planowaniu oszczędzania."
+>
+  <NaglowekStrony
+    etykieta="Biblioteka wiedzy"
+    tytul="Artykuły"
+    lid="Każdy artykuł ma datę publikacji, datę aktualizacji i listę źródeł."
+  />
+
+  <div class="sekcja">
+    <div class="kontener">
+      {
+        artykuly.length > 0 ? (
+          <ul class="lista-artykulow">
+            {artykuly.map((a) => (
+              <li>
+                <article class="karta karta--link">
+                  <p class="maly cichy">
+                    {a.data.seria}
+                    {a.data.szkic && <span class="znacznik znacznik--zloty">Szkic przed recenzją</span>}
+                  </p>
+                  <h2>
+                    <a href={`/artykuly/${a.id}/`}>{a.data.tytul}</a>
+                  </h2>
+                  <p>{a.data.opis}</p>
+                  <p class="karta__stopka cichy">
+                    Opublikowano: {dzien(a.data.opublikowano)} · Aktualizacja: {dzien(a.data.zaktualizowano)}
+                  </p>
+                </article>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div class="pusto">
+            <h2>Pierwsze artykuły są w przygotowaniu</h2>
+            <p>
+              Publikujemy dopiero po sprawdzeniu źródeł. W międzyczasie zajrzyj do
+              <a href="/kalkulator/">kalkulatora</a>.
+            </p>
+          </div>
+        )
+      }
+    </div>
+  </div>
+</Bazowy>
+
+<style>
+  .lista-artykulow {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: var(--o-5);
+    max-width: 48rem;
+  }
+  .lista-artykulow li {
+    margin: 0;
+  }
+  .lista-artykulow h2 {
+    font-size: var(--tekst-xl);
+    margin-bottom: var(--o-2);
+  }
+  .lista-artykulow .maly {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--o-3);
+  }
+  .pusto {
+    max-width: 36rem;
+    padding: var(--o-6);
+    border: 1px dashed #b9c2d0;
+    border-radius: var(--promien-m);
+    background: var(--biel);
+  }
+  .pusto h2 {
+    font-size: var(--tekst-xl);
+  }
+  .pusto p {
+    margin: 0;
+    color: var(--tekst-pomocniczy);
+  }
+</style>
