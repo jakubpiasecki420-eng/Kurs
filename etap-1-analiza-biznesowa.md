@@ -47,7 +47,20 @@ Uwagi:
 | IKZE — raty | co najmniej 10 lat (krócej, jeśli wpłacano krócej niż 10 lat) | art. 34a ust. 4 | [P] |
 | Oba | prawo do wpłat od 16 lat; ulga tylko przy jednym koncie danego typu | art. 3 i 4 | [P] |
 
-Zasady podatkowe (zwolnienie z podatku od zysków kapitałowych dla IKE, odliczenie wpłat i 10% ryczałtu przy wypłacie dla IKZE) wynikają z ustawy o PIT. Nie przeczytałem ich w tej sesji w źródle (serwis podatki.gov.pl był niedostępny), więc traktuję je jako **do ponownej weryfikacji w Etapie 4**.
+### 2.2a Zasady podatkowe IKE i IKZE (ustawa o PIT, t.j. Dz.U. 2026 poz. 592; ustawa o ryczałcie, t.j. Dz.U. 2025 poz. 843)
+
+| Kwestia | Treść | Przepis | Status |
+|---|---|---|---|
+| IKE — wypłata po spełnieniu warunków | dochody z oszczędzania na IKE zwolnione z podatku, o ile oszczędzający ma jedno IKE | art. 21 ust. 1 pkt 58a ustawy o PIT | [P] |
+| IKE — zwrot przed spełnieniem warunków | 19% zryczałtowanego podatku od dochodu (zysku) | art. 30a ust. 1 pkt 10 | [P] |
+| IKE — więcej niż jedno konto | 75% podatku od dochodu na każdym koncie | art. 30 ust. 1 pkt 7a | [P] |
+| IKZE — odliczenie, skala podatkowa | wpłaty odliczane od dochodu do wysokości limitu | art. 26 ust. 1 pkt 2b | [P] |
+| IKZE — odliczenie, podatek liniowy | wpłaty odliczane od dochodu, w zeznaniu rocznym | art. 30c ust. 2 pkt 3 i ust. 3b | [P] |
+| IKZE — odliczenie, ryczałt | wpłaty odliczane od przychodu | art. 11 ust. 1 ustawy o ryczałcie | [P] |
+| IKZE — wypłata po spełnieniu warunków | 10% zryczałtowanego podatku od **całej** wypłaty | art. 30 ust. 1 pkt 14 ustawy o PIT | [P] |
+| IKZE — zwrot przed spełnieniem warunków | przychód z innych źródeł, opodatkowany na zasadach ogólnych | art. 20 ust. 1 | [P] |
+
+Konsekwencja dla produktu: ulga IKZE to odroczenie podatku połączone z różnicą stawek, a nie zwolnienie. Każdy komunikat „odzyskaj X zł z podatku” musi zawierać informację o 10% przy wypłacie.
 
 ### 2.3 OKI — nowa ustawa (Dz.U. 2026 poz. 1098, ustawa z 3 lipca 2026 r.)
 
@@ -148,7 +161,7 @@ Pracownicy etatowi to naturalna druga edycja (pretekst: autozapis PPK), ale nie 
 1. **Niewykorzystana ulga IKZE** — kilka tysięcy złotych rocznie, przepada z końcem roku (limit nie przechodzi na kolejny rok).
 2. **Niska prognoza z ZUS przy wysokich dochodach** i brak świadomości, ile ona wynosi.
 3. **Paraliż wyboru**: IKE, IKZE, OKI, obligacje, fundusze; która instytucja; jakie opłaty.
-4. **Pułapka ryczałtu [Z]**: przy niskiej stawce ryczałtu (np. 8,5%) odliczenie jest mniejsze niż 10% podatku przy wypłacie, więc IKZE może być mniej korzystne niż IKE. Temat wymaga rzetelnego wyliczenia i potwierdzenia przez doradcę podatkowego, ale to dokładnie ten rodzaj odpowiedzi, za który ta grupa zapłaci.
+4. **Pułapka ryczałtu**: mechanizm jest potwierdzony w przepisach — ryczałtowiec odlicza wpłatę od przychodu, więc oszczędza według swojej stawki ryczałtu (np. 8,5%), a przy wypłacie płaci 10% od całej kwoty. Mój wniosek **[Z]**: przy niskich stawkach ryczałtu IKZE może wypaść gorzej niż IKE. Wymaga to rzetelnego wyliczenia i potwierdzenia przez doradcę podatkowego, ale to dokładnie ten rodzaj odpowiedzi, za który ta grupa zapłaci.
 5. **Brak zabezpieczenia dochodu** przy chorobie (świadczenia liczone od niskiej podstawy).
 
 ### 4.4 Jak edukuje konkurencja?
@@ -296,7 +309,8 @@ Informacje, których potrzebuję do Etapu 2: Twoja forma pracy i opodatkowania, 
 
 ## 7. Czego nie udało się potwierdzić
 
-- **Przepisy ustawy o PIT dotyczące IKE/IKZE** oraz strona podatki.gov.pl o uldze IKZE: host `podatki.gov.pl` (bez „www”) nie jest na liście dozwolonych w środowisku. Do dodania przed Etapem 4.
+- **Objaśnienia Ministerstwa Finansów na podatki.gov.pl** o uldze IKZE: host `podatki.gov.pl` (bez „www”) nie jest na liście dozwolonych w środowisku. Same przepisy ustawy o PIT i ustawy o ryczałcie przeczytałem w tekstach jednolitych (sekcja 2.2a).
+- **Wpływ wpłat na IKZE na składkę zdrowotną przedsiębiorcy**: nie sprawdzałem; do weryfikacji w Etapie 4.
 - **Dane KNF, PFR Portal PPK, ZUS i CEIDG** pochodzą z relacji medialnych, nie z plików źródłowych.
 - **Ceny i sprzedaż konkurencji** pochodzą z wyników wyszukiwania; liczby sprzedaży to deklaracje autorów lub agencji.
 - **Składki ZUS na 2027 r.** opierają się na projekcie ustawy budżetowej; kwota prognozowanego wynagrodzenia 10 033 zł jest spójna z ogłoszonymi limitami IKE/IKZE.
@@ -314,6 +328,8 @@ Akty prawne i urzędy:
 - [MRPiPS — IKZE, limit wpłat](https://www.gov.pl/web/rodzina/ikze-limit-wplat)
 - [Ustawa o IKE i IKZE, t.j. Dz.U. 2026 poz. 91](https://api.sejm.gov.pl/eli/acts/DU/2026/91/text.pdf)
 - [Ustawa o osobistych kontach inwestycyjnych, Dz.U. 2026 poz. 1098](https://eli.gov.pl/api/acts/DU/2026/1098/text/T/D20261098L.pdf)
+- [Ustawa o podatku dochodowym od osób fizycznych, t.j. Dz.U. 2026 poz. 592](https://api.sejm.gov.pl/eli/acts/DU/2026/592/text.pdf)
+- [Ustawa o zryczałtowanym podatku dochodowym, t.j. Dz.U. 2025 poz. 843](https://api.sejm.gov.pl/eli/acts/DU/2025/843/text.pdf)
 - [Ustawa o obrocie instrumentami finansowymi, t.j. Dz.U. 2024 poz. 722](https://api.sejm.gov.pl/eli/acts/DU/2024/722/text.pdf)
 - [Ustawa o prawach konsumenta, t.j. Dz.U. 2026 poz. 1244](https://api.sejm.gov.pl/eli/acts/DU/2026/1244/text.pdf)
 - [KNF — Dobre praktyki dla finfluencerów](https://www.knf.gov.pl/dla_konsumenta/kampanie_informacyjne/Finfluencer_dobre_praktyki_i_ryzyka/dobre_praktyki_fininfluencerzy)
