@@ -1,3 +1,7 @@
+> **Dokument archiwalny (Etap 1, 13 listopada 2026 r.).** Zawiera tok rozumowania i źródła, ale część zaleceń
+> została zmieniona. Obowiązują dokumenty w katalogu `docs/` oraz `CLAUDE.md`. Różnice opisuje
+> `docs/konfrontacja-analiz.md`.
+
 # Etap 1 — analiza biznesowa i audyt koncepcji „Emerytura pod kontrolą”
 
 Stan prawny i dane na dzień: **13 listopada 2026 r.**
