@@ -3,7 +3,6 @@
 import Kalkulator from '@/components/Kalkulator.astro';
 import KalkulatorProsty from '@/components/KalkulatorProsty.astro';
 import { procent } from '@/lib/format';
-import { STOPA_PRZYKLADOWA } from '@/lib/przyklady';
 import { wartosc } from '@/lib/rejestr';
 import type { IdNarzedziaDostepnego } from '@/lib/platforma/narzedzia';
 
@@ -17,7 +16,11 @@ const inflacja = wartosc('nbp-cel-inflacyjny');
 {id === 'oszczedzanie' && <Kalkulator />}
 {
   id === 'procent-skladany' && (
-    <KalkulatorProsty rodzaj="procent-skladany" domyslne={{ kwota: 10_000, stopa: STOPA_PRZYKLADOWA, lata: 20 }} />
+    <KalkulatorProsty
+      rodzaj="procent-skladany"
+      domyslne={{ kwota: 10_000, stopa: inflacja, lata: 20 }}
+      opisStopy={`Domyślnie ${procent(inflacja)} — tyle wynosi cel inflacyjny NBP. To punkt odniesienia, nie prognoza ani typowy wynik. Sprawdź też wariant zerowy i ujemny.`}
+    />
   )
 }
 {

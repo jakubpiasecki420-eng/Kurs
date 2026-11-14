@@ -5,37 +5,50 @@ tytul: 'IKE: zasady i limit wpłat'
 opis: 'Czym jest indywidualne konto emerytalne, kto może na nie wpłacać, ile wynosi roczny limit i skąd się bierze.'
 czasMin: 7
 demonstracyjna: false
-twierdzenia: [ike-limit-2027, ike-zwolnienie, ike-wiek-wplat, ike-jedno-konto, ike-ubezpieczenie, ike-limit-wzor, ike-limit-ogloszenie, ike-limit-2026]
+twierdzenia:
+  [
+    ike-limit-2027,
+    ike-zwolnienie,
+    ike-wiek-wplat,
+    ike-maloletni,
+    ike-jedno-konto,
+    ike-ubezpieczenie,
+    ike-limit-wzor,
+    ike-limit-ogloszenie,
+    ike-limit-nie-nizszy,
+    ike-limit-2026,
+    ikze-limit-wzor,
+  ]
 materialy:
   - tytul: 'Przewodnik po IKE'
     opis: 'Publiczna strona z najważniejszymi zasadami konta.'
     adres: '/ike/'
 quiz:
   pytania:
-    - pytanie: 'Od jakiego wieku można wpłacać na IKE?'
+    - pytanie: 'Masz 17 lat i w tym roku nie pracujesz na umowę o pracę. Czy możesz w tym roku wpłacać na IKE?'
       odpowiedzi:
-        - 'Od 16 lat.'
-        - 'Od 18 lat.'
-        - 'Od rozpoczęcia działalności gospodarczej.'
-      poprawna: 0
-      wyjasnienie: 'Prawo do wpłat na IKE przysługuje osobie, która ukończyła 16 lat.'
+        - 'Tak, do pełnej wysokości rocznego limitu wpłat na IKE.'
+        - 'Nie, bo w tym roku nie masz dochodów z umowy o pracę.'
+        - 'Tak, ale wyłącznie za zgodą urzędu skarbowego.'
+      poprawna: 1
+      wyjasnienie: 'Prawo do wpłat ma osoba, która ukończyła 16 lat, ale małoletni może wpłacać tylko w roku, w którym ma dochody z umowy o pracę, i najwyżej do ich wysokości.'
     - pytanie: 'Jak ustala się roczny limit wpłat na IKE?'
       odpowiedzi:
-        - 'To stała kwota zapisana w ustawie.'
-        - 'To trzykrotność prognozowanego przeciętnego wynagrodzenia miesięcznego, ogłaszana co roku w Monitorze Polskim.'
-        - 'Każda instytucja ustala go sama.'
-      poprawna: 1
-      wyjasnienie: 'Limit wynika ze wzoru w ustawie, a jego kwotę na kolejny rok ogłasza minister w Monitorze Polskim.'
+        - 'To stała kwota zapisana w ustawie, niezmienna od chwili uchwalenia.'
+        - 'Każda instytucja finansowa ustala go samodzielnie w regulaminie.'
+        - 'Trzykrotność prognozowanego przeciętnego wynagrodzenia, ogłaszana co roku.'
+      poprawna: 2
+      wyjasnienie: 'Limit wynika ze wzoru w ustawie, a jego kwotę na kolejny rok minister ogłasza w Monitorze Polskim.'
     - pytanie: 'Ile kont IKE możesz mieć, żeby zachować zwolnienie podatkowe?'
       odpowiedzi:
-        - 'Jedno.'
-        - 'Dwa — w różnych instytucjach.'
         - 'Dowolnie wiele, jeśli łączne wpłaty mieszczą się w limicie.'
-      poprawna: 0
+        - 'Jedno.'
+        - 'Dwa, jeśli prowadzą je różne instytucje.'
+      poprawna: 1
       wyjasnienie: 'Zwolnienie przysługuje, jeśli gromadzisz środki tylko na jednym IKE.'
 ---
 
-> **W tej lekcji:** jak działa indywidualne konto emerytalne i ile możesz na nie wpłacić. W kolejnej lekcji: warunki wypłaty bez podatku i koszt wcześniejszego zwrotu.
+> **W tej lekcji:** jak działa indywidualne konto emerytalne i ile możesz na nie wpłacić. W kolejnej lekcji: warunki wypłaty bez podatku, zwrot całkowity i częściowy.
 
 ## Najważniejsze w trzech punktach
 
@@ -51,20 +64,20 @@ Preferencja podatkowa dotyczy zysku. Wpłacasz pieniądze już opodatkowane, ale
 
 ## Kto może oszczędzać
 
-Wpłacać na IKE może osoba, która ukończyła 16 lat[^ike-wiek-wplat]. Zwolnienie podatkowe przysługuje, jeśli gromadzisz środki tylko na jednym IKE[^ike-jedno-konto].
+Wpłacać na IKE może osoba, która ukończyła 16 lat[^ike-wiek-wplat]. Osoba niepełnoletnia może wpłacać tylko w roku, w którym ma dochody z pracy na podstawie umowy o pracę, i najwyżej do ich wysokości[^ike-maloletni]. Zwolnienie podatkowe przysługuje, jeśli gromadzisz środki tylko na jednym IKE[^ike-jedno-konto].
 
 IKE może być prowadzone także w ramach umowy ubezpieczenia na życie z ubezpieczeniowym funduszem kapitałowym[^ike-ubezpieczenie]. Warto to sprawdzić w starych umowach — może się okazać, że już masz IKE.
 
 ## Ile możesz wpłacić
 
-Limit dotyczy wpłat w danym roku kalendarzowym i odpowiada trzykrotności prognozowanego przeciętnego wynagrodzenia miesięcznego[^ike-limit-wzor]. Kwotę na kolejny rok minister ogłasza w Monitorze Polskim do końca roku poprzedzającego[^ike-limit-ogloszenie].
+Limit dotyczy wpłat w danym roku kalendarzowym i odpowiada trzykrotności prognozowanego przeciętnego wynagrodzenia miesięcznego[^ike-limit-wzor]. Kwotę na kolejny rok minister ogłasza w Monitorze Polskim do końca roku poprzedzającego[^ike-limit-ogloszenie]. Jeśli wyliczona kwota byłaby niższa niż w poprzednim roku, obowiązuje limit z poprzedniego roku[^ike-limit-nie-nizszy].
 
 | Rok | Limit wpłat |
 | --- | --- |
 | 2026 | {{ike-limit-2026}}[^ike-limit-2026] |
 | 2027 | {{ike-limit-2027}}[^ike-limit-2027] |
 
-Limit wyznacza tylko górną granicę na rok. Nie musisz wpłacać całej kwoty ani wpłacać co miesiąc. Limit IKE jest taki sam dla wszystkich — nie zależy od tego, czy prowadzisz działalność.
+Limit wyznacza tylko górną granicę na rok. Nie musisz wpłacać całej kwoty ani wpłacać co miesiąc. Limit IKE nie zależy od tego, czy prowadzisz działalność — inaczej niż przy IKZE[^ikze-limit-wzor].
 
 ## Zapisz u siebie
 

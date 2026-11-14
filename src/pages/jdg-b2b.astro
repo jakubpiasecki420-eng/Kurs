@@ -9,6 +9,8 @@ import { zl } from '@/lib/format';
 const p = przypisy([
   'zus-informacja-o-stanie-konta',
   'zus-hipotetyczna-emerytura',
+  'zus-hipotetyczna-bez-subkonta',
+  'pit-emerytura-zaliczka',
   'ikze-limit-2027-dzialalnosc',
   'ikze-limit-2027',
   'ikze-dzialalnosc-definicja',
@@ -44,7 +46,9 @@ const p = przypisy([
         <p>
           Jeżeli masz ukończone 35 lat, w informacji znajdziesz też wysokość hipotetycznej emerytury<Odn
             nr={p.nr('zus-hipotetyczna-emerytura')}
-          />. To wyliczenie oparte na założeniach, a nie gwarancja przyszłego świadczenia.
+          />. To wyliczenie oparte na założeniach, a nie gwarancja przyszłego świadczenia. Nie obejmuje środków
+          z subkonta<Odn nr={p.nr('zus-hipotetyczna-bez-subkonta')} /> i jest kwotą brutto — od emerytury pobiera się
+          zaliczkę na podatek<Odn nr={p.nr('pit-emerytura-zaliczka')} />.
         </p>
 
         <h2>Krok 2. Ustal, jaki limit IKZE Cię dotyczy</h2>

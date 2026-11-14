@@ -10,18 +10,25 @@ quiz:
   pytania:
     - pytanie: 'Na czym polega procent składany?'
       odpowiedzi:
-        - 'Zysk zostaje na koncie i w kolejnych latach zarabia razem z kapitałem.'
-        - 'Bank dolicza odsetki dwa razy w roku.'
-        - 'Zysk jest gwarantowany przez instytucję.'
-      poprawna: 0
-      wyjasnienie: 'To zysk od wcześniejszego zysku. Nie ma w nim żadnej gwarancji — działa tylko wtedy, gdy zysk w ogóle jest.'
-    - pytanie: 'Co dzieje się z efektem procentu składanego, gdy wydłuża się okres?'
-      odpowiedzi:
-        - 'Słabnie.'
-        - 'Rośnie — różnica między zyskiem pozostawionym a wypłacanym przyspiesza z każdym rokiem.'
-        - 'Pozostaje taki sam co roku.'
+        - 'Bank dolicza odsetki dwa razy w roku zamiast raz.'
+        - 'Zysk zostaje na koncie i dalej pracuje z kapitałem.'
+        - 'Instytucja gwarantuje stały zysk przez cały okres.'
       poprawna: 1
+      wyjasnienie: 'To zysk od wcześniejszego zysku. Nie ma w nim żadnej gwarancji — działa tylko wtedy, gdy zysk w ogóle jest.'
+    - pytanie: 'Jak zmienia się różnica między zyskiem pozostawionym a wypłacanym co roku, gdy wydłużasz okres?'
+      odpowiedzi:
+        - 'Rośnie coraz szybciej z każdym kolejnym rokiem.'
+        - 'Maleje, bo zysk z czasem przestaje rosnąć.'
+        - 'Pozostaje taka sama w każdym roku oszczędzania.'
+      poprawna: 0
       wyjasnienie: 'Na początku różnica jest niewielka, a z czasem przyspiesza. Dlatego czas jest jednym z najważniejszych założeń.'
+    - pytanie: 'Co pokazuje kalkulator procentu składanego przy ujemnej stopie zwrotu?'
+      odpowiedzi:
+        - 'Wartość rośnie wolniej, ale zawsze powyżej wpłaty.'
+        - 'Kalkulator nie przyjmuje ujemnych stóp zwrotu.'
+        - 'Wartość maleje — mechanizm działa w drugą stronę.'
+      poprawna: 2
+      wyjasnienie: 'Przy stracie każda kolejna strata jest liczona od mniejszej kwoty, ale wartość konta spada.'
 ---
 
 > **W tej lekcji:** druga siła działająca na oszczędności. Jeśli pieniądze przynoszą zysk, a zysk zostaje na koncie, w kolejnym roku zarabia on razem z kapitałem.
@@ -34,6 +41,8 @@ To jest procent składany. Na początku efekt jest niewielki, z czasem przyspies
 
 Różnica między kolumnami po roku jest zerowa, po 30 latach — wyraźna. Czas jest tu tak samo ważny jak wysokość zysku.
 
+Stopę 5% wybraliśmy wyłącznie do ilustracji mechanizmu. Nie jest to typowy, przeciętny ani oczekiwany wynik — w kolejnej lekcji zobaczysz ten sam przykład także przy zysku zerowym i równym inflacji.
+
 ## Procent składany nie jest obietnicą
 
 Procent składany to mechanizm matematyczny, a nie gwarancja. Działa tylko wtedy, gdy zysk jest. Przy zerowym zysku nic się nie składa, a przy stracie ten sam mechanizm działa w drugą stronę — sprawdź to w kalkulatorze, wpisując stopę ujemną.
@@ -42,7 +51,7 @@ Ten sam mechanizm działa też na koszty: opłata pobierana co roku od zgromadzo
 
 ## Ćwiczenie
 
-W kalkulatorze poniżej sprawdź trzy warianty dla tej samej kwoty i okresu: stopę zerową, stopę równą celowi inflacyjnemu NBP i stopę wyższą. Pamiętaj, że kalkulator pokazuje wartości nominalne — bez inflacji, podatków i kosztów.
+W kalkulatorze poniżej sprawdź trzy warianty dla tej samej kwoty i okresu: stopę zerową, stopę równą celowi inflacyjnemu NBP (wartość domyślna) i stopę wyższą. Sprawdź też stopę ujemną. Pamiętaj, że kalkulator pokazuje wartości nominalne — bez inflacji, podatków i kosztów.
 
 ## Czego ta lekcja nie rozstrzyga
 

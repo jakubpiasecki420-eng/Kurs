@@ -53,7 +53,7 @@ export const DYREKTYWY: Record<string, () => string> = {
     const dochod = wartoscSrodkow - wplaty;
     const podatek = dochod * stawka;
     return tabela(
-      'Przykład: wcześniejszy zwrot z IKE',
+      'Przykład: zwrot całkowity z IKE',
       ['Pozycja', 'Kwota'],
       [
         ['Suma Twoich wpłat', zl(wplaty)],
@@ -62,23 +62,49 @@ export const DYREKTYWY: Record<string, () => string> = {
         [`Podatek ${procent(stawka)} od dochodu`, zl(podatek)],
         ['Otrzymujesz', zl(wartoscSrodkow - podatek)],
       ],
-      'Przykład obliczeniowy dla kwot z tabeli. Gdyby wypłata nastąpiła po spełnieniu warunków, podatku by nie było.',
+      'Przykład obliczeniowy dla zwrotu całkowitego, który nie był poprzedzony zwrotami częściowymi. Gdyby wypłata nastąpiła po spełnieniu warunków ustawy, podatku by nie było.',
+      [1],
+    );
+  },
+
+  'przyklad:czesciowy-zwrot-ike': () => {
+    const wplaty = 40_000;
+    const wartoscSrodkow = 50_000;
+    const kwotaZwrotu = 10_000;
+    const stawka = wartoscP('ike-zwrot-podatek');
+    const koszt = kwotaZwrotu * (wplaty / wartoscSrodkow);
+    const dochod = kwotaZwrotu - koszt;
+    const podatek = dochod * stawka;
+    return tabela(
+      'Przykład: częściowy zwrot z IKE',
+      ['Pozycja', 'Kwota'],
+      [
+        ['Suma Twoich wpłat', zl(wplaty)],
+        ['Wartość środków w dniu zwrotu', zl(wartoscSrodkow)],
+        ['Kwota częściowego zwrotu', zl(kwotaZwrotu)],
+        [`Przypadająca na zwrot część wpłat: ${zl(kwotaZwrotu)} × ${zl(wplaty)} ÷ ${zl(wartoscSrodkow)}`, zl(koszt)],
+        ['Dochód', zl(dochod)],
+        [`Podatek ${procent(stawka)} od dochodu`, zl(podatek)],
+        ['Otrzymujesz', zl(kwotaZwrotu - podatek)],
+      ],
+      `Przykład obliczeniowy według zasady proporcji dla częściowego zwrotu. Na koncie zostaje ${zl(wartoscSrodkow - kwotaZwrotu)}; nie uwzględniamy opłat instytucji.`,
       [1],
     );
   },
 
   'przyklad:skladka-emerytalna': () => {
     const stawka = wartoscP('sus-skladka-emerytalna');
+    const gr = (x: number) => zl(x, { grosze: true });
     const wiersze = [1000, 2000, 5000].map((podstawa) => [
       `${zl(podstawa)} więcej`,
-      zlPelne(podstawa * stawka),
-      zlPelne(podstawa * stawka * 12),
+      gr(podstawa * stawka),
+      gr(podstawa * stawka * 12),
     ]);
     return tabela(
       'Ile składki emerytalnej dodaje wyższa podstawa',
       ['Podstawa wymiaru składek', 'Składka emerytalna miesięcznie', 'Składka emerytalna w roku'],
       wiersze,
-      `Składka emerytalna to ${procent(stawka)} podstawy wymiaru. Tabela pokazuje tylko składkę emerytalną; od tej samej podstawy liczy się też składki rentowe. Kwoty w zaokrągleniu do pełnych złotych. Przykład obliczeniowy, nie prognoza wysokości emerytury.`,
+      `Składka emerytalna to ${procent(stawka)} podstawy wymiaru. Tabela pokazuje tylko składkę emerytalną. Od tej samej podstawy liczy się też składki rentowe, wypadkową i — jeśli ją opłacasz — chorobową, więc całkowity koszt wyższej podstawy jest większy. Przykład obliczeniowy, nie prognoza wysokości emerytury.`,
       [1, 2],
     );
   },

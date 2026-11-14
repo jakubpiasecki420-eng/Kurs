@@ -205,6 +205,8 @@ Zmienna `SITE_URL` ustawia docelowy adres serwisu. Bez niej nie powstają adresy
 - Każda nowa strona trafia na listę w `tests/e2e/strony.spec.ts`.
 - Strefa kursanta: stan postępu zmieniają wyłącznie funkcje z `src/lib/platforma/postep.ts`, zapisuje go magazyn (`magazyn.ts`). Widoki oznaczają elementy zależne od postępu atrybutami `data-*`, które uzupełnia `klient.ts`. Teksty do DOM tylko przez `textContent`.
 - Nowa lekcja: plik w `src/content/lekcje/<kurs>/` i wpis w programie kursu. Treści merytoryczne tylko na twierdzeniach ze statusem P. W treści liczby z rejestru wstawiaj jako `{{identyfikator}}`, przypisy jako `[^identyfikator]` (bez odstępu po słowie), przykłady obliczeniowe dyrektywą `<!-- tabela:… -->` (`src/lib/przyklady.ts`). Każde twierdzenie z pola `twierdzenia` musi mieć przypis w treści.
+- Fragment, którego interpretacja nie jest jednoznaczna, oznacz w lekcji akapitem `> **Do potwierdzenia przez eksperta.** …` i dopisz pytanie do raportu etapu. Test `tresc.test.ts` pilnuje listy takich lekcji.
+- Quizy: co najmniej trzy odpowiedzi, poprawne rozłożone na różne pozycje, poprawna odpowiedź nie może być zwykle najdłuższa (test w `tresc.test.ts`).
 - Treść dla kursanta pisz w formach neutralnych płciowo („Zapisz”, „suma wpłat”), nie „wpłaciłeś”.
 
 ---
@@ -229,6 +231,8 @@ Stan faz i ścieżka do publikacji: `docs/harmonogram.md`.
 Etap 1 platformy (fundamenty) jest zakończony: strefa kursanta w wersji demonstracyjnej, model kursu i postępu, centrum narzędzi.
 
 Etap 2 (treść pierwszego kursu) jest zakończony w zakresie bez blokad: kurs „Emerytura pod kontrolą” jest aktywny i ma 12 lekcji w modułach 1, 2, 4, 9 i 12, z quizami i przykładami z rejestru. Lekcje są wersją roboczą przed recenzją. W centrum narzędzi działają kalkulatory oszczędzania, procentu składanego i inflacji. Szczegóły i ograniczenia: `docs/architektura-platformy.md`.
+
+Etap 2B (naprawa po audycie `docs/audyt-jakosci-kursu-etap-2a.md`) jest zakończony; raport: `docs/raport-etap-2b.md`. Lekcje pozostają wersją roboczą przed recenzją.
 
 Materiał uzupełniający: szkice rozdziałów 0, 2, 4 i 9 przewodnika składają się do PDF (`npm run przewodnik`) z tymi samymi przykładami obliczeniowymi co lekcje (`src/lib/przyklady.ts`).
 

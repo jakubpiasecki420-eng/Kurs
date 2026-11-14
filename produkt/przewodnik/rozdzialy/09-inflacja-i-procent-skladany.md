@@ -46,7 +46,7 @@ Tabela pokazuje wpłatę 500 zł miesięcznie przez 10, 20 i 30 lat. Pierwszy wa
 Wnioski z tej tabeli:
 
 - Przy zerowym zysku wartość realna jest **niższa** niż suma wpłat. Pieniądze odłożone „w skarpecie” tracą siłę nabywczą.
-- Przy zysku równym inflacji każda wpłata zachowuje siłę nabywczą z dnia, w którym ją zrobiłeś. Wartość realna jest mimo to niższa od sumy wpłat, bo wpłata 500 zł za dwadzieścia lat będzie warta w dzisiejszych pieniądzach dużo mniej niż dzisiejsza. Kto chce oszczędzać realnie tyle samo, musi z czasem podnosić wpłaty.
+- Przy zysku równym inflacji każda wpłata zachowuje siłę nabywczą z dnia, w którym ją zrobiono. Wartość realna jest mimo to niższa od sumy wpłat, bo wpłata 500 zł za dwadzieścia lat będzie warta w dzisiejszych pieniądzach dużo mniej niż dzisiejsza. Kto chce oszczędzać realnie tyle samo, musi z czasem podnosić wpłaty.
 - Dopiero zysk wyższy od inflacji realnie powiększa oszczędności. Wyższy zysk oznacza jednak zwykle wyższe ryzyko — o tym w rozdziale 10.
 
 <!-- wykres:scenariusz -->
@@ -68,9 +68,9 @@ Dlatego w rozdziale 11 tabela opłat jest pierwszym punktem porównania ofert.
 
 ## Sprawdź u siebie
 
-- [ ] Wpisz do zeszytu ćwiczeń kwotę, którą realnie możesz odkładać co miesiąc.
+- [ ] Zapisz kwotę, którą możesz odkładać co miesiąc.
 - [ ] Policz w kalkulatorze trzy warianty dla swojej kwoty i swojego horyzontu: zerowy zysk, zysk równy inflacji i zysk wyższy od inflacji.
-- [ ] Zapisz wartości realne. Porównaj je z liczbą z rozdziału 2: różnicą między hipotetyczną emeryturą a Twoimi wydatkami.
+- [ ] Zapisz wartości realne. Obok zapisz orientacyjną różnicę z rozdziału 2 między hipotetyczną emeryturą a Twoimi wydatkami.
 
 ## Czego ten rozdział nie rozstrzyga
 

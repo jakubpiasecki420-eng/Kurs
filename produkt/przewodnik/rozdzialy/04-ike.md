@@ -3,7 +3,7 @@ numer: 4
 tytul: 'IKE'
 cel: 'Znasz limit wpłat, warunki wypłaty bez podatku, koszt wcześniejszego zwrotu i wiesz, o co zapytać instytucję.'
 stanNaDzien: 2026-11-13
-twierdzenia: [ike-wiek-wplat, ike-jedno-konto, ike-ubezpieczenie, ike-limit-wzor, ike-limit-2026, ike-limit-2027, ike-wyplata-warunki, ike-zwolnienie, ike-zwrot-podatek, ike-zwrot-dochod, ike-wiele-kont, ike-wyplata-transferowa]
+twierdzenia: [ike-wiek-wplat, ike-maloletni, ike-jedno-konto, ike-ubezpieczenie, ike-limit-wzor, ike-limit-2026, ike-limit-2027, ike-wyplata-warunki, ike-zwolnienie, ike-po-wyplacie, ike-zwrot-calkowity, ike-zwrot-czesciowy, ike-zwrot-podatek, ike-zwrot-dochod, ike-zwrot-czesciowy-dochod, ike-wiele-kont, ike-wyplata-transferowa]
 blokady: []
 status: szkic
 ---
@@ -24,7 +24,7 @@ Preferencja podatkowa dotyczy zysku. Płacisz z pieniędzy już opodatkowanych, 
 
 ## Kto może oszczędzać
 
-Wpłacać na IKE może osoba, która ukończyła 16 lat[^ike-wiek-wplat]. Zwolnienie podatkowe przysługuje, jeśli masz tylko jedno IKE[^ike-jedno-konto].
+Wpłacać na IKE może osoba, która ukończyła 16 lat[^ike-wiek-wplat]. Osoba niepełnoletnia — tylko w roku, w którym ma dochody z umowy o pracę, i najwyżej do ich wysokości[^ike-maloletni]. Zwolnienie podatkowe przysługuje, jeśli masz tylko jedno IKE[^ike-jedno-konto].
 
 ## Ile możesz wpłacić
 
@@ -50,9 +50,17 @@ Gdy oba warunki są spełnione, dochody z oszczędzania na IKE są zwolnione z p
 
 ## Ile kosztuje wcześniejszy zwrot
 
-Pieniądze możesz wycofać wcześniej. Wtedy od dochodu pobierany jest podatek {{ike-zwrot-podatek}}[^ike-zwrot-podatek]. Dochodem jest różnica między wartością środków na koncie a sumą wpłat[^ike-zwrot-dochod].
+Wypłata może być jednorazowa albo w ratach. Po wypłacie jednorazowej albo pierwszej raty nie można ponownie założyć IKE[^ike-po-wyplacie].
+
+Pieniądze możesz wycofać przed spełnieniem warunków. **Zwrot całkowity** następuje po wypowiedzeniu umowy[^ike-zwrot-calkowity]. **Częściowy zwrot** dotyczy środków pochodzących z wpłat, a konto działa dalej[^ike-zwrot-czesciowy]. W obu przypadkach od dochodu pobierany jest podatek {{ike-zwrot-podatek}}[^ike-zwrot-podatek].
+
+Przy zwrocie całkowitym dochodem jest różnica między wartością środków na koncie a sumą wpłat, pomniejszoną o część przypisaną wcześniejszym zwrotom częściowym[^ike-zwrot-dochod].
 
 <!-- przyklad:zwrot-ike -->
+
+Przy częściowym zwrocie dochodem jest kwota zwrotu pomniejszona o proporcjonalną część wpłat: kwota zwrotu × suma wpłat ÷ wartość środków[^ike-zwrot-czesciowy-dochod].
+
+<!-- przyklad:czesciowy-zwrot-ike -->
 
 Wpłacone pieniądze nie są opodatkowane drugi raz. Tracisz tylko preferencję od zysku.
 
@@ -72,14 +80,14 @@ Nie wskazujemy konkretnych ofert. Te pytania pozwolą Ci porównać je samodziel
 - Ile kosztuje przeniesienie konta do innej instytucji?
 - Jak wygląda wypłata jednorazowa i wypłata w ratach?
 
-Odpowiedzi wpisz do tabeli porównawczej w zeszycie ćwiczeń.
+Odpowiedzi zapisz w tabeli, żeby porównać instytucje.
 
 ## Sprawdź u siebie
 
 - [ ] Czy masz już IKE? Sprawdź też stare polisy — IKE może być prowadzone w ramach umowy ubezpieczenia na życie[^ike-ubezpieczenie].
 - [ ] Jeśli masz więcej niż jedno, zapisz, gdzie są. To pierwsza rzecz do uporządkowania.
-- [ ] Zapisz rok pierwszej wpłaty i lata, w których wpłacałeś.
-- [ ] Zapisz, ile wpłaciłeś w tym roku i ile zostało do limitu.
+- [ ] Zapisz rok pierwszej wpłaty i wszystkie lata, w których były wpłaty.
+- [ ] Zapisz sumę wpłat w tym roku i kwotę, która została do limitu.
 
 ## Czego ten rozdział nie rozstrzyga
 

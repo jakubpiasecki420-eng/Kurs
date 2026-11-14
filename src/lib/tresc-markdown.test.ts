@@ -51,7 +51,20 @@ describe('przykłady obliczeniowe', () => {
     const html = dyrektywa(nazwa);
     expect(html).not.toMatch(/NaN|undefined|Infinity/);
     expect(html).toMatch(/<table|<svg/);
-    expect(html).toMatch(/nie prognoza|podatku by nie było/);
+    expect(html).toMatch(/nie prognoza|podatku by nie było|Przykład obliczeniowy/);
+  });
+
+  it('przykład częściowego zwrotu z IKE liczy dochód proporcjonalnie', () => {
+    const html = dyrektywa('przyklad:czesciowy-zwrot-ike').replace(/[\u00a0\u202f]/g, ' ');
+    expect(html).toContain('8 000 zł');
+    expect(html).toContain('2 000 zł');
+    expect(html).toContain('380 zł');
+  });
+
+  it('tabela składki emerytalnej pokazuje grosze, więc kwoty roczne zgadzają się z miesięcznymi', () => {
+    const html = dyrektywa('przyklad:skladka-emerytalna').replace(/[\u00a0\u202f]/g, ' ');
+    expect(html).toContain('390,40 zł');
+    expect(html).toContain('4 684,80 zł');
   });
 
   it('przykład zwrotu z IKE liczy podatek ze stawki z rejestru', () => {

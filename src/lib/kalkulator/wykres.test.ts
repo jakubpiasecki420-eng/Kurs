@@ -21,6 +21,9 @@ describe('kroki', () => {
 });
 
 describe('etykietaOsi', () => {
+  it('dla kwot od miliarda używa „mld”', () => {
+    expect(etykietaOsi(25_000_000_000, 100_000_000_000)).toBe('25 mld');
+  });
   it('stosuje jeden styl na całej osi', () => {
     expect(etykietaOsi(0, 200_000)).toBe('0');
     expect(etykietaOsi(50_000, 200_000)).toBe('50 tys.');

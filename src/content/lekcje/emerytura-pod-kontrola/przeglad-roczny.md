@@ -13,20 +13,20 @@ materialy:
     adres: '/zrodla/'
 quiz:
   pytania:
-    - pytanie: 'Kiedy najwcześniej warto zaktualizować w planie liczby z ZUS?'
+    - pytanie: 'Kiedy możesz zaktualizować w planie liczby z ZUS za poprzedni rok?'
       odpowiedzi:
-        - 'Po udostępnieniu informacji o stanie konta, czyli do 31 sierpnia.'
-        - 'W styczniu, zaraz po końcu roku.'
-        - 'Tylko raz, na początku planowania.'
-      poprawna: 0
-      wyjasnienie: 'ZUS udostępnia informację o stanie konta do 31 sierpnia. Wcześniej masz do dyspozycji dane z poprzedniego roku.'
+        - 'Dopiero po złożeniu w ZUS wniosku o emeryturę.'
+        - 'Gdy ZUS udostępni informację — najpóźniej 31 sierpnia.'
+        - 'W styczniu, zaraz po zakończeniu poprzedniego roku kalendarzowego.'
+      poprawna: 1
+      wyjasnienie: 'ZUS ma obowiązek udostępnić informację o stanie konta do 31 sierpnia. Wcześniej masz do dyspozycji dane sprzed roku.'
     - pytanie: 'Dlaczego koniec roku kalendarzowego ma znaczenie dla IKE i IKZE?'
       odpowiedzi:
-        - 'Bo limity wpłat dotyczą roku kalendarzowego, a warunki wypłaty liczą lata kalendarzowe, w których były wpłaty.'
-        - 'Bo 31 grudnia konta są zamykane.'
-        - 'Nie ma znaczenia.'
-      poprawna: 0
-      wyjasnienie: 'Limit dotyczy wpłat w danym roku, a do warunku pięciu lat wpłat liczy się rok, w którym była wpłata.'
+        - 'Bo 31 grudnia instytucje zamykają wszystkie konta.'
+        - 'Bo koniec roku nie ma znaczenia dla tych kont.'
+        - 'Bo limity i warunek pięciu lat wpłat liczy się w latach kalendarzowych.'
+      poprawna: 2
+      wyjasnienie: 'Limit dotyczy wpłat w danym roku, a do warunku pięciu lat wpłat liczy się rok, w którym wpłata została dokonana.'
 ---
 
 > **W tej lekcji:** plan emerytalny to nie jednorazowa decyzja. Co roku pojawiają się nowe dane, a Twoja sytuacja się zmienia. Poniższy kalendarz zbiera terminy wynikające z przepisów.
@@ -45,13 +45,15 @@ Od 1 stycznia 2027 r. działa nowy rodzaj konta — OKI[^oki-start]. Pierwszy pr
 
 ## Dlaczego liczy się rok kalendarzowy
 
-Warunki wypłaty z IKE obejmują między innymi wpłaty w co najmniej 5 dowolnych latach kalendarzowych[^ike-wyplata-warunki]. Przy IKZE wypłata wymaga wpłat w co najmniej 5 latach kalendarzowych[^ikze-wyplata-warunki]. Do tych warunków liczy się więc rok, w którym wpłata wpłynęła na konto.
+Warunki wypłaty z IKE obejmują między innymi wpłaty w co najmniej 5 dowolnych latach kalendarzowych[^ike-wyplata-warunki]. Przy IKZE wypłata wymaga wpłat w co najmniej 5 latach kalendarzowych[^ikze-wyplata-warunki]. Do tych warunków liczy się rok kalendarzowy, w którym wpłata została dokonana. Jeśli wpłacasz na przełomie roku, sprawdź w instytucji, którą datę przyjmuje.
+
+> **Do potwierdzenia przez eksperta.** Ustawa mówi o „dokonywaniu wpłat” w latach kalendarzowych. Nie ustaliliśmy, czy decyduje data zlecenia przelewu, czy data uznania rachunku instytucji.
 
 ## Przegląd roczny: lista kontrolna
 
 Raz w roku, najlepiej po otrzymaniu informacji z ZUS, przejdź przez tę listę:
 
-1. **Liczby z ZUS.** Nowa łączna kwota składek i hipotetyczna emerytura.
+1. **Liczby z ZUS.** Nowa łączna kwota składek, stan subkonta i hipotetyczna emerytura.
 2. **Wydatki.** Czy Twoje miesięczne wydatki się zmieniły?
 3. **Luka.** Przelicz ją na nowo z aktualnymi liczbami.
 4. **Rezerwa.** Czy nadal odpowiada Twoim potrzebom?

@@ -8,11 +8,26 @@ export interface Zakres {
   max: number;
 }
 
-/** Odczyt liczby z pola tekstowego: akceptuje przecinek, spacje, znak % i minus typograficzny. */
+/**
+ * Odczyt liczby z pola tekstowego w polskim zapisie.
+ * Przecinek to separator dziesiętny; spacje (także twarde) i kropki w grupach po trzy cyfry
+ * to separatory tysięcy („10 000”, „10.000”, „1.000,50”). Kropka w innym miejscu („2.5”) jest
+ * traktowana jak przecinek. Pomija znak %, „zł”, „lat” i akceptuje minus typograficzny.
+ * Zwraca NaN, gdy zapis jest niejednoznaczny lub błędny.
+ */
 export function liczbaZPola(tekst: string): number {
-  const czysty = tekst.replace(/[\s %]/g, '').replace('−', '-').replace(',', '.');
-  if (czysty === '' || !/^-?\d*\.?\d+$/.test(czysty)) return Number.NaN;
-  return Number(czysty);
+  let t = tekst
+    .toLowerCase()
+    .replace(/zł|lat|%/g, '')
+    .replace(/[\s\u00a0\u202f]/g, '')
+    .replace(/^[−–]/, '-');
+  if (t === '') return Number.NaN;
+  // Kropki jako separatory tysięcy: pierwsza grupa 1–3 cyfr (nie od zera), dalej grupy po 3 cyfry.
+  if (/^-?[1-9]\d{0,2}(\.\d{3})+(,\d+)?$/.test(t)) t = t.replace(/\./g, '');
+  if (t.includes('.') && t.includes(',')) return Number.NaN;
+  t = t.replace(',', '.');
+  if (!/^-?(\d+(\.\d+)?|\.\d+)$/.test(t)) return Number.NaN;
+  return Number(t);
 }
 
 /** Komunikat błędu albo null, gdy wartość jest poprawna. */
@@ -26,7 +41,7 @@ export function sprawdzPole(nazwa: string, v: number, z: Zakres, opisZakresu: st
 export const ZAKRESY_PROSTE = {
   kwota: { min: 1, max: 10_000_000 },
   stopa: { min: -0.2, max: 0.2 },
-  inflacja: { min: -0.05, max: 0.3 },
+  inflacja: { min: -0.05, max: 0.2 },
   lata: { min: 1, max: 50 },
 } as const;
 

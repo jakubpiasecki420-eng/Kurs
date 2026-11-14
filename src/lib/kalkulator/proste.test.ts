@@ -4,10 +4,30 @@ import { liczbaZPola, przebiegInflacji, przebiegKapitalu, rokiTabeli, sprawdzPol
 describe('liczbaZPola', () => {
   it('rozumie polski zapis', () => {
     expect(liczbaZPola('10 000')).toBe(10000);
+    expect(liczbaZPola('10\u00a0000')).toBe(10000);
     expect(liczbaZPola('2,5')).toBe(2.5);
     expect(liczbaZPola('−2 %')).toBe(-2);
+    expect(liczbaZPola('10 000 zł')).toBe(10000);
+    expect(liczbaZPola('20 lat')).toBe(20);
     expect(liczbaZPola('abc')).toBeNaN();
     expect(liczbaZPola('')).toBeNaN();
+  });
+  it('kropkę w grupach po trzy cyfry traktuje jak separator tysięcy', () => {
+    expect(liczbaZPola('10.000')).toBe(10000);
+    expect(liczbaZPola('1.000.000')).toBe(1_000_000);
+    expect(liczbaZPola('1.000,50')).toBe(1000.5);
+    expect(liczbaZPola('2.500')).toBe(2500);
+  });
+  it('kropkę w innym miejscu traktuje jak przecinek dziesiętny', () => {
+    expect(liczbaZPola('2.5')).toBe(2.5);
+    expect(liczbaZPola('0.025')).toBe(0.025);
+    expect(liczbaZPola('1,000')).toBe(1);
+  });
+  it('odrzuca zapis niejednoznaczny lub błędny', () => {
+    expect(liczbaZPola('1,5.0')).toBeNaN();
+    expect(liczbaZPola('1.2.3')).toBeNaN();
+    expect(liczbaZPola('1e3')).toBeNaN();
+    expect(liczbaZPola('10.00.0')).toBeNaN();
   });
 });
 
@@ -92,5 +112,21 @@ describe('widokProsty', () => {
       lata: expect.any(String),
     });
     expect(walidujProste('procent-skladany', { kwota: 100, stopa: -0.02, lata: 3 })).toEqual({});
+    expect(walidujProste('inflacja', { kwota: 100, stopa: 0.25, lata: 3 })).toHaveProperty('stopa');
+  });
+  it('przy ujemnej stopie nie nazywa straty zyskiem', () => {
+    const w = widokProsty('procent-skladany', { kwota: 10_000, stopa: -0.02, lata: 20 });
+    const etykiety = w.kafle.map((k) => k.etykieta).join(' | ');
+    expect(etykiety).not.toMatch(/zysk/i);
+    expect(w.kafle[1]).toMatchObject({ etykieta: 'Strata łącznie' });
+    expect(t(w.kafle[1].wartosc)).toBe('3 324 zł');
+    expect(w.kolumny.join(' ')).not.toMatch(/zysk/i);
+  });
+  it('odmienia liczbę lat w kalkulatorze inflacji', () => {
+    const e = (lata: number) => widokProsty('inflacja', { kwota: 1000, stopa: 0.025, lata }).kafle[0].etykieta;
+    expect(e(1)).toBe('Tyle będzie kosztować za 1 rok');
+    expect(e(2)).toBe('Tyle będzie kosztować za 2 lata');
+    expect(e(5)).toBe('Tyle będzie kosztować za 5 lat');
+    expect(e(22)).toBe('Tyle będzie kosztować za 22 lata');
   });
 });

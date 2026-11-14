@@ -10,7 +10,7 @@
     "mp-2025-1202": {
       "tytul": "Obwieszczenie Ministra Rodziny, Pracy i Polityki Społecznej z 17 listopada 2025 r. w sprawie wysokości kwoty wpłat na IKE w roku 2026",
       "publikator": "M.P. 2025 poz. 1202",
-      "url": "https://www.gov.pl/web/rodzina/ike-limit-wplat",
+      "url": "https://api.sejm.gov.pl/eli/acts/MP/2025/1202/text.pdf",
       "rodzaj": "akt prawny"
     },
     "mp-2026-1081": {
@@ -22,7 +22,7 @@
     "mp-2025-1156": {
       "tytul": "Obwieszczenie Ministra Rodziny, Pracy i Polityki Społecznej z 10 listopada 2025 r. w sprawie wysokości kwoty wpłat na IKZE w roku 2026",
       "publikator": "M.P. 2025 poz. 1156",
-      "url": "https://www.gov.pl/web/rodzina/ikze-limit-wplat",
+      "url": "https://api.sejm.gov.pl/eli/acts/MP/2025/1156/text.pdf",
       "rodzaj": "akt prawny"
     },
     "mp-2026-1062": {
@@ -132,6 +132,12 @@
       "publikator": "dokumentacja projektu",
       "url": null,
       "rodzaj": "własne"
+    },
+    "ustawa-pp": {
+      "tytul": "Ustawa z 6 marca 2018 r. – Prawo przedsiębiorców",
+      "publikator": "t.j. Dz.U. 2026 poz. 1484",
+      "url": "https://api.sejm.gov.pl/eli/acts/DU/2026/1484/text.pdf",
+      "rodzaj": "akt prawny"
     }
   },
   "twierdzenia": [
@@ -248,11 +254,11 @@
     {
       "id": "ike-zwrot-dochod",
       "obszar": "ike",
-      "tresc": "Przy zwrocie z IKE dochodem jest różnica między wartością środków zgromadzonych na koncie a sumą wpłat.",
+      "tresc": "Przy zwrocie środków z IKE dochodem jest różnica między wartością środków zgromadzonych na koncie a sumą wpłat. Jeżeli zwrot całkowity poprzedziły zwroty częściowe, sumę wpłat pomniejsza się o koszty przypisane tym zwrotom.",
       "zrodlo": "ustawa-pit",
-      "przepis": "art. 30a ust. 8",
+      "przepis": "art. 30a ust. 8 i 8a",
       "status": "P",
-      "sprawdzono": "2026-11-13",
+      "sprawdzono": "2026-11-14",
       "przeglad": "2027-05-15"
     },
     {
@@ -486,7 +492,7 @@
       "zrodlo": "ustawa-sus",
       "przepis": "art. 50 ust. 1a pkt 1–3",
       "status": "P",
-      "sprawdzono": "2026-11-13",
+      "sprawdzono": "2026-11-14",
       "przeglad": "2027-05-15"
     },
     {
@@ -546,9 +552,9 @@
     {
       "id": "sus-podstawa-wyzsza",
       "obszar": "jdg-b2b",
-      "tresc": "Przedsiębiorca może zadeklarować podstawę wymiaru składek wyższą od najniższej.",
+      "tresc": "Przedsiębiorca może zadeklarować podstawę wymiaru składek wyższą od obowiązującej go najniższej, także przy podstawie ustalanej od dochodu. Zadeklarowanie wyższej kwoty nie podlega korekcie za miesiąc, w którym je złożono.",
       "zrodlo": "ustawa-sus",
-      "przepis": "art. 18 ust. 8a",
+      "przepis": "art. 18 ust. 8a; art. 18c ust. 8",
       "status": "P",
       "sprawdzono": "2026-11-14",
       "przeglad": "2027-05-15"
@@ -953,6 +959,302 @@
       "status": "Z",
       "sprawdzono": "2026-11-13",
       "przeglad": "2027-01-15"
+    },
+    {
+      "id": "sus-subkonto-skladka",
+      "obszar": "zus",
+      "tresc": "Ze składki emerytalnej część równą 7,3% podstawy wymiaru ZUS zapisuje na subkoncie. U członka otwartego funduszu emerytalnego 2,92% podstawy trafia do OFE, a 4,38% na subkonto.",
+      "wartosc": 0.073,
+      "jednostka": "stawka",
+      "zrodlo": "ustawa-sus",
+      "przepis": "art. 22 ust. 3",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "zus-hipotetyczna-bez-subkonta",
+      "obszar": "zus",
+      "tresc": "Hipotetyczną emeryturę oblicza się z sumy składek, o których mowa w art. 40 ust. 1, i kapitału początkowego. Art. 40 ust. 1 wyłącza składki zapisywane na subkoncie i odprowadzane do OFE, więc środki z subkonta nie wchodzą do hipotetycznej emerytury.",
+      "zrodlo": "ustawa-sus",
+      "przepis": "art. 40 ust. 1; art. 50 ust. 2",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "zus-informacja-subkonto",
+      "obszar": "zus",
+      "tresc": "Informacja o stanie konta podaje także kwoty zewidencjonowane na subkoncie według stanu na 31 grudnia poprzedniego roku oraz składki na otwarte fundusze emerytalne.",
+      "zrodlo": "ustawa-sus",
+      "przepis": "art. 50 ust. 1a pkt 2a, 4 i 5",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "zus-informacja-12-miesiecy",
+      "obszar": "zus",
+      "tresc": "Zestawienie składek z ostatnich 12 miesięcy w informacji o stanie konta obejmuje składki na ubezpieczenie emerytalne w wysokości nominalnej, w podziale na miesiące, bez części odprowadzanej do OFE i zapisywanej na subkoncie.",
+      "zrodlo": "ustawa-sus",
+      "przepis": "art. 50 ust. 1a pkt 3",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "zus-hipotetyczna-5-lat",
+      "obszar": "zus",
+      "tresc": "Gdy do wieku 60 lat (kobieta) lub 65 lat (mężczyzna) brakuje nie więcej niż 5 lat, informacja podaje dodatkowo hipotetyczną emeryturę dla wieku wyższego o rok, dwa, trzy, cztery i pięć lat.",
+      "zrodlo": "ustawa-sus",
+      "przepis": "art. 50 ust. 1d",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "pit-emerytura-zaliczka",
+      "obszar": "zus",
+      "tresc": "Organy rentowe jako płatnicy pobierają zaliczki miesięczne na podatek dochodowy od wypłacanych emerytur.",
+      "zrodlo": "ustawa-pit",
+      "przepis": "art. 34 ust. 1",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "zdrowotna-emeryci",
+      "obszar": "zus",
+      "tresc": "Osoby pobierające emeryturę podlegają obowiązkowo ubezpieczeniu zdrowotnemu. Składka na ubezpieczenie zdrowotne wynosi 9% podstawy wymiaru.",
+      "wartosc": 0.09,
+      "jednostka": "stawka",
+      "zrodlo": "ustawa-zdrowotna",
+      "przepis": "art. 66 ust. 1 pkt 16; art. 79 ust. 1",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "fus-waloryzacja-roczna",
+      "obszar": "zus",
+      "tresc": "Waloryzację składek zapisanych na koncie przeprowadza się corocznie od 1 czerwca. W wyniku waloryzacji stan konta nie może się obniżyć.",
+      "zrodlo": "ustawa-fus",
+      "przepis": "art. 25 ust. 3",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "fus-waloryzacja-wskaznik",
+      "obszar": "zus",
+      "tresc": "Wskaźnik waloryzacji składek to wskaźnik cen towarów i usług konsumpcyjnych powiększony o realny wzrost sumy przypisu składek na ubezpieczenie emerytalne. Nie może być niższy niż wskaźnik cen.",
+      "zrodlo": "ustawa-fus",
+      "przepis": "art. 25 ust. 6",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "fus-tablice-korzystniejsze",
+      "obszar": "zus",
+      "tresc": "Jeżeli jest to korzystniejsze, do obliczenia emerytury stosuje się tablice trwania życia obowiązujące w dniu osiągnięcia wieku 60 lat (kobiety) lub 65 lat (mężczyźni).",
+      "zrodlo": "ustawa-fus",
+      "przepis": "art. 26 ust. 6",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "fus-kapital-poczatkowy-zarobki",
+      "obszar": "zus",
+      "tresc": "Podstawę wymiaru kapitału początkowego ustala się m.in. z kolejnych 10 lat kalendarzowych sprzed 1 stycznia 1999 r.",
+      "zrodlo": "ustawa-fus",
+      "przepis": "art. 174 ust. 3",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "fus-kapital-nie-dziedziczony",
+      "obszar": "zus",
+      "tresc": "Kwota stanowiąca podstawę obliczenia emerytury nie podlega dziedziczeniu, z zastrzeżeniem przepisu o wypłacie gwarantowanej ze środków subkonta.",
+      "zrodlo": "ustawa-fus",
+      "przepis": "art. 25 ust. 2",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "fus-okresy-definicje",
+      "obszar": "zus",
+      "tresc": "Okresami składkowymi są m.in. okresy ubezpieczenia. Okresami nieskładkowymi są m.in. okresy pobierania zasiłku chorobowego lub opiekuńczego.",
+      "zrodlo": "ustawa-fus",
+      "przepis": "art. 6 ust. 1 pkt 1; art. 7 pkt 1",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "fus-nieskladkowe-limit",
+      "obszar": "zus",
+      "tresc": "Okresy nieskładkowe uwzględnia się w wymiarze nieprzekraczającym jednej trzeciej udowodnionych okresów składkowych. Zasada ta dotyczy także stażu wymaganego do podwyższenia emerytury do najniższej.",
+      "zrodlo": "ustawa-fus",
+      "przepis": "art. 5 ust. 2; art. 87 ust. 1",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "fus-najnizsza-przychod",
+      "obszar": "zus",
+      "tresc": "Podwyższenie emerytury do kwoty najniższej emerytury nie przysługuje emerytowi, który osiąga przychód z tytułu działalności podlegającej obowiązkowi ubezpieczenia społecznego, jeżeli przychód ten przekracza kwotę podwyższenia.",
+      "zrodlo": "ustawa-fus",
+      "przepis": "art. 87 ust. 5; art. 104 ust. 1",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "sus-maly-zus-plus",
+      "obszar": "jdg-b2b",
+      "tresc": "Jeżeli roczny przychód z działalności gospodarczej w poprzednim roku nie przekroczył 120 000 zł, podstawa wymiaru składek emerytalnej i rentowych może zależeć od dochodu z poprzedniego roku: wynosi połowę przeciętnego miesięcznego dochodu.",
+      "wartosc": 120000,
+      "jednostka": "zł",
+      "zrodlo": "ustawa-sus",
+      "przepis": "art. 18c ust. 1 i 3",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "sus-maly-zus-plus-granice",
+      "obszar": "jdg-b2b",
+      "tresc": "Podstawa ustalana od dochodu nie może być wyższa niż 60% prognozowanego przeciętnego wynagrodzenia ani niższa niż 30% minimalnego wynagrodzenia obowiązującego w styczniu danego roku.",
+      "zrodlo": "ustawa-sus",
+      "przepis": "art. 18c ust. 2",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "sus-maly-zus-plus-ryczalt",
+      "obszar": "jdg-b2b",
+      "tresc": "U osób opłacających ryczałt od przychodów ewidencjonowanych dochodem do ustalenia tej podstawy jest roczny przychód pomnożony przez 0,5.",
+      "zrodlo": "ustawa-sus",
+      "przepis": "art. 18c ust. 12 pkt 2",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "sus-maly-zus-plus-okres",
+      "obszar": "jdg-b2b",
+      "tresc": "Z ustalania podstawy od dochodu można korzystać maksymalnie przez 36 miesięcy w każdym okresie 60 miesięcy prowadzenia działalności. Rozwiązanie nie dotyczy m.in. osób, które spełniają warunki preferencyjnej podstawy z art. 18a.",
+      "zrodlo": "ustawa-sus",
+      "przepis": "art. 18c ust. 11 i 11a",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "sus-limit-roczny",
+      "obszar": "jdg-b2b",
+      "tresc": "Roczna podstawa wymiaru składek na ubezpieczenia emerytalne i rentowe nie może być wyższa od 30-krotności prognozowanego przeciętnego wynagrodzenia miesięcznego na dany rok.",
+      "zrodlo": "ustawa-sus",
+      "przepis": "art. 19 ust. 1",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "sus-podstawa-chorobowe-wypadkowe",
+      "obszar": "jdg-b2b",
+      "tresc": "Podstawą wymiaru składek na ubezpieczenie chorobowe i wypadkowe jest podstawa wymiaru składek emerytalnej i rentowych. Przedsiębiorca podlega ubezpieczeniu wypadkowemu obowiązkowo, a chorobowemu dobrowolnie, na swój wniosek.",
+      "zrodlo": "ustawa-sus",
+      "przepis": "art. 20 ust. 1; art. 11 ust. 2; art. 12 ust. 1",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "pp-ulga-na-start",
+      "obszar": "jdg-b2b",
+      "tresc": "Osoba fizyczna podejmująca działalność gospodarczą po raz pierwszy albo ponownie po co najmniej 60 miesiącach, która nie wykonuje jej na rzecz byłego pracodawcy, nie podlega obowiązkowym ubezpieczeniom społecznym przez 6 miesięcy od dnia podjęcia działalności. Może z tego zrezygnować.",
+      "zrodlo": "ustawa-pp",
+      "przepis": "art. 18 ust. 1 i 2",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "ike-maloletni",
+      "obszar": "ike",
+      "tresc": "Małoletni może wpłacać na IKE lub IKZE tylko w roku, w którym uzyskuje dochody z pracy na podstawie umowy o pracę. Jego wpłaty nie mogą przekroczyć tych dochodów ani rocznego limitu.",
+      "zrodlo": "ustawa-ike-ikze",
+      "przepis": "art. 3 ust. 2; art. 13 ust. 7",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "ike-limit-nie-nizszy",
+      "obszar": "ike",
+      "tresc": "Jeżeli limit wpłat na IKE wyliczony na dany rok byłby niższy od ogłoszonego w poprzednim roku, obowiązuje limit z poprzedniego roku.",
+      "zrodlo": "ustawa-ike-ikze",
+      "przepis": "art. 13 ust. 1a",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "ike-po-wyplacie",
+      "obszar": "ike",
+      "tresc": "Wypłata z IKE może być jednorazowa albo w ratach. Oszczędzający, który dokonał wypłaty jednorazowej albo wypłaty pierwszej raty, nie może ponownie założyć IKE ani dokonywać wpłat na IKE, z którego wypłacono pierwszą ratę.",
+      "zrodlo": "ustawa-ike-ikze",
+      "przepis": "art. 34 ust. 2, 4 i 5",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "ike-wyplata-smierc",
+      "obszar": "ike",
+      "tresc": "W przypadku śmierci oszczędzającego środki z IKE wypłaca się na wniosek osoby uprawnionej.",
+      "zrodlo": "ustawa-ike-ikze",
+      "przepis": "art. 34 ust. 1 pkt 2",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "ike-zwrot-calkowity",
+      "obszar": "ike",
+      "tresc": "Zwrot środków z IKE następuje w razie wypowiedzenia umowy o prowadzenie IKE, jeżeli nie zachodzą przesłanki do wypłaty lub wypłaty transferowej.",
+      "zrodlo": "ustawa-ike-ikze",
+      "przepis": "art. 37 ust. 1",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "ike-zwrot-czesciowy",
+      "obszar": "ike",
+      "tresc": "Oszczędzający może wystąpić o częściowy zwrot, pod warunkiem że środki pochodziły z wpłat na IKE.",
+      "zrodlo": "ustawa-ike-ikze",
+      "przepis": "art. 37 ust. 1a",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "ike-zwrot-czesciowy-dochod",
+      "obszar": "ike",
+      "tresc": "Przy częściowym zwrocie z IKE dochodem jest kwota zwrotu pomniejszona o przypadające na nią koszty, czyli o iloczyn kwoty zwrotu i udziału sumy wpłat w wartości środków na koncie.",
+      "zrodlo": "ustawa-pit",
+      "przepis": "art. 30a ust. 8b",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
     }
   ]
 }

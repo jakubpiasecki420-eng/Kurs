@@ -11,24 +11,24 @@ quiz:
   pytania:
     - pytanie: 'Odkładasz co miesiąc tę samą kwotę, a zysk jest równy inflacji. Jak wypada wartość realna w porównaniu z sumą wpłat?'
       odpowiedzi:
-        - 'Jest równa sumie wpłat.'
-        - 'Jest niższa od sumy wpłat, bo późniejsze wpłaty tej samej kwoty są warte mniej w dzisiejszych pieniądzach.'
-        - 'Jest wyższa od sumy wpłat.'
-      poprawna: 1
-      wyjasnienie: 'Każda wpłata zachowuje siłę nabywczą z dnia wpłaty, ale wpłata 500 zł za dwadzieścia lat jest warta dziś znacznie mniej niż dzisiejsza.'
+        - 'Jest równa sumie wpłat, bo zysk pokrywa inflację.'
+        - 'Jest wyższa od sumy wpłat dzięki procentowi składanemu.'
+        - 'Jest niższa, bo późniejsze wpłaty są realnie warte mniej.'
+      poprawna: 2
+      wyjasnienie: 'Każda wpłata zachowuje siłę nabywczą z dnia wpłaty, ale ta sama nominalna wpłata za dwadzieścia lat jest warta dziś znacznie mniej niż dzisiejsza.'
     - pytanie: 'Która informacja jest niezbędna, żeby sensownie odczytać wynik symulacji?'
       odpowiedzi:
-        - 'Czy wynik jest nominalny, czy realny, i jakie przyjęto założenia.'
-        - 'Tylko końcowa kwota.'
-        - 'Nazwa instytucji, która przygotowała symulację.'
-      poprawna: 0
+        - 'Nazwa instytucji finansowej, która przygotowała symulację wyniku.'
+        - 'Założenia i to, czy wynik jest nominalny, czy realny.'
+        - 'Wyłącznie końcowa kwota pokazana na wykresie.'
+      poprawna: 1
       wyjasnienie: 'Kwota bez założeń i bez informacji, czy uwzględnia inflację, niewiele mówi.'
     - pytanie: 'Dlaczego jeden punkt procentowy rocznych kosztów ma duże znaczenie w długim okresie?'
       odpowiedzi:
-        - 'Bo opłata jest pobierana tylko raz, na początku.'
-        - 'Bo opłata pomniejsza kapitał co roku, a pomniejszony kapitał przestaje pracować w kolejnych latach.'
-        - 'Nie ma dużego znaczenia.'
-      poprawna: 1
+        - 'Pomniejsza kapitał co roku, więc mniej pieniędzy pracuje dalej.'
+        - 'Jest pobierany tylko raz, przy otwarciu konta, więc później nie działa.'
+        - 'Nie ma znaczenia, jeśli zysk jest dodatni.'
+      poprawna: 0
       wyjasnienie: 'Na koszty działa ten sam procent składany co na zysk — tylko w przeciwną stronę.'
 ---
 
@@ -50,7 +50,7 @@ Wnioski z tej tabeli:
 
 ## Koszty: niewielki procent, duża kwota
 
-Opłaty liczone od zgromadzonych środków wyglądają niewinnie, bo pobierane są po trochu każdego roku. Działa na nie jednak ten sam procent składany.
+Opłaty liczone od zgromadzonych środków wyglądają niewinnie, bo pobierane są po trochu każdego roku. Działa na nie jednak ten sam procent składany. W przykładzie i w kalkulatorze koszty pomniejszają wartość po doliczeniu zysku, więc zysk po kosztach jest nieco niższy niż prosta różnica „zysk minus koszty”.
 
 <!-- tabela:koszty -->
 
@@ -67,7 +67,7 @@ Dlatego przy porównywaniu ofert tabela opłat jest jednym z pierwszych punktów
 
 1. Wpisz do kalkulatora poniżej kwotę, którą realnie możesz odkładać co miesiąc, i liczbę lat do emerytury.
 2. Policz trzy warianty: zerowy zysk, zysk równy inflacji i zysk wyższy od inflacji.
-3. Zapisz wartości realne. Porównaj je z liczbą z modułu 2: różnicą między hipotetyczną emeryturą a Twoimi wydatkami.
+3. Zapisz wartości realne. Obok zapisz orientacyjną lukę z modułu 2, pamiętając o jej ograniczeniach: hipotetyczna emerytura pomija subkonto i jest kwotą brutto.
 
 ## Czego ta lekcja nie rozstrzyga
 

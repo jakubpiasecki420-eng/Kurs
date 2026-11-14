@@ -3,7 +3,7 @@
  * serie wykresu i wiersze tabeli. Używany przy budowaniu strony i w przeglądarce,
  * więc pierwszy wynik jest widoczny bez JavaScriptu.
  */
-import { procent, zlPelne } from '../format';
+import { liczebnik, procent, zlPelne } from '../format';
 import {
   przebiegInflacji,
   przebiegKapitalu,
@@ -96,7 +96,7 @@ export const POLA: Record<RodzajProsty, Record<PoleProste, OpisPola>> = {
       jednostka: '%',
       opis: 'Stała w każdym roku. Rzeczywista inflacja zmienia się z roku na rok.',
       zakres: ZAKRESY_PROSTE.inflacja,
-      opisZakresu: 'od −5% do 30%',
+      opisZakresu: 'od −5% do 20%',
       procentowe: true,
       calkowite: false,
     },
@@ -127,36 +127,41 @@ export function walidujProste(rodzaj: RodzajProsty, d: DaneProste): Partial<Reco
 function widokProcentu(d: DaneProste): WidokProsty {
   const p = przebiegKapitalu(d.kwota, d.stopa, d.lata);
   const k = p[p.length - 1];
+  const strata = d.stopa < 0;
+  // Przy ujemnej stopie „zysk” byłby mylący: pokazujemy stratę i porównanie ze stałą stratą roczną.
+  const n = {
+    wynik: strata ? 'Strata łącznie' : 'Zysk łącznie',
+    prosty: strata ? 'Gdyby co roku tracić tę samą kwotę' : 'Gdyby zysk co roku wypłacać',
+    roznica: strata ? 'O tyle mniejsza strata niż przy stałej kwocie' : 'Zysk od wcześniejszych zysków',
+    seriaSkladany: strata ? 'Strata liczona od bieżącej wartości (procent składany)' : 'Zysk zostaje na koncie (procent składany)',
+    seriaProsty: strata ? 'Strata liczona od kwoty początkowej (procent prosty)' : 'Zysk wypłacany co roku (procent prosty)',
+    kolSkladany: strata ? 'Strata od bieżącej wartości' : 'Zysk zostaje na koncie',
+    kolProsty: strata ? 'Strata od kwoty początkowej' : 'Zysk wypłacany co roku',
+  };
   return {
     kafle: [
       { etykieta: `Wartość po ${d.lata} ${lat(d.lata)}`, wartosc: zlPelne(k.skladany), kolor: 'var(--seria-nominalna)' },
-      { etykieta: 'Zysk łącznie', wartosc: zlPelne(k.skladany - d.kwota) },
-      { etykieta: 'Gdyby zysk co roku wypłacać', wartosc: zlPelne(k.prosty), kolor: 'var(--seria-wplaty)' },
-      { etykieta: 'Zysk od wcześniejszych zysków', wartosc: zlPelne(k.skladany - k.prosty) },
+      { etykieta: n.wynik, wartosc: zlPelne(Math.abs(k.skladany - d.kwota)) },
+      { etykieta: n.prosty, wartosc: zlPelne(k.prosty), kolor: 'var(--seria-wplaty)' },
+      { etykieta: n.roznica, wartosc: zlPelne(k.skladany - k.prosty) },
     ],
     serie: [
+      { nazwa: n.seriaSkladany, krotko: 'składany', kolor: 'var(--seria-nominalna)', wartosci: p.map((r) => r.skladany) },
       {
-        nazwa: 'Zysk zostaje na koncie (procent składany)',
-        krotko: 'składany',
-        kolor: 'var(--seria-nominalna)',
-        wartosci: p.map((r) => r.skladany),
-      },
-      {
-        nazwa: 'Zysk wypłacany co roku (procent prosty)',
+        nazwa: n.seriaProsty,
         krotko: 'prosty',
         kolor: 'var(--seria-wplaty)',
         wartosci: p.map((r) => r.prosty),
         przerywana: true,
       },
     ],
-    kolumny: ['Rok', 'Zysk zostaje na koncie', 'Zysk wypłacany co roku', 'Różnica'],
+    kolumny: ['Rok', n.kolSkladany, n.kolProsty, 'Różnica'],
     wiersze: rokiTabeli(d.lata).map((rok) => ({
       rok,
       komorki: [zlPelne(p[rok].skladany), zlPelne(p[rok].prosty), zlPelne(p[rok].skladany - p[rok].prosty)],
     })),
     tytulWykresu: 'Wartość kwoty początkowej w kolejnych latach',
-    opisWykresu:
-      'Dwie linie: zysk pozostawiony na koncie (procent składany) i zysk wypłacany co roku (procent prosty). Te same dane są w tabeli pod wykresem.',
+    opisWykresu: `Dwie linie: ${n.seriaSkladany.toLowerCase()} i ${n.seriaProsty.toLowerCase()}. Te same dane są w tabeli pod wykresem.`,
   };
 }
 
@@ -165,8 +170,8 @@ function widokInflacji(d: DaneProste): WidokProsty {
   const k = p[p.length - 1];
   return {
     kafle: [
-      { etykieta: `Tyle będzie kosztować za ${d.lata} ${d.lata === 1 ? 'rok' : 'lat'}`, wartosc: zlPelne(k.koszt), kolor: 'var(--seria-nominalna)' },
-      { etykieta: `Tyle dziś jest warte ${zlPelne(d.kwota)} otrzymane za ${d.lata} ${d.lata === 1 ? 'rok' : 'lat'}`, wartosc: zlPelne(k.silaNabywcza), kolor: 'var(--seria-realna)' },
+      { etykieta: `Tyle będzie kosztować za ${liczebnik(d.lata, 'rok', 'lata', 'lat')}`, wartosc: zlPelne(k.koszt), kolor: 'var(--seria-nominalna)' },
+      { etykieta: `Tyle dziś jest warte ${zlPelne(d.kwota)} otrzymane za ${liczebnik(d.lata, 'rok', 'lata', 'lat')}`, wartosc: zlPelne(k.silaNabywcza), kolor: 'var(--seria-realna)' },
       { etykieta: 'Siła nabywcza w porównaniu z dzisiejszą', wartosc: procent(k.silaNabywcza / d.kwota, 1) },
     ],
     serie: [

@@ -8,6 +8,7 @@ import { procent, zl } from '@/lib/format';
 
 const p = przypisy([
   'ike-wiek-wplat',
+  'ike-maloletni',
   'ike-limit-wzor',
   'ike-limit-2026',
   'ike-limit-2027',
@@ -15,6 +16,8 @@ const p = przypisy([
   'ike-zwolnienie',
   'ike-zwrot-podatek',
   'ike-zwrot-dochod',
+  'ike-zwrot-czesciowy',
+  'ike-zwrot-czesciowy-dochod',
   'ike-jedno-konto',
   'ike-wiele-kont',
   'ike-wyplata-transferowa',
@@ -36,7 +39,12 @@ const p = przypisy([
       <div class="proza">
         <h2>W skrócie</h2>
         <ul>
-          <li>Wpłacać może osoba, która ukończyła 16 lat<Odn nr={p.nr('ike-wiek-wplat')} />.</li>
+          <li>
+            Wpłacać może osoba, która ukończyła 16 lat<Odn nr={p.nr('ike-wiek-wplat')} />. Osoba niepełnoletnia —
+            tylko w roku, w którym ma dochody z umowy o pracę, i najwyżej do ich wysokości<Odn
+              nr={p.nr('ike-maloletni')}
+            />.
+          </li>
           <li>
             Limit wpłat w 2027 r. wynosi <strong>{zl(p.wartosc('ike-limit-2027'))}</strong><Odn
               nr={p.nr('ike-limit-2027')}
@@ -95,8 +103,11 @@ const p = przypisy([
         <p>
           Środki można wycofać przed spełnieniem warunków, ale wtedy od dochodu pobierany jest
           zryczałtowany podatek {procent(p.wartosc('ike-zwrot-podatek'))}<Odn nr={p.nr('ike-zwrot-podatek')} />.
-          Dochodem jest różnica między wartością środków na koncie a sumą wpłat<Odn
+          Przy zwrocie całkowitym dochodem jest różnica między wartością środków na koncie a sumą wpłat<Odn
             nr={p.nr('ike-zwrot-dochod')}
+          />. Możliwy jest też częściowy zwrot środków pochodzących z wpłat<Odn nr={p.nr('ike-zwrot-czesciowy')} />.
+          Wtedy dochodem jest kwota zwrotu pomniejszona o proporcjonalnie przypadającą na nią część wpłat<Odn
+            nr={p.nr('ike-zwrot-czesciowy-dochod')}
           />.
         </p>
 

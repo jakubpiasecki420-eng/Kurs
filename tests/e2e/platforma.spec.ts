@@ -127,9 +127,9 @@ test('quiz wymaga odpowiedzi, ocenia je i zapisuje wynik w postępie', async ({ 
   await quiz.getByRole('button', { name: 'Sprawdź odpowiedzi' }).click();
   await expect(quiz.getByRole('alert')).toHaveText('Odpowiedz na wszystkie pytania.');
 
-  await quiz.getByLabel(/Od kwoty zapisanej na koncie w ZUS/).check();
-  await quiz.getByLabel(/Jest niższa, bo kapitał/).check();
-  await quiz.getByLabel(/Nie, jest wspólne/).check();
+  await quiz.getByLabel(/Od zapisanego kapitału podzielonego/).check();
+  await quiz.getByLabel(/W wieku A kwota jest wyższa/).check();
+  await quiz.getByLabel(/Stan konta nie może się obniżyć/).check();
   await quiz.getByRole('button', { name: 'Sprawdź odpowiedzi' }).click();
   await expect(quiz.locator('[data-quiz-wynik]')).toHaveText('Wynik: 2 z 3.');
   await expect(quiz.locator('[data-pytanie="1"]')).toHaveAttribute('data-wynik', 'zle');
@@ -137,7 +137,7 @@ test('quiz wymaga odpowiedzi, ocenia je i zapisuje wynik w postępie', async ({ 
 
   await quiz.getByRole('button', { name: 'Rozwiąż ponownie' }).click();
   await expect(quiz.locator('[data-quiz-wynik]')).toBeHidden();
-  await expect(quiz.getByLabel(/Jest niższa, bo kapitał/)).not.toBeChecked();
+  await expect(quiz.getByLabel(/W wieku A kwota jest wyższa/)).not.toBeChecked();
 
   await otworz(page, '/platforma/postep/');
   await expect(page.locator('[data-quizy]')).toContainText('2/3');
@@ -158,14 +158,18 @@ test('lekcja kursu: oznaczenie wersji roboczej, przykłady z rejestru i przypisy
   await otworz(page, R.ike);
   await expect(page.getByText('Przed recenzją eksperta')).toBeVisible();
   await expect(page.getByText('Treść przykładowa')).toHaveCount(0);
-  const przyklad = page.getByRole('region', { name: 'Przykład: wcześniejszy zwrot z IKE' });
+  const przyklad = page.getByRole('region', { name: 'Przykład: zwrot całkowity z IKE' });
   await expect(przyklad).toContainText('Podatek 19% od dochodu');
   await expect(przyklad).toContainText('1 900 zł');
+  const czesciowy = page.getByRole('region', { name: 'Przykład: częściowy zwrot z IKE' });
+  await expect(czesciowy).toContainText('2 000 zł');
+  await expect(czesciowy).toContainText('380 zł');
+  await expect(page.getByText('Do potwierdzenia przez eksperta.')).toBeVisible();
   const przypis = page.locator('.proza a.odn').first();
   await expect(przypis).toHaveAttribute('href', '#zrodlo-1');
   await przypis.click();
   await expect(page.locator('#zrodlo-1')).toBeInViewport();
-  await expect(page.locator('.zrodla li')).toHaveCount(6);
+  await expect(page.locator('.zrodla li')).toHaveCount(10);
 });
 
 test('lekcja z wykresem i kalkulatorem: każdy ma własne identyfikatory', async ({ page }) => {
@@ -185,6 +189,8 @@ test('kalkulator inflacji w lekcji przelicza wynik i zgłasza błędne dane', as
   await k.getByLabel('Roczna inflacja').fill('2,5');
   await k.getByLabel('Za ile lat').fill('20');
   await expect(k.locator('[data-kafel-wartosc]').first()).toHaveText('1 639 zł');
+  await k.getByLabel('Za ile lat').fill('2');
+  await expect(k.locator('[data-kafel-etykieta]').first()).toHaveText('Tyle będzie kosztować za 2 lata');
   await k.getByLabel('Za ile lat').fill('80');
   await expect(k.getByText('Za ile lat: podaj wartość od 1 do 50 lat.')).toBeVisible();
   await expect(k.getByLabel('Za ile lat')).toHaveAttribute('aria-invalid', 'true');
@@ -199,6 +205,8 @@ test('centrum narzędzi: dostępne kalkulatory z opisem, planowane narzędzia be
   await expect(page).toHaveURL('/platforma/narzedzia/oszczedzanie/');
   await page.getByLabel('Okres oszczędzania').fill('10');
   await expect(page.locator('[data-wynik="sumaWplat"]')).toHaveText('60 000 zł');
+  await page.getByLabel('Wpłata miesięczna').fill('1.000');
+  await expect(page.locator('[data-wynik="sumaWplat"]')).toHaveText('120 000 zł');
   const opis = page.getByRole('region', { name: /O narzędziu/ });
   await expect(opis).toContainText('Założenia');
   await expect(opis).toContainText('Źródła danych');
@@ -211,6 +219,8 @@ test('kalkulator procentu składanego: przelicza, rysuje wykres i wraca do warto
   await expect(page).toHaveURL('/platforma/narzedzia/procent-skladany/');
   const k = page.locator('[data-kalkulator-prosty="procent-skladany"]');
   await expect(k).toHaveAttribute('data-gotowy', 'true');
+  await expect(k.getByLabel('Roczna stopa zwrotu')).toHaveValue('2,5');
+  await k.getByLabel('Roczna stopa zwrotu').fill('5');
   await k.getByLabel('Okres').fill('10');
   await expect(k.locator('[data-kafel-wartosc]').first()).toHaveText('16 289 zł');
   await expect(k.locator('[data-kafel-etykieta]').first()).toHaveText('Wartość po 10 latach');
@@ -218,6 +228,14 @@ test('kalkulator procentu składanego: przelicza, rysuje wykres i wraca do warto
   await expect(k.locator('[data-wykres] svg path')).toHaveCount(2);
   await k.getByLabel('Roczna stopa zwrotu').fill('0');
   await expect(k.locator('[data-kafel-wartosc]').nth(3)).toHaveText('0 zł');
+  await k.getByLabel('Roczna stopa zwrotu').fill('−2');
+  await expect(k.locator('[data-kafel-etykieta]').nth(1)).toHaveText('Strata łącznie');
+  await k.getByLabel('Roczna stopa zwrotu').fill('5');
+  await k.getByLabel('Kwota początkowa').fill('10.000');
+  await expect(k.locator('[data-kafel-wartosc]').first()).toHaveText('16 289 zł');
+  await k.getByLabel('Kwota początkowa').fill('1.000,50');
+  await expect(k.getByLabel('Kwota początkowa')).toHaveAttribute('aria-invalid', 'false');
+  await expect(k.locator('[data-kafel-wartosc]').first()).toHaveText('1 630 zł');
   await k.getByRole('button', { name: 'Przywróć wartości początkowe' }).click();
   await expect(k.getByLabel('Okres')).toHaveValue('20');
   await expect(k.getByLabel('Kwota początkowa')).toBeFocused();

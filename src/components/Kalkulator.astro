@@ -236,6 +236,7 @@ const warianty = [-0.02, 0, 0.025, 0.05, 0.07];
   import { symuluj, waliduj, type Pole, type Wynik, type Zalozenia } from '@/lib/kalkulator/oszczednosci';
   import { geometria, rysujWykres, SERIE } from '@/lib/kalkulator/wykres';
   import { zlPelne } from '@/lib/format';
+  import { liczbaZPola } from '@/lib/kalkulator/proste';
 
   const korzen = document.querySelector<HTMLElement>('[data-kalkulator]');
   if (korzen) uruchom(korzen);
@@ -255,17 +256,10 @@ const warianty = [-0.02, 0, 0.025, 0.05, 0.07];
 
     const pole = (nazwa: Pole) => formularz.elements.namedItem(nazwa) as HTMLInputElement;
 
-    /** Akceptuje zapis z przecinkiem, spacjami i znakiem procentu. */
-    function liczba(tekst: string): number {
-      const czysty = tekst.replace(/[\s %]/g, '').replace('−', '-').replace(',', '.');
-      if (czysty === '' || !/^-?\d*\.?\d+$/.test(czysty)) return Number.NaN;
-      return Number(czysty);
-    }
-
     function odczytaj(): Zalozenia {
       const z = {} as Zalozenia;
       (Object.keys(domyslne) as Pole[]).forEach((nazwa) => {
-        const v = liczba(pole(nazwa).value);
+        const v = liczbaZPola(pole(nazwa).value);
         z[nazwa] = procentowe.includes(nazwa) ? v / 100 : v;
       });
       return z;

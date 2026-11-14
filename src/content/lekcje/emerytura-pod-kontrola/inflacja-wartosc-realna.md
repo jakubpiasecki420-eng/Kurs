@@ -11,17 +11,25 @@ quiz:
   pytania:
     - pytanie: 'Czym różni się wartość realna od nominalnej?'
       odpowiedzi:
-        - 'Wartość realna to kwota przeliczona na dzisiejsze ceny; nominalna to liczba złotych na koncie.'
-        - 'Wartość realna to kwota po podatku.'
-        - 'Nie ma różnicy, to dwie nazwy tej samej kwoty.'
+        - 'Wartość nominalna to kwota po odjęciu podatków i opłat.'
+        - 'Wartość realna to ta sama kwota przeliczona na dzisiejsze ceny.'
+        - 'Wartość realna to kwota gwarantowana przez instytucję finansową.'
+      poprawna: 1
+      wyjasnienie: 'Wartość realna mówi, ile za te pieniądze można będzie kupić w porównaniu z dzisiaj. Wartość nominalna to liczba złotych na koncie.'
+    - pytanie: 'Za 20 lat dostaniesz 10 000 zł, a ceny w tym czasie rosły co roku. Co jest prawdą?'
+      odpowiedzi:
+        - 'Te pieniądze kupią mniej niż 10 000 zł dzisiaj.'
+        - 'Kupią tyle samo, bo kwota się nie zmieniła.'
+        - 'Kupią więcej, bo pieniądze z czasem same zyskują na wartości.'
       poprawna: 0
-      wyjasnienie: 'Wartość realna mówi, ile za te pieniądze można będzie kupić w porównaniu z dzisiaj.'
+      wyjasnienie: 'Przy rosnących cenach ta sama kwota kupuje mniej. Dlatego przyszłe kwoty warto przeliczać na dzisiejsze pieniądze.'
     - pytanie: 'Czy cel inflacyjny NBP jest prognozą inflacji w kolejnych latach?'
       odpowiedzi:
-        - 'Tak, inflacja zawsze mu odpowiada.'
-        - 'Nie. To cel, a rzeczywista inflacja bywa wyraźnie wyższa albo niższa.'
-      poprawna: 1
-      wyjasnienie: 'Używamy go jako punktu odniesienia w przykładach, ale nie jako przewidywania.'
+        - 'Tak, rzeczywista inflacja zawsze mu odpowiada.'
+        - 'Tak, ale tylko dla najbliższych dwóch lat.'
+        - 'Nie, rzeczywista inflacja bywa wyższa lub niższa.'
+      poprawna: 2
+      wyjasnienie: 'Używamy celu NBP jako punktu odniesienia w przykładach, ale nie jako przewidywania.'
 ---
 
 > **W tej lekcji:** pierwsza z dwóch sił, które działają na oszczędności przez dziesięciolecia. Inflacja zmniejsza wartość pieniądza, więc ta sama kwota za 30 lat kupi wyraźnie mniej niż dziś.

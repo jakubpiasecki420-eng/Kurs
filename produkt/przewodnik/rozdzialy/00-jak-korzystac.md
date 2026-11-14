@@ -8,7 +8,7 @@ blokady: []
 status: szkic
 ---
 
-Ten przewodnik pomaga osobom prowadzącym działalność i pracującym na B2B uporządkować oszczędzanie na emeryturę. Nie zakłada wiedzy finansowej. Każde trudniejsze pojęcie objaśniamy przy pierwszym użyciu.
+Ten przewodnik pomaga osobom prowadzącym działalność i pracującym na B2B uporządkować oszczędzanie na emeryturę. Nie zakłada wiedzy finansowej. Trudniejsze pojęcia staramy się objaśniać przy pierwszym użyciu.
 
 ## Jak jest zbudowany
 
@@ -16,7 +16,7 @@ Każdy rozdział ma ten sam układ:
 
 1. **Najważniejsze w trzech punktach** — jeśli masz pięć minut, przeczytaj tylko to.
 2. **Treść** — zasady wyjaśnione krok po kroku, z przykładami.
-3. **Sprawdź u siebie** — zadania do wykonania we własnych dokumentach. Wyniki zapisz w zeszycie ćwiczeń.
+3. **Sprawdź u siebie** — zadania do wykonania we własnych dokumentach. Wyniki zapisz w jednym miejscu, np. w notatniku albo arkuszu.
 4. **Czego ten rozdział nie rozstrzyga** — granice tego, co możemy Ci powiedzieć.
 5. **Źródła** — przepisy, na których opiera się rozdział.
 
@@ -28,7 +28,7 @@ Każdy limit, stawka i warunek ma w tekście numer przypisu. Na końcu rozdział
 
 Liczby bierzemy wyłącznie z aktów prawnych i ze stron urzędów. Nie powołujemy się na artykuły prasowe ani na materiały reklamowe instytucji finansowych.
 
-Stan prawny przewodnika: **{{stan-na-dzien}}** Przepisy i limity zmieniają się co roku. W okresie objętym aktualizacjami dostaniesz poprawioną wersję wraz z opisem zmian.
+Stan prawny przewodnika: **{{stan-na-dzien}}** Przepisy i limity zmieniają się co roku — przed decyzją sprawdź, czy korzystasz z aktualnej wersji.
 
 ## Jak czytać przykłady obliczeniowe
 
@@ -54,4 +54,4 @@ Przygotuj przed lekturą:
 - [ ] dostęp do swojego konta w serwisie internetowym ZUS,
 - [ ] ostatnie roczne zeznanie podatkowe,
 - [ ] umowy i wyciągi z kont oszczędnościowych i inwestycyjnych, jeśli je masz,
-- [ ] zeszyt ćwiczeń dołączony do przewodnika.
+- [ ] notatnik albo arkusz na swoje liczby.

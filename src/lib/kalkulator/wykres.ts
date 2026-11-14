@@ -42,6 +42,7 @@ export function etykietaOsi(v: number, maksOsi: number): string {
   const f = (x: number, miejsca: number) =>
     x.toLocaleString('pl-PL', { maximumFractionDigits: miejsca, useGrouping: 'always' } as Intl.NumberFormatOptions);
   if (v === 0) return '0';
+  if (maksOsi >= 1_000_000_000) return `${f(v / 1_000_000_000, 2)} mld`;
   if (maksOsi >= 1_000_000) return `${f(v / 1_000_000, 2)} mln`;
   if (maksOsi >= 10_000) return `${f(v / 1000, 1)} tys.`;
   return f(v, 0);

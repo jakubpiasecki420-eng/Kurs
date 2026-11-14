@@ -92,4 +92,37 @@ describe('treść platformy', () => {
       expect(l.tresc, l.plik).not.toMatch(/\d+,\d+%/);
     }
   });
+
+  it('quizy kursu docelowego nie dają się zgadnąć po pozycji ani długości odpowiedzi', () => {
+    const pytania = wszystkieLekcje()
+      .filter((x) => x.plik.startsWith('emerytura-pod-kontrola/'))
+      .flatMap((l) => (l.dane.quiz?.pytania ?? []) as { odpowiedzi: string[]; poprawna: number }[]);
+    expect(pytania.length).toBeGreaterThan(20);
+    pytania.forEach((p) => expect(p.odpowiedzi.length).toBeGreaterThanOrEqual(3));
+    // Każda pozycja poprawnej odpowiedzi (1., 2., 3.) występuje w co najmniej 20% pytań.
+    for (const poz of [0, 1, 2]) {
+      expect(pytania.filter((p) => p.poprawna === poz).length / pytania.length).toBeGreaterThanOrEqual(0.2);
+    }
+    // Poprawna odpowiedź jest jedyną najdłuższą w co najwyżej 40% pytań.
+    const najdluzsza = pytania.filter((p) => {
+      const dl = p.odpowiedzi.map((o) => o.length);
+      const maks = Math.max(...dl);
+      return dl[p.poprawna] === maks && dl.filter((x) => x === maks).length === 1;
+    });
+    expect(najdluzsza.length / pytania.length).toBeLessThanOrEqual(0.4);
+  });
+
+  it('miejsca wymagające opinii eksperta są oznaczone w treści', () => {
+    const oznaczone = wszystkieLekcje().filter((l) => l.tresc.includes('**Do potwierdzenia przez eksperta.**'));
+    expect(oznaczone.map((l) => l.plik).sort()).toEqual(
+      [
+        'emerytura-pod-kontrola/hipotetyczna-emerytura.md',
+        'emerytura-pod-kontrola/ike-wyplata-i-zwrot.md',
+        'emerytura-pod-kontrola/informacja-o-stanie-konta.md',
+        'emerytura-pod-kontrola/przeglad-roczny.md',
+        'emerytura-pod-kontrola/wiek-i-najnizsza-emerytura.md',
+      ].sort(),
+    );
+  });
 });
+
