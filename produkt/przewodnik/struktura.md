@@ -1,6 +1,6 @@
 # „Emerytura pod kontrolą” — struktura przewodnika PDF
 
-Stan na dzień: **13 listopada 2026 r.** Zakres i granice: `docs/zakres-produktu.md`.
+Stan na dzień: **14 listopada 2026 r.** Zakres i granice: `docs/zakres-produktu.md`.
 
 Format: A4, 60–80 stron, identyfikacja z `docs/marka.md`. Każdy rozdział powstaje według `szablon-rozdzialu.md`.
 
@@ -9,7 +9,7 @@ Kolumna „Twierdzenia” podaje identyfikatory z `src/data/rejestr.json`. Rozdz
 | Nr | Rozdział | Cel czytelnika | Twierdzenia | Blokada | Strony |
 | --- | --- | --- | --- | --- | --- |
 | 0 | Jak korzystać z przewodnika | Wie, co dostał, czego tu nie ma i jaki jest stan prawny | — | — | 2 |
-| 1 | Jak działa system emerytalny | Rozumie, skąd bierze się świadczenie i dlaczego dodatkowe oszczędzanie jest jego decyzją | do uzupełnienia: ustawa o emeryturach i rentach z FUS | brak twierdzeń P | 5 |
+| 1 | Jak działa system emerytalny | Rozumie, skąd bierze się świadczenie i dlaczego dodatkowe oszczędzanie jest jego decyzją | `fus-*`, `sus-skladka-emerytalna`, `sus-konto-zwaloryzowane`, `sus-podstawa-jdg`, `sus-podstawa-wyzsza`, `sus-preferencyjna` | — | 5 |
 | 2 | ZUS: co możesz sprawdzić | Otwiera informację o stanie konta i umie ją przeczytać | `zus-informacja-o-stanie-konta`, `zus-hipotetyczna-emerytura` | — | 5 |
 | 3 | Twoja forma pracy | Wie, co z prowadzenia działalności wynika dla limitów i odliczeń | `ikze-dzialalnosc-definicja`, `ikze-ulga-na-start-wylaczenie`, `zdrowotna-podstawa` | DP-3, DP-4, DP-6 | 6 |
 | 4 | IKE | Zna limit, warunki wypłaty i skutki zwrotu | `ike-*` | — | 6 |
@@ -20,7 +20,7 @@ Kolumna „Twierdzenia” podaje identyfikatory z `src/data/rejestr.json`. Rozdz
 | 9 | Inflacja i procent składany | Odróżnia wartość nominalną od realnej; umie czytać symulację | `nbp-cel-inflacyjny` | — | 5 |
 | 10 | Podstawy inwestowania | Zna pojęcia: ryzyko, dywersyfikacja, koszty, horyzont | — (pojęcia; bez instrumentów) | PR-2 | 6 |
 | 11 | Jak porównywać instytucje i produkty | Ma listę pytań i tabelę opłat do wypełnienia | `ike-wyplata-transferowa` | PR-2 | 4 |
-| 12 | Twój plan | Ma wypełniony plan: rezerwa, kolejność, kwota, terminy, przegląd roczny | — | — | 6 |
+| 12 | Twój plan | Ma wypełniony plan: rezerwa, kolejność, kwota, terminy, przegląd roczny | terminy ogłoszeń: `fus-tablice-gus`, `ike-limit-ogloszenie`, `ikze-limit-ogloszenie`, `oki-stawka-ogloszenie` | — | 6 |
 | A | Checklisty | — | — | — | 3 |
 | B | Słownik pojęć | — | — | — | 3 |
 | C | Źródła i dziennik zmian | Widzi wszystkie przepisy i historię aktualizacji | cały rejestr, status P | — | 4 |
@@ -35,7 +35,9 @@ Kolumna „Twierdzenia” podaje identyfikatory z `src/data/rejestr.json`. Rozdz
 | 9 | `rozdzialy/09-inflacja-i-procent-skladany.md` | Szkic przed recenzją |
 | C | generowany ze źródeł użytych w rozdziałach | Automatycznie |
 
-Skład: `npm run przewodnik` tworzy `wydruki/emerytura-pod-kontrola-<wersja>.pdf`. Tabele i wykres w rozdziałach 4 i 9 powstają z bibliotek kalkulatora (dyrektywy `<!-- tabela:… -->` w treści), więc zmiana stawki w rejestrze aktualizuje przykłady.
+Lekcje kursu na platformie istnieją dla modułów 1, 2, 4, 9 i 12 (`src/content/lekcje/emerytura-pod-kontrola/`). Rozdziały 1 i 12 można złożyć z tych lekcji.
+
+Skład: `npm run przewodnik` tworzy `wydruki/emerytura-pod-kontrola-<wersja>.pdf`. Tabele i wykres w rozdziałach 4 i 9 powstają z `src/lib/przyklady.ts` (dyrektywy `<!-- tabela:… -->` w treści) — tego samego modułu co w lekcjach, więc zmiana stawki w rejestrze aktualizuje przykłady w obu miejscach.
 
 ## Kolejność pisania
 

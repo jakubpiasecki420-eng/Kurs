@@ -1,0 +1,31 @@
+---
+/** Interfejs narzędzia dostępnego w strefie kursanta — na stronie narzędzia i w lekcji. */
+import Kalkulator from '@/components/Kalkulator.astro';
+import KalkulatorProsty from '@/components/KalkulatorProsty.astro';
+import { procent } from '@/lib/format';
+import { STOPA_PRZYKLADOWA } from '@/lib/przyklady';
+import { wartosc } from '@/lib/rejestr';
+import type { IdNarzedziaDostepnego } from '@/lib/platforma/narzedzia';
+
+interface Props {
+  id: IdNarzedziaDostepnego;
+}
+const { id } = Astro.props;
+const inflacja = wartosc('nbp-cel-inflacyjny');
+---
+
+{id === 'oszczedzanie' && <Kalkulator />}
+{
+  id === 'procent-skladany' && (
+    <KalkulatorProsty rodzaj="procent-skladany" domyslne={{ kwota: 10_000, stopa: STOPA_PRZYKLADOWA, lata: 20 }} />
+  )
+}
+{
+  id === 'inflacja' && (
+    <KalkulatorProsty
+      rodzaj="inflacja"
+      domyslne={{ kwota: 1000, stopa: inflacja, lata: 20 }}
+      opisStopy={`Domyślnie ${procent(inflacja)} — tyle wynosi cel inflacyjny NBP. Rzeczywista inflacja bywa wyższa lub niższa i zmienia się z roku na rok.`}
+    />
+  )
+}

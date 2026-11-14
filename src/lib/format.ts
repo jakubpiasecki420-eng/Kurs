@@ -52,3 +52,11 @@ export function lata(n: number): string {
   if (j >= 2 && j <= 4 && !(d >= 12 && d <= 14)) return `${n} lata`;
   return `${n} lat`;
 }
+
+/** Odmiana rzeczownika po liczebniku: liczebnik(5, 'moduł', 'moduły', 'modułów') → „5 modułów”. */
+export function liczebnik(n: number, jeden: string, kilka: string, wiele: string): string {
+  if (n === 1) return `1 ${jeden}`;
+  const j = n % 10;
+  const d = n % 100;
+  return `${n} ${j >= 2 && j <= 4 && !(d >= 12 && d <= 14) ? kilka : wiele}`;
+}

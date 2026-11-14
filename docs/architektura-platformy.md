@@ -22,13 +22,13 @@ Dawny adres `/produkt/` przekierowuje na `/program/`.
 
 | Adres | Widok | Plik |
 | --- | --- | --- |
-| `/platforma/` | Pulpit: powitanie, kontynuacja nauki, postęp, moduły, ostatnia aktywność, narzędzia, kursy w przygotowaniu | `src/pages/platforma/index.astro` |
+| `/platforma/` | Pulpit: powitanie, kontynuacja nauki, postęp, moduły, ostatnia aktywność, narzędzia, pozostałe kursy (w tym demonstracyjny) | `src/pages/platforma/index.astro` |
 | `/platforma/kurs/<kurs>/` | Program kursu z modułami i lekcjami | `src/pages/platforma/kurs/[kurs]/index.astro` |
 | `/platforma/kurs/<kurs>/<moduł>/` | Moduł: status, warunek dostępu, lekcje, sąsiednie moduły | `…/[kurs]/[modul]/index.astro` |
 | `/platforma/kurs/<kurs>/<moduł>/<lekcja>/` | Lekcja | `…/[kurs]/[modul]/[lekcja].astro` |
 | `/platforma/postep/` | Panel postępu: moduły, quizy, historia | `src/pages/platforma/postep.astro` |
 | `/platforma/narzedzia/` | Centrum narzędzi | `src/pages/platforma/narzedzia/index.astro` |
-| `/platforma/narzedzia/oszczedzanie/` | Kalkulator regularnego oszczędzania z opisem narzędzia | `…/narzedzia/oszczedzanie.astro` |
+| `/platforma/narzedzia/<narzędzie>/` | Dostępne narzędzie z opisem: `oszczedzanie`, `procent-skladany`, `inflacja` | `…/narzedzia/[narzedzie].astro` (lista: `NARZEDZIA_DOSTEPNE`) |
 | `/platforma/ustawienia/` | Nazwa wyświetlana, eksport i usuwanie danych, informacja o kontach | `src/pages/platforma/ustawienia.astro` |
 
 Układ: `src/layouts/Aplikacja.astro` — nagłówek aplikacji, menu boczne (na telefonie dolny pasek), baner trybu demonstracyjnego, stopka z zastrzeżeniem. Style: `src/styles/platforma.css`.
@@ -55,18 +55,32 @@ Schematy: `src/content.config.ts`. Model i typy: `src/lib/platforma/model.ts`.
 
 Lekcje podlegają tym samym zasadom źródeł co strona: twierdzenia ze statusem P, przypisy przez `przypisy()`.
 
+### Treść lekcji i rejestr
+
+Treść lekcji renderuje `renderujTresc()` z `src/lib/tresc-markdown.ts` (marked). W Markdownie lekcji:
+
+| Zapis | Wynik |
+| --- | --- |
+| `{{identyfikator}}` | Wartość twierdzenia z rejestru, sformatowana (kwota w zł albo stawka w %) |
+| `[^identyfikator]` | Przypis `[n]` prowadzący do listy źródeł; `n` to pozycja w polu `twierdzenia` |
+| `<!-- przyklad:zwrot-ike -->` i inne dyrektywy | Przykład obliczeniowy z `src/lib/przyklady.ts`: tabela albo wykres z podpisem i założeniami |
+
+Budowanie zatrzymuje się, gdy identyfikator nie jest zadeklarowany w lekcji, nie ma statusu P albo zostaje nieprzetworzony znacznik. Ten sam moduł przykładów składa przewodnik PDF, więc liczby w lekcjach i w PDF pochodzą z jednego miejsca. Tabele z Markdownu trafiają do przewijanego regionu z etykietą.
+
+Dyrektywy: `przyklad:zwrot-ike`, `przyklad:skladka-emerytalna`, `tabela:inflacja`, `tabela:procent-skladany`, `tabela:scenariusze`, `wykres:scenariusz`, `tabela:koszty`.
+
 ### Kursy w repozytorium
 
 | Kurs | Stan | Zawartość |
 | --- | --- | --- |
 | `kurs-demonstracyjny` | aktywny, demonstracyjny | 3 moduły, 6 lekcji. Treść opisuje samą platformę albo jest tekstem zastępczym. Lekcja 1.1 pokazuje wszystkie elementy szablonu |
-| `emerytura-pod-kontrola` | w przygotowaniu | 12 modułów — tytuły i opisy z `produkt/przewodnik/struktura.md`, bez lekcji |
+| `emerytura-pod-kontrola` | aktywny (kurs w menu „Mój kurs”) | 12 modułów, w tym 5 z lekcjami: 1 (3 lekcje), 2 (2), 4 (2), 9 (3), 12 (2) — razem 12 lekcji. Moduły 3, 5–8, 10 i 11 są oznaczone jako w przygotowaniu. Lekcje mają znacznik „Przed recenzją eksperta”, dopóki `publikacja.recenzjaEksperta` jest puste |
 
 ### Szablon lekcji
 
-Kolejność: okruszki → nagłówek (numer, pozycja w kursie, czas, oznaczenie treści przykładowej, stan ukończenia) → informacja o blokadzie modułu → spis sekcji → treść → ilustracja → ćwiczenie z narzędziem → quiz → materiały dodatkowe → źródła → ukończenie → poprzednia / następna lekcja. Obok, na komputerze: postęp kursu i lista lekcji modułu.
+Kolejność: okruszki → nagłówek (numer, pozycja w kursie, czas, oznaczenie treści przykładowej albo wersji przed recenzją, stan ukończenia) → informacja o blokadzie modułu → spis sekcji → treść → ilustracja → ćwiczenie z narzędziem → quiz → materiały dodatkowe → źródła → ukończenie → poprzednia / następna lekcja. Obok, na komputerze: postęp kursu i lista lekcji modułu.
 
-Komponenty: `src/components/platforma/` (`KartaModulu`, `ListaLekcji`, `PasekPostepu`, `ZnacznikStatusu`, `Quiz`, `Ilustracja`, `MaterialyDodatkowe`, `InformacjeNarzedzia`, `KartaNarzedzia`, `NaglowekWidoku`, `BanerDemo`).
+Komponenty: `src/components/platforma/` (`WidokNarzedzia`, `KartaModulu`, `ListaLekcji`, `PasekPostepu`, `ZnacznikStatusu`, `Quiz`, `Ilustracja`, `MaterialyDodatkowe`, `InformacjeNarzedzia`, `KartaNarzedzia`, `NaglowekWidoku`, `BanerDemo`).
 
 ## 4. Postęp kursanta
 
@@ -109,14 +123,16 @@ Rejestr: `src/lib/platforma/narzedzia.ts`. Każde narzędzie — także planowan
 
 | Narzędzie | Stan | Logika |
 | --- | --- | --- |
-| Kalkulator regularnego oszczędzania | **Dostępne** — `/kalkulator/`, `/platforma/narzedzia/oszczedzanie/`, osadzony w lekcji 1.1 | `src/lib/kalkulator/oszczednosci.ts`, `wykres.ts` |
-| Kalkulator procentu składanego | Planowane | Funkcja `kapitalPoLatach` gotowa i przetestowana |
-| Kalkulator inflacji | Planowane | Do przygotowania |
+| Kalkulator regularnego oszczędzania | **Dostępne** — `/kalkulator/`, `/platforma/narzedzia/oszczedzanie/`, lekcje 9.3 i 12.1 kursu, lekcja 1.3 kursu demonstracyjnego | `src/lib/kalkulator/oszczednosci.ts`, `wykres.ts` |
+| Kalkulator procentu składanego | **Dostępne** — `/platforma/narzedzia/procent-skladany/`, lekcja 9.2 | `src/lib/kalkulator/proste.ts`, `proste-widok.ts`, `wykres-linie.ts`; komponent `KalkulatorProsty.astro` |
+| Kalkulator inflacji | **Dostępne** — `/platforma/narzedzia/inflacja/`, lekcja 9.1 | jak wyżej |
 | Kalkulator ulgi IKZE | Po recenzji podatkowej | `src/lib/kalkulator/ikze.ts` gotowa i przetestowana |
 | Porównanie IKE i IKZE | Po recenzji podatkowej | `ikzeWzgledemIke` w `ikze.ts` |
 | Symulator scenariuszy emerytalnych | Planowane | Do zaprojektowania |
 
-Nowe narzędzie: wpis w rejestrze → biblioteka obliczeń z testami w `src/lib/kalkulator/` → komponent → strona w `/platforma/narzedzia/` z `InformacjeNarzedzia`.
+Nowe narzędzie: wpis w rejestrze → biblioteka obliczeń z testami w `src/lib/kalkulator/` → komponent → identyfikator w `NARZEDZIA_DOSTEPNE` i gałąź w `WidokNarzedzia.astro`. Strona `/platforma/narzedzia/<id>/` powstaje wtedy sama, a lekcja może osadzić narzędzie polem `narzedzie`. Budowanie zatrzyma się, jeśli narzędzie ma interfejs, a w rejestrze nie jest oznaczone jako dostępne.
+
+Kalkulatory procentu składanego i inflacji liczą pierwszy wynik przy budowaniu strony (działają bez JavaScriptu), a po zmianie danych przeliczają się w przeglądarce. Wykres jest statyczny; dokładne wartości są w tabeli. Style kalkulatorów i wykresów są wspólne: `src/styles/kalkulator.css` i `src/styles/wykres.css`. W lekcji układ kalkulatora zależy od szerokości kolumny treści (zapytanie kontenerowe), nie od szerokości ekranu.
 
 ## 6. Decyzje technologiczne
 
@@ -155,7 +171,7 @@ Kolejność zalecana na etap kont:
 | Postęp tylko w przeglądarce | Brak synchronizacji między urządzeniami; utrata po wyczyszczeniu danych | Etap kont |
 | Wszystkie lekcje publicznie dostępne pod adresem | Nie da się sprzedawać dostępu do treści | Przed sprzedażą kursu (sekcja 7, pkt 5) |
 | Blokada modułu tylko informacyjna | Lekcję z niedostępnego modułu można otworzyć bezpośrednio | Razem z kontrolą dostępu |
-| Jeden kalkulator na stronę | Komponent `Kalkulator.astro` używa stałych identyfikatorów pól i obsługuje pierwszą instancję | Przy pierwszej lekcji z dwoma narzędziami |
+| Jeden kalkulator danego rodzaju na stronę | `Kalkulator.astro` używa stałych identyfikatorów pól; `KalkulatorProsty.astro` poprzedza je rodzajem, więc kalkulator procentu i inflacji mogą stać obok siebie, ale nie dwa takie same | Przy pierwszej lekcji z dwoma narzędziami tego samego rodzaju |
 | Odpowiedzi quizu w kodzie strony | Quiz nie nadaje się do egzaminu | Jeśli pojawi się certyfikat |
-| Jeden aktywny kurs w menu | `ID_KURSU_AKTYWNEGO` w `src/lib/platforma/dane.ts` | Gdy powstanie drugi kurs aktywny |
+| Jeden aktywny kurs w menu i na pulpicie | `ID_KURSU_AKTYWNEGO` w `src/lib/platforma/dane.ts` (obecnie `emerytura-pod-kontrola`). Postęp kursu demonstracyjnego widać tylko na jego stronach | Gdy kursant będzie miał więcej niż jeden kurs |
 | Bez JavaScriptu strefa pokazuje stan początkowy | Postęp i quizy wymagają JavaScriptu | Nie planujemy zmiany |

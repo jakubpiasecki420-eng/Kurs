@@ -8,12 +8,12 @@ Stan na dzień: **13 listopada 2026 r.**
 
 | Składnik | Forma | Stan |
 | --- | --- | --- |
-| Kurs | 12 modułów z lekcjami, quizami i zadaniami na platformie (`/platforma/`) | Program modułów: `src/content/kursy/emerytura-pod-kontrola.json`. Lekcje jeszcze nie powstały. Szablon lekcji i strefa kursanta działają na kursie demonstracyjnym |
-| Narzędzia | Kalkulatory w centrum narzędzi i osadzone w lekcjach | Kalkulator oszczędzania dostępny; pozostałe zaplanowane w `src/lib/platforma/narzedzia.ts` |
+| Kurs | 12 modułów z lekcjami, quizami i zadaniami na platformie (`/platforma/`) | Program modułów: `src/content/kursy/emerytura-pod-kontrola.json`. Lekcje mają moduły 1, 2, 4, 9 i 12 (12 lekcji, wersja robocza przed recenzją). Moduły 3 i 5–7 czekają na recenzję podatkową, 8, 10 i 11 na polecenie właściciela |
+| Narzędzia | Kalkulatory w centrum narzędzi i osadzone w lekcjach | Dostępne: kalkulatory oszczędzania, procentu składanego i inflacji. Kalkulator IKZE i porównanie IKE/IKZE po recenzji podatkowej; symulator emerytalny planowany (`src/lib/platforma/narzedzia.ts`) |
 | Materiały uzupełniające | PDF z rozdziałami i zeszyt ćwiczeń do wydruku | Szkice rozdziałów 0, 2, 4 i 9 (`npm run przewodnik`); struktura zeszytu: `produkt/workbook/struktura.md` |
 | Aktualizacje | 12 miesięcy | Proces: `system-aktualizacji.md` |
 
-Szkice rozdziałów przewodnika są źródłem treści przyszłych lekcji: jeden rozdział odpowiada jednemu modułowi.
+Szkice rozdziałów przewodnika są źródłem treści lekcji: jeden rozdział odpowiada jednemu modułowi. Moduł 1 i moduł 12 mają już lekcje, a jeszcze nie mają rozdziałów PDF.
 
 Czego kurs nie zawiera w pierwszej wersji: wideo, konsultacji indywidualnych, społeczności, portfeli modelowych, rankingów instytucji.
 

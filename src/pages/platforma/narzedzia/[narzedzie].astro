@@ -1,0 +1,36 @@
+---
+import Aplikacja from '@/layouts/Aplikacja.astro';
+import NaglowekWidoku from '@/components/platforma/NaglowekWidoku.astro';
+import WidokNarzedzia from '@/components/platforma/WidokNarzedzia.astro';
+import InformacjeNarzedzia from '@/components/platforma/InformacjeNarzedzia.astro';
+import { NARZEDZIA_DOSTEPNE, narzedzie, type IdNarzedziaDostepnego } from '@/lib/platforma/narzedzia';
+
+export function getStaticPaths() {
+  return NARZEDZIA_DOSTEPNE.map((id) => {
+    const n = narzedzie(id);
+    if (n.stan !== 'dostepne' || n.adres !== `/platforma/narzedzia/${id}/`) {
+      throw new Error(`Narzędzie „${id}” ma interfejs, ale w rejestrze nie jest dostępne pod /platforma/narzedzia/${id}/.`);
+    }
+    return { params: { narzedzie: id } };
+  });
+}
+
+const id = Astro.params.narzedzie as IdNarzedziaDostepnego;
+const n = narzedzie(id);
+---
+
+<Aplikacja tytul={n.nazwa} opis={n.opis} sekcja="narzedzia">
+  <NaglowekWidoku
+    etykieta="Narzędzie"
+    tytul={n.nazwa}
+    opis={n.opis}
+    okruszki={[
+      { adres: '/platforma/', etykieta: 'Pulpit' },
+      { adres: '/platforma/narzedzia/', etykieta: 'Narzędzia' },
+    ]}
+  />
+  <WidokNarzedzia id={id} />
+  <div class="panel" style="margin-top: var(--o-6)">
+    <InformacjeNarzedzia narzedzie={n} />
+  </div>
+</Aplikacja>

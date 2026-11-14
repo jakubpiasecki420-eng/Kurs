@@ -1,0 +1,241 @@
+---
+/**
+ * Kalkulator procentu składanego albo inflacji. Pierwszy wynik powstaje przy budowaniu
+ * strony, więc jest widoczny bez JavaScriptu. Bez podatków i kosztów.
+ */
+import { KOLEJNOSC_POL, POLA, widokProsty, type DaneProste, type RodzajProsty } from '@/lib/kalkulator/proste-widok';
+import { rysujLinie } from '@/lib/kalkulator/wykres-linie';
+
+interface Props {
+  rodzaj: RodzajProsty;
+  domyslne: DaneProste;
+  /** Treść pod polem stopy, np. skąd pochodzi wartość domyślna. */
+  opisStopy?: string;
+}
+const { rodzaj, domyslne, opisStopy } = Astro.props;
+const pola = POLA[rodzaj];
+const w = widokProsty(rodzaj, domyslne);
+const proc = (u: number) => (u * 100).toLocaleString('pl-PL', { maximumFractionDigits: 2, useGrouping: false });
+const wartoscPola = (p: keyof DaneProste) => (pola[p].procentowe ? proc(domyslne[p]) : String(domyslne[p]));
+const id = (p: string) => `${rodzaj}-${p}`;
+const zastrzezenie =
+  rodzaj === 'procent-skladany'
+    ? 'Wartości nominalne, bez inflacji, podatków i kosztów. To przykład obliczeniowy, nie prognoza.'
+    : 'Inflacja przyjęta jako stała w każdym roku. To przykład obliczeniowy, nie prognoza.';
+---
+
+<div class="kalkulator" data-kalkulator-prosty={rodzaj} data-domyslne={JSON.stringify(domyslne)}>
+  <form class="kalkulator__formularz" novalidate data-formularz>
+    <h2 class="kalkulator__tytul">Założenia</h2>
+    {
+      KOLEJNOSC_POL.map((p) => (
+        <div class="pole">
+          <label for={id(p)}>{pola[p].etykieta}</label>
+          <div class="pole__wejscie">
+            <input
+              id={id(p)}
+              name={p}
+              type="text"
+              inputmode={pola[p].calkowite ? 'numeric' : 'decimal'}
+              autocomplete="off"
+              value={wartoscPola(p)}
+              aria-describedby={`${id(p)}-opis ${id(p)}-blad`}
+            />
+            <span class="pole__jednostka" aria-hidden="true">
+              {pola[p].jednostka}
+            </span>
+          </div>
+          <p class="pole__opis" id={`${id(p)}-opis`}>
+            {p === 'stopa' && opisStopy ? opisStopy : pola[p].opis}
+          </p>
+          <p class="pole__blad" id={`${id(p)}-blad`} data-blad={p} aria-live="polite" />
+        </div>
+      ))
+    }
+    <button type="button" class="kalkulator__reset" data-reset>Przywróć wartości początkowe</button>
+    <noscript>
+      <p class="pole__opis">Przeliczanie wymaga włączonego JavaScriptu. Poniżej widzisz wynik dla wartości początkowych.</p>
+    </noscript>
+  </form>
+
+  <div class="kalkulator__wyniki" data-wyniki>
+    <p class="kalkulator__symulacja">
+      <span class="znacznik znacznik--zloty">Symulacja</span>
+      {zastrzezenie}
+    </p>
+
+    <dl class="kafle" aria-live="polite" data-kafle>
+      {
+        w.kafle.map((k) => (
+          <div class="kafel">
+            <dt>
+              {k.kolor && <span class="klucz" style={`--k: ${k.kolor}`} />}
+              <span data-kafel-etykieta>{k.etykieta}</span>
+            </dt>
+            <dd data-kafel-wartosc>{k.wartosc}</dd>
+          </div>
+        ))
+      }
+    </dl>
+
+    <figure class="wykres">
+      <figcaption class="wykres__naglowek">
+        <span class="wykres__tytul">{w.tytulWykresu}</span>
+        <ul class="legenda" aria-label="Legenda">
+          {
+            w.serie.map((s) => (
+              <li>
+                <span class="klucz" style={`--k: ${s.kolor}${s.przerywana ? '; border-top-style: dashed' : ''}`} />
+                {s.nazwa}
+              </li>
+            ))
+          }
+        </ul>
+      </figcaption>
+      <div class="wykres__pole wykres__pole--statyczne" data-wykres>
+        <Fragment
+          set:html={rysujLinie({
+            serie: w.serie,
+            szerokosc: 640,
+            prefiks: `${rodzaj}-wykres`,
+            tytul: w.tytulWykresu,
+            opis: w.opisWykresu,
+          })}
+        />
+      </div>
+    </figure>
+
+    <details class="tabela-wynikow">
+      <summary>Pokaż wyniki w tabeli</summary>
+      <div class="tabela-przewijana" tabindex="0" role="region" aria-label="Tabela wyników. Jeśli nie mieści się na ekranie, przewiń ją w poziomie.">
+        <table>
+          <caption class="wizualnie-ukryte">{w.tytulWykresu}</caption>
+          <thead>
+            <tr>{w.kolumny.map((k) => <th scope="col" class="liczba">{k}</th>)}</tr>
+          </thead>
+          <tbody data-tabela>
+            {
+              w.wiersze.map((r) => (
+                <tr>
+                  <th scope="row" class="liczba">
+                    {r.rok}
+                  </th>
+                  {r.komorki.map((c) => (
+                    <td class="liczba">{c}</td>
+                  ))}
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+</div>
+
+<script>
+  import {
+    KOLEJNOSC_POL,
+    POLA,
+    walidujProste,
+    widokProsty,
+    type DaneProste,
+    type RodzajProsty,
+  } from '@/lib/kalkulator/proste-widok';
+  import { liczbaZPola } from '@/lib/kalkulator/proste';
+  import { rysujLinie } from '@/lib/kalkulator/wykres-linie';
+
+  document.querySelectorAll<HTMLElement>('[data-kalkulator-prosty]').forEach(uruchom);
+
+  function uruchom(korzen: HTMLElement) {
+    const rodzaj = korzen.dataset.kalkulatorProsty as RodzajProsty;
+    const pola = POLA[rodzaj];
+    const domyslne = JSON.parse(korzen.dataset.domyslne!) as DaneProste;
+    const formularz = korzen.querySelector<HTMLFormElement>('[data-formularz]')!;
+    const wyniki = korzen.querySelector<HTMLElement>('[data-wyniki]')!;
+    const poleWykresu = korzen.querySelector<HTMLElement>('[data-wykres]')!;
+    const tabela = korzen.querySelector<HTMLTableSectionElement>('[data-tabela]')!;
+    const kafle = [...korzen.querySelectorAll<HTMLElement>('[data-kafle] .kafel')];
+    const wejscie = (p: string) => formularz.elements.namedItem(p) as HTMLInputElement;
+    let dane = domyslne;
+
+    const odczytaj = (): DaneProste => {
+      const d = {} as DaneProste;
+      KOLEJNOSC_POL.forEach((p) => {
+        const v = liczbaZPola(wejscie(p).value);
+        d[p] = pola[p].procentowe ? v / 100 : v;
+      });
+      return d;
+    };
+
+    function rysuj() {
+      const w = widokProsty(rodzaj, dane);
+      const szablon = document.createElement('template');
+      // Znaczniki pochodzą z naszych stałych i liczb; tekstów od użytkownika tu nie ma.
+      szablon.innerHTML = rysujLinie({
+        serie: w.serie,
+        szerokosc: Math.max(280, Math.round(poleWykresu.clientWidth)),
+        prefiks: `${rodzaj}-wykres`,
+        tytul: w.tytulWykresu,
+        opis: w.opisWykresu,
+      });
+      poleWykresu.replaceChildren(szablon.content.firstElementChild!);
+    }
+
+    function wypelnij() {
+      const w = widokProsty(rodzaj, dane);
+      w.kafle.forEach((k, i) => {
+        const el = kafle[i];
+        if (!el) return;
+        el.querySelector('[data-kafel-etykieta]')!.textContent = k.etykieta;
+        el.querySelector('[data-kafel-wartosc]')!.textContent = k.wartosc;
+      });
+      tabela.replaceChildren(
+        ...w.wiersze.map((r) => {
+          const tr = document.createElement('tr');
+          const th = document.createElement('th');
+          th.scope = 'row';
+          th.className = 'liczba';
+          th.textContent = String(r.rok);
+          tr.append(th);
+          r.komorki.forEach((c) => {
+            const td = document.createElement('td');
+            td.className = 'liczba';
+            td.textContent = c;
+            tr.append(td);
+          });
+          return tr;
+        }),
+      );
+    }
+
+    function przelicz() {
+      const d = odczytaj();
+      const bledy = walidujProste(rodzaj, d);
+      KOLEJNOSC_POL.forEach((p) => {
+        const komunikat = bledy[p] ?? '';
+        korzen.querySelector<HTMLElement>(`[data-blad="${p}"]`)!.textContent = komunikat;
+        wejscie(p).setAttribute('aria-invalid', komunikat ? 'true' : 'false');
+      });
+      const poprawne = Object.keys(bledy).length === 0;
+      wyniki.toggleAttribute('data-nieaktualne', !poprawne);
+      if (!poprawne) return;
+      dane = d;
+      wypelnij();
+      rysuj();
+    }
+
+    formularz.addEventListener('input', przelicz);
+    formularz.addEventListener('submit', (e) => e.preventDefault());
+    korzen.querySelector('[data-reset]')!.addEventListener('click', () => {
+      KOLEJNOSC_POL.forEach((p) => {
+        const v = pola[p].procentowe ? domyslne[p] * 100 : domyslne[p];
+        wejscie(p).value = v.toLocaleString('pl-PL', { maximumFractionDigits: 2, useGrouping: false });
+      });
+      przelicz();
+      wejscie('kwota').focus();
+    });
+    new ResizeObserver(() => rysuj()).observe(poleWykresu);
+    korzen.dataset.gotowy = 'true';
+  }
+</script>

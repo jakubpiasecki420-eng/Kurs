@@ -38,7 +38,7 @@ export async function wszystkieKursy(): Promise<Kurs[]> {
 }
 
 /** Kurs, na którym kursant uczy się w obecnej wersji platformy. */
-export const ID_KURSU_AKTYWNEGO = 'kurs-demonstracyjny';
+export const ID_KURSU_AKTYWNEGO = 'emerytura-pod-kontrola';
 
 export async function kurs(id: string): Promise<Kurs> {
   const k = (await wszystkieKursy()).find((x) => x.id === id);

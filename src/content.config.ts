@@ -1,6 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
+import { NARZEDZIA_DOSTEPNE } from './lib/platforma/narzedzia';
 
 /**
  * Każdy artykuł musi mieć daty i listę źródeł. Bez nich strona się nie zbuduje.
@@ -70,7 +71,7 @@ const lekcje = defineCollection({
     demonstracyjna: z.boolean(),
     twierdzenia: z.array(z.string()).default([]),
     ilustracja: z.object({ opis: z.string(), podpis: z.string() }).optional(),
-    narzedzie: z.enum(['oszczedzanie']).optional(),
+    narzedzie: z.enum(NARZEDZIA_DOSTEPNE).optional(),
     materialy: z
       .array(z.object({ tytul: z.string(), opis: z.string(), adres: z.string().optional() }))
       .default([]),

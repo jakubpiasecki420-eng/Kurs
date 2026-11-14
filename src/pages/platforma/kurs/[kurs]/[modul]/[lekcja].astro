@@ -1,7 +1,7 @@
 ---
 import Aplikacja from '@/layouts/Aplikacja.astro';
 import Ikona from '@/components/Ikona.astro';
-import Kalkulator from '@/components/Kalkulator.astro';
+import WidokNarzedzia from '@/components/platforma/WidokNarzedzia.astro';
 import ListaLekcji from '@/components/platforma/ListaLekcji.astro';
 import PasekPostepu from '@/components/platforma/PasekPostepu.astro';
 import Ilustracja from '@/components/platforma/Ilustracja.astro';
@@ -9,11 +9,12 @@ import MaterialyDodatkowe from '@/components/platforma/MaterialyDodatkowe.astro'
 import Quiz from '@/components/platforma/Quiz.astro';
 import InformacjeNarzedzia from '@/components/platforma/InformacjeNarzedzia.astro';
 import Zrodla from '@/components/Zrodla.astro';
-import { render } from 'astro:content';
 import { wszystkieKursy, wszystkieLekcje, type WpisLekcji } from '@/lib/platforma/dane';
 import { sasiedzi } from '@/lib/platforma/kurs';
 import { narzedzie } from '@/lib/platforma/narzedzia';
 import { przypisy } from '@/lib/rejestr';
+import { renderujTresc } from '@/lib/tresc-markdown';
+import { PRZED_RECENZJA } from '@/lib/serwis';
 import type { Kurs, Lekcja, Modul } from '@/lib/platforma/model';
 
 export async function getStaticPaths() {
@@ -29,9 +30,10 @@ export async function getStaticPaths() {
 }
 
 const { kurs, modul, lekcja, wpis } = Astro.props as { kurs: Kurs; modul: Modul; lekcja: Lekcja; wpis: WpisLekcji };
-const { Content, headings } = await render(wpis);
 const d = wpis.data;
-const sekcje = headings.filter((h) => h.depth === 2);
+// Ten sam renderer co przewodnik PDF: wartości i przypisy z rejestru, tylko status P.
+const tresc = renderujTresc(wpis.body ?? '', d.twierdzenia, `lekcja ${kurs.id}/${lekcja.id}`);
+const sekcje = tresc.naglowki.filter((h) => h.poziom === 2);
 const { poprzednia, nastepna, pozycja, wszystkie } = sasiedzi(kurs, lekcja.id);
 const zrodla = przypisy(d.twierdzenia);
 const n = d.narzedzie ? narzedzie(d.narzedzie) : null;
@@ -56,6 +58,7 @@ const wymagane = modul.wymaga.map((w) => kurs.moduly.find((m) => m.id === w)!);
         <div class="lekcja-meta">
           <span class="lekcja-meta__czas"><Ikona nazwa="zegar" /> {lekcja.czasMin} min</span>
           {lekcja.demonstracyjna && <span class="znacznik znacznik--zloty">Treść przykładowa</span>}
+          {!lekcja.demonstracyjna && PRZED_RECENZJA && <span class="znacznik znacznik--zloty">Przed recenzją eksperta</span>}
           <span class="znacznik" data-lekcja={lekcja.id} data-kurs={kurs.id} data-ukonczona="false" data-znacznik-ukonczenia>
             <span data-tekst-znacznika>Nieukończona</span>
           </span>
@@ -88,7 +91,7 @@ const wymagane = modul.wymaga.map((w) => kurs.moduly.find((m) => m.id === w)!);
               <ol>
                 {sekcje.map((s) => (
                   <li>
-                    <a href={`#${s.slug}`}>{s.text}</a>
+                    <a href={`#${s.slug}`}>{s.tekst}</a>
                   </li>
                 ))}
               </ol>
@@ -96,9 +99,7 @@ const wymagane = modul.wymaga.map((w) => kurs.moduly.find((m) => m.id === w)!);
           )
         }
 
-        <div class="proza">
-          <Content />
-        </div>
+        <div class="proza" set:html={tresc.html} />
 
         {d.ilustracja && <Ilustracja opis={d.ilustracja.opis} podpis={d.ilustracja.podpis} />}
 
@@ -109,7 +110,7 @@ const wymagane = modul.wymaga.map((w) => kurs.moduly.find((m) => m.id === w)!);
                 Ćwiczenie: {n.nazwa.toLowerCase()}
               </h2>
               <p class="maly cichy">Wpisz własne założenia. Wynik nie zapisuje się w postępie.</p>
-              <Kalkulator />
+              <WidokNarzedzia id={d.narzedzie!} />
               <details class="tabela-wynikow" style="margin-top: var(--o-4)">
                 <summary>O narzędziu: założenia, źródła i zastrzeżenia</summary>
                 <InformacjeNarzedzia narzedzie={n} tytulPoziom="h3" />

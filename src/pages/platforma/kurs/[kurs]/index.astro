@@ -6,6 +6,8 @@ import PasekPostepu from '@/components/platforma/PasekPostepu.astro';
 import { wszystkieKursy } from '@/lib/platforma/dane';
 import { lacznyCzas, lekcjeKursu } from '@/lib/platforma/kurs';
 import type { Kurs } from '@/lib/platforma/model';
+import { liczebnik } from '@/lib/format';
+import { PRZED_RECENZJA } from '@/lib/serwis';
 
 export async function getStaticPaths() {
   return (await wszystkieKursy()).map((kurs) => ({ params: { kurs: kurs.id }, props: { kurs } }));
@@ -14,6 +16,8 @@ export async function getStaticPaths() {
 const { kurs } = Astro.props as { kurs: Kurs };
 const lekcje = lekcjeKursu(kurs).length;
 const aktywny = kurs.stan === 'aktywny';
+const modulyZLekcjami = kurs.moduly.filter((m) => m.lekcje.length > 0).length;
+const niepelny = modulyZLekcjami < kurs.moduly.length;
 ---
 
 <Aplikacja tytul={kurs.tytul} opis={kurs.opis} sekcja="kurs" kursy={aktywny ? [kurs] : []}>
@@ -29,8 +33,17 @@ const aktywny = kurs.stan === 'aktywny';
       <section class="panel" aria-label="Postęp kursu" style="margin-bottom: var(--o-5)">
         <PasekPostepu etykieta="Postęp kursu" kurs={kurs.id} />
         <p class="maly cichy" style="margin: var(--o-3) 0 0">
-          {kurs.moduly.length} moduły · {lekcje} lekcji · około {lacznyCzas(kurs)} minut nauki
+          {liczebnik(modulyZLekcjami, 'moduł', 'moduły', 'modułów')} z lekcjami · {liczebnik(lekcje, 'lekcja', 'lekcje', 'lekcji')} · około {lacznyCzas(kurs)} minut nauki
         </p>
+        {
+          !kurs.demonstracyjny && (niepelny || PRZED_RECENZJA) && (
+            <p class="maly" style="margin: var(--o-3) 0 0" data-informacja-o-kursie>
+              {niepelny &&
+                `Lekcje ma ${modulyZLekcjami} z ${kurs.moduly.length} modułów. Pozostałe są w przygotowaniu; część czeka na recenzję doradcy podatkowego. `}
+              {PRZED_RECENZJA && 'Wszystkie lekcje są wersją roboczą przed recenzją eksperta.'}
+            </p>
+          )
+        }
       </section>
     ) : (
       <div class="blokada">

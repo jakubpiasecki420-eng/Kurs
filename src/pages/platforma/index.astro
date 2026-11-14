@@ -6,10 +6,11 @@ import PasekPostepu from '@/components/platforma/PasekPostepu.astro';
 import { ID_KURSU_AKTYWNEGO, wszystkieKursy } from '@/lib/platforma/dane';
 import { lekcjeKursu } from '@/lib/platforma/kurs';
 import { NARZEDZIA } from '@/lib/platforma/narzedzia';
+import { liczebnik } from '@/lib/format';
 
 const kursy = await wszystkieKursy();
 const kurs = kursy.find((k) => k.id === ID_KURSU_AKTYWNEGO)!;
-const wPrzygotowaniu = kursy.filter((k) => k.stan === 'w-przygotowaniu');
+const inne = kursy.filter((k) => k.id !== ID_KURSU_AKTYWNEGO);
 const pierwsza = lekcjeKursu(kurs)[0];
 ---
 
@@ -58,7 +59,7 @@ const pierwsza = lekcjeKursu(kurs)[0];
           </div>
           <div class="statystyka">
             <dt>Ukończone moduły</dt>
-            <dd><span data-liczba="moduly-ukonczone" data-kurs={kurs.id}>0</span> <span class="statystyka__z">z <span data-liczba="moduly-wszystkie" data-kurs={kurs.id}>{kurs.moduly.length}</span></span></dd>
+            <dd><span data-liczba="moduly-ukonczone" data-kurs={kurs.id}>0</span> <span class="statystyka__z">z <span data-liczba="moduly-wszystkie" data-kurs={kurs.id}>{kurs.moduly.filter((m) => m.lekcje.length > 0).length}</span></span></dd>
           </div>
           <div class="statystyka">
             <dt>Rozwiązane quizy</dt>
@@ -74,12 +75,16 @@ const pierwsza = lekcjeKursu(kurs)[0];
       </section>
 
       {
-        wPrzygotowaniu.map((k) => (
+        inne.map((k) => (
           <section class="panel" aria-labelledby={`kurs-${k.id}`}>
             <h2 class="panel__tytul" id={`kurs-${k.id}`}>{k.tytul}</h2>
             <p class="maly">{k.opis}</p>
-            <p class="maly cichy">{k.moduly.length} modułów · kurs w przygotowaniu</p>
-            <a class="link-strzalka" href={k.adres}>Zobacz program</a>
+            <p class="maly cichy">
+              {k.stan === 'w-przygotowaniu'
+                ? `${liczebnik(k.moduly.length, 'moduł', 'moduły', 'modułów')} · kurs w przygotowaniu`
+                : `${liczebnik(lekcjeKursu(k).length, 'lekcja', 'lekcje', 'lekcji')}${k.demonstracyjny ? ' · pokazuje działanie platformy' : ''}`}
+            </p>
+            <a class="link-strzalka" href={k.adres}>{k.stan === 'w-przygotowaniu' ? 'Zobacz program' : 'Przejdź do kursu'}</a>
           </section>
         ))
       }

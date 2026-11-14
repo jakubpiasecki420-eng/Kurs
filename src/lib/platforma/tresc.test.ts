@@ -1,9 +1,28 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
+import { parse } from 'yaml';
 import { twierdzenie } from '@/lib/rejestr';
+import { renderujTresc } from '@/lib/tresc-markdown';
 
 const kursy = new URL('../../content/kursy/', import.meta.url);
 const lekcje = new URL('../../content/lekcje/', import.meta.url);
+
+interface Lekcja {
+  plik: string;
+  dane: { twierdzenia?: string[]; demonstracyjna: boolean; narzedzie?: string; quiz?: { pytania: unknown[] } };
+  tresc: string;
+}
+
+function wszystkieLekcje(): Lekcja[] {
+  return readdirSync(lekcje).flatMap((katalog) =>
+    readdirSync(new URL(`${katalog}/`, lekcje)).map((plik) => {
+      const tekst = readFileSync(new URL(`${katalog}/${plik}`, lekcje), 'utf8');
+      const m = tekst.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+      if (!m) throw new Error(`${katalog}/${plik}: brak nagłówka YAML.`);
+      return { plik: `${katalog}/${plik}`, dane: parse(m[1]), tresc: m[2] };
+    }),
+  );
+}
 
 describe('treść platformy', () => {
   const pliki = readdirSync(kursy).filter((p) => p.endsWith('.json'));
@@ -34,19 +53,43 @@ describe('treść platformy', () => {
     }
   });
 
-  it('kurs w przygotowaniu nie ma jeszcze lekcji', () => {
+  it('kurs docelowy jest aktywny; lekcje mają tylko moduły, których treść nie czeka na recenzję podatkową', () => {
     const kurs = JSON.parse(readFileSync(new URL('emerytura-pod-kontrola.json', kursy), 'utf8'));
-    expect(kurs.stan).toBe('w-przygotowaniu');
-    expect(kurs.moduly.every((m: { lekcje?: string[] }) => !m.lekcje || m.lekcje.length === 0)).toBe(true);
+    expect(kurs.stan).toBe('aktywny');
+    expect(kurs.demonstracyjny).toBe(false);
+    const zLekcjami = kurs.moduly.filter((m: { lekcje?: string[] }) => m.lekcje?.length).map((m: { id: string }) => m.id);
+    expect(zLekcjami).toEqual(['system-emerytalny', 'zus', 'ike', 'inflacja', 'twoj-plan']);
+  });
+
+  it('lekcje kursu docelowego nie są oznaczone jako przykładowe i mają quiz', () => {
+    for (const l of wszystkieLekcje().filter((x) => x.plik.startsWith('emerytura-pod-kontrola/'))) {
+      expect(l.dane.demonstracyjna, l.plik).toBe(false);
+      expect(l.dane.quiz?.pytania.length, l.plik).toBeGreaterThan(0);
+    }
   });
 
   it('lekcje odwołują się tylko do twierdzeń ze źródeł pierwotnych', () => {
-    for (const katalog of readdirSync(lekcje)) {
-      for (const plik of readdirSync(new URL(`${katalog}/`, lekcje))) {
-        const linia = readFileSync(new URL(`${katalog}/${plik}`, lekcje), 'utf8').match(/^twierdzenia: \[(.*)\]$/m);
-        const ids = linia ? linia[1].split(',').map((s) => s.trim()).filter(Boolean) : [];
-        ids.forEach((id) => expect(twierdzenie(id).status, id).toBe('P'));
-      }
+    for (const l of wszystkieLekcje()) {
+      (l.dane.twierdzenia ?? []).forEach((id) => expect(twierdzenie(id).status, `${l.plik}: ${id}`).toBe('P'));
+    }
+  });
+
+  it('każda lekcja renderuje się bez błędów, a każde zadeklarowane twierdzenie ma przypis w treści', () => {
+    for (const l of wszystkieLekcje()) {
+      const deklarowane = l.dane.twierdzenia ?? [];
+      const { html } = renderujTresc(l.tresc, deklarowane, l.plik);
+      expect(html, l.plik).not.toMatch(/NaN|undefined/);
+      deklarowane.forEach((id, i) => expect(html, `${l.plik}: brak przypisu ${id}`).toContain(`href="#zrodlo-${i + 1}"`));
+    }
+  });
+
+  it('w treści lekcji nie ma kwot ani stawek wpisanych ręcznie zamiast odwołań do rejestru', () => {
+    // Dozwolone wyjątki: liczby z przykładów dydaktycznych i warunki wieku/stażu opisane słownie w treści twierdzeń.
+    const kwotaZRejestru = /\b\d{1,3}(?: \d{3})+(?:,\d{2})? zł/;
+    for (const l of wszystkieLekcje().filter((x) => x.plik.startsWith('emerytura-pod-kontrola/'))) {
+      const bezPrzykladow = l.tresc.replace(/500 zł|100 zł|103 zł|40 000 zł|50 000 zł|10 000 zł/g, '');
+      expect(bezPrzykladow, l.plik).not.toMatch(kwotaZRejestru);
+      expect(l.tresc, l.plik).not.toMatch(/\d+,\d+%/);
     }
   });
 });

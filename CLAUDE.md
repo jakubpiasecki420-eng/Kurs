@@ -2,7 +2,7 @@
 
 > Główne źródło prawdy dla projektu. Przeczytaj przed rozpoczęciem pracy. Szczegóły są w `docs/`; w razie sprzeczności obowiązuje ten plik, a sprzeczność trzeba usunąć.
 >
-> Stan na dzień: **13 listopada 2026 r.**
+> Stan na dzień: **14 listopada 2026 r.**
 
 ---
 
@@ -133,7 +133,7 @@ Pełny opis, pliki logo i komponenty: `docs/marka.md`.
 | `/jak-uczymy/` | Prezentacja platformy i sposobu nauki |
 | `/biblioteka/` | Darmowe materiały: przewodniki, artykuły, kalkulator |
 | `/artykuly/` | Artykuły |
-| `/platforma/…` | **Strefa kursanta** (wersja demonstracyjna): pulpit, program kursu, moduły, lekcje, postęp, narzędzia, ustawienia. Zawsze `noindex` |
+| `/platforma/…` | **Strefa kursanta** (wersja demonstracyjna): pulpit, program kursu, moduły, lekcje, postęp, narzędzia (`/platforma/narzedzia/<id>/`), ustawienia. Zawsze `noindex` |
 | `/o-projekcie/` | Zasady, metoda, status serwisu |
 | `/zrodla/` | Rejestr źródeł i metodologia |
 | `/kontakt/` | Kontakt |
@@ -184,13 +184,13 @@ Zmienna `SITE_URL` ustawia docelowy adres serwisu. Bez niej nie powstają adresy
 | --- | --- |
 | `src/config/serwis.json` | Marka, dane podmiotu, flagi publikacji, ustawienia zapisu |
 | `src/data/rejestr.json` | Rejestr źródeł i twierdzeń |
-| `src/lib/` | Rejestr, formatowanie, kolory, kalkulatory — z testami obok |
+| `src/lib/` | Rejestr, formatowanie, kolory, kalkulatory, treść lekcji (`tresc-markdown.ts`) i przykłady obliczeniowe (`przyklady.ts`) — z testami obok |
 | `src/lib/platforma/` | Model kursu, budowanie programu, postęp, magazyn, rejestr narzędzi, skrypt strefy kursanta — z testami |
 | `src/content/kursy/`, `src/content/lekcje/` | Programy kursów (JSON) i lekcje (Markdown) |
 | `src/components/`, `src/layouts/` | Komponenty i układy: `Bazowy.astro` (strona publiczna), `Aplikacja.astro` (strefa kursanta); komponenty platformy w `src/components/platforma/` |
 | `src/pages/` | Strony |
 | `src/content/artykuly/` | Artykuły w Markdown ze schematem (`src/content.config.ts`) |
-| `src/styles/` | Tokeny, style wspólne, `platforma.css` dla strefy kursanta |
+| `src/styles/` | Tokeny, style wspólne, `kalkulator.css` i `wykres.css` dla narzędzi, `platforma.css` dla strefy kursanta |
 | `public/` | Logo, favicon, grafika OG (generowane) |
 | `tests/e2e/` | Testy w przeglądarce |
 | `scripts/` | Generatory i kontrola gotowości |
@@ -204,7 +204,8 @@ Zmienna `SITE_URL` ustawia docelowy adres serwisu. Bez niej nie powstają adresy
 - Nowy kolor tekstu dopisz do `src/lib/kolory.ts`, `src/styles/tokeny.css` i testu kontrastu.
 - Każda nowa strona trafia na listę w `tests/e2e/strony.spec.ts`.
 - Strefa kursanta: stan postępu zmieniają wyłącznie funkcje z `src/lib/platforma/postep.ts`, zapisuje go magazyn (`magazyn.ts`). Widoki oznaczają elementy zależne od postępu atrybutami `data-*`, które uzupełnia `klient.ts`. Teksty do DOM tylko przez `textContent`.
-- Nowa lekcja: plik w `src/content/lekcje/<kurs>/` i wpis w programie kursu. Treści merytoryczne tylko na twierdzeniach ze statusem P.
+- Nowa lekcja: plik w `src/content/lekcje/<kurs>/` i wpis w programie kursu. Treści merytoryczne tylko na twierdzeniach ze statusem P. W treści liczby z rejestru wstawiaj jako `{{identyfikator}}`, przypisy jako `[^identyfikator]` (bez odstępu po słowie), przykłady obliczeniowe dyrektywą `<!-- tabela:… -->` (`src/lib/przyklady.ts`). Każde twierdzenie z pola `twierdzenia` musi mieć przypis w treści.
+- Treść dla kursanta pisz w formach neutralnych płciowo („Zapisz”, „suma wpłat”), nie „wpłaciłeś”.
 
 ---
 
@@ -225,8 +226,10 @@ Zmiana jest gotowa, gdy:
 
 Stan faz i ścieżka do publikacji: `docs/harmonogram.md`.
 
-Etap 1 platformy (fundamenty) jest zakończony: strefa kursanta w wersji demonstracyjnej, model kursu i postępu, centrum narzędzi. Szczegóły i ograniczenia: `docs/architektura-platformy.md`.
+Etap 1 platformy (fundamenty) jest zakończony: strefa kursanta w wersji demonstracyjnej, model kursu i postępu, centrum narzędzi.
 
-Materiał uzupełniający: szkice rozdziałów 0, 2, 4 i 9 przewodnika składają się do PDF (`npm run przewodnik`). Te same treści staną się źródłem lekcji kursu.
+Etap 2 (treść pierwszego kursu) jest zakończony w zakresie bez blokad: kurs „Emerytura pod kontrolą” jest aktywny i ma 12 lekcji w modułach 1, 2, 4, 9 i 12, z quizami i przykładami z rejestru. Lekcje są wersją roboczą przed recenzją. W centrum narzędzi działają kalkulatory oszczędzania, procentu składanego i inflacji. Szczegóły i ograniczenia: `docs/architektura-platformy.md`.
+
+Materiał uzupełniający: szkice rozdziałów 0, 2, 4 i 9 przewodnika składają się do PDF (`npm run przewodnik`) z tymi samymi przykładami obliczeniowymi co lekcje (`src/lib/przyklady.ts`).
 
 Nie rozpoczynaj kolejnego etapu bez polecenia właściciela. Wstrzymane do czasu opinii zewnętrznych: kalkulator IKZE w interfejsie, moduły 3 i 5–7, porównanie kont według formy opodatkowania, formularz zapisu, sprzedaż, włączenie indeksowania.

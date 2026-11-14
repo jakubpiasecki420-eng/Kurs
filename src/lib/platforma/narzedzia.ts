@@ -49,26 +49,34 @@ export const NARZEDZIA: readonly Narzedzie[] = [
   {
     id: 'procent-skladany',
     nazwa: 'Kalkulator procentu składanego',
-    opis: 'Wartość jednorazowej kwoty po latach przy stałej stopie.',
-    stan: 'planowane',
-    adres: null,
-    biblioteka: 'src/lib/kalkulator/oszczednosci.ts (funkcja kapitalPoLatach)',
-    zalozenia: ['Jednorazowa wpłata, stała roczna stopa, zysk pozostaje na koncie.'],
+    opis: 'Wartość jednorazowej kwoty po latach przy stałej stopie — z porównaniem do sytuacji, w której zysk co roku się wypłaca.',
+    stan: 'dostepne',
+    adres: '/platforma/narzedzia/procent-skladany/',
+    biblioteka: 'src/lib/kalkulator/proste.ts',
+    zalozenia: [
+      'Jednorazowa wpłata na początku okresu, bez kolejnych wpłat i wypłat.',
+      'Stała roczna stopa zwrotu; zysk dopisywany raz w roku.',
+      'Wartości nominalne: bez inflacji, podatków i kosztów.',
+      'Wariant porównawczy: zysk wypłacany co roku i niepracujący dalej (procent prosty).',
+    ],
     zrodla: [],
-    zaktualizowano: '2026-11-13',
+    zaktualizowano: '2026-11-14',
     zastrzezenie: ZASTRZEZENIE,
-    uwaga: 'Obliczenia są gotowe i przetestowane; brakuje interfejsu.',
   },
   {
     id: 'inflacja',
     nazwa: 'Kalkulator inflacji',
-    opis: 'Ile w przyszłości będzie kosztować dzisiejsza kwota i ile dzisiejszych pieniędzy jest warta kwota przyszła.',
-    stan: 'planowane',
-    adres: null,
-    biblioteka: 'do przygotowania',
-    zalozenia: ['Stała roczna inflacja przez cały okres.'],
+    opis: 'Ile w przyszłości będzie kosztować to, co dziś kosztuje podana kwota, i ile w dzisiejszych pieniądzach będzie warta ta sama kwota otrzymana w przyszłości.',
+    stan: 'dostepne',
+    adres: '/platforma/narzedzia/inflacja/',
+    biblioteka: 'src/lib/kalkulator/proste.ts',
+    zalozenia: [
+      'Stała roczna inflacja w każdym roku okresu.',
+      'Domyślna inflacja równa celowi inflacyjnemu NBP; to punkt odniesienia, nie prognoza.',
+      'Ceny wszystkich dóbr zmieniają się w tym samym tempie.',
+    ],
     zrodla: ['nbp-cel-inflacyjny'],
-    zaktualizowano: '2026-11-13',
+    zaktualizowano: '2026-11-14',
     zastrzezenie: ZASTRZEZENIE,
   },
   {
@@ -110,6 +118,10 @@ export const NARZEDZIA: readonly Narzedzie[] = [
     zastrzezenie: ZASTRZEZENIE,
   },
 ];
+
+/** Narzędzia, które mają interfejs (zob. WidokNarzedzia.astro). */
+export const NARZEDZIA_DOSTEPNE = ['oszczedzanie', 'procent-skladany', 'inflacja'] as const;
+export type IdNarzedziaDostepnego = (typeof NARZEDZIA_DOSTEPNE)[number];
 
 export const OPIS_STANU: Record<StanNarzedzia, string> = {
   dostepne: 'Dostępne',

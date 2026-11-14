@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { data, lata, procent, zl, zlPelne } from './format';
+import { data, lata, liczebnik, procent, zl, zlPelne } from './format';
 
 const nbsp = ' ';
 
@@ -47,5 +47,15 @@ describe('lata', () => {
     expect(lata(12)).toBe('12 lat');
     expect(lata(22)).toBe('22 lata');
     expect(lata(30)).toBe('30 lat');
+  });
+});
+
+describe('liczebnik', () => {
+  it('odmienia rzeczownik po liczebniku', () => {
+    expect(liczebnik(1, 'moduł', 'moduły', 'modułów')).toBe('1 moduł');
+    expect(liczebnik(3, 'moduł', 'moduły', 'modułów')).toBe('3 moduły');
+    expect(liczebnik(12, 'moduł', 'moduły', 'modułów')).toBe('12 modułów');
+    expect(liczebnik(22, 'lekcja', 'lekcje', 'lekcji')).toBe('22 lekcje');
+    expect(liczebnik(11, 'lekcja', 'lekcje', 'lekcji')).toBe('11 lekcji');
   });
 });

@@ -870,9 +870,17 @@
   font: 700 var(--tekst-l) var(--font-naglowki);
 }
 
-/* Narzędzie w lekcji */
+/* Narzędzie w lekcji: kolumna treści jest węższa niż strona narzędzia, więc układ zależy od niej, nie od ekranu. */
+.lekcja-narzedzie {
+  container-type: inline-size;
+}
 .lekcja-narzedzie .kalkulator {
   margin-top: var(--o-4);
+}
+@container (max-width: 54rem) {
+  .lekcja-narzedzie .kalkulator {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 /* Ukończenie i nawigacja */

@@ -266,6 +266,16 @@
       "przeglad": "2027-05-15"
     },
     {
+      "id": "ike-limit-ogloszenie",
+      "obszar": "ike",
+      "tresc": "Minister właściwy do spraw zabezpieczenia społecznego ogłasza limit wpłat na IKE na kolejny rok w Monitorze Polskim do końca roku poprzedzającego.",
+      "zrodlo": "ustawa-ike-ikze",
+      "przepis": "art. 13 ust. 4",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
       "id": "ikze-limit-wzor",
       "obszar": "ikze",
       "tresc": "Roczny limit wpłat na IKZE odpowiada 1,2-krotności prognozowanego przeciętnego wynagrodzenia miesięcznego, a dla osób prowadzących pozarolniczą działalność — 1,8-krotności.",
@@ -430,6 +440,16 @@
       "przeglad": "2027-05-15"
     },
     {
+      "id": "ikze-limit-ogloszenie",
+      "obszar": "ikze",
+      "tresc": "Minister właściwy do spraw zabezpieczenia społecznego ogłasza limity wpłat na IKZE na kolejny rok w Monitorze Polskim do końca roku poprzedzającego.",
+      "zrodlo": "ustawa-ike-ikze",
+      "przepis": "art. 13a ust. 8",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
       "id": "zdrowotna-podstawa",
       "obszar": "jdg-b2b",
       "tresc": "Roczną podstawą składki zdrowotnej przedsiębiorcy na skali lub podatku liniowym jest dochód z działalności, czyli przychody pomniejszone o koszty i o opłacone składki społeczne. Przepis nie przewiduje pomniejszenia tej podstawy o wpłaty na IKZE.",
@@ -487,6 +507,122 @@
       "przepis": "art. 50 ust. 2",
       "status": "P",
       "sprawdzono": "2026-11-13",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "sus-skladka-emerytalna",
+      "obszar": "zus",
+      "tresc": "Składka na ubezpieczenie emerytalne wynosi 19,52% podstawy wymiaru.",
+      "wartosc": 0.1952,
+      "jednostka": "stawka",
+      "zrodlo": "ustawa-sus",
+      "przepis": "art. 22 ust. 1 pkt 1",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "sus-konto-zwaloryzowane",
+      "obszar": "zus",
+      "tresc": "Na koncie ubezpieczonego w ZUS zapisuje się zwaloryzowaną wysokość składek na ubezpieczenie emerytalne.",
+      "zrodlo": "ustawa-sus",
+      "przepis": "art. 40 ust. 1",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "sus-podstawa-jdg",
+      "obszar": "jdg-b2b",
+      "tresc": "Podstawą wymiaru składek emerytalnej i rentowych osoby prowadzącej działalność jest zadeklarowana kwota, nie niższa niż 60% prognozowanego przeciętnego wynagrodzenia na dany rok.",
+      "wartosc": 0.6,
+      "jednostka": "stawka",
+      "zrodlo": "ustawa-sus",
+      "przepis": "art. 18 ust. 8",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "sus-podstawa-wyzsza",
+      "obszar": "jdg-b2b",
+      "tresc": "Przedsiębiorca może zadeklarować podstawę wymiaru składek wyższą od najniższej.",
+      "zrodlo": "ustawa-sus",
+      "przepis": "art. 18 ust. 8a",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "sus-preferencyjna",
+      "obszar": "jdg-b2b",
+      "tresc": "Przez pierwsze 24 miesiące kalendarzowe od rozpoczęcia działalności podstawą wymiaru składek emerytalnej i rentowych może być zadeklarowana kwota nie niższa niż 30% minimalnego wynagrodzenia; ustawa wyłącza z tego m.in. osoby, które w ciągu 60 miesięcy przed startem prowadziły działalność.",
+      "wartosc": 0.3,
+      "jednostka": "stawka",
+      "zrodlo": "ustawa-sus",
+      "przepis": "art. 18a ust. 1 i 2",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "fus-wiek-emerytalny",
+      "obszar": "zus",
+      "tresc": "Emerytura z ZUS przysługuje po osiągnięciu wieku emerytalnego wynoszącego co najmniej 60 lat dla kobiet i 65 lat dla mężczyzn; ustawa przewiduje od tej zasady wyjątki.",
+      "zrodlo": "ustawa-fus",
+      "przepis": "art. 24 ust. 1",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "fus-podstawa-obliczenia",
+      "obszar": "zus",
+      "tresc": "Podstawą obliczenia emerytury są zwaloryzowane składki na ubezpieczenie emerytalne zapisane na koncie, zwaloryzowany kapitał początkowy oraz środki zapisane na subkoncie.",
+      "zrodlo": "ustawa-fus",
+      "przepis": "art. 25 ust. 1",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "fus-wzor-emerytury",
+      "obszar": "zus",
+      "tresc": "Emerytura to podstawa obliczenia podzielona przez średnie dalsze trwanie życia dla osób w wieku przejścia na emeryturę. Średnie dalsze trwanie życia jest wspólne dla kobiet i mężczyzn i wyrażone w miesiącach.",
+      "zrodlo": "ustawa-fus",
+      "przepis": "art. 26 ust. 1 i 3",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "fus-tablice-gus",
+      "obszar": "zus",
+      "tresc": "Prezes GUS co roku do 31 marca ogłasza w Monitorze Polskim tablice trwania życia, które są podstawą przyznawania emerytur.",
+      "zrodlo": "ustawa-fus",
+      "przepis": "art. 26 ust. 4 i 5",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "fus-najnizsza-warunki",
+      "obszar": "zus",
+      "tresc": "Emeryturę niższą od najniższej podwyższa się do kwoty najniższej emerytury, jeżeli mężczyzna ukończył 65 lat i ma co najmniej 25 lat okresów składkowych i nieskładkowych, a kobieta ukończyła 60 lat i ma ich co najmniej 20 lat.",
+      "zrodlo": "ustawa-fus",
+      "przepis": "art. 87 ust. 1",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
+    },
+    {
+      "id": "fus-najnizsza-proporcja",
+      "obszar": "zus",
+      "tresc": "Przy liczeniu stażu do najniższej emerytury miesiące, w których składki na ubezpieczenia emerytalne i rentowe liczono od podstawy niższej niż minimalne wynagrodzenie, uwzględnia się proporcjonalnie do tej podstawy.",
+      "zrodlo": "ustawa-fus",
+      "przepis": "art. 87 ust. 3",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
       "przeglad": "2027-05-15"
     },
     {
@@ -561,6 +697,16 @@
       "status": "P",
       "sprawdzono": "2026-11-13",
       "przeglad": "2027-11-30"
+    },
+    {
+      "id": "oki-stawka-ogloszenie",
+      "obszar": "oki",
+      "tresc": "Minister finansów ogłasza stawkę podatku od wartości aktywów na kolejny rok w Monitorze Polskim do 30 listopada roku poprzedzającego.",
+      "zrodlo": "ustawa-oki",
+      "przepis": "art. 25 ust. 2",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15"
     },
     {
       "id": "oki-zwolnienie-lacznie",

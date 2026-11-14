@@ -16,10 +16,9 @@ import { marked } from 'marked';
 import { chromium } from '@playwright/test';
 import { PDFDocument } from 'pdf-lib';
 import { przygotujRozdzial, type Rozdzial } from '@/lib/przewodnik';
-import { kapitalPoLatach, symuluj } from '@/lib/kalkulator/oszczednosci';
-import { rysujWykres, SERIE } from '@/lib/kalkulator/wykres';
-import { data, lata, procent, zl, zlPelne } from '@/lib/format';
-import { STAN_NA_DZIEN, wartosc } from '@/lib/rejestr';
+import { dyrektywa, esc } from '@/lib/przyklady';
+import { data, liczebnik } from '@/lib/format';
+import { STAN_NA_DZIEN } from '@/lib/rejestr';
 import { PRZED_RECENZJA, SERWIS } from '@/lib/serwis';
 
 const korzen = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -49,109 +48,13 @@ const SPIS: Array<[string, string]> = [
   ['C', 'Źródła'],
 ];
 
-// ---------- Przykłady obliczeniowe ----------
-
-const esc = (t: string) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-
-function tabela(naglowki: string[], wiersze: string[][], podpis: string, liczbowe: number[]): string {
-  const th = naglowki
-    .map((n, i) => `<th scope="col"${liczbowe.includes(i) ? ' class="l"' : ''}>${n}</th>`)
-    .join('');
-  const tr = wiersze
-    .map(
-      (w) =>
-        `<tr>${w.map((k, i) => (i === 0 ? `<th scope="row">${k}</th>` : `<td${liczbowe.includes(i) ? ' class="l"' : ''}>${k}</td>`)).join('')}</tr>`,
-    )
-    .join('');
-  return `<figure class="przyklad"><table><thead><tr>${th}</tr></thead><tbody>${tr}</tbody></table><figcaption>${podpis}</figcaption></figure>`;
-}
-
-const inflacja = wartosc('nbp-cel-inflacyjny');
-const WPLATA = 500;
-const STOPA_PRZYKLADOWA = 0.05;
-
-const DYREKTYWY: Record<string, () => string> = {
-  'przyklad:zwrot-ike': () => {
-    const wplaty = 40_000;
-    const wartoscSrodkow = 50_000;
-    const stawka = wartosc('ike-zwrot-podatek');
-    const dochod = wartoscSrodkow - wplaty;
-    const podatek = dochod * stawka;
-    return tabela(
-      ['Pozycja', 'Kwota'],
-      [
-        ['Suma Twoich wpłat', zl(wplaty)],
-        ['Wartość środków w dniu zwrotu', zl(wartoscSrodkow)],
-        ['Dochód', zl(dochod)],
-        [`Podatek ${procent(stawka)} od dochodu`, zl(podatek)],
-        ['Otrzymujesz', zl(wartoscSrodkow - podatek)],
-      ],
-      'Przykład obliczeniowy dla kwot z tabeli. Gdyby wypłata nastąpiła po spełnieniu warunków, podatku by nie było.',
-      [1],
-    );
-  },
-
-  'tabela:inflacja': () =>
-    tabela(
-      ['Po ilu latach', 'Tyle kosztuje to, co dziś kosztuje 1 000 zł', 'Tyle w dzisiejszych pieniądzach jest warte 1 000 zł'],
-      [10, 20, 30].map((n) => [lata(n), zlPelne(1000 * Math.pow(1 + inflacja, n)), zlPelne(1000 / Math.pow(1 + inflacja, n))]),
-      `Założenie: inflacja ${procent(inflacja)} w każdym roku. Przykład obliczeniowy, nie prognoza.`,
-      [1, 2],
-    ),
-
-  'tabela:procent-skladany': () =>
-    tabela(
-      ['Po ilu latach', 'Zysk zostaje na koncie', 'Zysk wypłacany co roku (kapitał i suma wypłat)'],
-      [1, 10, 20, 30].map((n) => [
-        lata(n),
-        zlPelne(kapitalPoLatach(10_000, STOPA_PRZYKLADOWA, n)),
-        zlPelne(10_000 + 10_000 * STOPA_PRZYKLADOWA * n),
-      ]),
-      `Założenia: jednorazowo 10 000 zł, stały zysk ${procent(STOPA_PRZYKLADOWA)} rocznie, bez kosztów i podatków. Różnica między kolumnami to procent składany. Przykład obliczeniowy, nie prognoza.`,
-      [1, 2],
-    ),
-
-  'tabela:scenariusze': () => {
-    const stopy = [0, inflacja, STOPA_PRZYKLADOWA];
-    const wiersze = [10, 20, 30].flatMap((n) =>
-      stopy.map((s) => {
-        const w = symuluj({ wplataMiesieczna: WPLATA, lata: n, stopaZwrotu: s, inflacja, koszty: 0 });
-        return [lata(n), procent(s), zlPelne(w.sumaWplat), zlPelne(w.wartoscNominalna), zlPelne(w.wartoscRealna)];
-      }),
-    );
-    return tabela(
-      ['Okres', 'Roczny zysk', 'Suma wpłat', 'Wartość nominalna', 'Wartość realna'],
-      wiersze,
-      `Założenia: wpłata ${zl(WPLATA)} na koniec każdego miesiąca, inflacja ${procent(inflacja)} rocznie, bez kosztów i podatków. Wartość realna — w dzisiejszych pieniądzach. Przykład obliczeniowy, nie prognoza.`,
-      [1, 2, 3, 4],
-    );
-  },
-
-  'wykres:scenariusz': () => {
-    const w = symuluj({ wplataMiesieczna: WPLATA, lata: 30, stopaZwrotu: STOPA_PRZYKLADOWA, inflacja, koszty: 0 });
-    const legenda = SERIE.map((s) => `<li><span class="klucz" style="--k:${s.kolor}"></span>${s.nazwa}</li>`).join('');
-    return `<figure class="wykres"><p class="wykres__tytul">Przebieg w kolejnych latach</p><ul class="legenda">${legenda}</ul>${rysujWykres(w, 640)}<figcaption>Założenia: ${zl(WPLATA)} miesięcznie przez 30 lat, zysk ${procent(STOPA_PRZYKLADOWA)} rocznie, inflacja ${procent(inflacja)} rocznie, bez kosztów i podatków. Przykład obliczeniowy, nie prognoza.</figcaption></figure>`;
-  },
-
-  'tabela:koszty': () => {
-    const bez = symuluj({ wplataMiesieczna: WPLATA, lata: 30, stopaZwrotu: STOPA_PRZYKLADOWA, inflacja, koszty: 0 });
-    return tabela(
-      ['Roczne koszty', 'Wartość nominalna po 30 latach', 'Mniej niż bez kosztów'],
-      [0, 0.005, 0.01, 0.02].map((k) => {
-        const w = symuluj({ wplataMiesieczna: WPLATA, lata: 30, stopaZwrotu: STOPA_PRZYKLADOWA, inflacja, koszty: k });
-        return [procent(k), zlPelne(w.wartoscNominalna), k === 0 ? '—' : zlPelne(bez.wartoscNominalna - w.wartoscNominalna)];
-      }),
-      `Założenia: ${zl(WPLATA)} miesięcznie przez 30 lat, zysk ${procent(STOPA_PRZYKLADOWA)} rocznie przed kosztami, koszty liczone od zgromadzonych środków, bez podatków. Przykład obliczeniowy, nie prognoza.`,
-      [1, 2],
-    );
-  },
-};
-
 function wstawDyrektywy(markdown: string, numer: string): string {
   return markdown.replace(/<!--\s*([a-z:-]+)\s*-->/g, (_c, nazwa: string) => {
-    const f = DYREKTYWY[nazwa];
-    if (!f) throw new Error(`Rozdział ${numer}: nieznana dyrektywa „${nazwa}”.`);
-    return `\n\n${f()}\n\n`;
+    try {
+      return `\n\n${dyrektywa(nazwa)}\n\n`;
+    } catch (e) {
+      throw new Error(`Rozdział ${numer}: ${(e as Error).message}`);
+    }
   });
 }
 
@@ -302,6 +205,8 @@ table { width: 100%; border-collapse: collapse; font-size: 9pt; margin: 6pt 0 10
 th, td { text-align: left; vertical-align: top; padding: 5pt 7pt; border-bottom: .6pt solid var(--linia); }
 thead th { font: 700 7.5pt 'Manrope Variable'; letter-spacing: .05em; text-transform: uppercase; color: var(--cichy); background: var(--tlo); }
 tbody th { font-weight: 600; }
+.wizualnie-ukryte { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.tabela-przewijana { overflow: visible; }
 .l { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
 tr { break-inside: avoid; }
 figure { margin: 8pt 0 12pt; break-inside: avoid; }
@@ -392,5 +297,5 @@ wynik.setLanguage('pl-PL');
 wynik.setCreator(SERWIS.marka);
 writeFileSync(sciezkaPdf, await wynik.save());
 
-console.log(`Złożono ${rozdzialy.length} rozdziałów: ${[...obecne].join(', ')}.`);
+console.log(`Złożono ${liczebnik(obecne.size, 'rozdział', 'rozdziały', 'rozdziałów')}: ${[...obecne].join(', ')}.`);
 console.log(`PDF: ${sciezkaPdf}`);

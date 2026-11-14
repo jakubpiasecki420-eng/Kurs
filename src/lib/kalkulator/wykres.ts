@@ -119,7 +119,8 @@ export function rozsun(pozycje: number[], odstep: number, min: number, maks: num
   return wynik;
 }
 
-export function rysujWykres(wynik: Wynik, szerokosc: number): string {
+/** `prefiks` rozróżnia identyfikatory, gdy na stronie jest więcej niż jeden wykres. */
+export function rysujWykres(wynik: Wynik, szerokosc: number, prefiks = 'wykres'): string {
   const g = geometria(wynik, szerokosc);
   const lata = wynik.przebieg.length - 1;
   const ostatni = wynik.przebieg[lata];
@@ -171,9 +172,9 @@ export function rysujWykres(wynik: Wynik, szerokosc: number): string {
   }
 
   return (
-    `<svg class="wykres__svg" viewBox="0 0 ${g.szerokosc} ${g.wysokosc}" width="${g.szerokosc}" height="${g.wysokosc}" role="img" aria-labelledby="wykres-tytul wykres-opis">` +
-    `<title id="wykres-tytul">Przebieg symulacji w kolejnych latach</title>` +
-    `<desc id="wykres-opis">Trzy linie: wartość nominalna, wartość w dzisiejszych pieniądzach i suma wpłat. Te same dane są w tabeli pod wykresem.</desc>` +
+    `<svg class="wykres__svg" viewBox="0 0 ${g.szerokosc} ${g.wysokosc}" width="${g.szerokosc}" height="${g.wysokosc}" role="img" aria-labelledby="${prefiks}-tytul ${prefiks}-opis">` +
+    `<title id="${prefiks}-tytul">Przebieg symulacji w kolejnych latach</title>` +
+    `<desc id="${prefiks}-opis">Trzy linie: wartość nominalna, wartość w dzisiejszych pieniądzach i suma wpłat. Te same dane są w tabeli pod wykresem.</desc>` +
     `<g>${siatka}</g>` +
     `<text x="${g.lewy}" y="${g.wysokosc - 6}" class="wykres__os wykres__os--tytul">Lata oszczędzania</text>` +
     `<text x="${g.lewy - 10}" y="11" text-anchor="end" class="wykres__os wykres__os--tytul">zł</text>` +

@@ -2,7 +2,7 @@
 
 Niezależna platforma edukacji finansowej dla osób prowadzących działalność i pracujących na B2B: strona publiczna oraz strefa kursanta z kursami, lekcjami, quizami, kalkulatorami i postępem. Zbudowana w Astro jako strona statyczna.
 
-Strefa kursanta (`/platforma/`) działa w wersji demonstracyjnej: konta jeszcze nie istnieją, a postęp zapisuje się tylko w przeglądarce.
+Strefa kursanta (`/platforma/`) działa w wersji demonstracyjnej: konta jeszcze nie istnieją, a postęp zapisuje się tylko w przeglądarce. Kurs „Emerytura pod kontrolą” ma 12 lekcji w 5 z 12 modułów (wersja robocza przed recenzją); w centrum narzędzi działają kalkulatory oszczędzania, procentu składanego i inflacji.
 
 **Status: wersja robocza.** Materiały nie przeszły recenzji doradcy podatkowego. Serwis jest zamknięty dla wyszukiwarek, nie zbiera danych i niczego nie sprzedaje.
 
