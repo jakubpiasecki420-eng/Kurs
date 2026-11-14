@@ -137,7 +137,7 @@ const p = przypisy([
             Wpłata zmniejsza podatek za rok, w którym jej dokonujesz. Przy wypłacie zapłacisz jednak {
               procent(p.wartosc('ikze-wyplata-podatek'))
             } od całej wypłacanej kwoty, czyli od wpłat i od zysku<Odn nr={p.nr('ikze-wyplata-podatek')} />.
-            Ostateczny bilans zależy od stawki, według której dziś płacisz podatek.
+            Ostateczny bilans zależy m.in. od stawki, według której dziś płacisz podatek, i od wyników inwestycji na koncie.
           </p>
         </div>
 
@@ -154,8 +154,8 @@ const p = przypisy([
         <p>
           Kwota zwrócona przed spełnieniem warunków jest przychodem z innych źródeł<Odn
             nr={p.nr('ikze-zwrot-podatek')}
-          />. Nie obejmuje jej więc zryczałtowana stawka {procent(p.wartosc('ikze-wyplata-podatek'))}
-          przewidziana dla wypłaty.
+          />. Zryczałtowana stawka {procent(p.wartosc('ikze-wyplata-podatek'))} dotyczy wypłat z IKZE, a nie zwrotu.
+          Jak zwrot rozliczyć przy Twojej formie opodatkowania, ustal z doradcą podatkowym.
         </p>
 
         <h2>O co zapytać instytucję przed podpisaniem umowy</h2>

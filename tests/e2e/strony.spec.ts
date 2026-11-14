@@ -117,3 +117,9 @@ test('przypis prowadzi do źródła na dole strony', async ({ page }) => {
   await expect(page.locator(cel!)).toBeInViewport();
   await expect(page.locator(cel!).locator('a')).toHaveAttribute('href', /^https:\/\//);
 });
+
+test('rejestr źródeł oddziela brzmienie przepisu od wniosku autora', async ({ page }) => {
+  await page.goto('/zrodla/');
+  await expect(page.getByText(/Wniosek z przepisów, przed recenzją eksperta/).first()).toBeVisible();
+  await expect(page.locator('#oki-stawka-2027')).toContainText('Obowiązuje od 1 stycznia 2027');
+});

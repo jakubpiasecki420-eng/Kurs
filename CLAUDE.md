@@ -77,7 +77,8 @@ Pierwszy kurs ma 12 modułów (`src/content/kursy/emerytura-pod-kontrola.json`, 
 4. **Nie wpisuj liczb w komponentach.** Pobieraj je przez `p.wartosc('identyfikator')` i formatuj funkcjami z `src/lib/format.ts`.
 5. Nowe twierdzenie dodajesz dopiero po przeczytaniu aktu w źródle. Preferowane: ELI/ISAP, Monitor Polski, strony ZUS, MF, MRPiPS, KNF, UOKiK.
 6. Symulacje ujawniają założenia, rozróżniają wartość nominalną i realną i są oznaczone jako przykłady.
-7. Po zmianie rejestru: `npm test`, `npm run build`, `npm run rejestr`.
+7. Każde twierdzenie P ma pole `interpretacja`: `brzmienie` (streszczenie przepisu) albo `wniosek` (połączenie przepisów lub wniosek autora — z polem `uwagi`, wymaga eksperta). Status P potwierdza treść przepisu, nie interpretację.
+8. Po zmianie rejestru: `npm test`, `npm run build`, `npm run rejestr`.
 
 Procedura i kalendarz: `docs/system-aktualizacji.md`. Czytelna wersja rejestru: `docs/rejestr-zrodel-i-twierdzen.md` (plik generowany).
 
@@ -232,7 +233,9 @@ Etap 1 platformy (fundamenty) jest zakończony: strefa kursanta w wersji demonst
 
 Etap 2 (treść pierwszego kursu) jest zakończony w zakresie bez blokad: kurs „Emerytura pod kontrolą” jest aktywny i ma 12 lekcji w modułach 1, 2, 4, 9 i 12, z quizami i przykładami z rejestru. Lekcje są wersją roboczą przed recenzją. W centrum narzędzi działają kalkulatory oszczędzania, procentu składanego i inflacji. Szczegóły i ograniczenia: `docs/architektura-platformy.md`.
 
-Etap 2B (naprawa po audycie `docs/audyt-jakosci-kursu-etap-2a.md`) jest zakończony; raport: `docs/raport-etap-2b.md`. Lekcje pozostają wersją roboczą przed recenzją.
+Etap 2B (naprawa po audycie `docs/audyt-jakosci-kursu-etap-2a.md`) jest zakończony; raport: `docs/raport-etap-2b.md`.
+
+Etap 2C (audyt kontrolny i naprawy) jest zakończony: `docs/audyt-kontrolny-etap-2b.md`, `docs/rejestr-napraw-etap-2c.md`. Pytania do ekspertów: `docs/pytania-do-ekspertow.md`. Architektura wielokursowa: `docs/architektura-wielokursowa.md`. Kolejne kroki: `docs/plan-dalszego-rozwoju.md`. Lekcje pozostają wersją roboczą przed recenzją.
 
 Materiał uzupełniający: szkice rozdziałów 0, 2, 4 i 9 przewodnika składają się do PDF (`npm run przewodnik`) z tymi samymi przykładami obliczeniowymi co lekcje (`src/lib/przyklady.ts`).
 

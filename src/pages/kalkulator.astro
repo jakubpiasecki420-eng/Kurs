@@ -5,6 +5,7 @@ import Kalkulator from '@/components/Kalkulator.astro';
 import Odn from '@/components/Odn.astro';
 import Zrodla from '@/components/Zrodla.astro';
 import { przypisy } from '@/lib/rejestr';
+import { procent } from '@/lib/format';
 
 const p = przypisy(['nbp-cel-inflacyjny']);
 ---
@@ -70,10 +71,11 @@ const p = przypisy(['nbp-cel-inflacyjny']);
 
         <h2>Skąd domyślna inflacja</h2>
         <p>
-          Jako wartość początkową przyjmujemy 2,5%, czyli średniookresowy cel inflacyjny NBP<Odn
+          Jako wartość początkową przyjmujemy {procent(p.wartosc('nbp-cel-inflacyjny'))}, czyli średniookresowy cel inflacyjny NBP<Odn
             nr={p.nr('nbp-cel-inflacyjny')}
           />. To punkt odniesienia, a nie przewidywanie. Domyślna stopa zwrotu jest równa inflacji: w tym
-          scenariuszu oszczędności jedynie utrzymują siłę nabywczą.
+          scenariuszu oszczędności jedynie utrzymują siłę nabywczą. To hipotetyczne założenie, a nie prognoza zysku —
+          cel inflacyjny NBP dotyczy wzrostu cen, nie wyników inwestycji.
         </p>
         <p>
           Więcej o różnicy między obiema kwotami przeczytasz w artykule

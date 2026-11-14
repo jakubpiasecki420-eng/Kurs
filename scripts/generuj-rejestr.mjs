@@ -27,17 +27,32 @@ const linie = [
   '',
   `Stan prawny na dzień: **${rejestr.stanNaDzien}**. Liczba twierdzeń: **${rejestr.twierdzenia.length}**.`,
   '',
+  '## Co oznacza weryfikacja',
+  '',
+  'Status P potwierdza tylko, że przepis istnieje i został przeczytany w źródle pierwotnym. Pozostałe poziomy weryfikacji są niezależne:',
+  '',
+  '| Poziom | Kto potwierdza | Gdzie zapisane |',
+  '| --- | --- | --- |',
+  '| 1. Treść przepisu | Autor, w tekście aktu (status P, data „Sprawdzono”) | ten rejestr |',
+  '| 2. Interpretacja | „brzmienie” — streszczenie przepisu; „wniosek” — połączenie przepisów albo wniosek autora, wymaga eksperta | kolumna „Charakter” |',
+  '| 3. Przedstawienie w lekcji | Autor; recenzja eksperta jeszcze się nie odbyła | lekcje, akapity „Do potwierdzenia przez eksperta” |',
+  '| 4. Przykład liczbowy | Testy automatyczne (niezależne przeliczenie) | `src/lib/*.test.ts` |',
+  '',
 ];
 
 for (const [status, [tytul, opis]] of Object.entries(STATUSY)) {
   const wiersze = rejestr.twierdzenia.filter((t) => t.status === status);
   linie.push(`## ${tytul}`, '', opis, '', `Liczba: ${wiersze.length}.`, '');
-  linie.push('| Identyfikator | Obszar | Twierdzenie | Podstawa | Sprawdzono | Przegląd |', '| --- | --- | --- | --- | --- | --- |');
+  linie.push('| Identyfikator | Obszar | Twierdzenie | Podstawa | Charakter | Sprawdzono | Przegląd |', '| --- | --- | --- | --- | --- | --- | --- |');
   for (const t of wiersze) {
     const z = rejestr.zrodla[t.zrodlo];
     const zrodlo = z.url ? `[${z.publikator}](${z.url})` : z.publikator;
+    const charakter = [
+      t.interpretacja === 'wniosek' ? `**wniosek** — ${komorka(t.uwagi ?? '')}` : (t.interpretacja ?? '—'),
+      t.obowiazujeOd ? `obowiązuje od ${t.obowiazujeOd}` : '',
+    ].filter(Boolean).join('; ');
     linie.push(
-      `| \`${t.id}\` | ${t.obszar} | ${komorka(t.tresc)} | ${komorka(t.przepis)}; ${zrodlo} | ${t.sprawdzono} | ${t.przeglad} |`,
+      `| \`${t.id}\` | ${t.obszar} | ${komorka(t.tresc)} | ${komorka(t.przepis)}; ${zrodlo} | ${charakter} | ${t.sprawdzono} | ${t.przeglad} |`,
     );
   }
   linie.push('');

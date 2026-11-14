@@ -126,7 +126,15 @@ const liczba = grupy.reduce((s, g) => s + g.wiersze.length, 0);
                     const z = zrodlo(t.zrodlo);
                     return (
                       <tr id={t.id}>
-                        <td class="tresc">{t.tresc}</td>
+                        <td class="tresc">
+                          {t.tresc}
+                          {t.obowiazujeOd && (
+                            <span class="uwaga-twierdzenia">Obowiązuje od {data(t.obowiazujeOd)}.</span>
+                          )}
+                          {t.interpretacja === 'wniosek' && (
+                            <span class="uwaga-twierdzenia">Wniosek z przepisów, przed recenzją eksperta: {t.uwagi}</span>
+                          )}
+                        </td>
                         <td>
                           {t.przepis !== 'obwieszczenie' && <>{t.przepis}<br /></>}
                           {z.url ? <a href={z.url}>{z.publikator}</a> : z.publikator}
@@ -163,6 +171,12 @@ const liczba = grupy.reduce((s, g) => s + g.wiersze.length, 0);
   }
   .data {
     white-space: nowrap;
+  }
+  .uwaga-twierdzenia {
+    display: block;
+    margin-top: var(--o-1);
+    font-size: var(--tekst-xs);
+    color: var(--tekst-cichy);
   }
   tr:target td {
     background: #fbf6e8;

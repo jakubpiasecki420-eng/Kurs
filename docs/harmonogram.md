@@ -20,6 +20,8 @@ Stan na dzień: **13 listopada 2026 r.**
 | --- | --- | --- |
 | 1. Fundamenty platformy | Strefa kursanta (pulpit, program, moduł, lekcja, postęp, narzędzia, ustawienia), model kurs → moduł → lekcja, postęp w przeglądarce za wymiennym magazynem, centrum narzędzi, strony „Program”, „Jak uczymy”, „Biblioteka” | **Zrobione 13 listopada 2026 r.** Wersja demonstracyjna, bez kont. Opis: `architektura-platformy.md` |
 | 2. Treść pierwszego kursu | Lekcje modułów bez blokad (1, 2, 4, 9, 12) na podstawie szkiców przewodnika i rejestru; kalkulatory procentu składanego i inflacji; wspólne przykłady obliczeniowe dla lekcji i PDF | **Zrobione 14 listopada 2026 r.** 12 lekcji w 5 modułach, wersja robocza przed recenzją. Moduły 3, 5–8, 10, 11 czekają: 3 i 5–7 na recenzję podatkową, 8, 10 i 11 na polecenie właściciela |
+| 2B. Naprawa po audycie | Poprawki 42 uwag z audytu 2A: subkonto i kwota brutto, składki przedsiębiorców, zwrot z IKE, polski format liczb, quizy | **Zrobione 14 listopada 2026 r.** Raport: `raport-etap-2b.md` |
+| 2C. Audyt kontrolny | Kontrola etapu 2B, stron publicznych, kalkulatorów i rejestru; rozdzielenie treści przepisu i interpretacji; przygotowanie architektury wielokursowej | **Zrobione 14 listopada 2026 r.** Raporty: `audyt-kontrolny-etap-2b.md`, `rejestr-napraw-etap-2c.md`; dalej: `plan-dalszego-rozwoju.md` |
 | 3. Konta i ochrona treści | Logowanie, magazyn serwerowy, przeniesienie postępu z przeglądarki, renderowanie lekcji po stronie serwera | Po polityce prywatności i wyborze hostingu |
 | 4. Sprzedaż dostępu | Płatności, regulamin, zwroty | Po progach walidacji i recenzji |
 

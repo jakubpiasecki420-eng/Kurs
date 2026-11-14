@@ -82,7 +82,7 @@ Przy działalności gospodarczej podstawa niższa od minimalnego wynagrodzenia m
 - **Preferencyjna podstawa** — przez pierwsze 24 miesiące działalności podstawą może być kwota nie niższa niż {{sus-preferencyjna}} minimalnego wynagrodzenia[^sus-preferencyjna]. Ustawa wyłącza z tego m.in. osoby, które w ciągu 60 miesięcy przed startem prowadziły działalność.
 - **Mały ZUS plus** — podstawa zależy od dochodu i może wynosić od 30% minimalnego wynagrodzenia do 60% prognozowanego przeciętnego wynagrodzenia[^sus-maly-zus-plus-granice]. Jeśli Twoja podstawa jest niższa od minimalnego wynagrodzenia, te miesiące też liczą się do stażu tylko w części.
 
-Jest też trzecia sytuacja. **Ulga na start** pozwala przez 6 miesięcy od podjęcia działalności nie podlegać obowiązkowym ubezpieczeniom społecznym[^pp-ulga-na-start]. W tym czasie nie są płacone składki emerytalne, więc nic nie trafia na konto w ZUS.
+Jest też trzecia sytuacja. **Ulga na start** pozwala przez 6 miesięcy od podjęcia działalności nie podlegać obowiązkowym ubezpieczeniom społecznym. Dotyczy osób, które zakładają działalność po raz pierwszy albo ponownie po co najmniej 60 miesiącach i nie wykonują jej na rzecz byłego pracodawcy; można z niej zrezygnować[^pp-ulga-na-start]. W tym czasie nie są płacone składki emerytalne, więc nic nie trafia na konto w ZUS.
 
 > **Do potwierdzenia przez eksperta.** Czy miesiące ulgi na start, gdy przedsiębiorca nie podlega ubezpieczeniom, liczą się do stażu potrzebnego do najniższej emerytury. Z definicji okresów składkowych wynika, że nie są okresem ubezpieczenia z tytułu działalności, ale tej interpretacji nie potwierdził jeszcze specjalista.
 

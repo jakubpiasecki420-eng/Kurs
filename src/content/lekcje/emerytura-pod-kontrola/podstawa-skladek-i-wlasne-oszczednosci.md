@@ -7,6 +7,7 @@ czasMin: 10
 demonstracyjna: false
 twierdzenia:
   [
+    sus-podstawa-pracownik,
     sus-podstawa-jdg,
     sus-preferencyjna,
     sus-maly-zus-plus,
@@ -59,7 +60,7 @@ quiz:
 
 ## Trzy sposoby ustalania podstawy
 
-Podstawa wymiaru to kwota, od której liczy się składki. Na etacie jest nią co do zasady przychód z pracy. Przy działalności gospodarczej możliwe są trzy sytuacje:
+Podstawa wymiaru to kwota, od której liczy się składki. Na etacie jest nią co do zasady przychód ze stosunku pracy[^sus-podstawa-pracownik]. Przy działalności gospodarczej możliwe są trzy sytuacje:
 
 | Sposób | Podstawa składek emerytalnej i rentowych | Najważniejsze warunki |
 | --- | --- | --- |
@@ -69,7 +70,7 @@ Podstawa wymiaru to kwota, od której liczy się składki. Na etacie jest nią c
 
 Przy ryczałcie od przychodów ewidencjonowanych dochodem do wyliczenia małego ZUS plus jest połowa przychodu[^sus-maly-zus-plus-ryczalt]. Ustawa przewiduje też inne warunki i wyłączenia — przed wyborem sprawdź je w ZUS albo z księgową.
 
-W każdej z tych sytuacji możesz zadeklarować podstawę wyższą niż najniższa. Takiej deklaracji nie można skorygować za miesiąc, w którym ją złożono[^sus-podstawa-wyzsza]. Roczna podstawa składek emerytalnej i rentowych ma też górną granicę: 30-krotność prognozowanego przeciętnego wynagrodzenia miesięcznego[^sus-limit-roczny].
+W każdej z tych sytuacji możesz zadeklarować podstawę wyższą niż najniższa. Jeśli podstawą jest kwota deklarowana, zadeklarowania wyższej kwoty nie można skorygować za miesiąc, w którym je złożono[^sus-podstawa-wyzsza]. Roczna podstawa składek emerytalnej i rentowych ma też górną granicę: 30-krotność prognozowanego przeciętnego wynagrodzenia miesięcznego[^sus-limit-roczny].
 
 Jeśli Twój dochód jest wyższy niż podstawa składek, kapitał w ZUS rośnie wolniej, niż rósłby, gdyby podstawą był cały dochód.
 

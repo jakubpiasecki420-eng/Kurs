@@ -12,6 +12,15 @@ import dane from '@/data/rejestr.json';
  */
 export type Status = 'P' | 'W' | 'Z';
 
+/**
+ * Charakter twierdzenia ze statusem P. Status P potwierdza, że przepis istnieje i został przeczytany —
+ * nie potwierdza interpretacji. Dlatego osobno zaznaczamy:
+ *   brzmienie — twierdzenie streszcza treść przepisu bez wyciągania wniosków,
+ *   wniosek   — twierdzenie łączy przepisy albo wyciąga z nich wniosek; wymaga potwierdzenia przez eksperta
+ *               (powód w polu `uwagi`).
+ */
+export type Interpretacja = 'brzmienie' | 'wniosek';
+
 export interface Zrodlo {
   tytul: string;
   publikator: string;
@@ -31,6 +40,12 @@ export interface Twierdzenie {
   status: Status;
   sprawdzono: string;
   przeglad: string;
+  /** Wymagane dla statusu P. */
+  interpretacja?: Interpretacja;
+  /** Ograniczenia interpretacji — wymagane, gdy interpretacja to „wniosek”. */
+  uwagi?: string;
+  /** Data, od której przepis stosuje się, jeśli jeszcze nie obowiązuje albo jest to istotne (ISO). */
+  obowiazujeOd?: string;
 }
 
 export const STAN_NA_DZIEN: string = dane.stanNaDzien;

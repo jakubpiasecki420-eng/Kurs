@@ -4,7 +4,7 @@ import NaglowekStrony from '@/components/NaglowekStrony.astro';
 import Odn from '@/components/Odn.astro';
 import Zrodla from '@/components/Zrodla.astro';
 import { przypisy } from '@/lib/rejestr';
-import { zl } from '@/lib/format';
+import { procent, zl } from '@/lib/format';
 
 const p = przypisy([
   'zus-informacja-o-stanie-konta',
@@ -19,6 +19,7 @@ const p = przypisy([
   'ikze-odliczenie-liniowy',
   'ikze-odliczenie-ryczalt',
   'ikze-ryczalt-proporcja',
+  'ikze-wyplata-podatek',
   'zdrowotna-podstawa',
 ]);
 ---
@@ -94,6 +95,12 @@ const p = przypisy([
               nr={p.nr('ikze-ryczalt-proporcja')}
             />.
           </li>
+          <li>
+            Przy każdej formie opodatkowania od wypłaty z IKZE pobierany jest podatek {
+              procent(p.wartosc('ikze-wyplata-podatek'))
+            } od całej wypłacanej kwoty<Odn nr={p.nr('ikze-wyplata-podatek')} />. Odliczenie odracza podatek, a nie
+            go usuwa.
+          </li>
         </ul>
         <p>
           Im niższa stawka, według której płacisz podatek, tym mniejsza korzyść z odliczenia. Dlatego ten sam
@@ -115,8 +122,8 @@ const p = przypisy([
           <li>Forma opodatkowania i stawka, według której płacisz podatek.</li>
           <li>Podstawa, od której opłacasz składki społeczne.</li>
           <li>Czy masz już IKE lub IKZE, w jakiej instytucji i z jakimi opłatami.</li>
-          <li>Ile wpłaciłeś w tym roku i ile zostało do limitu.</li>
-          <li>Czy masz rezerwę na nieprzewidziane wydatki, zanim zamrozisz pieniądze na lata.</li>
+          <li>Suma wpłat w tym roku i kwota, która została do limitu.</li>
+          <li>Czy masz rezerwę na nieprzewidziane wydatki, zanim odłożysz pieniądze na wiele lat.</li>
         </ul>
 
         <h2>Co przygotowujemy</h2>

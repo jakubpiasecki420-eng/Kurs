@@ -163,3 +163,29 @@ describe('ustawNazwe', () => {
     expect(ustawNazwe(pustyStan(), 'x'.repeat(100)).profil.nazwa).toHaveLength(60);
   });
 });
+
+describe('wiele kursów', () => {
+  // Drugi kurs o tych samych identyfikatorach modułów i lekcji — sprawdza, że postęp jest rozdzielony.
+  const drugi = kursDlaKlienta(
+    zbudujKurs(
+      { ...DANE_KURSU, id: 'drugi-kurs', tytul: 'Drugi kurs testowy' },
+      LEKCJE.map((l) => ({ ...l, kurs: 'drugi-kurs' })),
+    ),
+  );
+
+  it('ukończenie lekcji w jednym kursie nie zmienia postępu w drugim', () => {
+    const s = ukonczLekcje(pustyStan(), kurs, 'm1', 'a', t(0));
+    expect(podsumowanie(s, kurs).ukonczoneLekcje).toBe(1);
+    expect(podsumowanie(s, drugi).ukonczoneLekcje).toBe(0);
+    expect(statusModulu(s, drugi, 'm1')).toBe('dostepny');
+  });
+
+  it('wyniki quizów i bieżąca lekcja są zapisywane osobno dla każdego kursu', () => {
+    let s = zapiszWynikQuizu(pustyStan(), kurs, 'm1', 'a', 2, 3, t(1));
+    s = otworzLekcje(s, drugi, 'm2', 'c', t(2));
+    expect(s.kursy.testowy.wynikiQuizow.a).toMatchObject({ poprawne: 2, wszystkie: 3 });
+    expect(s.kursy['drugi-kurs'].wynikiQuizow.a).toBeUndefined();
+    expect(s.kursy.testowy.biezaca?.lekcja).not.toBe('c');
+    expect(nastepnaLekcja(s, drugi)?.lekcja.id).toBe('c');
+  });
+});

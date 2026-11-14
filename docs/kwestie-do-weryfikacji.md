@@ -2,6 +2,8 @@
 
 Stan na dzień: **13 listopada 2026 r.** Żadna z poniższych opinii nie została jeszcze uzyskana.
 
+> Aktualna, uzupełniona lista pytań z odniesieniami do fragmentów platformy: `docs/pytania-do-ekspertow.md` (14 listopada 2026 r.). Ten dokument zachowujemy jako historię oznaczeń DP, PR, KS i WL.
+
 Do każdego pytania dołączony jest stan wiedzy projektu. Fakty mają źródło w `rejestr-zrodel-i-twierdzen.md`.
 
 ## Doradca podatkowy

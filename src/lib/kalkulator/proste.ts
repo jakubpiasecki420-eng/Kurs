@@ -51,7 +51,10 @@ export interface RokKapitalu {
   rok: number;
   /** Zysk pozostaje na koncie i pracuje razem z kapitałem. */
   skladany: number;
-  /** Zysk wypłacany co roku: kapitał plus suma wypłaconych zysków. */
+  /**
+   * Zysk wypłacany co roku: kapitał plus suma wypłaconych zysków. Przy stracie: kapitał pomniejszony
+   * o stałą stratę liczoną od kwoty początkowej — nigdy poniżej zera, bo nie można stracić więcej niż kapitał.
+   */
   prosty: number;
 }
 
@@ -62,7 +65,7 @@ export function przebiegKapitalu(kwota: number, stopa: number, lata: number): Ro
   return Array.from({ length: lata + 1 }, (_, rok) => ({
     rok,
     skladany: kwota * Math.pow(1 + stopa, rok),
-    prosty: kwota + kwota * stopa * rok,
+    prosty: Math.max(0, kwota + kwota * stopa * rok),
   }));
 }
 
@@ -70,6 +73,8 @@ export function przebiegKapitalu(kwota: number, stopa: number, lata: number): Ro
 
 export interface RokInflacji {
   rok: number;
+  /** Skumulowana inflacja od startu: łączny wzrost cen, np. 0.64 = ceny wyższe o 64%. */
+  skumulowana: number;
   /** Ile będzie kosztować to, co dziś kosztuje `kwota`. */
   koszt: number;
   /** Ile w dzisiejszych pieniądzach będzie warta `kwota` otrzymana w danym roku. */
@@ -82,7 +87,7 @@ export function przebiegInflacji(kwota: number, inflacja: number, lata: number):
   }
   return Array.from({ length: lata + 1 }, (_, rok) => {
     const m = Math.pow(1 + inflacja, rok);
-    return { rok, koszt: kwota * m, silaNabywcza: kwota / m };
+    return { rok, skumulowana: m - 1, koszt: kwota * m, silaNabywcza: kwota / m };
   });
 }
 
@@ -93,4 +98,13 @@ export function rokiTabeli(lata: number): number[] {
   for (let r = krok; r <= lata; r += krok) wynik.push(r);
   if (wynik[wynik.length - 1] !== lata) wynik.push(lata);
   return wynik;
+}
+
+/**
+ * Realna stopa zwrotu: o ile rocznie rośnie siła nabywcza oszczędności.
+ * Dokładnie (1 + stopa nominalna) ÷ (1 + inflacja) − 1; różnica „stopa minus inflacja” jest tylko przybliżeniem.
+ */
+export function stopaRealna(stopaNominalna: number, inflacja: number): number {
+  if (!(stopaNominalna > -1) || !(inflacja > -1)) throw new RangeError('Stopa i inflacja muszą być większe niż −100%.');
+  return (1 + stopaNominalna) / (1 + inflacja) - 1;
 }

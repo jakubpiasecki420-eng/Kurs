@@ -54,6 +54,14 @@ describe('przykłady obliczeniowe', () => {
     expect(html).toMatch(/nie prognoza|podatku by nie było|Przykład obliczeniowy/);
   });
 
+  it('tabela stopy realnej pokazuje różnicę między przybliżeniem a wzorem dokładnym', () => {
+    const html = dyrektywa('tabela:stopa-realna').replace(/[\u00a0\u202f]/g, ' ');
+    expect(html).toContain('2,5%');
+    expect(html).toContain('2,44%');
+    expect(html).toContain('-2,44%');
+    expect(html).toContain('nie prognoza');
+  });
+
   it('przykład częściowego zwrotu z IKE liczy dochód proporcjonalnie', () => {
     const html = dyrektywa('przyklad:czesciowy-zwrot-ike').replace(/[\u00a0\u202f]/g, ' ');
     expect(html).toContain('8 000 zł');

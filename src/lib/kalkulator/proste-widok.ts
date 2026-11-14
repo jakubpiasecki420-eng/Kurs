@@ -173,6 +173,10 @@ function widokInflacji(d: DaneProste): WidokProsty {
       { etykieta: `Tyle będzie kosztować za ${liczebnik(d.lata, 'rok', 'lata', 'lat')}`, wartosc: zlPelne(k.koszt), kolor: 'var(--seria-nominalna)' },
       { etykieta: `Tyle dziś jest warte ${zlPelne(d.kwota)} otrzymane za ${liczebnik(d.lata, 'rok', 'lata', 'lat')}`, wartosc: zlPelne(k.silaNabywcza), kolor: 'var(--seria-realna)' },
       { etykieta: 'Siła nabywcza w porównaniu z dzisiejszą', wartosc: procent(k.silaNabywcza / d.kwota, 1) },
+      {
+        etykieta: `Łączny wzrost cen przez ${liczebnik(d.lata, 'rok', 'lata', 'lat')} (inflacja skumulowana)`,
+        wartosc: procent(k.skumulowana, 1),
+      },
     ],
     serie: [
       { nazwa: 'Cena tego samego koszyka', krotko: 'cena', kolor: 'var(--seria-nominalna)', wartosci: p.map((r) => r.koszt) },

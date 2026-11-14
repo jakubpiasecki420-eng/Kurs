@@ -69,7 +69,7 @@ describe('przebiegInflacji', () => {
     expect(p[20].koszt * p[20].silaNabywcza).toBeCloseTo(1000 * 1000, 4);
   });
   it('przy zerowej inflacji nic się nie zmienia', () => {
-    expect(przebiegInflacji(500, 0, 3)[3]).toEqual({ rok: 3, koszt: 500, silaNabywcza: 500 });
+    expect(przebiegInflacji(500, 0, 3)[3]).toEqual({ rok: 3, skumulowana: 0, koszt: 500, silaNabywcza: 500 });
   });
 });
 
@@ -128,5 +128,40 @@ describe('widokProsty', () => {
     expect(e(2)).toBe('Tyle będzie kosztować za 2 lata');
     expect(e(5)).toBe('Tyle będzie kosztować za 5 lat');
     expect(e(22)).toBe('Tyle będzie kosztować za 22 lata');
+  });
+});
+
+import { stopaRealna } from './proste';
+
+describe('kontrola niezależnymi obliczeniami (etap 2C)', () => {
+  it('procent prosty przy stracie nie spada poniżej zera', () => {
+    // 1 zł, −20% rocznie, 50 lat: 1 + 1 × (−0,2) × 50 = −9 → nie można stracić więcej niż kapitał.
+    const p = przebiegKapitalu(1, -0.2, 50);
+    expect(p[50].prosty).toBe(0);
+    expect(p[5].prosty).toBeCloseTo(0, 10);
+    expect(p[4].prosty).toBeCloseTo(0.2, 10);
+    expect(p[50].skladany).toBeCloseTo(0.8 ** 50, 15);
+    p.forEach((r) => expect(r.prosty).toBeGreaterThanOrEqual(0));
+  });
+
+  it('inflacja skumulowana to łączny wzrost cen, a nie suma rocznych stóp', () => {
+    const p = przebiegInflacji(1000, 0.025, 20);
+    expect(p[20].skumulowana).toBeCloseTo(1.025 ** 20 - 1, 12);
+    expect(p[20].skumulowana).toBeGreaterThan(0.025 * 20);
+    expect(p[0].skumulowana).toBe(0);
+    const w = widokProsty('inflacja', { kwota: 1000, stopa: 0.025, lata: 20 });
+    expect(w.kafle[3]).toMatchObject({ etykieta: 'Łączny wzrost cen przez 20 lat (inflacja skumulowana)', wartosc: '63,9%' });
+  });
+
+  it('stopa realna liczona dokładnie, a nie jako różnica', () => {
+    expect(stopaRealna(0.05, 0.025)).toBeCloseTo(1.05 / 1.025 - 1, 12);
+    expect(stopaRealna(0.025, 0.025)).toBeCloseTo(0, 12);
+    expect(stopaRealna(0, 0.025)).toBeLessThan(0);
+    expect(() => stopaRealna(-1, 0.02)).toThrow(RangeError);
+  });
+
+  it('kalkulator procentu przy stracie pokazuje wartości nieujemne', () => {
+    const w = widokProsty('procent-skladany', { kwota: 1, stopa: -0.2, lata: 50 });
+    w.serie.forEach((s) => s.wartosci.forEach((v) => expect(v).toBeGreaterThanOrEqual(0)));
   });
 });

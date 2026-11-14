@@ -1,6 +1,6 @@
 # System aktualizacji informacji prawnych i podatkowych
 
-Stan na dzień: **13 listopada 2026 r.**
+Stan na dzień: **14 listopada 2026 r.**
 
 ## 1. Jedno źródło prawdy
 
@@ -18,13 +18,28 @@ Każde twierdzenie ma:
 | `status` | `P` źródło pierwotne, `W` źródło wtórne, `Z` założenie własne |
 | `sprawdzono` | Data ostatniego sprawdzenia w źródle |
 | `przeglad` | Data, do której trzeba sprawdzić ponownie |
+| `interpretacja` | Tylko dla statusu P: `brzmienie` — streszczenie przepisu; `wniosek` — połączenie przepisów albo wniosek autora, wymaga potwierdzenia przez eksperta |
+| `uwagi` | Ograniczenia interpretacji; obowiązkowe dla `wniosek` |
+| `obowiazujeOd` | Data, od której przepis się stosuje, gdy jeszcze nie obowiązuje albo data jest istotna (np. OKI od 1 stycznia 2027 r.) |
+
+Status P nie oznacza poprawnej interpretacji. Weryfikacja ma cztery niezależne poziomy:
+
+| Poziom | Co potwierdza | Gdzie zapisane |
+| --- | --- | --- |
+| 1. Treść przepisu | Przepis istnieje i mówi to, co twierdzenie (status P, data `sprawdzono`) | rejestr |
+| 2. Interpretacja | Czy twierdzenie streszcza przepis, czy wyciąga wniosek (`interpretacja`) | rejestr |
+| 3. Przedstawienie w lekcji | Czy lekcja nie upraszcza przepisu za bardzo; miejsca niejednoznaczne mają akapit „Do potwierdzenia przez eksperta” | lekcje, raporty etapów |
+| 4. Przykład liczbowy | Czy liczby są policzone poprawnie | testy jednostkowe z niezależnym przeliczeniem |
+
+Poziomy 2 i 3 potwierdza ostatecznie recenzent. Do czasu recenzji serwis ma status wersji roboczej.
 
 ## 2. Zabezpieczenia w kodzie
 
 | Zabezpieczenie | Gdzie | Co robi |
 | --- | --- | --- |
 | Tylko status P na stronie | `src/lib/rejestr.ts`, funkcja `przypisy()` | Strona się nie zbuduje, jeśli użyje twierdzenia ze statusem W lub Z |
-| Komplet pól | `src/lib/rejestr.test.ts` | Test nie przejdzie, jeśli twierdzeniu brakuje źródła, przepisu lub dat |
+| Komplet pól | `src/lib/rejestr.test.ts` | Test nie przejdzie, jeśli twierdzeniu brakuje źródła, przepisu lub dat, jeśli twierdzenie P nie ma pola `interpretacja` albo wniosek nie ma uwag, albo jeśli data sprawdzenia jest późniejsza niż stan prawny |
+| Tylko P w lekcjach | `src/lib/tresc-markdown.ts`, `src/lib/platforma/tresc.test.ts` | Lekcja się nie zbuduje, jeśli użyje twierdzenia niezadeklarowanego albo innego niż P; test sprawdza, że każde zadeklarowane twierdzenie ma przypis |
 | Spójność limitów | ten sam test | Limity IKE i IKZE muszą wynikać z jednej prognozy wynagrodzenia |
 | Źródła artykułów | `src/content.config.ts` | Artykuł bez dat i listy twierdzeń nie przejdzie walidacji |
 | Przeterminowane przeglądy | `npm run gotowosc` | Blokada publikacji, gdy minęła data z pola `przeglad` |

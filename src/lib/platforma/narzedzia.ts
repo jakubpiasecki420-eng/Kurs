@@ -115,6 +115,7 @@ export const NARZEDZIA: readonly Narzedzie[] = [
     biblioteka: 'do zaprojektowania',
     zalozenia: ['Do ustalenia razem z metodą.'],
     zrodla: ['zus-hipotetyczna-warianty'],
+    uwaga: 'Wynik nie będzie oficjalną prognozą ZUS. Metoda i sposób przedstawienia wymagają recenzji eksperta przed udostępnieniem.',
     zaktualizowano: '2026-11-13',
     zastrzezenie: ZASTRZEZENIE,
   },

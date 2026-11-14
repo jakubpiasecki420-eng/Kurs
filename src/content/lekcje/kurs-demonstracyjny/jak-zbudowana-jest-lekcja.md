@@ -68,4 +68,4 @@ Wynik quizu zapisuje się w Twoim postępie. Możesz go poprawić, rozwiązując
 
 ## Ukończenie lekcji
 
-Na końcu lekcji oznaczasz ją jako ukończoną. Platforma zapamiętuje, gdzie skończyłeś, i na pulpicie podpowiada, od czego kontynuować.
+Na końcu lekcji oznaczasz ją jako ukończoną. Platforma zapamiętuje, na której lekcji skończyła się nauka, i na pulpicie podpowiada, od czego kontynuować.

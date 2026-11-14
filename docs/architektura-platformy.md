@@ -132,6 +132,8 @@ Rejestr: `src/lib/platforma/narzedzia.ts`. Każde narzędzie — także planowan
 
 Nowe narzędzie: wpis w rejestrze → biblioteka obliczeń z testami w `src/lib/kalkulator/` → komponent → identyfikator w `NARZEDZIA_DOSTEPNE` i gałąź w `WidokNarzedzia.astro`. Strona `/platforma/narzedzia/<id>/` powstaje wtedy sama, a lekcja może osadzić narzędzie polem `narzedzie`. Budowanie zatrzyma się, jeśli narzędzie ma interfejs, a w rejestrze nie jest oznaczone jako dostępne.
 
+Kalkulator inflacji pokazuje też inflację skumulowaną (łączny wzrost cen). W kalkulatorze procentu składanego wariant „procent prosty” przy stracie nie spada poniżej zera. Wartości domyślne i warianty stopy zwrotu są opisane jako hipotetyczne założenia, nie prognozy.
+
 Kalkulatory procentu składanego i inflacji liczą pierwszy wynik przy budowaniu strony (działają bez JavaScriptu), a po zmianie danych przeliczają się w przeglądarce. Wykres jest statyczny; dokładne wartości są w tabeli. Style kalkulatorów i wykresów są wspólne: `src/styles/kalkulator.css` i `src/styles/wykres.css`. W lekcji układ kalkulatora zależy od szerokości kolumny treści (zapytanie kontenerowe), nie od szerokości ekranu.
 
 ## 6. Decyzje technologiczne
@@ -173,5 +175,5 @@ Kolejność zalecana na etap kont:
 | Blokada modułu tylko informacyjna | Lekcję z niedostępnego modułu można otworzyć bezpośrednio | Razem z kontrolą dostępu |
 | Jeden kalkulator danego rodzaju na stronę | `Kalkulator.astro` używa stałych identyfikatorów pól; `KalkulatorProsty.astro` poprzedza je rodzajem, więc kalkulator procentu i inflacji mogą stać obok siebie, ale nie dwa takie same | Przy pierwszej lekcji z dwoma narzędziami tego samego rodzaju |
 | Odpowiedzi quizu w kodzie strony | Quiz nie nadaje się do egzaminu | Jeśli pojawi się certyfikat |
-| Jeden aktywny kurs w menu i na pulpicie | `ID_KURSU_AKTYWNEGO` w `src/lib/platforma/dane.ts` (obecnie `emerytura-pod-kontrola`). Postęp kursu demonstracyjnego widać tylko na jego stronach | Gdy kursant będzie miał więcej niż jeden kurs |
+| Jeden aktywny kurs w menu, na pulpicie, w panelu postępu i na stronie `/program/` (plan zmian: `architektura-wielokursowa.md`) | `ID_KURSU_AKTYWNEGO` w `src/lib/platforma/dane.ts` (obecnie `emerytura-pod-kontrola`). Postęp kursu demonstracyjnego widać tylko na jego stronach | Gdy kursant będzie miał więcej niż jeden kurs |
 | Bez JavaScriptu strefa pokazuje stan początkowy | Postęp i quizy wymagają JavaScriptu | Nie planujemy zmiany |

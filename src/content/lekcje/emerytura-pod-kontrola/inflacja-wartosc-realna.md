@@ -49,6 +49,14 @@ Inflacja to wzrost cen. Przy inflacji 3% rocznie to, co dziś kosztuje 100 zł, 
 
 Przy planowaniu na dziesięciolecia ważniejsza jest wartość realna. Pozwala porównać przyszłą kwotę z Twoimi dzisiejszymi wydatkami — na przykład z kwotą zapisaną w module 2.
 
+## Realna stopa zwrotu
+
+Ta sama logika dotyczy zysku. **Stopa nominalna** to procent, o który rośnie liczba złotych. **Stopa realna** mówi, o ile rośnie siła nabywcza, czyli to, co za te złotówki można kupić. Często liczy się ją w przybliżeniu jako „zysk minus inflacja”. Dokładnie: (1 + zysk) ÷ (1 + inflacja) − 1.
+
+<!-- tabela:stopa-realna -->
+
+Przy zerowym zysku stopa realna jest ujemna — oszczędności tracą siłę nabywczą. Przy zysku równym inflacji wynosi zero.
+
 ## Ćwiczenie
 
 Wpisz do kalkulatora poniżej swoje obecne miesięczne wydatki i liczbę lat, które zostały Ci do emerytury. Sprawdź dwa warianty: inflację równą celowi NBP i wyższą, na przykład 4%. Zapisz, ile w każdym z nich będzie kosztować ten sam koszyk.

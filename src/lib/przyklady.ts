@@ -6,6 +6,7 @@
  */
 import dane from '../data/rejestr.json';
 import { kapitalPoLatach, symuluj } from './kalkulator/oszczednosci';
+import { stopaRealna } from './kalkulator/proste';
 import { rysujWykres, SERIE } from './kalkulator/wykres';
 import { lata, procent, zl, zlPelne } from './format';
 
@@ -109,11 +110,28 @@ export const DYREKTYWY: Record<string, () => string> = {
     );
   },
 
+  'tabela:stopa-realna': () => {
+    const i = wartoscP('nbp-cel-inflacyjny');
+    const wiersze = [0, i, STOPA_PRZYKLADOWA].map((r) => [
+      procent(r),
+      procent(i),
+      procent(r - i, 2),
+      procent(stopaRealna(r, i), 2),
+    ]);
+    return tabela(
+      'Stopa nominalna, inflacja i stopa realna',
+      ['Roczny zysk nominalny', 'Inflacja', 'Przybliżenie: zysk minus inflacja', 'Stopa realna: (1 + zysk) ÷ (1 + inflacja) − 1'],
+      wiersze,
+      `Założenie: inflacja ${procent(i)} rocznie, równa celowi NBP. Zysk ${procent(STOPA_PRZYKLADOWA)} to wariant hipotetyczny, nie prognoza. Przykład obliczeniowy.`,
+      [0, 1, 2, 3],
+    );
+  },
+
   'tabela:inflacja': () => {
     const i = wartoscP('nbp-cel-inflacyjny');
     return tabela(
-      'Jak inflacja zmienia wartość 1 000 zł',
-      ['Po ilu latach', 'Tyle kosztuje to, co dziś kosztuje 1 000 zł', 'Tyle w dzisiejszych pieniądzach jest warte 1 000 zł'],
+      `Jak inflacja zmienia wartość ${zl(1000)}`,
+      ['Po ilu latach', `Tyle kosztuje to, co dziś kosztuje ${zl(1000)}`, `Tyle w dzisiejszych pieniądzach jest warte ${zl(1000)}`],
       [10, 20, 30].map((n) => [lata(n), zlPelne(1000 * Math.pow(1 + i, n)), zlPelne(1000 / Math.pow(1 + i, n))]),
       `Założenie: inflacja ${procent(i)} w każdym roku. ${NIE_PROGNOZA}`,
       [1, 2],
@@ -122,14 +140,14 @@ export const DYREKTYWY: Record<string, () => string> = {
 
   'tabela:procent-skladany': () =>
     tabela(
-      'Procent składany na przykładzie 10 000 zł',
+      `Procent składany na przykładzie ${zl(10_000)}`,
       ['Po ilu latach', 'Zysk zostaje na koncie', 'Zysk wypłacany co roku (kapitał i suma wypłat)'],
       [1, 10, 20, 30].map((n) => [
         lata(n),
         zlPelne(kapitalPoLatach(10_000, STOPA_PRZYKLADOWA, n)),
         zlPelne(10_000 + 10_000 * STOPA_PRZYKLADOWA * n),
       ]),
-      `Założenia: jednorazowo 10 000 zł, stały zysk ${procent(STOPA_PRZYKLADOWA)} rocznie, bez kosztów i podatków. Różnica między kolumnami to procent składany. ${NIE_PROGNOZA}`,
+      `Założenia: jednorazowo ${zl(10_000)}, stały zysk ${procent(STOPA_PRZYKLADOWA)} rocznie, bez kosztów i podatków. Różnica między kolumnami to procent składany. ${NIE_PROGNOZA}`,
       [1, 2],
     ),
 

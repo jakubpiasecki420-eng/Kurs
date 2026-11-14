@@ -19,7 +19,7 @@ const inflacja = wartosc('nbp-cel-inflacyjny');
     <KalkulatorProsty
       rodzaj="procent-skladany"
       domyslne={{ kwota: 10_000, stopa: inflacja, lata: 20 }}
-      opisStopy={`Domyślnie ${procent(inflacja)} — tyle wynosi cel inflacyjny NBP. To punkt odniesienia, nie prognoza ani typowy wynik. Sprawdź też wariant zerowy i ujemny.`}
+      opisStopy={`Domyślnie ${procent(inflacja)}: wariant „zysk równy celowi inflacyjnemu NBP”. Cel NBP dotyczy wzrostu cen, nie wyników inwestycji — to hipotetyczne założenie, nie prognoza zysku. Sprawdź też wariant zerowy i ujemny.`}
     />
   )
 }

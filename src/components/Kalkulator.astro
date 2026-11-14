@@ -76,7 +76,7 @@ const warianty = [-0.02, 0, 0.025, 0.05, 0.07];
         />
         <span class="pole__jednostka" aria-hidden="true">%</span>
       </div>
-      <div class="warianty" role="group" aria-label="Przykładowe warianty stopy zwrotu">
+      <div class="warianty" role="group" aria-label="Przykładowe warianty stopy zwrotu — założenia hipotetyczne, nie prognozy">
         {
           warianty.map((w) => (
             <button
@@ -91,7 +91,7 @@ const warianty = [-0.02, 0, 0.025, 0.05, 0.07];
         }
       </div>
       <p class="pole__opis" id="k-zwrot-opis">
-        To Twoje założenie, nie prognoza. Sprawdź też warianty niekorzystne: zerowy i ujemny.
+        To Twoje założenie, nie prognoza. Przyciski to hipotetyczne warianty do porównania, a nie spodziewane wyniki. Sprawdź też warianty niekorzystne: zerowy i ujemny.
       </p>
       <p class="pole__blad" id="k-zwrot-blad" data-blad="stopaZwrotu" aria-live="polite"></p>
     </div>

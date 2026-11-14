@@ -49,6 +49,31 @@ describe('rejestr twierdzeń', () => {
   });
 });
 
+describe('charakter twierdzeń ze statusem P', () => {
+  const p = TWIERDZENIA.filter((t) => t.status === 'P');
+
+  it('każde twierdzenie P ma określony charakter: brzmienie przepisu albo wniosek', () => {
+    p.forEach((t) => expect(['brzmienie', 'wniosek'], t.id).toContain(t.interpretacja));
+  });
+
+  it('każdy wniosek ma opisane ograniczenia interpretacji', () => {
+    p.filter((t) => t.interpretacja === 'wniosek').forEach((t) => expect(t.uwagi?.length ?? 0, t.id).toBeGreaterThan(30));
+  });
+
+  it('twierdzenia W i Z nie udają charakteru „brzmienie”', () => {
+    TWIERDZENIA.filter((t) => t.status !== 'P').forEach((t) => expect(t.interpretacja, t.id).toBeUndefined());
+  });
+
+  it('data obowiązywania jest datą ISO, a przepisy OKI obowiązują od 2027 r.', () => {
+    TWIERDZENIA.filter((t) => t.obowiazujeOd).forEach((t) => expect(t.obowiazujeOd, t.id).toMatch(DATA_ISO));
+    expect(twierdzenie('oki-stawka-2027').obowiazujeOd).toBe('2027-01-01');
+  });
+
+  it('data sprawdzenia nie jest późniejsza niż stan prawny rejestru', () => {
+    TWIERDZENIA.forEach((t) => expect(t.sprawdzono <= STAN_NA_DZIEN, t.id).toBe(true));
+  });
+});
+
 describe('przypisy', () => {
   it('numeruje twierdzenia w kolejności deklaracji', () => {
     const p = przypisy(['ike-limit-2027', 'ike-wyplata-warunki']);

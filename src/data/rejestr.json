@@ -1,5 +1,5 @@
 {
-  "stanNaDzien": "2026-11-13",
+  "stanNaDzien": "2026-11-14",
   "zrodla": {
     "ustawa-ike-ikze": {
       "tytul": "Ustawa z 20 kwietnia 2004 r. o indywidualnych kontach emerytalnych oraz indywidualnych kontach zabezpieczenia emerytalnego",
@@ -148,8 +148,9 @@
       "zrodlo": "ustawa-ike-ikze",
       "przepis": "art. 3 ust. 1",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ike-jedno-konto",
@@ -158,8 +159,9 @@
       "zrodlo": "ustawa-ike-ikze",
       "przepis": "art. 4 ust. 1",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ike-ubezpieczenie",
@@ -168,8 +170,9 @@
       "zrodlo": "ustawa-ike-ikze",
       "przepis": "art. 13 ust. 2",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ike-limit-wzor",
@@ -178,8 +181,9 @@
       "zrodlo": "ustawa-ike-ikze",
       "przepis": "art. 13 ust. 1",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ike-limit-2026",
@@ -191,8 +195,9 @@
       "zrodlo": "mp-2025-1202",
       "przepis": "obwieszczenie",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-01-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-01-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ike-limit-2027",
@@ -204,8 +209,9 @@
       "zrodlo": "mp-2026-1081",
       "przepis": "obwieszczenie",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-11-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-11-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ike-wyplata-warunki",
@@ -214,8 +220,9 @@
       "zrodlo": "ustawa-ike-ikze",
       "przepis": "art. 34 ust. 1",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ike-zwolnienie",
@@ -224,8 +231,9 @@
       "zrodlo": "ustawa-pit",
       "przepis": "art. 21 ust. 1 pkt 58a",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ike-zwrot-podatek",
@@ -236,8 +244,9 @@
       "zrodlo": "ustawa-pit",
       "przepis": "art. 30a ust. 1 pkt 10",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ike-wiele-kont",
@@ -248,8 +257,9 @@
       "zrodlo": "ustawa-pit",
       "przepis": "art. 30 ust. 1 pkt 7a",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ike-zwrot-dochod",
@@ -259,7 +269,8 @@
       "przepis": "art. 30a ust. 8 i 8a",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ike-wyplata-transferowa",
@@ -268,8 +279,9 @@
       "zrodlo": "ustawa-ike-ikze",
       "przepis": "art. 35 ust. 1 pkt 1",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ike-limit-ogloszenie",
@@ -279,7 +291,8 @@
       "przepis": "art. 13 ust. 4",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ikze-limit-wzor",
@@ -288,8 +301,9 @@
       "zrodlo": "ustawa-ike-ikze",
       "przepis": "art. 13a ust. 1 i 1a",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ikze-limit-2026",
@@ -301,8 +315,9 @@
       "zrodlo": "mp-2025-1156",
       "przepis": "obwieszczenie",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-01-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-01-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ikze-limit-2026-dzialalnosc",
@@ -314,8 +329,9 @@
       "zrodlo": "mp-2025-1156",
       "przepis": "obwieszczenie",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-01-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-01-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ikze-limit-2027",
@@ -327,8 +343,9 @@
       "zrodlo": "mp-2026-1062",
       "przepis": "pkt 1 obwieszczenia",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-11-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-11-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ikze-limit-2027-dzialalnosc",
@@ -340,8 +357,9 @@
       "zrodlo": "mp-2026-1062",
       "przepis": "pkt 2 obwieszczenia",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-11-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-11-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ikze-dzialalnosc-definicja",
@@ -350,8 +368,9 @@
       "zrodlo": "ustawa-sus",
       "przepis": "art. 8 ust. 6; odesłanie w art. 13a ust. 1a ustawy o IKE/IKZE",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ikze-ulga-na-start-wylaczenie",
@@ -360,8 +379,9 @@
       "zrodlo": "ustawa-sus",
       "przepis": "art. 8 ust. 6a",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ikze-odliczenie-skala",
@@ -370,8 +390,9 @@
       "zrodlo": "ustawa-pit",
       "przepis": "art. 26 ust. 1 pkt 2b",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ikze-odliczenie-liniowy",
@@ -380,8 +401,9 @@
       "zrodlo": "ustawa-pit",
       "przepis": "art. 30c ust. 2 pkt 3 i ust. 3b",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ikze-odliczenie-ryczalt",
@@ -390,8 +412,9 @@
       "zrodlo": "ustawa-ryczalt",
       "przepis": "art. 11 ust. 1",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ikze-ryczalt-proporcja",
@@ -400,8 +423,9 @@
       "zrodlo": "ustawa-ryczalt",
       "przepis": "art. 11 ust. 3",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ikze-wyplata-warunki",
@@ -410,8 +434,9 @@
       "zrodlo": "ustawa-ike-ikze",
       "przepis": "art. 34a ust. 1 i 2",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ikze-wyplata-raty",
@@ -420,8 +445,9 @@
       "zrodlo": "ustawa-ike-ikze",
       "przepis": "art. 34a ust. 4",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ikze-wyplata-podatek",
@@ -432,8 +458,9 @@
       "zrodlo": "ustawa-pit",
       "przepis": "art. 30 ust. 1 pkt 14",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ikze-zwrot-podatek",
@@ -442,8 +469,9 @@
       "zrodlo": "ustawa-pit",
       "przepis": "art. 20 ust. 1",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ikze-limit-ogloszenie",
@@ -453,7 +481,8 @@
       "przepis": "art. 13a ust. 8",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "zdrowotna-podstawa",
@@ -462,8 +491,10 @@
       "zrodlo": "ustawa-zdrowotna",
       "przepis": "art. 81 ust. 2",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "wniosek",
+      "uwagi": "Druga część to wniosek z braku przepisu przewidującego pomniejszenie podstawy o wpłaty na IKZE. Sytuacji ryczałtowca nie analizowano (zob. z-ryczalt-zdrowotna-ikze)."
     },
     {
       "id": "zus-informacja-o-stanie-konta",
@@ -472,8 +503,9 @@
       "zrodlo": "ustawa-sus",
       "przepis": "art. 50 ust. 1",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "zus-hipotetyczna-emerytura",
@@ -482,8 +514,9 @@
       "zrodlo": "ustawa-sus",
       "przepis": "art. 50 ust. 1a pkt 2, ust. 1ba i 1c",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "zus-informacja-zawartosc",
@@ -493,7 +526,8 @@
       "przepis": "art. 50 ust. 1a pkt 1–3",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "zus-hipotetyczna-warianty",
@@ -502,8 +536,9 @@
       "zrodlo": "ustawa-sus",
       "przepis": "art. 50 ust. 1c",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "zus-hipotetyczna-wzor",
@@ -512,8 +547,9 @@
       "zrodlo": "ustawa-sus",
       "przepis": "art. 50 ust. 2",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "sus-skladka-emerytalna",
@@ -525,7 +561,8 @@
       "przepis": "art. 22 ust. 1 pkt 1",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "sus-konto-zwaloryzowane",
@@ -535,7 +572,19 @@
       "przepis": "art. 40 ust. 1",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
+    },
+    {
+      "id": "sus-podstawa-pracownik",
+      "obszar": "zus",
+      "tresc": "Podstawę wymiaru składek emerytalnej i rentowych pracownika stanowi przychód ze stosunku pracy w rozumieniu ustawy, z wyjątkami w niej przewidzianymi.",
+      "zrodlo": "ustawa-sus",
+      "przepis": "art. 18 ust. 1 (odesłanie do art. 4 pkt 9 i 10)",
+      "status": "P",
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "sus-podstawa-jdg",
@@ -547,7 +596,8 @@
       "przepis": "art. 18 ust. 8",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "sus-podstawa-wyzsza",
@@ -557,7 +607,8 @@
       "przepis": "art. 18 ust. 8a; art. 18c ust. 8",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "sus-preferencyjna",
@@ -569,7 +620,8 @@
       "przepis": "art. 18a ust. 1 i 2",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "fus-wiek-emerytalny",
@@ -579,7 +631,8 @@
       "przepis": "art. 24 ust. 1",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "fus-podstawa-obliczenia",
@@ -589,7 +642,8 @@
       "przepis": "art. 25 ust. 1",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "fus-wzor-emerytury",
@@ -599,7 +653,8 @@
       "przepis": "art. 26 ust. 1 i 3",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "fus-tablice-gus",
@@ -609,7 +664,8 @@
       "przepis": "art. 26 ust. 4 i 5",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "fus-najnizsza-warunki",
@@ -619,7 +675,8 @@
       "przepis": "art. 87 ust. 1",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "fus-najnizsza-proporcja",
@@ -629,7 +686,8 @@
       "przepis": "art. 87 ust. 3",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "zus-kapital-poczatkowy",
@@ -638,8 +696,9 @@
       "zrodlo": "ustawa-fus",
       "przepis": "art. 173 ust. 1; art. 196",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "zus-profil-informacyjny",
@@ -648,8 +707,9 @@
       "zrodlo": "ustawa-sus",
       "przepis": "art. 50 ust. 1h, 1ha i 1i",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "oki-start",
@@ -658,8 +718,9 @@
       "zrodlo": "ustawa-oki",
       "przepis": "art. 46",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-01-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-01-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "oki-kto",
@@ -668,8 +729,10 @@
       "zrodlo": "ustawa-oki",
       "przepis": "art. 3 ust. 2 i 3",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie",
+      "obowiazujeOd": "2027-01-01"
     },
     {
       "id": "oki-podatek",
@@ -678,8 +741,10 @@
       "zrodlo": "ustawa-oki",
       "przepis": "art. 22 ust. 1; art. 32 pkt 1",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie",
+      "obowiazujeOd": "2027-01-01"
     },
     {
       "id": "oki-stawka",
@@ -688,8 +753,10 @@
       "zrodlo": "ustawa-oki",
       "przepis": "art. 25 ust. 1",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-11-30"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-11-30",
+      "interpretacja": "brzmienie",
+      "obowiazujeOd": "2027-01-01"
     },
     {
       "id": "oki-stawka-2027",
@@ -701,8 +768,10 @@
       "zrodlo": "ustawa-oki",
       "przepis": "art. 43",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-11-30"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-11-30",
+      "interpretacja": "brzmienie",
+      "obowiazujeOd": "2027-01-01"
     },
     {
       "id": "oki-stawka-ogloszenie",
@@ -712,7 +781,9 @@
       "przepis": "art. 25 ust. 2",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie",
+      "obowiazujeOd": "2027-01-01"
     },
     {
       "id": "oki-zwolnienie-lacznie",
@@ -723,8 +794,10 @@
       "zrodlo": "ustawa-oki",
       "przepis": "art. 26 ust. 2",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie",
+      "obowiazujeOd": "2027-01-01"
     },
     {
       "id": "oki-zwolnienie-oszczednosciowe",
@@ -735,18 +808,22 @@
       "zrodlo": "ustawa-oki",
       "przepis": "art. 26 ust. 1 pkt 1",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie",
+      "obowiazujeOd": "2027-01-01"
     },
     {
       "id": "oki-kwalifikowane",
       "obszar": "oki",
-      "tresc": "Fundusze inwestycyjne, fundusze zagraniczne i ubezpieczeniowe fundusze kapitałowe korzystają ze zwolnienia, jeżeli co najmniej 70% ich aktywów stanowią kwalifikowane aktywa, czyli m.in. obligacje i akcje denominowane w złotych oraz bony skarbowe.",
+      "tresc": "Fundusze inwestycyjne, fundusze zagraniczne i ubezpieczeniowe fundusze kapitałowe korzystają ze zwolnienia, jeżeli co najmniej 70% ich aktywów stanowią kwalifikowane aktywa. Są nimi m.in. obligacje i listy zastawne denominowane w złotych, akcje spółek, których kapitał zakładowy jest denominowany w złotych — jeżeli są w obrocie na rynku regulowanym lub w alternatywnym systemie obrotu — bony skarbowe oraz środki pieniężne w złotych.",
       "zrodlo": "ustawa-oki",
       "przepis": "art. 26 ust. 1 pkt 2 i ust. 4",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie",
+      "obowiazujeOd": "2027-01-01"
     },
     {
       "id": "oki-strata",
@@ -755,8 +832,10 @@
       "zrodlo": "ustawa-oki",
       "przepis": "art. 5 ust. 1 pkt 3 lit. c",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie",
+      "obowiazujeOd": "2027-01-01"
     },
     {
       "id": "oki-waloryzacja",
@@ -765,8 +844,10 @@
       "zrodlo": "ustawa-oki",
       "przepis": "art. 26 ust. 5; art. 44 ust. 1",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie",
+      "obowiazujeOd": "2030-01-01"
     },
     {
       "id": "nbp-cel-inflacyjny",
@@ -777,8 +858,9 @@
       "zrodlo": "mp-2026-943",
       "przepis": "załącznik do uchwały",
       "status": "P",
-      "sprawdzono": "2026-11-13",
-      "przeglad": "2027-10-01"
+      "sprawdzono": "2026-11-14",
+      "przeglad": "2027-10-01",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "nazwy-ike-ikze",
@@ -788,7 +870,8 @@
       "przepis": "art. 18 i art. 40",
       "status": "P",
       "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "nazwa-oki",
@@ -798,7 +881,9 @@
       "przepis": "art. 20 i art. 31",
       "status": "P",
       "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie",
+      "obowiazujeOd": "2027-01-01"
     },
     {
       "id": "doradztwo-definicja",
@@ -808,7 +893,8 @@
       "przepis": "art. 69 ust. 1 i ust. 2 pkt 5; art. 76 ust. 1",
       "status": "P",
       "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "doradztwo-sankcja",
@@ -818,7 +904,8 @@
       "przepis": "art. 178",
       "status": "P",
       "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "agent-firmy-inwestycyjnej",
@@ -828,7 +915,8 @@
       "przepis": "art. 79 ust. 1 i 2",
       "status": "P",
       "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "knf-dobre-praktyki",
@@ -838,7 +926,8 @@
       "przepis": "zalecenia",
       "status": "P",
       "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "konsument-tresci-cyfrowe",
@@ -848,7 +937,8 @@
       "przepis": "art. 38 ust. 1 pkt 13",
       "status": "P",
       "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "konsument-jdg",
@@ -858,7 +948,8 @@
       "przepis": "art. 7aa",
       "status": "P",
       "sprawdzono": "2026-11-13",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "rynek-ike-ikze",
@@ -970,7 +1061,8 @@
       "przepis": "art. 22 ust. 3",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "zus-hipotetyczna-bez-subkonta",
@@ -980,7 +1072,9 @@
       "przepis": "art. 40 ust. 1; art. 50 ust. 2",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "wniosek",
+      "uwagi": "Wniosek z zestawienia art. 40 ust. 1 i art. 50 ust. 2 ustawy o systemie ubezpieczeń społecznych. Nie sprawdzono, jak ZUS przedstawia to w informacji o stanie konta."
     },
     {
       "id": "zus-informacja-subkonto",
@@ -990,7 +1084,8 @@
       "przepis": "art. 50 ust. 1a pkt 2a, 4 i 5",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "zus-informacja-12-miesiecy",
@@ -1000,7 +1095,8 @@
       "przepis": "art. 50 ust. 1a pkt 3",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "zus-hipotetyczna-5-lat",
@@ -1010,7 +1106,8 @@
       "przepis": "art. 50 ust. 1d",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "pit-emerytura-zaliczka",
@@ -1020,7 +1117,8 @@
       "przepis": "art. 34 ust. 1",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "zdrowotna-emeryci",
@@ -1032,7 +1130,8 @@
       "przepis": "art. 66 ust. 1 pkt 16; art. 79 ust. 1",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "fus-waloryzacja-roczna",
@@ -1042,7 +1141,8 @@
       "przepis": "art. 25 ust. 3",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "fus-waloryzacja-wskaznik",
@@ -1052,7 +1152,8 @@
       "przepis": "art. 25 ust. 6",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "fus-tablice-korzystniejsze",
@@ -1062,7 +1163,8 @@
       "przepis": "art. 26 ust. 6",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "fus-kapital-poczatkowy-zarobki",
@@ -1072,7 +1174,8 @@
       "przepis": "art. 174 ust. 3",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "fus-kapital-nie-dziedziczony",
@@ -1082,7 +1185,8 @@
       "przepis": "art. 25 ust. 2",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "fus-okresy-definicje",
@@ -1092,7 +1196,8 @@
       "przepis": "art. 6 ust. 1 pkt 1; art. 7 pkt 1",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "fus-nieskladkowe-limit",
@@ -1102,7 +1207,8 @@
       "przepis": "art. 5 ust. 2; art. 87 ust. 1",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "fus-najnizsza-przychod",
@@ -1112,7 +1218,9 @@
       "przepis": "art. 87 ust. 5; art. 104 ust. 1",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "wniosek",
+      "uwagi": "Brzmienie art. 87 ust. 5 jest jednoznaczne; zastosowanie do emeryta, który nadal prowadzi działalność gospodarczą (art. 104 ust. 2), wymaga potwierdzenia przez eksperta."
     },
     {
       "id": "sus-maly-zus-plus",
@@ -1124,7 +1232,8 @@
       "przepis": "art. 18c ust. 1 i 3",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "sus-maly-zus-plus-granice",
@@ -1134,7 +1243,8 @@
       "przepis": "art. 18c ust. 2",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "sus-maly-zus-plus-ryczalt",
@@ -1144,7 +1254,8 @@
       "przepis": "art. 18c ust. 12 pkt 2",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "sus-maly-zus-plus-okres",
@@ -1154,7 +1265,8 @@
       "przepis": "art. 18c ust. 11 i 11a",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "sus-limit-roczny",
@@ -1164,7 +1276,8 @@
       "przepis": "art. 19 ust. 1",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "sus-podstawa-chorobowe-wypadkowe",
@@ -1174,7 +1287,8 @@
       "przepis": "art. 20 ust. 1; art. 11 ust. 2; art. 12 ust. 1",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "pp-ulga-na-start",
@@ -1184,7 +1298,8 @@
       "przepis": "art. 18 ust. 1 i 2",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ike-maloletni",
@@ -1194,7 +1309,8 @@
       "przepis": "art. 3 ust. 2; art. 13 ust. 7",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ike-limit-nie-nizszy",
@@ -1204,7 +1320,8 @@
       "przepis": "art. 13 ust. 1a",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ike-po-wyplacie",
@@ -1214,7 +1331,8 @@
       "przepis": "art. 34 ust. 2, 4 i 5",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ike-wyplata-smierc",
@@ -1224,7 +1342,8 @@
       "przepis": "art. 34 ust. 1 pkt 2",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ike-zwrot-calkowity",
@@ -1234,7 +1353,8 @@
       "przepis": "art. 37 ust. 1",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ike-zwrot-czesciowy",
@@ -1244,7 +1364,8 @@
       "przepis": "art. 37 ust. 1a",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     },
     {
       "id": "ike-zwrot-czesciowy-dochod",
@@ -1254,7 +1375,8 @@
       "przepis": "art. 30a ust. 8b",
       "status": "P",
       "sprawdzono": "2026-11-14",
-      "przeglad": "2027-05-15"
+      "przeglad": "2027-05-15",
+      "interpretacja": "brzmienie"
     }
   ]
 }

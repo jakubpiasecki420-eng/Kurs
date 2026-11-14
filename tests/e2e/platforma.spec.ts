@@ -306,3 +306,32 @@ test('menu strefy kursanta oznacza bieżący widok i działa na telefonie', asyn
     expect(ramka!.y + ramka!.height).toBeGreaterThan(wysokosc - 2);
   }
 });
+
+test('kalkulator procentu składanego: przy dużej stracie żadna wartość nie jest ujemna', async ({ page }) => {
+  await otworz(page, '/platforma/narzedzia/procent-skladany/');
+  const k = page.locator('[data-kalkulator-prosty="procent-skladany"]');
+  await expect(k).toHaveAttribute('data-gotowy', 'true');
+  await k.getByLabel('Kwota początkowa').fill('1');
+  await k.getByLabel('Roczna stopa zwrotu').fill('−20');
+  await k.getByLabel('Okres').fill('50');
+  await expect(k.locator('[data-kafel-wartosc]').nth(2)).toHaveText('0 zł');
+  await expect(k.locator('[data-tabela]')).not.toContainText('-');
+});
+
+test('kalkulator inflacji pokazuje inflację skumulowaną obok rocznej', async ({ page }) => {
+  await otworz(page, '/platforma/narzedzia/inflacja/');
+  const k = page.locator('[data-kalkulator-prosty="inflacja"]');
+  await expect(k).toHaveAttribute('data-gotowy', 'true');
+  await expect(k.locator('[data-kafel-etykieta]').nth(3)).toHaveText('Łączny wzrost cen przez 20 lat (inflacja skumulowana)');
+  await expect(k.locator('[data-kafel-wartosc]').nth(3)).toHaveText('63,9%');
+  await k.getByLabel('Za ile lat').fill('3');
+  await expect(k.locator('[data-kafel-etykieta]').nth(3)).toHaveText('Łączny wzrost cen przez 3 lata (inflacja skumulowana)');
+});
+
+test('lekcja 9.1 pokazuje stopę realną liczoną dokładnym wzorem', async ({ page }) => {
+  await otworz(page, `${EPK}inflacja/inflacja-wartosc-realna/`);
+  const t = page.getByRole('region', { name: 'Stopa nominalna, inflacja i stopa realna' });
+  await expect(t).toContainText('2,44%');
+  // Podpis z założeniami jest pod tabelą, w tym samym elemencie figure.
+  await expect(page.locator('figure.przyklad', { has: t }).locator('figcaption')).toContainText('nie prognoza');
+});
