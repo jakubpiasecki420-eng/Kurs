@@ -5,6 +5,10 @@ tytul: 'Informacja o stanie konta w ZUS'
 opis: 'Kiedy i gdzie ZUS udostępnia informację o Twoim koncie, co w niej jest, gdzie znaleźć stan subkonta i jak czytać zestawienie ostatnich składek.'
 czasMin: 7
 demonstracyjna: false
+podsumowanie:
+  - 'ZUS udostępnia informację o stanie konta do 31 sierpnia, ze stanem na koniec poprzedniego roku.'
+  - 'Informacja pokazuje składki na koncie, kapitał początkowy, stan subkonta i hipotetyczną emeryturę.'
+  - 'Zestawienie ostatnich składek nie obejmuje części na subkoncie, więc kwoty są mniejsze niż cała składka.'
 twierdzenia:
   [
     zus-informacja-o-stanie-konta,
@@ -47,7 +51,7 @@ Oprócz łącznej kwoty składek na koncie informacja zawiera[^zus-informacja-za
 
 - **kapitał początkowy** — jeśli został obliczony. Ustala się go osobom urodzonym po 1948 r., za które przed 1 stycznia 1999 r. opłacano składki[^zus-kapital-poczatkowy];
 - **hipotetyczną emeryturę** — omawiamy ją w następnej lekcji;
-- **stan subkonta** oraz składki na OFE, jeśli jesteś członkiem funduszu[^zus-informacja-subkonto]. Te środki wliczają się do prawdziwej emerytury, ale — jak zobaczysz w lekcji 2.2 — nie do hipotetycznej;
+- **stan subkonta** oraz składki na OFE, jeśli jesteś członkiem funduszu[^zus-informacja-subkonto]. Te środki wliczają się do prawdziwej emerytury, ale — jak zobaczysz w następnej lekcji — nie do hipotetycznej;
 - **składki z ostatnich 12 miesięcy** — w podziale na miesiące.
 
 ## Jak czytać zestawienie ostatnich składek
@@ -64,7 +68,7 @@ Dlatego nie porównuj zestawienia z całym przelewem do ZUS — przelew obejmuje
 2. Zapisz rok, którego dotyczy informacja, łączną kwotę składek, stan subkonta i kapitał początkowy, jeśli go masz.
 3. Sprawdź, czy w zestawieniu z ostatnich 12 miesięcy są wszystkie miesiące, za które opłacano Twoje składki.
 
-Te liczby będą potrzebne w kolejnej lekcji i w module 12.
+Te liczby będą potrzebne w kolejnej lekcji i w module „Twój plan”.
 
 ## Czego ta lekcja nie rozstrzyga
 

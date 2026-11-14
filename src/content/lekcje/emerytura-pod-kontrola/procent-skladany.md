@@ -5,6 +5,10 @@ tytul: 'Procent składany: zysk od zysku'
 opis: 'Jak czas zmienia wynik, gdy zysk zostaje na koncie, i dlaczego ten sam mechanizm działa także na koszty.'
 czasMin: 6
 demonstracyjna: false
+podsumowanie:
+  - 'Procent składany to zysk od wcześniejszego zysku; jego efekt rośnie z czasem.'
+  - 'To mechanizm, a nie gwarancja: przy zerowym zysku nic się nie składa, przy stracie działa w drugą stronę.'
+  - 'Stopy w przykładach są hipotetyczne i służą ilustracji.'
 narzedzie: procent-skladany
 quiz:
   pytania:

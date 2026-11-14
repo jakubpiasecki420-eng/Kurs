@@ -35,7 +35,25 @@ Kolumna „Twierdzenia” podaje identyfikatory z `src/data/rejestr.json`. Rozdz
 | 9 | `rozdzialy/09-inflacja-i-procent-skladany.md` | Szkic przed recenzją |
 | C | generowany ze źródeł użytych w rozdziałach | Automatycznie |
 
-Lekcje kursu na platformie istnieją dla modułów 1, 2, 4, 9 i 12 (`src/content/lekcje/emerytura-pod-kontrola/`). Rozdziały 1 i 12 można złożyć z tych lekcji.
+Lekcje kursu na platformie: `src/content/lekcje/emerytura-pod-kontrola/`, status w `docs/status-tresci-i-recenzji.md`.
+
+**Numeracja rozdziałów a moduły platformy.** Od Etapu 3A program na platformie zaczyna się modułem „Fundamenty bezpieczeństwa finansowego”, więc numer modułu na platformie jest o jeden większy niż numer rozdziału. Rozdziały zachowują numerację, bo odwołują się do nich pliki i skrypt składania PDF.
+
+| Rozdział PDF | Moduł na platformie | Lekcje na platformie |
+| --- | --- | --- |
+| — | 1. Fundamenty bezpieczeństwa finansowego | 3 (brak rozdziału) |
+| 1 | 2. Jak działa system emerytalny | 3 (brak rozdziału) |
+| 2 | 3. ZUS: co możesz sprawdzić | 2 |
+| 3 | 4. Twoja forma pracy | — (recenzja podatkowa) |
+| 4 | 5. IKE | 2 |
+| 5 | 6. IKZE | — (recenzja podatkowa) |
+| 6 | 7. OKI | — (recenzja podatkowa) |
+| 7 | 8. Trzy konta obok siebie | — (recenzja podatkowa) |
+| 8 | 9. PPK i PPE | — (ustawa o PPK do weryfikacji) |
+| 9 | 10. Inflacja i procent składany | 3 |
+| 10 | 11. Podstawy inwestowania | 3 (brak rozdziału) |
+| 11 | 12. Jak porównywać instytucje i produkty | 2 (brak rozdziału) |
+| 12 | 13. Twój plan | 2 (brak rozdziału) |
 
 Skład: `npm run przewodnik` tworzy `wydruki/emerytura-pod-kontrola-<wersja>.pdf`. Tabele i wykres w rozdziałach 4 i 9 powstają z `src/lib/przyklady.ts` (dyrektywy `<!-- tabela:… -->` w treści) — tego samego modułu co w lekcjach, więc zmiana stawki w rejestrze aktualizuje przykłady w obu miejscach.
 

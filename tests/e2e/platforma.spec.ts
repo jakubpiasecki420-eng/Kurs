@@ -3,6 +3,7 @@ import { expect, test, type Page } from '@playwright/test';
 const KURS = '/platforma/kurs/kurs-demonstracyjny/';
 const EPK = '/platforma/kurs/emerytura-pod-kontrola/';
 const R = {
+  rezerwa: `${EPK}fundamenty/rezerwa-finansowa/`,
   pierwsza: `${EPK}system-emerytalny/skad-bierze-sie-emerytura/`,
   ike: `${EPK}ike/ike-wyplata-i-zwrot/`,
   inflacja: `${EPK}inflacja/inflacja-wartosc-realna/`,
@@ -34,31 +35,31 @@ test('pulpit na starcie: informacja o trybie demonstracyjnym, pierwsza lekcja ku
   await expect(page.getByLabel('Tryb demonstracyjny')).toContainText('Konta użytkowników jeszcze nie działają');
   const kontynuuj = page.locator('[data-kontynuuj]');
   await expect(kontynuuj).toContainText('Zacznij naukę');
-  await expect(kontynuuj).toContainText('1.1 Skąd bierze się emerytura z ZUS');
-  await expect(status(page, 'system-emerytalny')).toHaveText('Dostępny');
-  await expect(page.locator('[data-liczba="moduly-wszystkie"]')).toHaveText('5');
+  await expect(kontynuuj).toContainText('1.1 Rezerwa finansowa przy nieregularnych dochodach');
+  await expect(status(page, 'fundamenty')).toHaveText('Dostępny');
+  await expect(page.locator('[data-liczba="moduly-wszystkie"]')).toHaveText('8');
   await expect(page.getByText('Nie masz jeszcze żadnej aktywności.')).toBeVisible();
   await expect(page.locator('[data-postep-kursu] [role="progressbar"]').first()).toHaveAttribute('aria-valuenow', '0');
   await expect(page.getByRole('region', { name: 'Kurs demonstracyjny' }).getByRole('link', { name: 'Przejdź do kursu' })).toHaveAttribute('href', KURS);
 });
 
 test('ukończenie lekcji aktualizuje postęp, kontynuację i historię — także po przeładowaniu', async ({ page }) => {
-  await otworz(page, R.pierwsza);
+  await otworz(page, R.rezerwa);
   await expect(page.locator('[data-tekst-znacznika]')).toHaveText('Nieukończona');
   await page.getByRole('button', { name: 'Oznacz jako ukończoną' }).click();
   await expect(page.locator('[data-tekst-znacznika]')).toHaveText('Ukończona');
-  await expect(page.locator('.lista-lekcji [data-lekcja="skad-bierze-sie-emerytura"]')).toHaveAttribute('data-ukonczona', 'true');
+  await expect(page.locator('.lista-lekcji [data-lekcja="rezerwa-finansowa"]')).toHaveAttribute('data-ukonczona', 'true');
 
   await otworz(page, '/platforma/');
   const kontynuuj = page.locator('[data-kontynuuj]');
   await expect(kontynuuj).toContainText('Kontynuuj naukę');
-  await expect(kontynuuj).toContainText('1.2 Wiek emerytalny i najniższa emerytura');
-  await expect(page.locator('[data-postep-kursu] [role="progressbar"]').first()).toHaveAttribute('aria-valuenow', '8');
-  await expect(status(page, 'system-emerytalny')).toHaveText('Rozpoczęty');
+  await expect(kontynuuj).toContainText('1.2 Pieniądze firmy i pieniądze domowe');
+  await expect(page.locator('[data-postep-kursu] [role="progressbar"]').first()).toHaveAttribute('aria-valuenow', '5');
+  await expect(status(page, 'fundamenty')).toHaveText('Rozpoczęty');
   await expect(page.locator('[data-aktywnosci]')).toContainText('Ukończono lekcję');
 
   await page.reload();
-  await expect(page.locator('[data-kontynuuj]')).toContainText('1.2 Wiek emerytalny i najniższa emerytura');
+  await expect(page.locator('[data-kontynuuj]')).toContainText('1.2 Pieniądze firmy i pieniądze domowe');
 });
 
 test('postęp kursu demonstracyjnego jest liczony osobno', async ({ page }) => {
@@ -199,7 +200,7 @@ test('kalkulator inflacji w lekcji przelicza wynik i zgłasza błędne dane', as
 
 test('centrum narzędzi: dostępne kalkulatory z opisem, planowane narzędzia bez linków', async ({ page }) => {
   await otworz(page, '/platforma/narzedzia/');
-  await expect(page.locator('.narzedzie-karta')).toHaveCount(6);
+  await expect(page.locator('.narzedzie-karta')).toHaveCount(7);
   await expect(page.getByRole('link', { name: 'Kalkulator ulgi IKZE' })).toHaveCount(0);
   await page.getByRole('link', { name: 'Kalkulator regularnego oszczędzania' }).click();
   await expect(page).toHaveURL('/platforma/narzedzia/oszczedzanie/');
@@ -286,11 +287,11 @@ test('uszkodzone dane w przeglądarce nie psują strefy kursanta', async ({ page
 
 test('program kursu: moduły z lekcjami i moduły w przygotowaniu', async ({ page }) => {
   await otworz(page, EPK);
-  await expect(page.locator('.modul')).toHaveCount(12);
-  await expect(page.locator('[data-informacja-o-kursie]')).toContainText('Lekcje ma 5 z 12 modułów');
+  await expect(page.locator('.modul')).toHaveCount(13);
+  await expect(page.locator('[data-informacja-o-kursie]')).toContainText('Lekcje ma 8 z 13 modułów');
   await expect(page.locator('[data-informacja-o-kursie]')).toContainText('wersją roboczą przed recenzją eksperta');
-  await expect(page.getByText('5 modułów z lekcjami · 12 lekcji')).toBeVisible();
-  await expect(page.locator('.lista-lekcji a')).toHaveCount(12);
+  await expect(page.getByText('8 modułów z lekcjami · 20 lekcji')).toBeVisible();
+  await expect(page.locator('.lista-lekcji a')).toHaveCount(20);
 });
 
 test('menu strefy kursanta oznacza bieżący widok i działa na telefonie', async ({ page, isMobile }) => {
@@ -328,10 +329,47 @@ test('kalkulator inflacji pokazuje inflację skumulowaną obok rocznej', async (
   await expect(k.locator('[data-kafel-etykieta]').nth(3)).toHaveText('Łączny wzrost cen przez 3 lata (inflacja skumulowana)');
 });
 
-test('lekcja 9.1 pokazuje stopę realną liczoną dokładnym wzorem', async ({ page }) => {
+test('lekcja o inflacji pokazuje stopę realną liczoną dokładnym wzorem', async ({ page }) => {
   await otworz(page, `${EPK}inflacja/inflacja-wartosc-realna/`);
   const t = page.getByRole('region', { name: 'Stopa nominalna, inflacja i stopa realna' });
   await expect(t).toContainText('2,44%');
   // Podpis z założeniami jest pod tabelą, w tym samym elemencie figure.
   await expect(page.locator('figure.przyklad', { has: t }).locator('figcaption')).toContainText('nie prognoza');
+});
+
+test('kalkulator rezerwy: cel, brakująca kwota, czas dojścia i błędne dane', async ({ page }) => {
+  await otworz(page, '/platforma/narzedzia/rezerwa/');
+  const k = page.locator('[data-kalkulator-rezerwy]');
+  await expect(k).toHaveAttribute('data-gotowy', 'true');
+  await expect(k.locator('[data-wynik="cel"]')).toHaveText('36 000 zł');
+  await expect(k.locator('[data-wynik="brakuje"]')).toHaveText('26 000 zł');
+  await expect(k.locator('[data-wynik="czas"]')).toHaveText('26 miesięcy');
+  await k.getByLabel('Już odłożone').fill('40.000');
+  await expect(k.locator('[data-wynik="brakuje"]')).toHaveText('0 zł');
+  await expect(k.locator('[data-wynik="czas"]')).toHaveText('cel osiągnięty');
+  await k.getByLabel('Już odłożone').fill('0');
+  await k.getByLabel('Odkładane co miesiąc').fill('0');
+  await expect(k.locator('[data-wynik="czas"]')).toHaveText('nie da się policzyć bez odkładania');
+  await k.getByLabel('Na ile miesięcy').fill('2,5');
+  await expect(k.getByLabel('Na ile miesięcy')).toHaveAttribute('aria-invalid', 'true');
+  await expect(k.locator('[data-wyniki]')).toHaveAttribute('data-nieaktualne', '');
+});
+
+test('katalog kursów, cele modułu i podsumowanie lekcji', async ({ page }) => {
+  await otworz(page, '/platforma/kursy/');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Kursy');
+  const linki = page.locator('.karta-kursu h2 a');
+  await expect(linki.first()).toHaveText('Emerytura pod kontrolą');
+  await expect(linki.last()).toHaveText('Kurs demonstracyjny');
+  await linki.first().click();
+  await expect(page).toHaveURL(EPK);
+
+  await otworz(page, `${EPK}fundamenty/`);
+  await expect(page.getByRole('heading', { name: 'Po tym module' })).toBeVisible();
+  await expect(page.locator('.cele-modulu li').first()).toBeVisible();
+
+  await otworz(page, R.rezerwa);
+  const podsumowanie = page.getByRole('region', { name: 'Podsumowanie' });
+  await expect(podsumowanie.locator('li')).toHaveCount(3);
+  await expect(page.locator('[data-kalkulator-rezerwy]')).toBeVisible();
 });

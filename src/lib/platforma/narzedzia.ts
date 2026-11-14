@@ -30,6 +30,23 @@ const ZASTRZEZENIE =
 
 export const NARZEDZIA: readonly Narzedzie[] = [
   {
+    id: 'rezerwa',
+    nazwa: 'Kalkulator rezerwy finansowej',
+    opis: 'Ile pieniędzy pokrywa wybraną liczbę miesięcy wydatków, ile brakuje i ile miesięcy zajmie uzupełnienie rezerwy.',
+    stan: 'dostepne',
+    adres: '/platforma/narzedzia/rezerwa/',
+    biblioteka: 'src/lib/kalkulator/rezerwa.ts',
+    zalozenia: [
+      'Cel rezerwy to miesięczne wydatki pomnożone przez liczbę miesięcy wybraną przez kursanta.',
+      'Stała kwota odkładana co miesiąc; czas dojścia zaokrąglony w górę do pełnych miesięcy.',
+      'Bez odsetek, bez inflacji i bez podatków.',
+      'Liczba miesięcy nie wynika z żadnego przepisu — to decyzja zależna od stabilności dochodów.',
+    ],
+    zrodla: [],
+    zaktualizowano: '2026-11-14',
+    zastrzezenie: ZASTRZEZENIE,
+  },
+  {
     id: 'oszczedzanie',
     nazwa: 'Kalkulator regularnego oszczędzania',
     opis: 'Suma wpłat, wartość nominalna i wartość w dzisiejszych pieniądzach przy stałej miesięcznej wpłacie.',
@@ -122,7 +139,7 @@ export const NARZEDZIA: readonly Narzedzie[] = [
 ];
 
 /** Narzędzia, które mają interfejs (zob. WidokNarzedzia.astro). */
-export const NARZEDZIA_DOSTEPNE = ['oszczedzanie', 'procent-skladany', 'inflacja'] as const;
+export const NARZEDZIA_DOSTEPNE = ['rezerwa', 'oszczedzanie', 'procent-skladany', 'inflacja'] as const;
 export type IdNarzedziaDostepnego = (typeof NARZEDZIA_DOSTEPNE)[number];
 
 export const OPIS_STANU: Record<StanNarzedzia, string> = {

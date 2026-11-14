@@ -15,6 +15,8 @@ Stan na dzień: **14 listopada 2026 r.** Dokument opisuje, jak obecna platforma 
 | Quizy | Wynik zapisywany per kurs i lekcja | `postep.ts`, `Quiz.astro` |
 | Narzędzia | Wspólne dla wszystkich kursów; lekcja dowolnego kursu może osadzić narzędzie polem `narzedzie` | `src/lib/platforma/narzedzia.ts`, `WidokNarzedzia.astro` |
 | Źródła | Jeden rejestr twierdzeń dla całej platformy | `src/data/rejestr.json` |
+| Katalog kursów (Etap 3A) | Strona `/platforma/kursy/` z kartami wszystkich kursów: grupa docelowa, opis, liczba modułów i lekcji, postęp. Kurs demonstracyjny jest zawsze ostatni | `src/pages/platforma/kursy.astro`, `kursyWKolejnosci()` w `dane.ts` |
+| Pola kursu i modułu (Etap 3A) | `kolejnosc` i `grupaDocelowa` w JSON kursu, `cele` w module, `podsumowanie` w lekcji — wszystkie opcjonalne, więc kurs demonstracyjny działa bez zmian | `src/content.config.ts`, `model.ts`, `kurs.ts` |
 
 W repozytorium są dziś dwa kursy: „Emerytura pod kontrolą” i kurs demonstracyjny. Platforma już teraz obsługuje je równolegle.
 
@@ -24,7 +26,7 @@ Te miejsca trzeba zmienić przed udostępnieniem drugiego kursu:
 
 | Miejsce | Obecne zachowanie | Proponowana zmiana |
 | --- | --- | --- |
-| `src/lib/platforma/dane.ts` — `ID_KURSU_AKTYWNEGO` | Jedna stała wskazuje kurs w menu, na pulpicie, w panelu postępu i na stronie `/program/` | Pole `kolejnosc` i flaga `wyrozniony` w JSON kursu; funkcja `kursyAktywne()` zwracająca aktywne kursy niedemonstracyjne w kolejności |
+| `src/lib/platforma/dane.ts` — `ID_KURSU_AKTYWNEGO` | Jedna stała wskazuje kurs w menu, na pulpicie, w panelu postępu i na stronie `/program/` Pole `kolejnosc` i funkcja `kursyWKolejnosci()` już istnieją (Etap 3A). Pozostaje: flaga `wyrozniony` albo wybór kursu z ostatnią aktywnością zamiast stałej |
 | `src/layouts/Aplikacja.astro` — menu „Mój kurs” | Link do jednego kursu | „Moje kursy” → lista kursów (`/platforma/kursy/`) albo link bezpośredni, gdy kurs jest jeden |
 | `src/pages/platforma/index.astro` — pulpit | Kontynuacja nauki i moduły jednego kursu; pozostałe kursy jako karty | Sekcja „Kontynuuj” dla kursu z ostatnią aktywnością (`stan.aktywnosci[0].kurs`), karty pozostałych kursów z ich postępem |
 | `src/pages/platforma/postep.astro` | Postęp jednego kursu | Sekcja na każdy kurs z jakąkolwiek aktywnością albo przełącznik kursu |
@@ -52,6 +54,8 @@ Pola opcjonalne, aby obecne pliki działały bez zmian:
 
 - `kolejnosc` — porządek na liście kursów.
 - `grupaDocelowa` — pokazywana na stronie programu.
+Stan po Etapie 3A: `kolejnosc` i `grupaDocelowa` są w schemacie i w kursie „Emerytura pod kontrolą”; `grupaDocelowa` jest pokazywana w katalogu kursów, jeszcze nie na stronie `/program/`. Pole `wymagaRecenzji` nie zostało dodane.
+
 - `wymagaRecenzji` — lista obszarów, które muszą przejść recenzję przed zmianą `stan` na `aktywny`. Dzięki temu `npm run gotowosc` może zgłaszać blokadę osobno dla każdego kursu.
 
 ## 4. Zasady dla kolejnych kursów

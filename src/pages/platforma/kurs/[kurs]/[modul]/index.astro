@@ -6,6 +6,7 @@ import PasekPostepu from '@/components/platforma/PasekPostepu.astro';
 import ZnacznikStatusu from '@/components/platforma/ZnacznikStatusu.astro';
 import { wszystkieKursy } from '@/lib/platforma/dane';
 import type { Kurs, Modul } from '@/lib/platforma/model';
+import { liczebnik } from '@/lib/format';
 
 export async function getStaticPaths() {
   return (await wszystkieKursy()).flatMap((kurs) =>
@@ -30,7 +31,7 @@ const czas = modul.lekcje.reduce((s, l) => s + l.czasMin, 0);
   >
     <div class="lekcja-meta">
       <ZnacznikStatusu kurs={kurs.id} modul={modul.id} poczatkowy={wymagane.length ? 'niedostepny' : 'dostepny'} />
-      <span>{modul.lekcje.length} lekcji · {czas} min</span>
+      <span>{liczebnik(modul.lekcje.length, 'lekcja', 'lekcje', 'lekcji')} · {czas} min</span>
     </div>
   </NaglowekWidoku>
 
@@ -46,6 +47,19 @@ const czas = modul.lekcje.reduce((s, l) => s + l.czasMin, 0);
         ))}
         .
       </p>
+    )
+  }
+
+  {
+    modul.cele.length > 0 && (
+      <section class="panel cele-modulu" aria-labelledby="cele-tytul">
+        <h2 class="panel__tytul" id="cele-tytul">Po tym module</h2>
+        <ul class="cele-modulu__lista">
+          {modul.cele.map((c) => (
+            <li>{c}</li>
+          ))}
+        </ul>
+      </section>
     )
   }
 

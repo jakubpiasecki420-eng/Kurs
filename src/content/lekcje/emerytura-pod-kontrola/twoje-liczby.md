@@ -5,6 +5,10 @@ tytul: 'Twoje liczby w jednym miejscu'
 opis: 'Zbierasz liczby z wcześniejszych modułów: hipotetyczną emeryturę, subkonto, wydatki, możliwą kwotę oszczędzania i horyzont. Z nich powstaje szkic planu.'
 czasMin: 10
 demonstracyjna: false
+podsumowanie:
+  - 'Luka między wydatkami a hipotetyczną emeryturą jest orientacyjna: pomija subkonto i jest liczona od kwoty brutto.'
+  - 'Wartość realną oszczędności zestawiasz z luką, ale nie przeliczasz kapitału na wypłaty bez porady specjalisty.'
+  - 'Szkic planu ma pięć elementów: rezerwa, kwota, miejsce, terminy i warunek zmiany.'
 twierdzenia: [zus-hipotetyczna-bez-subkonta, pit-emerytura-zaliczka, zdrowotna-emeryci, ikze-wyplata-podatek]
 narzedzie: oszczedzanie
 materialy:
@@ -33,7 +37,7 @@ quiz:
 
 ## Krok 1. Punkt wyjścia z ZUS
 
-Z modułu 2 masz dwie wysokości hipotetycznej emerytury i stan subkonta. Każdy wariant zakłada co innego: pierwszy — że od dziś nie wpłacasz składek, drugi — że dalsze składki będą na dotychczasowym średnim poziomie. Zapisz oba i zastanów się, który bardziej odpowiada Twoim planom.
+Z modułu o ZUS masz dwie wysokości hipotetycznej emerytury i stan subkonta. Każdy wariant zakłada co innego: pierwszy — że od dziś nie wpłacasz składek, drugi — że dalsze składki będą na dotychczasowym średnim poziomie. Zapisz oba i zastanów się, który bardziej odpowiada Twoim planom.
 
 Jeśli nie masz jeszcze 35 lat i informacja z ZUS nie zawiera hipotetycznej emerytury, zapisz łączną kwotę składek i stan subkonta i wróć do tego kroku później.
 
@@ -64,9 +68,9 @@ Nie zamieniamy tu kapitału na miesięczne wypłaty. To, ile miesięcznie da si�
 
 Zapisz pięć elementów:
 
-1. **Rezerwa** — czy i jaką kwotę chcesz trzymać osobno od oszczędności emerytalnych na nieprzewidziane wydatki.
+1. **Rezerwa** — cel i czas dojścia z lekcji „Rezerwa finansowa przy nieregularnych dochodach”.
 2. **Kwota** — ile odkładasz miesięcznie albo rocznie.
-3. **Miejsce** — które konta już masz i które rozważasz. Zasady IKE znasz z modułu 4. Porównanie kont według formy opodatkowania jest w przygotowaniu (moduły 5–7 czekają na recenzję podatkową), więc na razie zapisz pytania, które chcesz wyjaśnić.
+3. **Miejsce** — które konta już masz i które rozważasz. Zasady IKE znasz z modułu „IKE”, a sposób porównywania opłat — z modułu „Jak porównywać instytucje i produkty”. Porównanie kont według formy opodatkowania jest w przygotowaniu (moduły o IKZE, OKI i trzech kontach czekają na recenzję podatkową), więc na razie zapisz pytania, które chcesz wyjaśnić.
 4. **Terminy** — kiedy robisz wpłaty i kiedy sprawdzasz plan. Kalendarz jest w następnej lekcji.
 5. **Warunek zmiany** — co musiałoby się wydarzyć, żeby plan zmienić, na przykład spadek dochodów albo zmiana przepisów.
 

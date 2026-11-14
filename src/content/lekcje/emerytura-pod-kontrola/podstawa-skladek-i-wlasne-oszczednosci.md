@@ -5,6 +5,10 @@ tytul: 'Podstawa składek i własne oszczędności'
 opis: 'Trzy sposoby ustalania podstawy składek przy działalności, co zmienia wyższa podstawa i jakie są drogi dodatkowego oszczędzania na emeryturę.'
 czasMin: 10
 demonstracyjna: false
+podsumowanie:
+  - 'Przy działalności podstawę składek ustala się na jeden z trzech sposobów: zwykły, preferencyjny albo od dochodu (mały ZUS plus).'
+  - 'Składka emerytalna rośnie proporcjonalnie do podstawy, ale rosną też pozostałe składki.'
+  - 'Dodatkowe oszczędzanie ma trzy drogi: wyższa podstawa, dobrowolne konta i oszczędzanie poza nimi.'
 twierdzenia:
   [
     sus-podstawa-pracownik,
@@ -82,7 +86,7 @@ Składka emerytalna to {{sus-skladka-emerytalna}} podstawy wymiaru[^sus-skladka-
 
 Od tej samej podstawy liczy się też składkę wypadkową oraz chorobową, która dla przedsiębiorcy jest dobrowolna[^sus-podstawa-chorobowe-wypadkowe]. Wyższa podstawa zwiększa więc wszystkie te składki, a nie tylko emerytalną.
 
-Z lekcji 1.1 wiesz, że emerytura to zapisany kapitał podzielony przez średnie dalsze trwanie życia[^fus-wzor-emerytury]. Wyższe składki oznaczają więc wyższą emeryturę — ale tylko w części, która wynika z lat płacenia wyższych składek.
+Z lekcji „Skąd bierze się emerytura z ZUS” wiesz, że emerytura to zapisany kapitał podzielony przez średnie dalsze trwanie życia[^fus-wzor-emerytury]. Wyższe składki oznaczają więc wyższą emeryturę — ale tylko w części, która wynika z lat płacenia wyższych składek.
 
 Wyższa podstawa ma też drugą stronę. Zwiększa bieżące koszty prowadzenia działalności. Kwota zapisana w ZUS nie podlega dziedziczeniu, z wyjątkiem szczególnych zasad dla środków z subkonta[^fus-kapital-nie-dziedziczony]. Środki z IKE po śmierci oszczędzającego wypłaca się osobie uprawnionej[^ike-wyplata-smierc].
 
@@ -105,7 +109,7 @@ Zamiast pytać, która droga jest najlepsza, odpowiedz sobie na kilka pytań:
 - Jak ważna jest dla Ciebie preferencja podatkowa w porównaniu z elastycznością?
 - Ile możesz odkładać regularnie, także w słabszych miesiącach?
 
-Konta IKE omawiamy w module 4, inflację i koszty w module 9, a składanie planu w module 12.
+Konta IKE omawiamy w module „IKE”, inflację i koszty w module „Inflacja i procent składany”, ryzyko w module „Podstawy inwestowania”, a składanie planu w module „Twój plan”. O rezerwie piszemy w module „Fundamenty bezpieczeństwa finansowego”.
 
 ## Czego ta lekcja nie rozstrzyga
 

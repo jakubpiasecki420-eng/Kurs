@@ -45,7 +45,16 @@ export function zbudujKurs(dane: DaneKursu, lekcje: DaneLekcji[]): Kurs {
         adres: adresLekcji(dane.id, m.id, l.id),
       };
     });
-    return { id: m.id, numer: i + 1, tytul: m.tytul, opis: m.opis, wymaga: m.wymaga, lekcje: lista, adres: adresModulu(dane.id, m.id) };
+    return {
+      id: m.id,
+      numer: i + 1,
+      tytul: m.tytul,
+      opis: m.opis,
+      wymaga: m.wymaga,
+      cele: m.cele ?? [],
+      lekcje: lista,
+      adres: adresModulu(dane.id, m.id),
+    };
   });
 
   const sieroty = doKursu.filter((l) => !uzyte.has(l.id)).map((l) => l.id);
@@ -57,6 +66,8 @@ export function zbudujKurs(dane: DaneKursu, lekcje: DaneLekcji[]): Kurs {
     opis: dane.opis,
     stan: dane.stan,
     demonstracyjny: dane.demonstracyjny,
+    kolejnosc: dane.kolejnosc ?? 100,
+    grupaDocelowa: dane.grupaDocelowa ?? null,
     moduly,
     adres: adresKursu(dane.id),
   };

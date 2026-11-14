@@ -1,0 +1,138 @@
+---
+/**
+ * Kalkulator rezerwy finansowej. Pierwszy wynik powstaje przy budowaniu strony.
+ * Bez inflacji i odsetek; liczbę miesięcy wybiera kursant — nie ma jednej właściwej wartości.
+ */
+import { KOLEJNOSC_POL_REZERWY, POLA_REZERWY, policzRezerwe, type DaneRezerwy } from '@/lib/kalkulator/rezerwa';
+import { zlPelne, liczebnik } from '@/lib/format';
+
+const domyslne: DaneRezerwy = { wydatki: 6000, miesiace: 6, zgromadzone: 10_000, odkladane: 1000 };
+const w = policzRezerwe(domyslne);
+const jednostka: Record<keyof DaneRezerwy, string> = { wydatki: 'zł', miesiace: 'mies.', zgromadzone: 'zł', odkladane: 'zł' };
+const opis: Record<keyof DaneRezerwy, string> = {
+  wydatki: 'Kwota, której potrzebujesz co miesiąc, gdyby dochód z działalności nagle spadł: życie, rachunki, stałe zobowiązania.',
+  miesiace: 'Wybierasz sam. Nie ma przepisu ani jednej właściwej liczby — zależy to od stabilności Twoich dochodów.',
+  zgromadzone: 'Pieniądze odłożone osobno, które możesz szybko wykorzystać.',
+  odkladane: 'Kwota, którą realnie możesz dokładać co miesiąc. Wpisz 0, jeśli na razie nie odkładasz.',
+};
+const czasTekst = (m: number | null) =>
+  m === null ? 'nie da się policzyć bez odkładania' : m === 0 ? 'cel osiągnięty' : liczebnik(m, 'miesiąc', 'miesiące', 'miesięcy');
+const pokrycieTekst = (p: number) =>
+  `${p.toLocaleString('pl-PL', { maximumFractionDigits: 1 })} mies.`;
+---
+
+<div class="kalkulator" data-kalkulator-rezerwy data-domyslne={JSON.stringify(domyslne)}>
+  <form class="kalkulator__formularz" novalidate data-formularz>
+    <h2 class="kalkulator__tytul">Twoje liczby</h2>
+    {
+      KOLEJNOSC_POL_REZERWY.map((p) => (
+        <div class="pole">
+          <label for={`rezerwa-${p}`}>{POLA_REZERWY[p].etykieta}</label>
+          <div class="pole__wejscie">
+            <input
+              id={`rezerwa-${p}`}
+              name={p}
+              type="text"
+              inputmode={POLA_REZERWY[p].calkowite ? 'numeric' : 'decimal'}
+              autocomplete="off"
+              value={String(domyslne[p])}
+              aria-describedby={`rezerwa-${p}-opis rezerwa-${p}-blad`}
+            />
+            <span class="pole__jednostka" aria-hidden="true">
+              {jednostka[p]}
+            </span>
+          </div>
+          <p class="pole__opis" id={`rezerwa-${p}-opis`}>
+            {opis[p]}
+          </p>
+          <p class="pole__blad" id={`rezerwa-${p}-blad`} data-blad={p} aria-live="polite" />
+        </div>
+      ))
+    }
+    <button type="button" class="kalkulator__reset" data-reset>Przywróć wartości przykładowe</button>
+    <noscript>
+      <p class="pole__opis">Przeliczanie wymaga włączonego JavaScriptu. Poniżej widzisz wynik dla wartości przykładowych.</p>
+    </noscript>
+  </form>
+
+  <div class="kalkulator__wyniki" data-wyniki>
+    <p class="kalkulator__symulacja">
+      <span class="znacznik znacznik--zloty">Rachunek</span>
+      Wartości przykładowe — wpisz własne. Bez inflacji i odsetek.
+    </p>
+    <dl class="kafle" aria-live="polite">
+      <div class="kafel">
+        <dt>Cel rezerwy</dt>
+        <dd data-wynik="cel">{zlPelne(w.cel)}</dd>
+      </div>
+      <div class="kafel">
+        <dt>Brakuje do celu</dt>
+        <dd data-wynik="brakuje">{zlPelne(w.brakuje)}</dd>
+      </div>
+      <div class="kafel">
+        <dt>Obecna kwota wystarcza na</dt>
+        <dd data-wynik="pokrycie">{pokrycieTekst(w.pokrycie)}</dd>
+      </div>
+      <div class="kafel">
+        <dt>Czas dojścia do celu</dt>
+        <dd data-wynik="czas">{czasTekst(w.miesiaceDoCelu)}</dd>
+      </div>
+    </dl>
+    <p class="maly cichy">
+      Cel = miesięczne wydatki × liczba miesięcy. Czas dojścia = brakująca kwota ÷ kwota odkładana co miesiąc, w górę
+      do pełnych miesięcy. Rachunek nie uwzględnia odsetek ani wzrostu cen — przy dłuższym odkładaniu cel w złotych
+      warto co jakiś czas przeliczyć.
+    </p>
+  </div>
+</div>
+
+<script>
+  import { KOLEJNOSC_POL_REZERWY, policzRezerwe, walidujRezerwe, type DaneRezerwy } from '@/lib/kalkulator/rezerwa';
+  import { liczbaZPola } from '@/lib/kalkulator/proste';
+  import { liczebnik, zlPelne } from '@/lib/format';
+
+  document.querySelectorAll<HTMLElement>('[data-kalkulator-rezerwy]').forEach((korzen) => {
+    const formularz = korzen.querySelector<HTMLFormElement>('[data-formularz]')!;
+    const wyniki = korzen.querySelector<HTMLElement>('[data-wyniki]')!;
+    const domyslne = JSON.parse(korzen.dataset.domyslne!) as DaneRezerwy;
+    const pole = (p: string) => formularz.elements.namedItem(p) as HTMLInputElement;
+    const ustaw = (klucz: string, tekst: string) => {
+      korzen.querySelector<HTMLElement>(`[data-wynik="${klucz}"]`)!.textContent = tekst;
+    };
+
+    function przelicz() {
+      const d = {} as DaneRezerwy;
+      KOLEJNOSC_POL_REZERWY.forEach((p) => (d[p] = liczbaZPola(pole(p).value)));
+      const bledy = walidujRezerwe(d);
+      KOLEJNOSC_POL_REZERWY.forEach((p) => {
+        const k = bledy[p] ?? '';
+        korzen.querySelector<HTMLElement>(`[data-blad="${p}"]`)!.textContent = k;
+        pole(p).setAttribute('aria-invalid', k ? 'true' : 'false');
+      });
+      const ok = Object.keys(bledy).length === 0;
+      wyniki.toggleAttribute('data-nieaktualne', !ok);
+      if (!ok) return;
+      const w = policzRezerwe(d);
+      ustaw('cel', zlPelne(w.cel));
+      ustaw('brakuje', zlPelne(w.brakuje));
+      ustaw('pokrycie', `${w.pokrycie.toLocaleString('pl-PL', { maximumFractionDigits: 1 })} mies.`);
+      ustaw(
+        'czas',
+        w.miesiaceDoCelu === null
+          ? 'nie da się policzyć bez odkładania'
+          : w.miesiaceDoCelu === 0
+            ? 'cel osiągnięty'
+            : liczebnik(w.miesiaceDoCelu, 'miesiąc', 'miesiące', 'miesięcy'),
+      );
+    }
+
+    formularz.addEventListener('input', przelicz);
+    formularz.addEventListener('submit', (e) => e.preventDefault());
+    korzen.querySelector('[data-reset]')!.addEventListener('click', () => {
+      KOLEJNOSC_POL_REZERWY.forEach((p) => (pole(p).value = String(domyslne[p])));
+      przelicz();
+      pole('wydatki').focus();
+    });
+    korzen.dataset.gotowy = 'true';
+  });
+</script>

@@ -30,6 +30,8 @@ export interface Modul {
   opis: string;
   /** Moduły, które trzeba ukończyć, zanim ten stanie się dostępny. */
   wymaga: string[];
+  /** Cele edukacyjne modułu: co kursant będzie umiał po jego ukończeniu. */
+  cele: string[];
   lekcje: Lekcja[];
   adres: string;
 }
@@ -41,6 +43,10 @@ export interface Kurs {
   stan: StanKursu;
   /** Kurs z przykładowymi danymi, służący do pokazania działania platformy. */
   demonstracyjny: boolean;
+  /** Kolejność na liście kursów (mniejsza liczba — wyżej). */
+  kolejnosc: number;
+  /** Dla kogo jest kurs — pokazywane w katalogu kursów. */
+  grupaDocelowa: string | null;
   moduly: Modul[];
   adres: string;
 }
@@ -52,7 +58,9 @@ export interface DaneKursu {
   opis: string;
   stan: StanKursu;
   demonstracyjny: boolean;
-  moduly: Array<{ id: string; tytul: string; opis: string; wymaga: string[]; lekcje: string[] }>;
+  kolejnosc?: number;
+  grupaDocelowa?: string;
+  moduly: Array<{ id: string; tytul: string; opis: string; wymaga: string[]; cele?: string[]; lekcje: string[] }>;
 }
 
 /** Metadane lekcji (nagłówek pliku src/content/lekcje/<kurs>/<lekcja>.md). */

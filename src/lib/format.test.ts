@@ -29,6 +29,7 @@ describe('procent', () => {
     expect(procent(0.085)).toBe('8,5%');
     expect(procent(0.19)).toBe('19%');
     expect(procent(0.0085)).toBe('0,85%');
+    expect(procent(-0.1, 1)).toBe('−10%');
   });
 });
 

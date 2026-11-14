@@ -21,6 +21,7 @@ describe('rejestr narzędzi', () => {
 
   it('obejmuje narzędzia zapowiedziane w planie', () => {
     expect(NARZEDZIA.map((n) => n.id)).toEqual([
+      'rezerwa',
       'oszczedzanie',
       'procent-skladany',
       'inflacja',

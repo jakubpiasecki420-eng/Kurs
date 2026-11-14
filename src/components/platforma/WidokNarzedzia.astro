@@ -2,6 +2,7 @@
 /** Interfejs narzędzia dostępnego w strefie kursanta — na stronie narzędzia i w lekcji. */
 import Kalkulator from '@/components/Kalkulator.astro';
 import KalkulatorProsty from '@/components/KalkulatorProsty.astro';
+import KalkulatorRezerwy from '@/components/KalkulatorRezerwy.astro';
 import { procent } from '@/lib/format';
 import { wartosc } from '@/lib/rejestr';
 import type { IdNarzedziaDostepnego } from '@/lib/platforma/narzedzia';
@@ -13,6 +14,7 @@ const { id } = Astro.props;
 const inflacja = wartosc('nbp-cel-inflacyjny');
 ---
 
+{id === 'rezerwa' && <KalkulatorRezerwy />}
 {id === 'oszczedzanie' && <Kalkulator />}
 {
   id === 'procent-skladany' && (

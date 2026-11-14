@@ -37,8 +37,18 @@ export async function wszystkieKursy(): Promise<Kurs[]> {
   return kursy.map((k) => zbudujKurs({ id: k.id, ...k.data }, dane));
 }
 
-/** Kurs, na którym kursant uczy się w obecnej wersji platformy. */
+/**
+ * Kurs wyróżniony w menu „Mój kurs”, na pulpicie i na stronie /program/.
+ * Pozostałe kursy są dostępne w katalogu /platforma/kursy/ (zob. docs/architektura-wielokursowa.md).
+ */
 export const ID_KURSU_AKTYWNEGO = 'emerytura-pod-kontrola';
+
+/** Wszystkie kursy w kolejności katalogu: najpierw kursy właściwe, kurs demonstracyjny na końcu. */
+export async function kursyWKolejnosci(): Promise<Kurs[]> {
+  return (await wszystkieKursy()).sort(
+    (a, b) => Number(a.demonstracyjny) - Number(b.demonstracyjny) || a.kolejnosc - b.kolejnosc || a.tytul.localeCompare(b.tytul, 'pl'),
+  );
+}
 
 export async function kurs(id: string): Promise<Kurs> {
   const k = (await wszystkieKursy()).find((x) => x.id === id);

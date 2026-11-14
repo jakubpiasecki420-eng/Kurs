@@ -5,6 +5,10 @@ tytul: 'Kalendarz i przegląd roczny'
 opis: 'Terminy, w których co roku pojawiają się nowe dane — informacja z ZUS, limity wpłat, stawka podatku w OKI — i lista rzeczy do sprawdzenia przy przeglądzie planu.'
 czasMin: 7
 demonstracyjna: false
+podsumowanie:
+  - 'Terminy ogłoszeń wynikające z przepisów wyznaczają kalendarz przeglądu planu.'
+  - 'Limity wpłat i warunek pięciu lat liczy się w latach kalendarzowych.'
+  - 'Raz w roku sprawdzasz liczby z ZUS, wydatki, lukę, rezerwę, wpłaty, koszty i przepisy.'
 twierdzenia:
   [fus-tablice-gus, zus-informacja-o-stanie-konta, oki-stawka-ogloszenie, ike-limit-ogloszenie, ikze-limit-ogloszenie, ike-wyplata-warunki, ikze-wyplata-warunki, oki-start]
 materialy:
@@ -36,7 +40,7 @@ quiz:
 | Termin | Co się dzieje | Co zrobić |
 | --- | --- | --- |
 | do 31 marca | Prezes GUS ogłasza tablice trwania życia, które są podstawą przyznawania emerytur[^fus-tablice-gus] | Pamiętaj, że od tablic zależy dzielnik we wzorze na emeryturę |
-| do 31 sierpnia | ZUS udostępnia informację o stanie konta według stanu na 31 grudnia poprzedniego roku[^zus-informacja-o-stanie-konta] | Zaktualizuj liczby z modułu 2 i sprawdź, czy wszystkie składki dotarły |
+| do 31 sierpnia | ZUS udostępnia informację o stanie konta według stanu na 31 grudnia poprzedniego roku[^zus-informacja-o-stanie-konta] | Zaktualizuj liczby z modułu o ZUS i sprawdź, czy wszystkie składki dotarły |
 | do 30 listopada | Minister finansów ogłasza stawkę podatku od wartości aktywów w OKI na kolejny rok[^oki-stawka-ogloszenie] | Jeśli masz OKI, zapisz stawkę na kolejny rok |
 | do końca roku | Ogłaszane są limity wpłat na IKE[^ike-limit-ogloszenie] i IKZE[^ikze-limit-ogloszenie] na kolejny rok | Zapisz nowe limity i zaplanuj wpłaty |
 | 31 grudnia | Kończy się rok kalendarzowy, którego dotyczą limity wpłat | Sprawdź, czy wpłaty w tym roku są zgodne z planem |

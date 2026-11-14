@@ -5,6 +5,10 @@ tytul: 'IKE: wypłata, zwrot i zmiana instytucji'
 opis: 'Kiedy wypłata z IKE jest wolna od podatku, co oznacza wypłata jednorazowa, ile kosztuje zwrot całkowity i częściowy, dlaczego drugie IKE to błąd i jak przenieść konto.'
 czasMin: 11
 demonstracyjna: false
+podsumowanie:
+  - 'Wypłata bez podatku wymaga wieku (60 lat albo 55 lat i uprawnień emerytalnych) i historii wpłat.'
+  - 'Przy zwrocie całkowitym dochodem jest wartość środków minus wpłaty; przy częściowym — część zwrotu liczona proporcjonalnie.'
+  - 'Instytucję zmienia się wypłatą transferową, nie przez zwrot i ponowną wpłatę.'
 twierdzenia:
   [
     ike-wyplata-warunki,

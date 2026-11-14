@@ -5,6 +5,10 @@ tytul: 'Wiek emerytalny i najniższa emerytura'
 opis: 'Od kiedy przysługuje emerytura, kiedy ZUS podwyższa ją do najniższej kwoty, kiedy podwyższenia nie ma i jak niska podstawa składek wpływa na staż.'
 czasMin: 10
 demonstracyjna: false
+podsumowanie:
+  - 'Najniższa emerytura wymaga wieku i stażu: 60 lat i 20 lat dla kobiet, 65 lat i 25 lat dla mężczyzn.'
+  - 'Okresy nieskładkowe liczą się najwyżej do jednej trzeciej okresów składkowych.'
+  - 'Miesiące ze składkami od podstawy niższej niż płaca minimalna liczą się do stażu tylko w części.'
 twierdzenia:
   [
     fus-wiek-emerytalny,

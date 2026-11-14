@@ -1,6 +1,6 @@
 # Plan dalszego rozwoju po etapie 2C
 
-Stan na dzień: **14 listopada 2026 r.**
+Stan na dzień: **14 listopada 2026 r.** Zaktualizowano po Etapie 3A. Plan treści kursu (moduły, lekcje, kolejność) jest w `docs/plan-rozwoju-kursu.md`; ten plik obejmuje zadania techniczne, eksperckie i drugi kurs.
 
 Kolejność wynika z zależności. Każdy etap wymaga osobnego polecenia właściciela (CLAUDE.md, sekcja 11). Ścieżka publikacji i terminy: `docs/harmonogram.md`.
 
@@ -10,7 +10,7 @@ Kolejność wynika z zależności. Każdy etap wymaga osobnego polecenia właśc
    - `docs/pytania-do-ekspertow.md`;
    - `docs/audyt-kontrolny-etap-2b.md`;
    - dostęp do strony w wersji roboczej.
-   Najpierw sekcja „ZUS i ubezpieczenia społeczne” i „Podatki” — od nich zależy usunięcie oznaczeń w lekcjach 1.2, 2.1, 2.2, 4.2 i 12.2.
+   Najpierw sekcja „ZUS i ubezpieczenia społeczne” i „Podatki” — od nich zależy usunięcie oznaczeń w lekcjach „Wiek emerytalny i najniższa emerytura”, „Informacja o stanie konta w ZUS”, „Jak czytać hipotetyczną emeryturę”, „IKE: wypłata, zwrot i zmiana instytucji” i „Kalendarz i przegląd roczny”.
 2. Równolegle przeprowadzić rozmowy z grupą docelową (`docs/walidacja/scenariusz-rozmow.md`).
 
 ## 1. Zadania techniczne
@@ -18,7 +18,7 @@ Kolejność wynika z zależności. Każdy etap wymaga osobnego polecenia właśc
 | Nr | Zadanie | Zależy od | Wielkość |
 | --- | --- | --- | --- |
 | T-1 | Lista kursów zamiast jednej stałej `ID_KURSU_AKTYWNEGO`: pulpit, menu, panel postępu i program dla wielu kursów (`docs/architektura-wielokursowa.md`, sekcja 2) | Decyzja o drugim kursie | średnia |
-| T-2 | Pola `kolejnosc`, `grupaDocelowa`, `wymagaRecenzji` w schemacie kursu; blokady gotowości osobno dla każdego kursu | T-1 | mała |
+| T-2 | ~~Pola `kolejnosc`, `grupaDocelowa`~~ (zrobione w Etapie 3A); pozostaje `wymagaRecenzji` i blokady gotowości osobno dla każdego kursu | T-1 | mała |
 | T-3 | Miejsce na notatki kursanta (zapisywane jak postęp, w przeglądarce) — ćwiczenia „Zapisz u siebie” | Decyzja właściciela | średnia |
 | T-4 | Rozdzielenie twierdzeń z kilkoma liczbami (np. stawka OKI: 19% stopy referencyjnej, minimum 0,1%) albo pola `wartosci`, żeby usunąć liczby wpisane w komponent `/oki/` | — | mała |
 | T-5 | Artykuły renderowane tym samym mechanizmem co lekcje (`{{id}}`, `[^id]`, dyrektywy), żeby liczby w artykułach pochodziły z rejestru | — | mała |
@@ -31,10 +31,10 @@ Kolejność wynika z zależności. Każdy etap wymaga osobnego polecenia właśc
 
 | Nr | Zadanie | Uwagi |
 | --- | --- | --- |
-| M-1 | Moduł 8 (PPK i PPE): weryfikacja ustawy o PPK w źródle pierwotnym, twierdzenia P, lekcje | Dla przedsiębiorcy PPK dotyczy głównie zatrudniania pracowników — zakres do ustalenia |
-| M-2 | Moduł 10 (podstawy inwestowania): ryzyko, dywersyfikacja, koszty, horyzont — bez instrumentów | Uwaga na granicę doradztwa (pytanie R-02) |
-| M-3 | Moduł 11 (porównywanie ofert): pytania do instytucji i tabela opłat | Część pytań już jest w lekcji 4.2 |
-| M-4 | Rozdziały PDF 1 i 12 złożone z gotowych lekcji | — |
+| M-1 | Moduł „PPK i PPE”: weryfikacja ustawy o PPK w źródle pierwotnym, twierdzenia P, lekcje | Dla przedsiębiorcy PPK dotyczy głównie zatrudniania pracowników — zakres do ustalenia |
+| M-2 | ~~Moduł „Podstawy inwestowania”~~ — zrobione w Etapie 3A (3 lekcje) | Recenzja granicy doradztwa (pytanie R-02) nadal potrzebna |
+| M-3 | ~~Moduł „Jak porównywać instytucje i produkty”~~ — zrobione w Etapie 3A (2 lekcje) | Lista pytań do instytucji może wymagać uzupełnienia po recenzji |
+| M-4 | Rozdziały PDF dla modułów z lekcjami, które nie mają rozdziału (mapowanie w `produkt/przewodnik/struktura.md`) | — |
 | M-5 | Słowniczek pojęć dla kursu | Pojęcia są objaśnione przy pierwszym użyciu |
 | M-6 | Ponowna weryfikacja twierdzeń nieużywanych w treści (doradztwo, konsument, nazwy, KNF) — data 13.11.2026 | Przed opinią prawną |
 
@@ -42,9 +42,9 @@ Kolejność wynika z zależności. Każdy etap wymaga osobnego polecenia właśc
 
 | Nr | Zadanie | Ekspert | Pytania |
 | --- | --- | --- | --- |
-| E-1 | Recenzja modułów 1 i 2 i usunięcie oznaczeń „Do potwierdzenia” | Specjalista ds. ubezpieczeń społecznych | Z-01 do Z-08 |
-| E-2 | Recenzja modułów 4 i 12, stron IKE, IKZE, JDG/B2B | Doradca podatkowy | T-01 do T-04, T-11, T-12 |
-| E-3 | Moduły 3, 5, 6, 7 (forma pracy, IKZE, OKI, trzy konta) | Doradca podatkowy | T-05 do T-10 |
+| E-1 | Recenzja modułów „Jak działa system emerytalny” i „ZUS: co możesz sprawdzić” i usunięcie oznaczeń „Do potwierdzenia” | Specjalista ds. ubezpieczeń społecznych | Z-01 do Z-08 |
+| E-2 | Recenzja modułów „IKE” i „Twój plan”, stron IKE, IKZE, JDG/B2B | Doradca podatkowy | T-01 do T-04, T-11, T-12 |
+| E-3 | Moduły „Twoja forma pracy”, „IKZE”, „OKI”, „Trzy konta obok siebie” | Doradca podatkowy | T-05 do T-10 |
 | E-4 | Kalkulator ulgi IKZE i porównanie IKE/IKZE w interfejsie | Doradca podatkowy | T-05 |
 | E-5 | Opinia o nazwach IKE/IKZE/OKI i granicy edukacji i doradztwa | Prawnik | R-01 do R-03 |
 | E-6 | Wpis recenzji do `src/config/serwis.json` (imię, nazwisko, numer wpisu) — dopiero po wykonaniu | Właściciel | — |

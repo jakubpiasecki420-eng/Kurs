@@ -9,7 +9,7 @@ const lekcje = new URL('../../content/lekcje/', import.meta.url);
 
 interface Lekcja {
   plik: string;
-  dane: { twierdzenia?: string[]; demonstracyjna: boolean; narzedzie?: string; quiz?: { pytania: unknown[] } };
+  dane: { twierdzenia?: string[]; demonstracyjna: boolean; narzedzie?: string; podsumowanie?: string[]; quiz?: { pytania: unknown[] } };
   tresc: string;
 }
 
@@ -58,7 +58,20 @@ describe('treść platformy', () => {
     expect(kurs.stan).toBe('aktywny');
     expect(kurs.demonstracyjny).toBe(false);
     const zLekcjami = kurs.moduly.filter((m: { lekcje?: string[] }) => m.lekcje?.length).map((m: { id: string }) => m.id);
-    expect(zLekcjami).toEqual(['system-emerytalny', 'zus', 'ike', 'inflacja', 'twoj-plan']);
+    expect(zLekcjami).toEqual([
+      'fundamenty',
+      'system-emerytalny',
+      'zus',
+      'ike',
+      'inflacja',
+      'inwestowanie',
+      'porownywanie-ofert',
+      'twoj-plan',
+    ]);
+    // Moduły wstrzymane do recenzji podatkowej nie mają lekcji (CLAUDE.md, sekcja 11).
+    for (const id of ['forma-pracy', 'ikze', 'oki', 'trzy-konta']) {
+      expect(kurs.moduly.find((m: { id: string }) => m.id === id).lekcje ?? []).toEqual([]);
+    }
   });
 
   it('lekcje kursu docelowego nie są oznaczone jako przykładowe i mają quiz', () => {
@@ -123,6 +136,22 @@ describe('treść platformy', () => {
         'emerytura-pod-kontrola/wiek-i-najnizsza-emerytura.md',
       ].sort(),
     );
+  });
+
+  it('każda lekcja kursu docelowego ma podsumowanie, a każdy moduł z lekcjami — cele', () => {
+    for (const l of wszystkieLekcje().filter((x) => x.plik.startsWith('emerytura-pod-kontrola/'))) {
+      expect(l.dane.podsumowanie?.length ?? 0, l.plik).toBeGreaterThanOrEqual(2);
+    }
+    const kurs = JSON.parse(readFileSync(new URL('emerytura-pod-kontrola.json', kursy), 'utf8'));
+    for (const m of kurs.moduly.filter((x: { lekcje?: string[] }) => x.lekcje?.length)) {
+      expect(m.cele?.length ?? 0, m.id).toBeGreaterThanOrEqual(2);
+    }
+  });
+
+  it('lekcje nie odwołują się do numerów modułów i lekcji, które zmieniają się przy zmianie programu', () => {
+    for (const l of wszystkieLekcje().filter((x) => x.plik.startsWith('emerytura-pod-kontrola/'))) {
+      expect(l.tresc, l.plik).not.toMatch(/(?:lekcj\p{L}*|modu\p{L}*)\s+\d+(?:\.\d+)?/u);
+    }
   });
 });
 

@@ -5,6 +5,10 @@ tytul: 'Jak czytać hipotetyczną emeryturę'
 opis: 'Dwie wysokości hipotetycznej emerytury w informacji z ZUS: co zakładają, jak są liczone, czego nie obejmują i dlaczego to kwoty brutto.'
 czasMin: 10
 demonstracyjna: false
+podsumowanie:
+  - 'Hipotetyczna emerytura ma dwa warianty: według stanu konta i z dalszymi składkami na dotychczasowym poziomie.'
+  - 'Nie obejmuje środków z subkonta i jest kwotą brutto.'
+  - 'Różnica między wydatkami a hipotetyczną emeryturą to liczba orientacyjna, nie dokładna.'
 twierdzenia:
   [
     zus-hipotetyczna-emerytura,
@@ -67,7 +71,7 @@ Dla przedsiębiorcy drugi wariant ma ważną cechę. Jeśli przez większość d
 
 Suma składek i kapitału początkowego — w drugim wariancie powiększona o przyszłe hipotetyczne składki — zostaje podzielona przez średnie dalsze trwanie życia w wieku przejścia na emeryturę[^zus-hipotetyczna-wzor].
 
-To ten sam mechanizm co w lekcji 1.1: kapitał rozłożony na przewidywaną liczbę wypłat. Z jedną ważną różnicą — opisaną niżej.
+To ten sam mechanizm co w lekcji „Skąd bierze się emerytura z ZUS”: kapitał rozłożony na przewidywaną liczbę wypłat. Z jedną ważną różnicą — opisaną niżej.
 
 ## Czego hipotetyczna emerytura nie obejmuje
 
@@ -89,7 +93,7 @@ To ten sam mechanizm co w lekcji 1.1: kapitał rozłożony na przewidywaną licz
 1. Zapisz obie wysokości hipotetycznej emerytury z najnowszej informacji.
 2. Zapisz stan subkonta.
 3. Zapisz obok swoje obecne miesięczne wydatki.
-4. Porównaj liczby, pamiętając o dwóch zastrzeżeniach: hipotetyczna emerytura pomija subkonto (czyli pod tym względem zaniża emeryturę) i jest kwotą brutto (czyli zawyża to, co trafi do ręki). Różnicę między wydatkami a hipotetyczną emeryturą zapisz jako liczbę orientacyjną. Wrócisz do niej w module 12.
+4. Porównaj liczby, pamiętając o dwóch zastrzeżeniach: hipotetyczna emerytura pomija subkonto (czyli pod tym względem zaniża emeryturę) i jest kwotą brutto (czyli zawyża to, co trafi do ręki). Różnicę między wydatkami a hipotetyczną emeryturą zapisz jako liczbę orientacyjną. Wrócisz do niej w module „Twój plan”.
 
 Jeśli nie masz jeszcze 35 lat, informacja nie zawiera hipotetycznej emerytury. Zapisz wtedy łączną kwotę składek i stan subkonta i wróć do tego kroku, gdy ją otrzymasz.
 

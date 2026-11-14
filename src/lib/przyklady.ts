@@ -127,6 +127,81 @@ export const DYREKTYWY: Record<string, () => string> = {
     );
   },
 
+  'tabela:zmiennosc': () => {
+    const start = 10_000;
+    const scenariusze: [string, number[]][] = [
+      ['Co roku +5%', [0.05, 0.05]],
+      ['Na zmianę +20% i −10%', [0.2, -0.1]],
+      ['Na zmianę +35% i −25%', [0.35, -0.25]],
+    ];
+    const wiersze = scenariusze.map(([nazwa, [a, b]]) => {
+      const mnoznik2 = (1 + a) * (1 + b);
+      const wartosc = start * Math.pow(mnoznik2, 5);
+      const srednia = (a + b) / 2;
+      const faktyczna = Math.sqrt(mnoznik2) - 1;
+      return [nazwa, procent(srednia, 2), procent(faktyczna, 2), zlPelne(wartosc)];
+    });
+    return tabela(
+      'Ta sama średnia, różna zmienność',
+      ['Scenariusz (10 lat)', 'Średnia z rocznych wyników', 'Faktyczny średni wzrost rocznie', `Wartość ${zl(start)} po 10 latach`],
+      wiersze,
+      `Dane umowne, nie dotyczą żadnego instrumentu. Bez kosztów i podatków. Przykład obliczeniowy, nie prognoza: pokazuje, że przy tej samej średniej większe wahania obniżają wynik.`,
+      [1, 2, 3],
+    );
+  },
+
+  'tabela:dywersyfikacja': () => {
+    const start = 10_000;
+    const x = [0.15, -0.1, 0.1];
+    const y = [-0.05, 0.12, 0.03];
+    const mix = x.map((v, i) => (v + y[i]) / 2);
+    const koniec = (r: number[]) => start * r.reduce((m, v) => m * (1 + v), 1);
+    const wiersz = (nazwa: string, r: number[]) => [nazwa, ...r.map((v) => procent(v, 1)), procent(Math.min(...r), 1), zlPelne(koniec(r))];
+    return tabela(
+      'Dywersyfikacja na danych umownych',
+      ['Portfel', 'Rok 1', 'Rok 2', 'Rok 3', 'Najgorszy rok', `Wartość ${zl(start)} po 3 latach`],
+      [wiersz('Tylko aktywo X', x), wiersz('Tylko aktywo Y', y), wiersz('Po połowie X i Y, wyrównywane co roku', mix)],
+      `Aktywa X i Y są umowne — wyniki wymyślone do ilustracji, nie dotyczą żadnych instrumentów. Bez kosztów i podatków. Przykład obliczeniowy, nie prognoza.`,
+      [1, 2, 3, 4, 5],
+    );
+  },
+
+  'tabela:oplaty': () => {
+    const i = wartoscP('nbp-cel-inflacyjny');
+    const baza = { lata: 20, stopaZwrotu: STOPA_PRZYKLADOWA, inflacja: i };
+    const bez = symuluj({ ...baza, wplataMiesieczna: WPLATA, koszty: 0 }).wartoscNominalna;
+    const warianty: [string, number][] = [
+      ['Bez opłat', bez],
+      ['2% od każdej wpłaty', symuluj({ ...baza, wplataMiesieczna: WPLATA * 0.98, koszty: 0 }).wartoscNominalna],
+      ['0,5% rocznie od zgromadzonych środków', symuluj({ ...baza, wplataMiesieczna: WPLATA, koszty: 0.005 }).wartoscNominalna],
+      ['1% rocznie od zgromadzonych środków', symuluj({ ...baza, wplataMiesieczna: WPLATA, koszty: 0.01 }).wartoscNominalna],
+    ];
+    return tabela(
+      'Opłata od wpłat a opłata roczna',
+      ['Rodzaj opłaty', 'Wartość nominalna po 20 latach', 'Mniej niż bez opłat'],
+      warianty.map(([n, v]) => [n, zlPelne(v), v === bez ? '—' : zlPelne(bez - v)]),
+      `Założenia: ${zl(WPLATA)} miesięcznie przez 20 lat, zysk ${procent(STOPA_PRZYKLADOWA)} rocznie przed opłatami (wariant hipotetyczny), bez podatków. Wysokości opłat są przykładowe. Przykład obliczeniowy, nie prognoza.`,
+      [1, 2],
+    );
+  },
+
+  'tabela:dlug-a-oszczednosci': () => {
+    const kwota = 10_000;
+    const oprocentowanie = 0.12;
+    const zysk = STOPA_PRZYKLADOWA;
+    return tabela(
+      'Koszt długu a zysk z oszczędności',
+      ['Pozycja (pierwszy rok, ta sama kwota)', 'Kwota'],
+      [
+        [`Odsetki od długu ${zl(kwota)} oprocentowanego ${procent(oprocentowanie)} rocznie`, zl(kwota * oprocentowanie)],
+        [`Zysk z oszczędności ${zl(kwota)} przy ${procent(zysk)} rocznie`, zl(kwota * zysk)],
+        ['Różnica na niekorzyść, gdy dług zostaje, a oszczędności rosną', zl(kwota * (oprocentowanie - zysk))],
+      ],
+      `Liczby umowne: oprocentowanie długu i zysk z oszczędności są przykładowe. Uproszczenie bez podatków, kosztów i spłat w trakcie roku. Przykład obliczeniowy, nie prognoza.`,
+      [1],
+    );
+  },
+
   'tabela:inflacja': () => {
     const i = wartoscP('nbp-cel-inflacyjny');
     return tabela(

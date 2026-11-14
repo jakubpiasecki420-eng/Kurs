@@ -1,0 +1,71 @@
+---
+import Aplikacja from '@/layouts/Aplikacja.astro';
+import NaglowekWidoku from '@/components/platforma/NaglowekWidoku.astro';
+import PasekPostepu from '@/components/platforma/PasekPostepu.astro';
+import { kursyWKolejnosci } from '@/lib/platforma/dane';
+import { lacznyCzas, lekcjeKursu } from '@/lib/platforma/kurs';
+import { liczebnik } from '@/lib/format';
+
+const kursy = await kursyWKolejnosci();
+const aktywne = kursy.filter((k) => k.stan === 'aktywny');
+---
+
+<Aplikacja
+  tytul="Kursy"
+  opis="Katalog kursów Finansowej Przyszłości: program, zakres i postęp nauki w każdym kursie."
+  sekcja="kurs"
+  kursy={aktywne}
+>
+  <NaglowekWidoku
+    etykieta="Katalog"
+    tytul="Kursy"
+    opis="Każdy kurs ma własny program i własny postęp. Narzędzia i ustawienia są wspólne."
+    okruszki={[{ adres: '/platforma/', etykieta: 'Pulpit' }]}
+  />
+
+  <ul class="lista-kursow">
+    {
+      kursy.map((k) => {
+        const lekcje = lekcjeKursu(k).length;
+        const zLekcjami = k.moduly.filter((m) => m.lekcje.length > 0).length;
+        return (
+          <li>
+            <article class="panel karta-kursu" aria-labelledby={`kurs-${k.id}`} data-kurs-karta={k.id}>
+              <p class="etykieta">
+                {k.demonstracyjny ? 'Kurs demonstracyjny' : k.stan === 'aktywny' ? 'Kurs' : 'W przygotowaniu'}
+              </p>
+              <h2 class="karta-kursu__tytul" id={`kurs-${k.id}`}>
+                <a href={k.adres}>{k.tytul}</a>
+              </h2>
+              {k.grupaDocelowa && <p class="karta-kursu__dla maly"><strong>Dla kogo:</strong> {k.grupaDocelowa}</p>}
+              <p class="maly">{k.opis}</p>
+              <p class="maly cichy">
+                {liczebnik(k.moduly.length, 'moduł', 'moduły', 'modułów')}
+                {lekcje > 0 &&
+                  ` · ${liczebnik(lekcje, 'lekcja', 'lekcje', 'lekcji')} w ${liczebnik(zLekcjami, 'module', 'modułach', 'modułach')} · około ${lacznyCzas(k)} min`}
+              </p>
+              {k.stan === 'aktywny' && lekcje > 0 && <PasekPostepu etykieta={`Postęp: ${k.tytul}`} kurs={k.id} maly />}
+            </article>
+          </li>
+        );
+      })
+    }
+  </ul>
+</Aplikacja>
+
+<style>
+  .lista-kursow {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--o-4);
+  }
+  .karta-kursu__tytul {
+    font-size: var(--tekst-xl);
+    margin: 0 0 var(--o-2);
+  }
+  .karta-kursu__dla {
+    margin: 0 0 var(--o-2);
+  }
+</style>

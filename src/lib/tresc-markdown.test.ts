@@ -58,7 +58,7 @@ describe('przykłady obliczeniowe', () => {
     const html = dyrektywa('tabela:stopa-realna').replace(/[\u00a0\u202f]/g, ' ');
     expect(html).toContain('2,5%');
     expect(html).toContain('2,44%');
-    expect(html).toContain('-2,44%');
+    expect(html).toContain('−2,44%');
     expect(html).toContain('nie prognoza');
   });
 
@@ -78,6 +78,31 @@ describe('przykłady obliczeniowe', () => {
   it('przykład zwrotu z IKE liczy podatek ze stawki z rejestru', () => {
     expect(dyrektywa('przyklad:zwrot-ike').replace(/ /g, ' ')).toContain('1 900 zł');
     expect(wartoscP('ike-zwrot-podatek')).toBe(0.19);
+  });
+
+  // Wartości oczekiwane policzone niezależnie od kodu przykładów.
+  const bezSpacji = (n: string) => dyrektywa(n).replace(/[  ]/g, ' ');
+
+  it('przykład zmienności: ta sama średnia, niższy wynik przy większych wahaniach', () => {
+    const html = bezSpacji('tabela:zmiennosc');
+    // 10 000 × 1,05^10; 10 000 × (1,2 × 0,9)^5; 10 000 × (1,35 × 0,75)^5
+    for (const t of ['16 289 zł', '14 693 zł', '10 641 zł', '3,92%', '0,62%']) expect(html).toContain(t);
+  });
+
+  it('przykład dywersyfikacji: połączenie X i Y ma łagodniejszy najgorszy rok', () => {
+    const html = bezSpacji('tabela:dywersyfikacja');
+    // X: 1,15 × 0,9 × 1,1; Y: 0,95 × 1,12 × 1,03; połowa: 1,05 × 1,01 × 1,065
+    for (const t of ['11 385 zł', '10 959 zł', '11 294 zł', '−10%', '−5%', '6,5%']) expect(html).toContain(t);
+  });
+
+  it('przykład opłat: opłata od wpłat i opłaty roczne w tych samych założeniach', () => {
+    const html = bezSpacji('tabela:oplaty');
+    for (const t of ['202 902 zł', '198 844 zł', '191 557 zł', '180 940 zł']) expect(html).toContain(t);
+  });
+
+  it('przykład długu: różnica między odsetkami a zyskiem w pierwszym roku', () => {
+    const html = bezSpacji('tabela:dlug-a-oszczednosci');
+    for (const t of ['1 200 zł', '500 zł', '700 zł']) expect(html).toContain(t);
   });
 
   it('odmawia wartości spoza źródeł pierwotnych', () => {

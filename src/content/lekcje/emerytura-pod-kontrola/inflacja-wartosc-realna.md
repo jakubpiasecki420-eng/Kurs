@@ -5,6 +5,10 @@ tytul: 'Inflacja i wartość realna'
 opis: 'Ile w przyszłości będą warte dzisiejsze pieniądze i dlaczego przy planowaniu na dziesięciolecia liczy się wartość realna, a nie nominalna.'
 czasMin: 7
 demonstracyjna: false
+podsumowanie:
+  - 'Wartość realna to kwota przeliczona na dzisiejsze ceny; liczy się ją, dzieląc przez skumulowaną inflację.'
+  - 'Stopa realna to (1 + zysk) ÷ (1 + inflacja) − 1; „zysk minus inflacja” jest tylko przybliżeniem.'
+  - 'Cel inflacyjny NBP to punkt odniesienia, a nie prognoza.'
 twierdzenia: [nbp-cel-inflacyjny]
 narzedzie: inflacja
 quiz:
@@ -47,7 +51,7 @@ Inflacja to wzrost cen. Przy inflacji 3% rocznie to, co dziś kosztuje 100 zł, 
 - **Wartość nominalna** to liczba złotych na koncie. Zgadza się z wyciągiem.
 - **Wartość realna** to ta sama kwota przeliczona na dzisiejsze ceny. Mówi, ile za te pieniądze będzie można kupić.
 
-Przy planowaniu na dziesięciolecia ważniejsza jest wartość realna. Pozwala porównać przyszłą kwotę z Twoimi dzisiejszymi wydatkami — na przykład z kwotą zapisaną w module 2.
+Przy planowaniu na dziesięciolecia ważniejsza jest wartość realna. Pozwala porównać przyszłą kwotę z Twoimi dzisiejszymi wydatkami — na przykład z kwotą zapisaną w module o ZUS.
 
 ## Realna stopa zwrotu
 

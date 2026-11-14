@@ -28,7 +28,8 @@ export function procent(ulamek: number, maksMiejsc = 2): string {
     minimumFractionDigits: 0,
     maximumFractionDigits: maksMiejsc,
   }).format(ulamek * 100);
-  return `${wartosc}%`;
+  // Typograficzny minus zamiast łącznika, jak w treści lekcji („−10%”).
+  return `${wartosc.replace('-', '−')}%`;
 }
 
 /** Data ISO (RRRR-MM-DD) w zapisie „13 listopada 2026 r.”. */

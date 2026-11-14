@@ -42,6 +42,8 @@ const kursy = defineCollection({
     opis: z.string().min(20),
     stan: z.enum(['aktywny', 'w-przygotowaniu']),
     demonstracyjny: z.boolean(),
+    kolejnosc: z.number().int().optional(),
+    grupaDocelowa: z.string().min(10).optional(),
     moduly: z
       .array(
         z.object({
@@ -49,6 +51,7 @@ const kursy = defineCollection({
           tytul: z.string().min(3),
           opis: z.string().min(10),
           wymaga: z.array(z.string()).default([]),
+          cele: z.array(z.string().min(10)).max(5).optional(),
           lekcje: z.array(z.string().regex(/^[a-z0-9-]+$/)).default([]),
         }),
       )
@@ -72,6 +75,7 @@ const lekcje = defineCollection({
     twierdzenia: z.array(z.string()).default([]),
     ilustracja: z.object({ opis: z.string(), podpis: z.string() }).optional(),
     narzedzie: z.enum(NARZEDZIA_DOSTEPNE).optional(),
+    podsumowanie: z.array(z.string().min(10)).min(2).max(5).optional(),
     materialy: z
       .array(z.object({ tytul: z.string(), opis: z.string(), adres: z.string().optional() }))
       .default([]),

@@ -5,6 +5,10 @@ tytul: 'Regularne oszczędzanie, koszty i czytanie symulacji'
 opis: 'Trzy scenariusze regularnych wpłat, wpływ rocznych kosztów na wynik i cztery pytania, które warto zadać każdej symulacji.'
 czasMin: 10
 demonstracyjna: false
+podsumowanie:
+  - 'Przy zysku równym inflacji wartość realna regularnych wpłat jest niższa od ich sumy.'
+  - 'Roczne koszty od zgromadzonych środków zmieniają wynik w długim okresie o dziesiątki tysięcy złotych.'
+  - 'Każdą symulację czytaj przez założenia, wynik realny, wariant niekorzystny i koszty.'
 twierdzenia: [nbp-cel-inflacyjny]
 narzedzie: oszczedzanie
 quiz:
@@ -67,7 +71,7 @@ Dlatego przy porównywaniu ofert tabela opłat jest jednym z pierwszych punktów
 
 1. Wpisz do kalkulatora poniżej kwotę, którą realnie możesz odkładać co miesiąc, i liczbę lat do emerytury.
 2. Policz trzy warianty: zerowy zysk, zysk równy inflacji i zysk wyższy od inflacji.
-3. Zapisz wartości realne. Obok zapisz orientacyjną lukę z modułu 2, pamiętając o jej ograniczeniach: hipotetyczna emerytura pomija subkonto i jest kwotą brutto.
+3. Zapisz wartości realne. Obok zapisz orientacyjną lukę z modułu o ZUS, pamiętając o jej ograniczeniach: hipotetyczna emerytura pomija subkonto i jest kwotą brutto.
 
 ## Czego ta lekcja nie rozstrzyga
 

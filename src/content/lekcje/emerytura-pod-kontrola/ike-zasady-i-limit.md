@@ -5,6 +5,10 @@ tytul: 'IKE: zasady i limit wpłat'
 opis: 'Czym jest indywidualne konto emerytalne, kto może na nie wpłacać, ile wynosi roczny limit i skąd się bierze.'
 czasMin: 7
 demonstracyjna: false
+podsumowanie:
+  - 'Limit wpłat na IKE to trzykrotność prognozowanego przeciętnego wynagrodzenia, ogłaszana co roku.'
+  - 'Zwolnienie z podatku przysługuje tylko przy jednym IKE i po spełnieniu warunków wypłaty.'
+  - 'Osoba niepełnoletnia wpłaca tylko w roku, w którym ma dochody z umowy o pracę.'
 twierdzenia:
   [
     ike-limit-2027,

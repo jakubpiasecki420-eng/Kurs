@@ -1064,3 +1064,23 @@
   background: #edf7f3;
   color: #14513f;
 }
+
+/* Cele modułu i podsumowanie lekcji */
+.cele-modulu {
+  margin-bottom: var(--o-5);
+}
+.cele-modulu__lista,
+.podsumowanie-lekcji ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+.cele-modulu__lista li,
+.podsumowanie-lekcji li {
+  margin-bottom: var(--o-2);
+}
+.podsumowanie-lekcji {
+  background: var(--tlo);
+  border-radius: var(--promien-m);
+  padding: var(--o-5);
+  border-top: 0;
+}

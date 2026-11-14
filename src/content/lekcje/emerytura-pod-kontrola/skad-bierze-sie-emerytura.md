@@ -5,6 +5,10 @@ tytul: 'Skąd bierze się emerytura z ZUS'
 opis: 'Jak składki trafiają na konto i subkonto w ZUS, jak działa waloryzacja i jak z zapisanego kapitału powstaje miesięczna kwota emerytury.'
 czasMin: 9
 demonstracyjna: false
+podsumowanie:
+  - 'Składka emerytalna trafia częściowo na konto, a częściowo na subkonto w ZUS; oba są waloryzowane.'
+  - 'Emerytura to zapisany kapitał podzielony przez średnie dalsze trwanie życia w wieku przejścia na emeryturę.'
+  - 'Większy kapitał i późniejszy wiek przejścia oznaczają wyższą kwotę miesięczną.'
 twierdzenia:
   [
     sus-skladka-emerytalna,
@@ -52,17 +56,17 @@ quiz:
 
 ## Składka trafia na konto i subkonto
 
-Za każdy miesiąc ubezpieczenia płacona jest składka na ubezpieczenie emerytalne. Wynosi ona {{sus-skladka-emerytalna}} podstawy wymiaru[^sus-skladka-emerytalna]. Podstawa wymiaru to kwota, od której liczy się składki. Przy działalności gospodarczej ustala się ją według zasad opisanych w lekcji 1.3.
+Za każdy miesiąc ubezpieczenia płacona jest składka na ubezpieczenie emerytalne. Wynosi ona {{sus-skladka-emerytalna}} podstawy wymiaru[^sus-skladka-emerytalna]. Podstawa wymiaru to kwota, od której liczy się składki. Przy działalności gospodarczej ustala się ją według zasad opisanych w lekcji „Podstawa składek i własne oszczędności”.
 
 Składka nie trafia w całości w jedno miejsce. Część równa {{sus-subkonto-skladka}} podstawy wymiaru jest zapisywana na **subkoncie**, czyli w osobnej ewidencji w ZUS. Jeśli jesteś członkiem otwartego funduszu emerytalnego (OFE), część tej kwoty trafia do OFE[^sus-subkonto-skladka]. Pozostała część składki jest zapisywana na Twoim **koncie** w ZUS w wysokości zwaloryzowanej[^sus-konto-zwaloryzowane].
 
-To rozróżnienie wróci w module 2, bo hipotetyczna emerytura z informacji ZUS liczona jest inaczej niż prawdziwa.
+To rozróżnienie wróci w module o ZUS, bo hipotetyczna emerytura z informacji ZUS liczona jest inaczej niż prawdziwa.
 
 ## Waloryzacja: co dzieje się z zapisanymi składkami
 
 Zapisane składki nie leżą bez zmian. Co roku od 1 czerwca ZUS przeprowadza waloryzację, a jej wynik nie może obniżyć stanu konta[^fus-waloryzacja-roczna].
 
-Wskaźnik waloryzacji to wskaźnik wzrostu cen powiększony o realny wzrost sumy składek emerytalnych naliczanych w kraju. Nie może być niższy niż wskaźnik cen[^fus-waloryzacja-wskaznik]. Waloryzacja co najmniej nadąża więc za wzrostem cen mierzonym tym wskaźnikiem — inaczej niż oszczędności inwestowane na rynku, które mogą stracić (moduł 9).
+Wskaźnik waloryzacji to wskaźnik wzrostu cen powiększony o realny wzrost sumy składek emerytalnych naliczanych w kraju. Nie może być niższy niż wskaźnik cen[^fus-waloryzacja-wskaznik]. Waloryzacja co najmniej nadąża więc za wzrostem cen mierzonym tym wskaźnikiem — inaczej niż oszczędności inwestowane na rynku, które mogą stracić (moduły o inflacji i inwestowaniu).
 
 Opisane zasady dotyczą składek na koncie. Zasad dotyczących środków na subkoncie w tej lekcji nie omawiamy.
 

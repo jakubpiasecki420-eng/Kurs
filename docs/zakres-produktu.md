@@ -8,12 +8,12 @@ Stan na dzień: **13 listopada 2026 r.**
 
 | Składnik | Forma | Stan |
 | --- | --- | --- |
-| Kurs | 12 modułów z lekcjami, quizami i zadaniami na platformie (`/platforma/`) | Program modułów: `src/content/kursy/emerytura-pod-kontrola.json`. Lekcje mają moduły 1, 2, 4, 9 i 12 (12 lekcji, wersja robocza przed recenzją). Moduły 3 i 5–7 czekają na recenzję podatkową, 8, 10 i 11 na polecenie właściciela |
-| Narzędzia | Kalkulatory w centrum narzędzi i osadzone w lekcjach | Dostępne: kalkulatory oszczędzania, procentu składanego i inflacji. Kalkulator IKZE i porównanie IKE/IKZE po recenzji podatkowej; symulator emerytalny planowany (`src/lib/platforma/narzedzia.ts`) |
+| Kurs | 13 modułów z lekcjami, quizami i zadaniami na platformie (`/platforma/`) | Program modułów: `src/content/kursy/emerytura-pod-kontrola.json`. 20 lekcji w 8 modułach, wersja robocza przed recenzją (`docs/status-tresci-i-recenzji.md`). Na recenzję podatkową czekają moduły „Twoja forma pracy”, „IKZE”, „OKI” i „Trzy konta obok siebie”; moduł „PPK i PPE” czeka na weryfikację ustawy o PPK |
+| Narzędzia | Kalkulatory w centrum narzędzi i osadzone w lekcjach | Dostępne: kalkulatory rezerwy finansowej, regularnego oszczędzania, procentu składanego i inflacji. Kalkulator IKZE i porównanie IKE/IKZE po recenzji podatkowej; symulator emerytalny planowany (`src/lib/platforma/narzedzia.ts`) |
 | Materiały uzupełniające | PDF z rozdziałami i zeszyt ćwiczeń do wydruku | Szkice rozdziałów 0, 2, 4 i 9 (`npm run przewodnik`); struktura zeszytu: `produkt/workbook/struktura.md` |
 | Aktualizacje | 12 miesięcy | Proces: `system-aktualizacji.md` |
 
-Szkice rozdziałów przewodnika są źródłem treści lekcji: jeden rozdział odpowiada jednemu modułowi. Moduł 1 i moduł 12 mają już lekcje, a jeszcze nie mają rozdziałów PDF.
+Szkice rozdziałów przewodnika są źródłem treści lekcji: jeden rozdział odpowiada jednemu modułowi. Numeracja rozdziałów PDF pochodzi z pierwszej wersji programu (12 modułów) i nie odpowiada już numerom modułów na platformie — mapowanie jest w `produkt/przewodnik/struktura.md`. Moduły „Fundamenty bezpieczeństwa finansowego”, „Jak działa system emerytalny”, „Podstawy inwestowania”, „Jak porównywać instytucje i produkty” i „Twój plan” mają lekcje, a jeszcze nie mają rozdziałów PDF.
 
 Czego kurs nie zawiera w pierwszej wersji: wideo, konsultacji indywidualnych, społeczności, portfeli modelowych, rankingów instytucji.
 

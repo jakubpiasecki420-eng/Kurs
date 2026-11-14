@@ -101,6 +101,21 @@ const wymagane = modul.wymaga.map((w) => kurs.moduly.find((m) => m.id === w)!);
 
         <div class="proza" set:html={tresc.html} />
 
+        {
+          d.podsumowanie && (
+            <section class="lekcja-blok podsumowanie-lekcji" aria-labelledby="podsumowanie-tytul">
+              <h2 id="podsumowanie-tytul" class="lekcja-blok__tytul">
+                Podsumowanie
+              </h2>
+              <ul>
+                {d.podsumowanie.map((p) => (
+                  <li>{p}</li>
+                ))}
+              </ul>
+            </section>
+          )
+        }
+
         {d.ilustracja && <Ilustracja opis={d.ilustracja.opis} podpis={d.ilustracja.podpis} />}
 
         {

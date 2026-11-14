@@ -74,7 +74,7 @@ Dyrektywy: `przyklad:zwrot-ike`, `przyklad:skladka-emerytalna`, `tabela:inflacja
 | Kurs | Stan | Zawartość |
 | --- | --- | --- |
 | `kurs-demonstracyjny` | aktywny, demonstracyjny | 3 moduły, 6 lekcji. Treść opisuje samą platformę albo jest tekstem zastępczym. Lekcja 1.1 pokazuje wszystkie elementy szablonu |
-| `emerytura-pod-kontrola` | aktywny (kurs w menu „Mój kurs”) | 12 modułów, w tym 5 z lekcjami: 1 (3 lekcje), 2 (2), 4 (2), 9 (3), 12 (2) — razem 12 lekcji. Moduły 3, 5–8, 10 i 11 są oznaczone jako w przygotowaniu. Lekcje mają znacznik „Przed recenzją eksperta”, dopóki `publikacja.recenzjaEksperta` jest puste |
+| `emerytura-pod-kontrola` | aktywny (kurs w menu „Mój kurs”) | 13 modułów, w tym 8 z lekcjami: „Fundamenty bezpieczeństwa finansowego” (3 lekcje), „Jak działa system emerytalny” (3), „ZUS: co możesz sprawdzić” (2), „IKE” (2), „Inflacja i procent składany” (3), „Podstawy inwestowania” (3), „Jak porównywać instytucje i produkty” (2), „Twój plan” (2) — razem 20 lekcji. Moduły „Twoja forma pracy”, „IKZE”, „OKI”, „Trzy konta obok siebie” i „PPK i PPE” są oznaczone jako w przygotowaniu. Status każdej lekcji: `docs/status-tresci-i-recenzji.md`. Lekcje mają znacznik „Przed recenzją eksperta”, dopóki `publikacja.recenzjaEksperta` jest puste |
 
 ### Szablon lekcji
 
@@ -123,9 +123,10 @@ Rejestr: `src/lib/platforma/narzedzia.ts`. Każde narzędzie — także planowan
 
 | Narzędzie | Stan | Logika |
 | --- | --- | --- |
-| Kalkulator regularnego oszczędzania | **Dostępne** — `/kalkulator/`, `/platforma/narzedzia/oszczedzanie/`, lekcje 9.3 i 12.1 kursu, lekcja 1.3 kursu demonstracyjnego | `src/lib/kalkulator/oszczednosci.ts`, `wykres.ts` |
-| Kalkulator procentu składanego | **Dostępne** — `/platforma/narzedzia/procent-skladany/`, lekcja 9.2 | `src/lib/kalkulator/proste.ts`, `proste-widok.ts`, `wykres-linie.ts`; komponent `KalkulatorProsty.astro` |
-| Kalkulator inflacji | **Dostępne** — `/platforma/narzedzia/inflacja/`, lekcja 9.1 | jak wyżej |
+| Kalkulator rezerwy finansowej | **Dostępne** (Etap 3A) — `/platforma/narzedzia/rezerwa/`, lekcja „Rezerwa finansowa przy nieregularnych dochodach”. Rachunek bez odsetek, inflacji i podatków; nie korzysta z rejestru | `src/lib/kalkulator/rezerwa.ts` z testami; komponent `KalkulatorRezerwy.astro` |
+| Kalkulator regularnego oszczędzania | **Dostępne** — `/kalkulator/`, `/platforma/narzedzia/oszczedzanie/`, lekcje „Regularne oszczędzanie, koszty i czytanie symulacji”, „Rodzaje opłat i ich wpływ na wynik” i „Twoje liczby w jednym miejscu” kursu, lekcja 1.3 kursu demonstracyjnego | `src/lib/kalkulator/oszczednosci.ts`, `wykres.ts` |
+| Kalkulator procentu składanego | **Dostępne** — `/platforma/narzedzia/procent-skladany/`, lekcje „Procent składany: zysk od zysku” i „Ryzyko, zmienność i możliwość straty” | `src/lib/kalkulator/proste.ts`, `proste-widok.ts`, `wykres-linie.ts`; komponent `KalkulatorProsty.astro` |
+| Kalkulator inflacji | **Dostępne** — `/platforma/narzedzia/inflacja/`, lekcja „Inflacja i wartość realna” | jak wyżej |
 | Kalkulator ulgi IKZE | Po recenzji podatkowej | `src/lib/kalkulator/ikze.ts` gotowa i przetestowana |
 | Porównanie IKE i IKZE | Po recenzji podatkowej | `ikzeWzgledemIke` w `ikze.ts` |
 | Symulator scenariuszy emerytalnych | Planowane | Do zaprojektowania |

@@ -19,7 +19,8 @@ Stan na dzień: **13 listopada 2026 r.**
 | Etap | Zakres | Stan |
 | --- | --- | --- |
 | 1. Fundamenty platformy | Strefa kursanta (pulpit, program, moduł, lekcja, postęp, narzędzia, ustawienia), model kurs → moduł → lekcja, postęp w przeglądarce za wymiennym magazynem, centrum narzędzi, strony „Program”, „Jak uczymy”, „Biblioteka” | **Zrobione 13 listopada 2026 r.** Wersja demonstracyjna, bez kont. Opis: `architektura-platformy.md` |
-| 2. Treść pierwszego kursu | Lekcje modułów bez blokad (1, 2, 4, 9, 12) na podstawie szkiców przewodnika i rejestru; kalkulatory procentu składanego i inflacji; wspólne przykłady obliczeniowe dla lekcji i PDF | **Zrobione 14 listopada 2026 r.** 12 lekcji w 5 modułach, wersja robocza przed recenzją. Moduły 3, 5–8, 10, 11 czekają: 3 i 5–7 na recenzję podatkową, 8, 10 i 11 na polecenie właściciela |
+| 2. Treść pierwszego kursu | Lekcje modułów bez blokad (1, 2, 4, 9, 12) na podstawie szkiców przewodnika i rejestru; kalkulatory procentu składanego i inflacji; wspólne przykłady obliczeniowe dla lekcji i PDF | **Zrobione 14 listopada 2026 r.** 12 lekcji w 5 modułach, wersja robocza przed recenzją. Moduły 3, 5–8, 10, 11 (numeracja z pierwszej wersji programu) czekały: 3 i 5–7 na recenzję podatkową, 8, 10 i 11 na polecenie właściciela |
+| 3A. Rozwój platformy i kursu | Moduł „Fundamenty bezpieczeństwa finansowego”, lekcje modułów „Podstawy inwestowania” i „Jak porównywać instytucje i produkty”, podsumowania lekcji i cele modułów, kalkulator rezerwy, katalog kursów | **Zrobione 14 listopada 2026 r.** 20 lekcji w 8 z 13 modułów. Raport: `docs/etap-3a-raport.md` |
 | 2B. Naprawa po audycie | Poprawki 42 uwag z audytu 2A: subkonto i kwota brutto, składki przedsiębiorców, zwrot z IKE, polski format liczb, quizy | **Zrobione 14 listopada 2026 r.** Raport: `raport-etap-2b.md` |
 | 2C. Audyt kontrolny | Kontrola etapu 2B, stron publicznych, kalkulatorów i rejestru; rozdzielenie treści przepisu i interpretacji; przygotowanie architektury wielokursowej | **Zrobione 14 listopada 2026 r.** Raporty: `audyt-kontrolny-etap-2b.md`, `rejestr-napraw-etap-2c.md`; dalej: `plan-dalszego-rozwoju.md` |
 | 3. Konta i ochrona treści | Logowanie, magazyn serwerowy, przeniesienie postępu z przeglądarki, renderowanie lekcji po stronie serwera | Po polityce prywatności i wyborze hostingu |
@@ -50,9 +51,11 @@ Zmiana wobec wcześniejszego planu: premiera przesuwa się z lutego na marzec 20
 
 Możliwe bez czekania na opinie zewnętrzne (każdy punkt wymaga osobnego polecenia właściciela):
 
-1. Lekcje modułów 8 (PPK i PPE), 10 (podstawy inwestowania) i 11 (porównywanie ofert) — po zweryfikowaniu potrzebnych przepisów w źródłach pierwotnych.
-2. Rozdziały przewodnika PDF odpowiadające lekcjom modułów 1 i 12.
+1. Lekcje modułu „PPK i PPE” — po przeczytaniu ustawy o PPK w źródle pierwotnym i dopisaniu twierdzeń do rejestru.
+2. Rozdziały przewodnika PDF odpowiadające modułom, które mają lekcje, a nie mają rozdziału (`produkt/przewodnik/struktura.md`).
+
+Pełny plan: `docs/plan-rozwoju-kursu.md`.
 3. Kolejne artykuły oparte wyłącznie na twierdzeniach ze statusem P.
 4. Konfiguracja wdrożenia na wybrany hosting statyczny.
 
-Wstrzymane do czasu opinii: kalkulator IKZE w interfejsie, moduły 3 i 5–7 kursu oraz rozdziały 5–7 przewodnika, porównanie kont według formy opodatkowania, formularz zapisu, sprzedaż.
+Wstrzymane do czasu opinii: kalkulator IKZE w interfejsie, moduły „Twoja forma pracy”, „IKZE”, „OKI” i „Trzy konta obok siebie” oraz rozdziały 3 i 5–7 przewodnika, porównanie kont według formy opodatkowania, formularz zapisu, sprzedaż.

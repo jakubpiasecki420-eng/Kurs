@@ -1,20 +1,99 @@
 {
   "tytul": "Emerytura pod kontrolą",
-  "opis": "Kurs dla osób prowadzących działalność i pracujących na B2B: system emerytalny, IKE, IKZE i OKI przy Twojej formie opodatkowania, inflacja, koszty i własny plan.",
+  "opis": "Kurs dla osób prowadzących działalność i pracujących na B2B: fundamenty bezpieczeństwa finansowego, system emerytalny, IKE, IKZE i OKI, inflacja, ryzyko, koszty i własny plan.",
   "stan": "aktywny",
   "demonstracyjny": false,
+  "kolejnosc": 1,
+  "grupaDocelowa": "Osoby prowadzące jednoosobową działalność i pracujące na B2B, które chcą zrozumieć swoją przyszłą emeryturę i świadomie zaplanować oszczędzanie.",
   "moduly": [
-    { "id": "system-emerytalny", "tytul": "Jak działa system emerytalny", "opis": "Skąd bierze się świadczenie i dlaczego dodatkowe oszczędzanie jest Twoją decyzją.", "lekcje": ["skad-bierze-sie-emerytura", "wiek-i-najnizsza-emerytura", "podstawa-skladek-i-wlasne-oszczednosci"] },
-    { "id": "zus", "tytul": "ZUS: co możesz sprawdzić", "opis": "Informacja o stanie konta i hipotetyczna emerytura — jak je czytać.", "lekcje": ["informacja-o-stanie-konta", "hipotetyczna-emerytura"] },
+    {
+      "id": "fundamenty",
+      "tytul": "Fundamenty bezpieczeństwa finansowego",
+      "opis": "Rezerwa, porządek w pieniądzach firmy i domu, długi i kolejność celów — zanim zaczniesz odkładać na lata.",
+      "cele": [
+        "Policzysz wysokość rezerwy finansowej dla własnych wydatków.",
+        "Rozdzielisz pieniądze na zobowiązania, wydatki domowe i nadwyżkę.",
+        "Porównasz koszt długu z niepewnym zyskiem z oszczędności."
+      ],
+      "lekcje": ["rezerwa-finansowa", "pieniadze-firmy-i-domu", "kolejnosc-celow"]
+    },
+    {
+      "id": "system-emerytalny",
+      "tytul": "Jak działa system emerytalny",
+      "opis": "Skąd bierze się świadczenie i dlaczego dodatkowe oszczędzanie jest Twoją decyzją.",
+      "cele": [
+        "Wyjaśnisz, jak z kapitału w ZUS powstaje miesięczna emerytura.",
+        "Sprawdzisz warunki najniższej emerytury i wpływ niskiej podstawy składek na staż.",
+        "Rozróżnisz sposoby ustalania podstawy składek przy działalności."
+      ],
+      "lekcje": ["skad-bierze-sie-emerytura", "wiek-i-najnizsza-emerytura", "podstawa-skladek-i-wlasne-oszczednosci"]
+    },
+    {
+      "id": "zus",
+      "tytul": "ZUS: co możesz sprawdzić",
+      "opis": "Informacja o stanie konta i hipotetyczna emerytura — jak je czytać.",
+      "cele": [
+        "Znajdziesz i odczytasz informację o stanie konta, w tym stan subkonta.",
+        "Zrozumiesz założenia i ograniczenia hipotetycznej emerytury."
+      ],
+      "lekcje": ["informacja-o-stanie-konta", "hipotetyczna-emerytura"]
+    },
     { "id": "forma-pracy", "tytul": "Twoja forma pracy", "opis": "Co z prowadzenia działalności wynika dla limitów i odliczeń." },
-    { "id": "ike", "tytul": "IKE", "opis": "Limity, warunki wypłaty bez podatku i koszt wcześniejszego zwrotu.", "lekcje": ["ike-zasady-i-limit", "ike-wyplata-i-zwrot"] },
+    {
+      "id": "ike",
+      "tytul": "IKE",
+      "opis": "Limity, warunki wypłaty bez podatku i koszt wcześniejszego zwrotu.",
+      "cele": [
+        "Poznasz limit wpłat i warunki wypłaty bez podatku.",
+        "Policzysz podatek przy zwrocie całkowitym i częściowym."
+      ],
+      "lekcje": ["ike-zasady-i-limit", "ike-wyplata-i-zwrot"]
+    },
     { "id": "ikze", "tytul": "IKZE", "opis": "Odliczenie przy skali, podatku liniowym i ryczałcie oraz podatek przy wypłacie." },
     { "id": "oki", "tytul": "OKI", "opis": "Podatek od wartości aktywów i zwolnienia w nowym rodzaju konta." },
     { "id": "trzy-konta", "tytul": "Trzy konta obok siebie", "opis": "Jak ułożyć kolejność kont przy swojej formie opodatkowania." },
     { "id": "ppk-ppe", "tytul": "PPK i PPE", "opis": "Kiedy programy pracownicze mają znaczenie dla przedsiębiorcy." },
-    { "id": "inflacja", "tytul": "Inflacja i procent składany", "opis": "Wartość nominalna i realna, czas i koszty.", "lekcje": ["inflacja-wartosc-realna", "procent-skladany", "regularne-oszczedzanie-i-koszty"] },
-    { "id": "inwestowanie", "tytul": "Podstawy inwestowania", "opis": "Ryzyko, dywersyfikacja, koszty i horyzont — pojęcia bez wskazywania produktów." },
-    { "id": "porownywanie-ofert", "tytul": "Jak porównywać instytucje i produkty", "opis": "Pytania do instytucji i tabela opłat do samodzielnego wypełnienia." },
-    { "id": "twoj-plan", "tytul": "Twój plan", "opis": "Rezerwa, kolejność, kwota, terminy i przegląd roczny.", "lekcje": ["twoje-liczby", "przeglad-roczny"] }
+    {
+      "id": "inflacja",
+      "tytul": "Inflacja i procent składany",
+      "opis": "Wartość nominalna i realna, czas i koszty.",
+      "cele": [
+        "Odróżnisz wartość nominalną od realnej i policzysz stopę realną.",
+        "Zrozumiesz, jak czas i koszty zmieniają wynik oszczędzania.",
+        "Odczytasz symulację: założenia, wariant niekorzystny, koszty."
+      ],
+      "lekcje": ["inflacja-wartosc-realna", "procent-skladany", "regularne-oszczedzanie-i-koszty"]
+    },
+    {
+      "id": "inwestowanie",
+      "tytul": "Podstawy inwestowania",
+      "opis": "Ryzyko, dywersyfikacja, koszty i horyzont — pojęcia bez wskazywania produktów.",
+      "cele": [
+        "Wyjaśnisz, czym jest ryzyko i dlaczego wahania obniżają wynik.",
+        "Zrozumiesz, co daje dywersyfikacja i czego nie załatwia.",
+        "Rozpoznasz sygnały ostrzegawcze w ofertach."
+      ],
+      "lekcje": ["ryzyko-i-zmiennosc", "dywersyfikacja-i-horyzont", "obietnice-bez-pokrycia"]
+    },
+    {
+      "id": "porownywanie-ofert",
+      "tytul": "Jak porównywać instytucje i produkty",
+      "opis": "Pytania do instytucji i tabela opłat do samodzielnego wypełnienia.",
+      "cele": [
+        "Rozpoznasz rodzaje opłat i policzysz ich wpływ na wynik.",
+        "Porównasz oferty w jednej tabeli na podstawie tych samych pytań."
+      ],
+      "lekcje": ["koszty-produktow", "pytania-do-instytucji"]
+    },
+    {
+      "id": "twoj-plan",
+      "tytul": "Twój plan",
+      "opis": "Rezerwa, kolejność, kwota, terminy i przegląd roczny.",
+      "cele": [
+        "Zbierzesz swoje liczby z całego kursu w jednym miejscu.",
+        "Ustalisz kalendarz przeglądu planu na podstawie terminów z przepisów."
+      ],
+      "lekcje": ["twoje-liczby", "przeglad-roczny"]
+    }
   ]
 }

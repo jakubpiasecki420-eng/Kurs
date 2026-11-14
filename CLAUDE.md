@@ -57,7 +57,7 @@ Szczegóły: `docs/strategia-biznesowa.md`, `docs/grupa-docelowa-i-pozycjonowani
 
 Obszary: system emerytalny i ZUS, IKE, IKZE, **OKI (od 1 stycznia 2027 r.)**, PPK, PPE, inflacja, procent składany, koszty, ryzyko, planowanie.
 
-Pierwszy kurs ma 12 modułów (`src/content/kursy/emerytura-pod-kontrola.json`, rozwinięcie: `produkt/przewodnik/struktura.md`). Zakres i granice: `docs/zakres-produktu.md`. Architektura platformy: `docs/architektura-platformy.md`.
+Pierwszy kurs ma 13 modułów (`src/content/kursy/emerytura-pod-kontrola.json`, rozwinięcie: `produkt/przewodnik/struktura.md`). Moduły nazywamy tytułami, nie numerami — numeracja zmienia się przy dodaniu modułu. Zakres i granice: `docs/zakres-produktu.md`. Architektura platformy: `docs/architektura-platformy.md`.
 
 ### Granice edukacji
 
@@ -134,7 +134,7 @@ Pełny opis, pliki logo i komponenty: `docs/marka.md`.
 | `/jak-uczymy/` | Prezentacja platformy i sposobu nauki |
 | `/biblioteka/` | Darmowe materiały: przewodniki, artykuły, kalkulator |
 | `/artykuly/` | Artykuły |
-| `/platforma/…` | **Strefa kursanta** (wersja demonstracyjna): pulpit, program kursu, moduły, lekcje, postęp, narzędzia (`/platforma/narzedzia/<id>/`), ustawienia. Zawsze `noindex` |
+| `/platforma/…` | **Strefa kursanta** (wersja demonstracyjna): pulpit, katalog kursów (`/platforma/kursy/`), program kursu, moduły, lekcje, postęp, narzędzia (`/platforma/narzedzia/<id>/`), ustawienia. Zawsze `noindex` |
 | `/o-projekcie/` | Zasady, metoda, status serwisu |
 | `/zrodla/` | Rejestr źródeł i metodologia |
 | `/kontakt/` | Kontakt |
@@ -205,7 +205,7 @@ Zmienna `SITE_URL` ustawia docelowy adres serwisu. Bez niej nie powstają adresy
 - Nowy kolor tekstu dopisz do `src/lib/kolory.ts`, `src/styles/tokeny.css` i testu kontrastu.
 - Każda nowa strona trafia na listę w `tests/e2e/strony.spec.ts`.
 - Strefa kursanta: stan postępu zmieniają wyłącznie funkcje z `src/lib/platforma/postep.ts`, zapisuje go magazyn (`magazyn.ts`). Widoki oznaczają elementy zależne od postępu atrybutami `data-*`, które uzupełnia `klient.ts`. Teksty do DOM tylko przez `textContent`.
-- Nowa lekcja: plik w `src/content/lekcje/<kurs>/` i wpis w programie kursu. Treści merytoryczne tylko na twierdzeniach ze statusem P. W treści liczby z rejestru wstawiaj jako `{{identyfikator}}`, przypisy jako `[^identyfikator]` (bez odstępu po słowie), przykłady obliczeniowe dyrektywą `<!-- tabela:… -->` (`src/lib/przyklady.ts`). Każde twierdzenie z pola `twierdzenia` musi mieć przypis w treści.
+- Nowa lekcja: plik w `src/content/lekcje/<kurs>/` i wpis w programie kursu. Treści merytoryczne tylko na twierdzeniach ze statusem P. W treści liczby z rejestru wstawiaj jako `{{identyfikator}}`, przypisy jako `[^identyfikator]` (bez odstępu po słowie), przykłady obliczeniowe dyrektywą `<!-- tabela:… -->` (`src/lib/przyklady.ts`). Każde twierdzenie z pola `twierdzenia` musi mieć przypis w treści. Lekcja ma pole `podsumowanie` (2–5 zdań), a moduł z lekcjami — pole `cele` (co kursant umie po module). Do innych lekcji i modułów odwołuj się tytułem, nie numerem (test w `tresc.test.ts`).
 - Fragment, którego interpretacja nie jest jednoznaczna, oznacz w lekcji akapitem `> **Do potwierdzenia przez eksperta.** …` i dopisz pytanie do raportu etapu. Test `tresc.test.ts` pilnuje listy takich lekcji.
 - Quizy: co najmniej trzy odpowiedzi, poprawne rozłożone na różne pozycje, poprawna odpowiedź nie może być zwykle najdłuższa (test w `tresc.test.ts`).
 - Treść dla kursanta pisz w formach neutralnych płciowo („Zapisz”, „suma wpłat”), nie „wpłaciłeś”.
@@ -231,12 +231,14 @@ Stan faz i ścieżka do publikacji: `docs/harmonogram.md`.
 
 Etap 1 platformy (fundamenty) jest zakończony: strefa kursanta w wersji demonstracyjnej, model kursu i postępu, centrum narzędzi.
 
-Etap 2 (treść pierwszego kursu) jest zakończony w zakresie bez blokad: kurs „Emerytura pod kontrolą” jest aktywny i ma 12 lekcji w modułach 1, 2, 4, 9 i 12, z quizami i przykładami z rejestru. Lekcje są wersją roboczą przed recenzją. W centrum narzędzi działają kalkulatory oszczędzania, procentu składanego i inflacji. Szczegóły i ograniczenia: `docs/architektura-platformy.md`.
+Etap 2 (treść pierwszego kursu) jest zakończony w zakresie bez blokad: kurs „Emerytura pod kontrolą” jest aktywny, z quizami i przykładami z rejestru. Lekcje są wersją roboczą przed recenzją. Szczegóły i ograniczenia: `docs/architektura-platformy.md`.
 
 Etap 2B (naprawa po audycie `docs/audyt-jakosci-kursu-etap-2a.md`) jest zakończony; raport: `docs/raport-etap-2b.md`.
 
 Etap 2C (audyt kontrolny i naprawy) jest zakończony: `docs/audyt-kontrolny-etap-2b.md`, `docs/rejestr-napraw-etap-2c.md`. Pytania do ekspertów: `docs/pytania-do-ekspertow.md`. Architektura wielokursowa: `docs/architektura-wielokursowa.md`. Kolejne kroki: `docs/plan-dalszego-rozwoju.md`. Lekcje pozostają wersją roboczą przed recenzją.
 
+Etap 3A (rozwój platformy i kursu) jest zakończony: raport `docs/etap-3a-raport.md`, plan `docs/plan-rozwoju-kursu.md`, status treści `docs/status-tresci-i-recenzji.md`. Kurs ma **20 lekcji w 8 z 13 modułów**: „Fundamenty bezpieczeństwa finansowego” (3), „Jak działa system emerytalny” (3), „ZUS: co możesz sprawdzić” (2), „IKE” (2), „Inflacja i procent składany” (3), „Podstawy inwestowania” (3), „Jak porównywać instytucje i produkty” (2), „Twój plan” (2). W centrum narzędzi działają kalkulatory rezerwy finansowej, regularnego oszczędzania, procentu składanego i inflacji. Strefa kursanta ma katalog kursów (`/platforma/kursy/`).
+
 Materiał uzupełniający: szkice rozdziałów 0, 2, 4 i 9 przewodnika składają się do PDF (`npm run przewodnik`) z tymi samymi przykładami obliczeniowymi co lekcje (`src/lib/przyklady.ts`).
 
-Nie rozpoczynaj kolejnego etapu bez polecenia właściciela. Wstrzymane do czasu opinii zewnętrznych: kalkulator IKZE w interfejsie, moduły 3 i 5–7, porównanie kont według formy opodatkowania, formularz zapisu, sprzedaż, włączenie indeksowania.
+Nie rozpoczynaj kolejnego etapu bez polecenia właściciela. Wstrzymane do czasu opinii zewnętrznych: kalkulator IKZE w interfejsie, moduły „Twoja forma pracy”, „IKZE”, „OKI” i „Trzy konta obok siebie”, porównanie kont według formy opodatkowania, formularz zapisu, sprzedaż, włączenie indeksowania.
